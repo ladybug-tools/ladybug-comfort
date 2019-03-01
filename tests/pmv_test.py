@@ -1,7 +1,7 @@
 # coding utf-8
 
 import unittest
-from ladybug.comfort.pmv import PMV
+from ladybug_comfort.pmv import PMV
 
 
 class PMVTestCase(unittest.TestCase):
