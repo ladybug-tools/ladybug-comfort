@@ -1,13 +1,17 @@
 """PMV Comfort object."""
 import math
-from collections import Iterable
+try:
+    from collections import Iterable
+except ImportError:
+    # python 3.5+
+    from typing import Iterable
 from .comfortmodel import ComfortModel
-from ..psychrometrics import humid_ratio_from_db_rh
-from ..psychrometrics import saturated_vapor_pressure_torr
-from ..rootfind import secant
-from ..rootfind import bisect
-from ..listoperations import duplicate
-from ..epw import EPW
+from ladybug.psychrometrics import humid_ratio_from_db_rh
+from ladybug.psychrometrics import saturated_vapor_pressure_torr
+from ladybug.rootfind import secant
+from ladybug.rootfind import bisect
+from ladybug.listoperations import duplicate
+from ladybug.epw import EPW
 
 
 class PMV(ComfortModel):
