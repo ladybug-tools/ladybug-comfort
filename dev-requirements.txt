@@ -1,4 +1,4 @@
-lbt-ladybug>=0.1.0
+git+https://github.com/ladybug-tools/ladybug.git@development
 coverage==4.5.2
 coveralls==1.5.1
 pytest==4.1.0
