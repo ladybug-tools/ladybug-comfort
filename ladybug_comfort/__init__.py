@@ -7,7 +7,8 @@ Properties:
         for human geometry.  Each row refers to an degree of azimuth and each
         colum refers to a degree of altitude.
 """
-__version__ = "0.0.1"
+
+__version__ = '0.1.0'
 
 from ._loadmannequin import load_solarcal_splines
 
