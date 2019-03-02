@@ -92,7 +92,7 @@ class PMVParameter(ComfortParameter):
         """Set the PPD threshold given the EN-15251 comfort class."""
         self.ppd_comfort_thresh = ppd_threshold_from_comfort_class(comfort_class)
 
-    def is_comfortable(self, ppd, humidity_ratio):
+    def is_comfortable(self, ppd, humidity_ratio=0):
         """Determine if conditions are comfortable or not.
 
         Values are one of the following:
@@ -116,7 +116,7 @@ class PMVParameter(ComfortParameter):
         else:
             return 0
 
-    def discomfort_reason(self, pmv, ppd, humidity_ratio):
+    def discomfort_reason(self, pmv, ppd, humidity_ratio=0):
         """Determine the reason why conditions are comfortable or not.
 
         Values are one of the following:
@@ -134,6 +134,11 @@ class PMVParameter(ComfortParameter):
             return 2
         else:
             return 0
+
+    def duplicate(self):
+        """Duplicate these comfort parameters."""
+        return PMVParameter(self.ppd_comfort_thresh, self.humid_ratio_upper,
+                            self.humid_ratio_lower, self.still_air_threshold)
 
     def ToString(self):
         """Overwrite .NET ToString."""
