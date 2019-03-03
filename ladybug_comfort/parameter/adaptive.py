@@ -217,15 +217,18 @@ class AdaptiveParameter(ComfortParameter):
         else:
             return 0
 
+    def duplicate(self):
+        """Duplicate comfort parameters."""
+        return AdaptiveParameter(self.ashrae55_or_en15251, self.neutral_offset,
+                                 self.avg_month_or_running_mean,
+                                 self.discrete_or_continuous_air_speed,
+                                 self.cold_prevail_temp_limit, self.conditioning)
+
     def _calc_min_operative_temperature(self):
         """Set operative temperature below which conditions cannot be comfortable."""
         self._min_operative = neutral_temperature_conditioned(
             self._cold_prevail_temp_limit, self._conditioning, self.standard) \
             - self._neutral_offset
-
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
 
     def __repr__(self):
         """Adaptive comfort parameters representation."""

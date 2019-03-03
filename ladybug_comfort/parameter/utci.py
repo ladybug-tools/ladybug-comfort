@@ -212,8 +212,8 @@ class UTCIParameter(ComfortParameter):
         else:
             return 0
 
-    def thermal_condition_low(self, utci):
-        """Determine the thermal condition at a low resolution.
+    def thermal_condition_five_point(self, utci):
+        """Determine the thermal condition on a five-point scale.
 
         Values are one of the following:
             -2 = strong/extreme cold stress
@@ -233,8 +233,8 @@ class UTCIParameter(ComfortParameter):
         else:
             return 0
 
-    def thermal_condition_medium(self, utci):
-        """Determine the thermal condition at a medium resolution.
+    def thermal_condition_seven_point(self, utci):
+        """Determine the thermal condition on a seven-point scale.
 
         Values are one of the following:
             -3 = very strong/extreme cold stress
@@ -260,8 +260,8 @@ class UTCIParameter(ComfortParameter):
         else:
             return 0
 
-    def thermal_condition_high(self, utci):
-        """Determine the thermal condition at a high resolution.
+    def thermal_condition_nine_point(self, utci):
+        """Determine the thermal condition on a nine-point scale.
 
         Values are one of the following:
             -4 = very strong/extreme cold stress
@@ -293,8 +293,8 @@ class UTCIParameter(ComfortParameter):
         else:
             return 0
 
-    def thermal_condition_very_high(self, utci):
-        """Determine the thermal condition at a very high resolution.
+    def thermal_condition_eleven_point(self, utci):
+        """Determine the thermal condition on an eleven-point scale.
 
         Values are one of the following:
             -5 = extreme cold stress
@@ -371,12 +371,17 @@ class UTCIParameter(ComfortParameter):
         else:
             return 5
 
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
+    def duplicate(self):
+        """Duplicate these comfort parameters."""
+        return UTCIParameter(self.cold_thresh, self.heat_thresh,
+                             self.extreme_cold_thresh, self.very_strong_cold_thresh,
+                             self.strong_cold_thresh,
+                             self.moderate_cold_thresh, self.moderate_heat_thresh,
+                             self.strong_heat_thresh,
+                             self.very_strong_heat_thresh, self.extreme_heat_thresh)
 
     def __repr__(self):
-        """PMV comfort parameters representation."""
+        """UTCI comfort parameters representation."""
         return "UTCI Comfort Parameters\n Cold Threshold: {}C"\
             "\n Heat Threshold: {}C".format(
                 self._cold_thresh, self._heat_thresh)

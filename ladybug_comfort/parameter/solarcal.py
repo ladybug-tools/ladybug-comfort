@@ -136,9 +136,10 @@ class SolarCalParameter(object):
             return self.sharp
         return sharp_from_solar_and_body_azimuth(solar_azimuth, self.body_azimuth)
 
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
+    def duplicate(self):
+        """Duplicate SolarCal Parameters."""
+        return SolarCalParameter(self.posture, self.sharp, self.body_azimuth,
+                                 self.body_absorptivity, self.body_emissivity)
 
     def __repr__(self):
         """SolarCal body parameters representation."""

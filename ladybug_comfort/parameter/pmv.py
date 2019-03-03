@@ -140,10 +140,6 @@ class PMVParameter(ComfortParameter):
         return PMVParameter(self.ppd_comfort_thresh, self.humid_ratio_upper,
                             self.humid_ratio_lower, self.still_air_threshold)
 
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
-
     def __repr__(self):
         """PMV comfort parameters representation."""
         return "PMV Comfort Parameters\n PPD Threshold: {}\n HR Upper: {}"\

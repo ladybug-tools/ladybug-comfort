@@ -10,3 +10,7 @@ class ComfortParameter(object):
     def comfort_model(self):
         """Return the name of the comfort model to which the parameters belong."""
         return self._model
+
+    def ToString(self):
+        """Overwrite .NET ToString."""
+        return self.__repr__()
