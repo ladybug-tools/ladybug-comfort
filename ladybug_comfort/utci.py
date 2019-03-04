@@ -8,7 +8,7 @@ from ladybug.rootfind import bisect
 import math
 
 
-def utci(ta, tr, vel, rh):
+def universal_thermal_climate_index(ta, tr, vel, rh):
     """Calculate Universal Thermal Climate Index (UTCI) using a polynomial approximation.
 
     UTCI is an interational standard for outdoor temperature sensation

@@ -194,8 +194,7 @@ class UTCIParameter(ComfortParameter):
             0 = uncomfortable
             1 = comfortable
         """
-        return True if (utci >= self._cold_thresh
-                        and utci <= self._heat_thresh) else False
+        return 1 if (utci >= self._cold_thresh and utci <= self._heat_thresh) else 0
 
     def thermal_condition(self, utci):
         """Determine whether conditions are cold, neutral or hot.

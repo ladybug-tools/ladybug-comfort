@@ -2,7 +2,7 @@
 """Object for calculating PMV comfort from DataCollections."""
 from __future__ import division
 
-from ..pmv import pmv
+from ..pmv import predicted_mean_vote
 from ..parameter.pmv import PMVParameter
 from ._base import ComfortDataCollection
 
@@ -13,12 +13,12 @@ from ladybug.psychrometrics import humid_ratio_from_db_rh
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     StandardEffectiveTemperature, AirTemperature
 from ladybug.datatype.percentage import RelativeHumidity, HumidityRatio, \
-    PercentagePeopleDissatisfied, ThermalComfort
+    PercentagePeopleDissatisfied
 from ladybug.datatype.speed import Speed, AirSpeed
 from ladybug.datatype.energyflux import MetabolicRate
 from ladybug.datatype.rvalue import ClothingInsulation
 from ladybug.datatype.thermalcondition import PredictedMeanVote, \
-    ThermalCondition, DiscomfortReason
+    ThermalComfort, ThermalCondition, DiscomfortReason
 from ladybug.datatype.temperaturedelta import AirTemperatureDelta
 from ladybug.datatype.power import Power
 
@@ -101,6 +101,7 @@ class PMV(ComfortDataCollection):
         self._air_temperature = self._check_datacoll(
             air_temperature, Temperature, 'C', 'air_temperature')
         self._calc_length = len(self._air_temperature.values)
+        self._base_collection = self._air_temperature
         self._rel_humidity = self._check_datacoll(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
@@ -116,28 +117,28 @@ class PMV(ComfortDataCollection):
             self._air_speed = self._check_datacoll(
                 air_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._air_speed = air_temperature.get_aligned_collection(
+            self._air_speed = self._base_collection.get_aligned_collection(
                 0.1, AirSpeed(), 'm/s')
 
         if met_rate is not None:
             self._met_rate = self._check_datacoll(
                 met_rate, MetabolicRate, 'met', 'met_rate')
         else:
-            self._met_rate = air_temperature.get_aligned_collection(
+            self._met_rate = self._base_collection.get_aligned_collection(
                 1.1, MetabolicRate(), 'met')
 
         if clo_value is not None:
             self._clo_value = self._check_datacoll(
                 clo_value, ClothingInsulation, 'clo', 'clo_value')
         else:
-            self._clo_value = air_temperature.get_aligned_collection(
+            self._clo_value = self._base_collection.get_aligned_collection(
                 0.7, ClothingInsulation(), 'clo')
 
         if external_work is not None:
             self._external_work = self._check_datacoll(
                 external_work, MetabolicRate, 'met', 'external_work')
         else:
-            self._external_work = air_temperature.get_aligned_collection(
+            self._external_work = self._base_collection.get_aligned_collection(
                 0., MetabolicRate(), 'met')
 
         # check that all input data collections are aligned.
@@ -145,11 +146,11 @@ class PMV(ComfortDataCollection):
 
         # check comfort parameters
         if comfort_parameter is None:
-            self._comfort_parameter = PMVParameter()
+            self._comfort_par = PMVParameter()
         else:
             assert isinstance(comfort_parameter, PMVParameter), 'comfort_parameter '\
                 'must be a PMVParameter object. Got {}'.format(type(comfort_parameter))
-            self._comfort_parameter = comfort_parameter
+            self._comfort_par = comfort_parameter
 
         # value to track whether humidity ratio has been computed
         self._hr_calculated = False
@@ -186,16 +187,16 @@ class PMV(ComfortDataCollection):
         """
         epw_data = EPW(epw_file_address)
         return cls(
-            epw_data.dryBulbTemperature.values,
-            epw_data.dryBulbTemperature.values,
-            epw_data.air_speed.values,
-            epw_data.relativeHumidity.values,
+            epw_data.dryBulbTemperature,
+            epw_data.dryBulbTemperature,
+            epw_data.air_speed,
+            epw_data.relativeHumidity,
             met_rate, clo_value, external_work)
 
     def _calculate_humidity_ratio(self):
         """Compute the humidity ratio at each step of the Data Collection."""
         self._humidity_ratio = [humid_ratio_from_db_rh(db, rh) for db, rh in zip(
-            self._air_temperature.values, self._rel_humidity.values)]
+            self._air_temperature, self._rel_humidity)]
         self._hr_calculated = True
 
     def _calculate_pmv(self):
@@ -221,35 +222,35 @@ class PMV(ComfortDataCollection):
 
         # perform the PMV calculation
         for ta, tr, vel, rh, met, clo, wme, i in \
-            zip(self.air_temperature.values, self.rad_temperature.values,
-                self.air_speed.values, self.rel_humidity.values,
-                self.met_rate.values, self.clo_value.values, self.external_work.values,
-                list(range(self._calc_length))):
-            result = pmv(ta, tr, vel, rh, met, clo, wme,
-                         self._comfort_parameter.still_air_threshold)
+            zip(self._air_temperature, self._rad_temperature,
+                self._air_speed, self._rel_humidity,
+                self._met_rate, self._clo_value,
+                self._external_work, range(self._calc_length)):
+            result = predicted_mean_vote(ta, tr, vel, rh, met, clo, wme,
+                                         self._comfort_par.still_air_threshold)
             self._pmv.append(result['pmv'])
             self._ppd.append(result['ppd'])
             self._set.append(result['set'])
             self._ta_adj.append(result['ta_adj'])
             self._cooling_effect.append(result['ce'])
-            self._heat_loss_conduction.apend(result['heat_loss']['cond'])
-            self._heat_loss_sweating.apend(result['heat_loss']['sweat'])
-            self._heat_loss_latent_respiration.apend(result['heat_loss']['res_l'])
-            self._heat_loss_dry_respiration.apend(result['heat_loss']['res_s'])
-            self._heat_loss_radiation.apend(result['heat_loss']['rad'])
-            self._heat_loss_convection.apend(result['heat_loss']['conv'])
+            self._heat_loss_conduction.append(result['heat_loss']['cond'])
+            self._heat_loss_sweating.append(result['heat_loss']['sweat'])
+            self._heat_loss_latent_respiration.append(result['heat_loss']['res_l'])
+            self._heat_loss_dry_respiration.append(result['heat_loss']['res_s'])
+            self._heat_loss_radiation.append(result['heat_loss']['rad'])
+            self._heat_loss_convection.append(result['heat_loss']['conv'])
 
             # determine whether conditions are acceptable
-            condit = self._comfort_parameter.thermal_condition(
+            condit = self._comfort_par.thermal_condition(
                 result['pmv'], result['ppd'])
             if self._hr_comfort_required is True:
                 hr = self._humidity_ratio[i]
-                comf = self._comfort_parameter.is_comfortable(result['ppd'], hr)
-                reason = self._comfort_parameter.discomfort_reason(
+                comf = self._comfort_par.is_comfortable(result['ppd'], hr)
+                reason = self._comfort_par.discomfort_reason(
                     result['pmv'], result['ppd'], hr)
             else:
-                comf = self._comfort_parameter.is_comfortable(result['ppd'])
-                reason = self._comfort_parameter.discomfort_reason(
+                comf = self._comfort_par.is_comfortable(result['ppd'])
+                reason = self._comfort_par.discomfort_reason(
                     result['pmv'], result['ppd'])
             self._is_comfortable.append(comf)
             self._thermal_condition.append(condit)
@@ -304,8 +305,8 @@ class PMV(ComfortDataCollection):
 
     @property
     def comfort_parameter(self):
-        """PMV comfort paramters that are assigned to this object."""
-        return self._comfort_parameter.duplicate()
+        """PMV comfort parameters that are assigned to this object."""
+        return self._comfort_par.duplicate()
 
     @property
     def pmv(self):
@@ -329,7 +330,7 @@ class PMV(ComfortDataCollection):
         """Data Collection of percentage of people dissatisfied (PPD) for the input conditions.
 
         Specifically, this is defined by the percent of people who would have
-        a PMV of -1 or less or a PMV of +1 or greater under the conditions.
+        a PMV beyond acceptable thresholds (typically <-0.5 and >+0.5).
         Note that, with the PMV model, the best possible PPD achievable is 5%
         and most standards aim to have a PPD below 10%.
         """
@@ -357,7 +358,7 @@ class PMV(ComfortDataCollection):
             0 = uncomfortable
             1 = comfortable
         """
-        return self._build_coll(self._is_comfortable, ThermalComfort(), 'fraction')
+        return self._build_coll(self._is_comfortable, ThermalComfort(), 'condition')
 
     @property
     def thermal_condition(self):
@@ -437,7 +438,8 @@ class PMV(ComfortDataCollection):
         """Data Collection of air temperatures that have been adjusted by the SET model
         to account for the effect of air speed [C].
         """
-        return self._build_coll(self._ta_adj, AirTemperature(), 'C')
+        return self._build_coll(self._ta_adj,
+                                AirTemperature('Adjusted Air Temperature'), 'C')
 
     @property
     def cooling_effect(self):
@@ -446,55 +448,41 @@ class PMV(ComfortDataCollection):
         This is the difference between the air temperature and the
         adjusted air temperature [C].
         """
-        return self._build_coll(self._cooling_effect, AirTemperatureDelta(), 'C')
+        return self._build_coll(self._cooling_effect,
+                                AirTemperatureDelta('Cooling Effect'), 'C')
 
     @property
     def heat_loss_conduction(self):
         """Data Collection of heat loss by conduction in [W]."""
-        return self._build_coll(self._heat_loss_conduction, Power(), 'W')
+        return self._build_coll(self._heat_loss_conduction,
+                                Power('Heat Loss From Conduction'), 'W')
 
     @property
     def heat_loss_sweating(self):
         """Data Collection of heat loss by sweating in [W]."""
-        return self._build_coll(self._heat_loss_sweating, Power(), 'W')
+        return self._build_coll(self._heat_loss_sweating,
+                                Power('Heat Loss From Sweating'), 'W')
 
     @property
     def heat_loss_latent_respiration(self):
         """Data Collection of heat loss by latent respiration in [W]."""
-        return self._build_coll(self._heat_loss_latent_respiration, Power(), 'W')
+        return self._build_coll(self._heat_loss_latent_respiration,
+                                Power('Heat Loss From Latent Respiration'), 'W')
 
     @property
     def heat_loss_dry_respiration(self):
         """Data Collection of heat loss by dry respiration in [W]."""
-        return self._build_coll(self._heat_loss_dry_respiration, Power(), 'W')
+        return self._build_coll(self._heat_loss_dry_respiration,
+                                Power('Heat Loss From Dry Respiration'), 'W')
 
     @property
     def heat_loss_radiation(self):
         """Data Collection of heat loss by radiation in [W]."""
-        return self._build_coll(self._heat_loss_radiation, Power(), 'W')
+        return self._build_coll(self._heat_loss_radiation,
+                                Power('Heat Loss From Radiation'), 'W')
 
     @property
     def heat_loss_convection(self):
         """Data Collection of heat loss by convection in [W]."""
-        return self._build_coll(self._heat_loss_convection, Power(), 'W')
-
-    def _check_datacoll(self, data_coll, dat_type, unit, name):
-        """Check the data type and units of a Data Collection."""
-        if isinstance(data_coll, BaseCollection):
-            assert isinstance(data_coll.header.data_type, dat_type) and \
-                data_coll.header.unit == unit, '{} must be {} in {}. ' \
-                'Got {} in {}'.format(name, dat_type.name, unit,
-                                      data_coll.header.data_type.name,
-                                      data_coll.header.unit)
-            self._input_collections.append(data_coll)
-            return data_coll
-        else:
-            try:
-                return self._air_temperature.get_aligned_collection(
-                    float(data_coll), dat_type(), unit)
-            except ValueError:
-                raise TypeError('{} must be either a number or a Data Colleciton. '
-                                'Got {}'.format(name, type(data_coll)))
-
-    def _build_coll(self, value_list, dat_type, unit):
-        return self._air_temperature.get_aligned_collection(value_list, dat_type(), unit)
+        return self._build_coll(self._heat_loss_convection,
+                                Power('Heat Loss From Convection'), 'W')

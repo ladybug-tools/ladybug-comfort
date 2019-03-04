@@ -2,7 +2,7 @@
 """Object for calculating UTCI comfort from DataCollections."""
 from __future__ import division
 
-from ..utci import utci
+from ..utci import universal_thermal_climate_index
 from ..parameter.utci import UTCIParameter
 from ._base import ComfortDataCollection
 
@@ -10,12 +10,11 @@ from ladybug._datacollectionbase import BaseCollection
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     UniversalThermalClimateIndex
-from ladybug.datatype.percentage import RelativeHumidity, ThermalComfort
+from ladybug.datatype.percentage import RelativeHumidity
 from ladybug.datatype.speed import Speed, WindSpeed
-from ladybug.datatype.thermalcondition import ThermalCondition, \
+from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, \
     ThermalConditionFivePoint, ThermalConditionSevenPoint, \
-    ThermalConditionNinePoint, ThermalConditionElevenPoint, \
-    UTCICategory
+    ThermalConditionNinePoint, ThermalConditionElevenPoint, UTCICategory
 
 
 class UTCI(ComfortDataCollection):
@@ -80,10 +79,11 @@ class UTCI(ComfortDataCollection):
         self._air_temperature = self._check_datacoll(
             air_temperature, Temperature, 'C', 'air_temperature')
         self._calc_length = len(self._air_temperature.values)
+        self._base_collection = self._air_temperature
         self._rel_humidity = self._check_datacoll(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
-        # check parameters with defaults
+        # check inputs with defaults
         if rad_temperature is not None:
             self._rad_temperature = self._check_datacoll(
                 rad_temperature, Temperature, 'C', 'rad_temperature')
@@ -95,7 +95,7 @@ class UTCI(ComfortDataCollection):
             self._wind_speed = self._check_datacoll(
                 wind_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._wind_speed = air_temperature.get_aligned_collection(
+            self._wind_speed = self._base_collection.get_aligned_collection(
                 0.1, WindSpeed(), 'm/s')
 
         # check that all input data collections are aligned.
@@ -103,11 +103,11 @@ class UTCI(ComfortDataCollection):
 
         # check comfort parameters
         if comfort_parameter is None:
-            self._comfort_parameter = UTCIParameter()
+            self._comfort_par = UTCIParameter()
         else:
             assert isinstance(comfort_parameter, UTCIParameter), 'comfort_parameter '\
                 'must be a UTCIParameter object. Got {}'.format(type(comfort_parameter))
-            self._comfort_parameter = comfort_parameter
+            self._comfort_par = comfort_parameter
 
         # compute UTCI
         self._calculate_utci()
@@ -117,12 +117,12 @@ class UTCI(ComfortDataCollection):
         self._utci = []
         self._thermal_category = []
         for ta, tr, vel, rh in \
-            zip(self.air_temperature.values, self.rad_temperature.values,
-                self._wind_speed.values, self.rel_humidity.values):
-            result = utci(ta, tr, vel, rh)
+            zip(self._air_temperature, self._rad_temperature,
+                self._wind_speed, self._rel_humidity):
+            result = universal_thermal_climate_index(ta, tr, vel, rh)
             self._utci.append(result)
             self._thermal_category.append(
-                self._comfort_parameter.thermal_condition_eleven_point(result))
+                self._comfort_par.thermal_condition_eleven_point(result))
 
     @property
     def air_temperature(self):
@@ -146,8 +146,8 @@ class UTCI(ComfortDataCollection):
 
     @property
     def comfort_parameter(self):
-        """UTCI comfort paramters that are assigned to this object."""
-        return self._comfort_parameter.duplicate()
+        """UTCI comfort parameters that are assigned to this object."""
+        return self._comfort_par.duplicate()
 
     @property
     def utci(self):
@@ -163,8 +163,8 @@ class UTCI(ComfortDataCollection):
             0 = uncomfortable
             1 = comfortable
         """
-        comf_vals = [self._comfort_parameter.is_comfortable(t) for t in self._utci]
-        return self._build_coll(comf_vals, ThermalComfort(), 'fraction')
+        comf_vals = [self._comfort_par.is_comfortable(t) for t in self._utci]
+        return self._build_coll(comf_vals, ThermalComfort(), 'condition')
 
     @property
     def thermal_condition(self):
@@ -176,7 +176,7 @@ class UTCI(ComfortDataCollection):
              0 = netural
             +1 = hot
         """
-        condit_vals = [self._comfort_parameter.thermal_condition(t) for t in self._utci]
+        condit_vals = [self._comfort_par.thermal_condition(t) for t in self._utci]
         return self._build_coll(condit_vals, ThermalCondition(), 'condition')
 
     @property
@@ -190,7 +190,7 @@ class UTCI(ComfortDataCollection):
             +1 = moderate heat stress
             +2 = strong/extreme heat stress
         """
-        condit_vals = [self._comfort_parameter.thermal_condition_five_point(t)
+        condit_vals = [self._comfort_par.thermal_condition_five_point(t)
                        for t in self._utci]
         return self._build_coll(condit_vals, ThermalConditionFivePoint(), 'condition')
 
@@ -207,7 +207,7 @@ class UTCI(ComfortDataCollection):
             +2 = strong heat stress
             +3 = very strong/extreme heat stress
         """
-        condit_vals = [self._comfort_parameter.thermal_condition_seven_point(t)
+        condit_vals = [self._comfort_par.thermal_condition_seven_point(t)
                        for t in self._utci]
         return self._build_coll(condit_vals, ThermalConditionSevenPoint(), 'condition')
 
@@ -226,7 +226,7 @@ class UTCI(ComfortDataCollection):
             +3 = strong heat stress
             +4 = very strong/extreme heat stress
         """
-        condit_vals = [self._comfort_parameter.thermal_condition_nine_point(t)
+        condit_vals = [self._comfort_par.thermal_condition_nine_point(t)
                        for t in self._utci]
         return self._build_coll(condit_vals, ThermalConditionNinePoint(), 'condition')
 
@@ -269,7 +269,7 @@ class UTCI(ComfortDataCollection):
             8 = strong heat stress
             9 = extreme heat stress
         """
-        condit_vals = [self._comfort_parameter.original_utci_category(t)
+        condit_vals = [self._comfort_par.original_utci_category(t)
                        for t in self._utci]
         return self._build_coll(condit_vals, UTCICategory(), 'condition')
 
@@ -360,24 +360,3 @@ class UTCI(ComfortDataCollection):
         """The percent of time that conditions have very strong heat stress."""
         _vals = [1 for x in self._thermal_category if x == 5]
         return (sum(_vals) / self._calc_length) * 100
-
-    def _check_datacoll(self, data_coll, dat_type, unit, name):
-        """Check the data type and units of a Data Collection."""
-        if isinstance(data_coll, BaseCollection):
-            assert isinstance(data_coll.header.data_type, dat_type) and \
-                data_coll.header.unit == unit, '{} must be {} in {}. ' \
-                'Got {} in {}'.format(name, dat_type.name, unit,
-                                      data_coll.header.data_type.name,
-                                      data_coll.header.unit)
-            self._input_collections.append(data_coll)
-            return data_coll
-        else:
-            try:
-                return self._air_temperature.get_aligned_collection(
-                    float(data_coll), dat_type(), unit)
-            except ValueError:
-                raise TypeError('{} must be either a number or a Data Colleciton. '
-                                'Got {}'.format(name, type(data_coll)))
-
-    def _build_coll(self, value_list, dat_type, unit):
-        return self._air_temperature.get_aligned_collection(value_list, dat_type(), unit)

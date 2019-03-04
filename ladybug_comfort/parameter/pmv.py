@@ -99,9 +99,8 @@ class PMVParameter(ComfortParameter):
             0 = uncomfortable
             1 = comfortable
         """
-        return True if (ppd <= self._ppd_thresh and
-                        humidity_ratio >= self._hr_lower and
-                        humidity_ratio <= self._hr_upper) else False
+        return 1 if (ppd <= self._ppd_thresh and humidity_ratio >= self._hr_lower and
+                     humidity_ratio <= self._hr_upper) else 0
 
     def thermal_condition(self, pmv, ppd):
         """Determine whether conditions are cold, neutral or hot.

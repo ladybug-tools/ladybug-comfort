@@ -8,8 +8,7 @@ from ladybug.rootfind import bisect
 import math
 
 
-def pmv(ta, tr, vel, rh, met, clo, wme=0,
-        still_air_threshold=0.1):
+def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
     """Calculate PMV using Fanger's original equation and Pierce SET model when necessary.
 
     This method is the officially corrent way to calculate PMV comfort according to.
