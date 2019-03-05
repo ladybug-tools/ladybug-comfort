@@ -522,7 +522,7 @@ def sharp_from_solar_and_body_azimuth(solar_azimuth, body_azimuth=0):
     if angle_diff <= 180:
         return angle_diff
     else:
-        return angle_diff - 180
+        return 360 - angle_diff
 
 
 def get_projection_factor(altitude, sharp=135, posture='standing'):
