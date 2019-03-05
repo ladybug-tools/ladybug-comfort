@@ -161,37 +161,6 @@ class PMV(ComfortCollection):
         # calculate PMV
         self._calculate_pmv()
 
-    @classmethod
-    def from_epw_file(cls, epw_file_address, include_wind=False, include_sun=False,
-                      met_rate=None, clo_value=None, external_work=None):
-        """Create a PMV comfort object from the conditions within an EPW file.
-
-        Args:
-            epw_file_address: Address to an EPW file on your system.
-            include_wind: Set to True to include the epw wind speed in the calculation.
-                Default is False. Note that, if set to True, an automatic conversion
-                will be done from the meteorological wind speed at 10 meters to
-                human height at 1 meter.
-            include_sun: Set to True to include the MRT delta from sun directly
-                shining on people in the PMV calculation.  Default is False.
-                Note that this calculation will assume no surrounding context
-                and an human geometry that always has their left or right
-                side facing the sun.
-            met_rate: A value representing the metabolic rate of the human subject in
-                met. 1 met = resting seated. If list is empty, default is set to 1 met.
-            clo_value: A lvalue representing the clothing level of the human subject in
-                clo. 1 clo = three-piece suit. If list is empty, default is set to 1 clo.
-            external_work: A value representing the work done by the human subject in
-                met. 1 met = resting seated. If list is empty, default is set to 0 met.
-        """
-        epw_data = EPW(epw_file_address)
-        return cls(
-            epw_data.dryBulbTemperature,
-            epw_data.dryBulbTemperature,
-            epw_data.air_speed,
-            epw_data.relativeHumidity,
-            met_rate, clo_value, external_work)
-
     def _calculate_humidity_ratio(self):
         """Compute the humidity ratio at each step of the Data Collection."""
         self._humidity_ratio = [humid_ratio_from_db_rh(db, rh) for db, rh in zip(

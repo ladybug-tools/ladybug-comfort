@@ -3,6 +3,7 @@
 
 This module is imported in __init__.py and applies the changes on runtime.
 """
+from __future__ import division
 
 from ladybug.epw import EPW
 
@@ -53,6 +54,7 @@ def get_universal_thermal_climate_index(self, include_wind=False, include_sun=Fa
     else:
         mrt = self.dry_bulb_temperature
 
+    # return the comfort object
     utci_obj = UTCI(self.dry_bulb_temperature, self.relative_humidity, mrt, wind_speed,
                     comfort_parameter)
     return utci_obj
@@ -102,7 +104,13 @@ def get_standard_effective_temperature(self, include_wind=False, include_sun=Fal
                 thermal_condition
     """
     # Get wind and mrt inputs
-    wind_speed = self.wind_speed if include_wind is True else 0.1
+    if include_wind is True:
+        wind_speed = self.wind_speed.duplicate()
+        for i, spd in enumerate(wind_speed):
+            wind_speed[i] = spd * (2 / 3)
+    else:
+        wind_speed = 0.1
+
     if include_sun is True:
         solarcal_obj = OutdoorSolarCal(self.location, self.direct_normal_radiation,
                                        self.diffuse_horizontal_radiation,
@@ -112,6 +120,7 @@ def get_standard_effective_temperature(self, include_wind=False, include_sun=Fal
     else:
         mrt = self.dry_bulb_temperature
 
+    # return the comfort object
     set_obj = PMV(self.dry_bulb_temperature, self.relative_humidity, mrt, wind_speed,
                   met_rate, clo_value, external_work, comfort_parameter)
     return set_obj

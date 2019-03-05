@@ -22,12 +22,20 @@ class PMVParameter(ComfortParameter):
         """Initalize PMV Parameters.
 
         Args:
-            ppd_comfort_thresh:  Upper threshold of PPD that is considered acceptable
-            humid_ratio_upper:  Upper limit of humidity ratio considered acceptable.
-            humid_ratio_low: Lower limit of humidity ratioc onsidered acceptable.
-            still_air_threshold: The threshold at which the standard effective
-                temperature (SET) model will be used to correct for the
+            ppd_comfort_thresh: A number between 5 and 100 that represents the upper
+                threshold of PPD that is considered acceptable.
+                Default is 10, which charcterizes most buildings in the ASHRAE-55 and
+                EN-15251 standards.
+            humid_ratio_upper: A number between 0 and 1 indicating the upper limit of
+                humidity ratio that is considered acceptable. Default is 1 for
+                essentially no limit.
+            humid_ratio_low: A number between 0 and 1 indicating the lower limit of
+                humidity ratio considered acceptable. Default is 0 for essentially
+                no limit.
+            still_air_threshold: The air speed threshold in m/s at which the standard
+                effective temperature (SET) model will be used to correct for the
                 cooling effect of elevated air speeds.
+                Default is 0.1 m/s, which is the limit according to ASHRAE-55.
         """
 
         self.ppd_comfort_thresh = \
