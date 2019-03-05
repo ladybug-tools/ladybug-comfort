@@ -11,6 +11,7 @@ class ComfortDataCollection(object):
     def __init__(self):
         self._calc_length = 0
         self._base_collection = None
+        self._input_collections = []
 
     @property
     def comfort_model(self):
@@ -24,14 +25,20 @@ class ComfortDataCollection(object):
 
     def _check_datacoll(self, data_coll, dat_type, unit, name):
         """Check the data type and units of a Data Collection."""
+        assert isinstance(data_coll, BaseCollection), '{} must be a ' \
+            'Data Collection. Got {}.'.format(name, type(data_coll))
+        assert isinstance(data_coll.header.data_type, dat_type) and \
+            data_coll.header.unit == unit, '{} must be {} in {}. ' \
+            'Got {} in {}'.format(name, dat_type.name, unit,
+                                  data_coll.header.data_type.name,
+                                  data_coll.header.unit)
+        self._input_collections.append(data_coll)
+        return data_coll
+
+    def _check_input(self, data_coll, dat_type, unit, name):
+        """Check the a Data Collection."""
         if isinstance(data_coll, BaseCollection):
-            assert isinstance(data_coll.header.data_type, dat_type) and \
-                data_coll.header.unit == unit, '{} must be {} in {}. ' \
-                'Got {} in {}'.format(name, dat_type.name, unit,
-                                      data_coll.header.data_type.name,
-                                      data_coll.header.unit)
-            self._input_collections.append(data_coll)
-            return data_coll
+            return self._check_datacoll(data_coll, dat_type, unit, name)
         else:
             try:
                 return self._base_collection.get_aligned_collection(

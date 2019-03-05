@@ -74,25 +74,23 @@ class UTCI(ComfortDataCollection):
         """
         # check required inputs
         self._input_collections = []
-        assert isinstance(air_temperature, BaseCollection), 'air_temperature must be a' \
-            ' Data Collection. Got {}'.format(type(air_temperature))
         self._air_temperature = self._check_datacoll(
             air_temperature, Temperature, 'C', 'air_temperature')
         self._calc_length = len(self._air_temperature.values)
         self._base_collection = self._air_temperature
-        self._rel_humidity = self._check_datacoll(
+        self._rel_humidity = self._check_input(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
         # check inputs with defaults
         if rad_temperature is not None:
-            self._rad_temperature = self._check_datacoll(
+            self._rad_temperature = self._check_input(
                 rad_temperature, Temperature, 'C', 'rad_temperature')
         else:
             self._rad_temperature = self._air_temperature.duplicate()
             self._rad_temperature.header._data_type = MeanRadiantTemperature()
 
         if wind_speed is not None:
-            self._wind_speed = self._check_datacoll(
+            self._wind_speed = self._check_input(
                 wind_speed, Speed, 'm/s', 'air_speed')
         else:
             self._wind_speed = self._base_collection.get_aligned_collection(
@@ -152,7 +150,7 @@ class UTCI(ComfortDataCollection):
     @property
     def utci(self):
         """A Data Collection of Universal Thermal Climate Index (UTCI) in C."""
-        return self._build_coll(self._utci, UniversalThermalClimateIndex(), 'fraction')
+        return self._build_coll(self._utci, UniversalThermalClimateIndex(), 'C')
 
     @property
     def is_comfortable(self):

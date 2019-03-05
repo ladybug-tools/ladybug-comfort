@@ -96,46 +96,44 @@ class PMV(ComfortDataCollection):
         """
         # check and set required inputs
         self._input_collections = []
-        assert isinstance(air_temperature, BaseCollection), 'air_temperature must be a' \
-            ' Data Collection. Got {}'.format(type(air_temperature))
         self._air_temperature = self._check_datacoll(
             air_temperature, Temperature, 'C', 'air_temperature')
         self._calc_length = len(self._air_temperature.values)
         self._base_collection = self._air_temperature
-        self._rel_humidity = self._check_datacoll(
+        self._rel_humidity = self._check_input(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
         # check parameters with defaults
         if rad_temperature is not None:
-            self._rad_temperature = self._check_datacoll(
+            self._rad_temperature = self._check_input(
                 rad_temperature, Temperature, 'C', 'rad_temperature')
         else:
             self._rad_temperature = self._air_temperature.duplicate()
             self._rad_temperature.header._data_type = MeanRadiantTemperature()
 
         if air_speed is not None:
-            self._air_speed = self._check_datacoll(
+            self._air_speed = self._check_input(
                 air_speed, Speed, 'm/s', 'air_speed')
         else:
             self._air_speed = self._base_collection.get_aligned_collection(
                 0.1, AirSpeed(), 'm/s')
 
         if met_rate is not None:
-            self._met_rate = self._check_datacoll(
+            self._met_rate = self._check_input(
                 met_rate, MetabolicRate, 'met', 'met_rate')
         else:
             self._met_rate = self._base_collection.get_aligned_collection(
                 1.1, MetabolicRate(), 'met')
 
         if clo_value is not None:
-            self._clo_value = self._check_datacoll(
+            self._clo_value = self._check_input(
                 clo_value, ClothingInsulation, 'clo', 'clo_value')
         else:
             self._clo_value = self._base_collection.get_aligned_collection(
                 0.7, ClothingInsulation(), 'clo')
 
         if external_work is not None:
-            self._external_work = self._check_datacoll(
+            self._external_work = self._check_input(
                 external_work, MetabolicRate, 'met', 'external_work')
         else:
             self._external_work = self._base_collection.get_aligned_collection(

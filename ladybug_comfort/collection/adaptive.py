@@ -71,9 +71,7 @@ class Adaptive(ComfortDataCollection):
                 assume ASHRAE-55 criteria.
         """
         # check operative_temperature
-        assert isinstance(operative_temperature, BaseCollection), \
-            'operative_temperature must be a' \
-            ' Data Collection. Got {}'.format(type(operative_temperature))
+        self._input_collections = []
         self._op_temp = self._check_datacoll(
             operative_temperature, Temperature, 'C', 'operative_temperature')
         self._calc_length = len(self._op_temp.values)
@@ -81,7 +79,7 @@ class Adaptive(ComfortDataCollection):
 
         # check air_speed
         if air_speed is not None:
-            self._air_speed = self._check_datacoll(air_speed, Speed, 'm/s', 'air_speed')
+            self._air_speed = self._check_input(air_speed, Speed, 'm/s', 'air_speed')
         else:
             self._air_speed = self._base_collection.get_aligned_collection(
                 0.1, AirSpeed(), 'm/s')
@@ -105,7 +103,7 @@ class Adaptive(ComfortDataCollection):
             self._prevail_temp = prev_obj.get_aligned_prevailing(self._base_collection)
         else:
             # it is either a data collection or single value of prevailing temperature
-            self._prevail_temp = self._check_datacoll(
+            self._prevail_temp = self._check_input(
                 self._o_temp, PrevailingOutdoorTemperature, 'C', 'outdoor_temperature')
 
         # calculate Adaptive comfort
