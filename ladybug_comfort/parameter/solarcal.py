@@ -2,24 +2,20 @@
 """Parameters for specifying body characteristics for the SolarCal model."""
 from __future__ import division
 
+from ._base import ComfortParameter
 from ..solarcal import sharp_from_solar_and_body_azimuth
 
 
-class SolarCalParameter(object):
+class SolarCalParameter(ComfortParameter):
     """Parameters specifying body characteristics for the SolarCal model.
 
     Properties:
-        posture: A text string indicating the posture of the body.
-        sharp: A number between 0 and 180 representing the solar horizontal
-            angle relative to front of person (SHARP). 0 signifies sun that is
-            shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back.
-        body_azimuth: A number between 0 and 360 representing the direction that
-            the human is facing in degrees (0=North, 90=East, 180=South, 270=West).
-        body_absorptivity: A number between 0 and 1 representing the average
-            shortwave absorptivity of the body (including clothing and skin color).
-        body_emissivity: A number between 0 and 1 representing the average
-            longwave emissivity of the body.
+        posture
+        sharp
+        body_azimuth
+        body_absorptivity
+        body_emissivity
+        acceptable_postures
     """
     _model = 'SolarCal'
     _acceptable_postures = ('standing', 'seated', 'supine')
@@ -39,9 +35,8 @@ class SolarCalParameter(object):
                 typically faces their side or back to the sun to avoid glare.
             body_azimuth: A number between 0 and 360 representing the direction that
                 the human is facing in degrees (0=North, 90=East, 180=South, 270=West).
-                Default is None, which will assume that the person is always facing 135
-                degrees from the sun, meaning that the person faces their side or
-                back to the sun at all times in order to avoid glare.
+                Default is None, which will assume that the sharp input dictates the
+                degrees the human is facing from the sun.
             body_absorptivity: A number between 0 and 1 representing the average
                 shortwave absorptivity of the body (including clothing and skin color).
                 Typical clothing values - white: 0.2, khaki: 0.57, black: 0.88

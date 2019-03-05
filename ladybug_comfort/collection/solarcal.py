@@ -5,7 +5,7 @@ from __future__ import division
 from ..solarcal import outdoor_sky_heat_exch, indoor_sky_heat_exch, \
     shortwave_from_horiz_solar, sharp_from_solar_and_body_azimuth
 from ..parameter.solarcal import SolarCalParameter
-from ._base import ComfortDataCollection
+from ._base import ComfortCollection
 
 from ladybug.location import Location
 from ladybug.sunpath import Sunpath
@@ -19,8 +19,8 @@ from ladybug.datatype.energyintensity import Radiation
 from ladybug.datatype.percentage import Percentage
 
 
-class _SolarCalBase(ComfortDataCollection):
-    """Base class used by all other objects that use SolarCal with DataCollections."""
+class _SolarCalBase(ComfortCollection):
+    """Base class used by all objects that use SolarCal with Data Collections."""
 
     @property
     def location(self):
@@ -64,6 +64,13 @@ class _SolarCalBase(ComfortDataCollection):
             self._check_datacoll(data_coll, Irradiance, 'W/m2', name)
         return data_coll
 
+    def _fraction_input_check(self, data_coll, name, default):
+        if data_coll is not None:
+            return self._check_input(data_coll, Percentage, 'fraction', name)
+        else:
+            return self._base_collection.get_aligned_collection(
+                default, Percentage(), 'fraction')
+
     def _body_par_check(self, body_par):
         if body_par is None:
             self._body_par = SolarCalParameter(posture='standing')
@@ -73,9 +80,28 @@ class _SolarCalBase(ComfortDataCollection):
                 .format(type(body_par))
             self._body_par = body_par
 
+    def _get_altitudes_and_sharps(self):
+        """Get altitudes and sharps from solar position."""
+        sp = Sunpath.from_location(self._location)
+        _altitudes = []
+        if self._body_par.body_azimuth is None:
+            _sharps = [self._body_par.sharp] * self._calc_length
+            for t_date in self._base_collection.datetimes:
+                sun = sp.calculate_sun_from_date_time(t_date)
+                _altitudes.append(sun.altitude)
+        else:
+            _sharps = []
+            for t_date in self._base_collection.datetimes:
+                sun = sp.calculate_sun_from_date_time(t_date)
+                sharp = sharp_from_solar_and_body_azimuth(sun.azimuth,
+                                                          self._body_par.body_azimuth)
+                _sharps.append(sharp)
+                _altitudes.append(sun.altitude)
+        return _altitudes, _sharps
+
 
 class OutdoorSolarCal(_SolarCalBase):
-    """Outdoor SolarCal DataCollection object.
+    """Outdoor SolarCal Collection object.
 
     Properties:
         location
@@ -100,7 +126,7 @@ class OutdoorSolarCal(_SolarCalBase):
                  horizontal_infrared, surface_temperatures,
                  fraction_body_exposed=None, sky_exposure=None,
                  floor_reflectance=None, solarcal_body_parameter=None):
-        """Perform a full outdoor sky radiant heat exchange using Data Collections.
+        """Initalize Outdoor SolarCal object.
 
         Args:
             location: A Ladybug Location object.
@@ -134,7 +160,7 @@ class OutdoorSolarCal(_SolarCalBase):
             ' object. Got {}.'.format(type(location))
         self._location = location
         self._dir_norm = self._radiation_check(
-            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+            direct_normal_solar, 'direct_normal_solar')
         self._diff_horiz = self._radiation_check(
             diffuse_horizontal_solar, 'diffuse_horizontal_solar')
         self._calc_length = len(self._dir_norm.values)
@@ -146,24 +172,12 @@ class OutdoorSolarCal(_SolarCalBase):
             surface_temperatures, Temperature, 'C', 'surface_temperatures')
 
         # check optional inputs
-        if fraction_body_exposed is not None:
-            self._fract_exp = self._check_input(
-                fraction_body_exposed, Percentage, 'fraction', 'fraction_body_exposed')
-        else:
-            self._fract_exp = self._base_collection.get_aligned_collection(
-                1, Percentage(), 'fraction')
-        if sky_exposure is not None:
-            self._sky_exp = self._check_input(
-                sky_exposure, Percentage, 'fraction', 'sky_exposure')
-        else:
-            self._sky_exp = self._base_collection.get_aligned_collection(
-                1, Percentage(), 'fraction')
-        if floor_reflectance is not None:
-            self._flr_ref = self._check_input(
-                floor_reflectance, Percentage, 'fraction', 'floor_reflectance')
-        else:
-            self._flr_ref = self._base_collection.get_aligned_collection(
-                0.25, Percentage(), 'fraction')
+        self._fract_exp = self._fraction_input_check(
+            fraction_body_exposed, 'fraction_body_exposed', 1)
+        self._sky_exp = self._fraction_input_check(
+            sky_exposure, 'sky_exposure', 1)
+        self._flr_ref = self._fraction_input_check(
+            floor_reflectance, 'floor_reflectance', 0.25)
 
         # check that all input data collections are aligned.
         HourlyDiscontinuousCollection.are_collections_aligned(self._input_collections)
@@ -185,23 +199,9 @@ class OutdoorSolarCal(_SolarCalBase):
         self._mrt = []
 
         # get altitudes and sharps from solar position
-        sp = Sunpath.from_location(self._location)
-        _altitudes = []
-        if self._body_par.body_azimuth is None:
-            _sharps = [self._body_par.sharp] * self._calc_length
-            for t_date in self._base_collection.datetimes:
-                sun = sp.calculate_sun_from_date_time(t_date)
-                _altitudes.append(sun.altitude)
-        else:
-            _sharps = []
-            for t_date in self._base_collection.datetimes:
-                sun = sp.calculate_sun_from_date_time(t_date)
-                sharp = sharp_from_solar_and_body_azimuth(sun.azimuth,
-                                                          self._body_par.body_azimuth)
-                _sharps.append(sharp)
-                _altitudes.append(sun.altitude)
+        _altitudes, _sharps = self._get_altitudes_and_sharps()
 
-        # calculate final ers and mrt deltas
+        # calculate final erfs and mrt deltas
         for t_srfs, horiz_ir, diff, dir, alt, sharp, sky_e, fract_e, flr_ref in \
                 zip(self._srf_temp, self._horiz_ir, self._diff_horiz, self._dir_norm,
                     _altitudes, _sharps, self._sky_exp, self._fract_exp, self._flr_ref):
@@ -261,3 +261,265 @@ class OutdoorSolarCal(_SolarCalBase):
     def longwave_mrt_delta(self):
         """Data Collection of longwave MRT delta in C."""
         return self._build_coll(self._l_dmrt, RadiantTemperatureDelta(), 'C')
+
+
+class IndoorSolarCal(_SolarCalBase):
+    """Indoor SolarCal Collection object.
+
+    Properties:
+        location
+        direct_normal_solar
+        diffuse_horizontal_solar
+        longwave_mrt
+        fraction_body_exposed
+        sky_exposure
+        floor_reflectance
+        window_transmittance
+        solarcal_body_parameter
+        effective_radiant_field
+        mrt_delta
+        mean_radiant_temperature
+    """
+    _model = 'Indoor SolarCal'
+
+    def __init__(self, location, direct_normal_solar, diffuse_horizontal_solar,
+                 longwave_mrt, fraction_body_exposed=None, sky_exposure=None,
+                 floor_reflectance=None, window_transmittance=None,
+                 solarcal_body_parameter=None):
+        """Initalize Indoor SolarCal object.
+
+        Args:
+            location: A Ladybug Location object.
+            direct_normal_solar: Hourly Data Collection with the direct normal solar
+                irradiance in W/m2.
+            diffuse_horizontal_solar: Hourly Data Collection with the diffuse
+                horizontal solar irradiance in W/m2.
+            longwave_mrt: Hourly Data Collection or individual value with the longwave
+                mean radiant temperature (MRT) expereinced as a result of indoor
+                surface temperatures in C.
+            fraction_body_exposed: A Data Collection or number between 0 and 1
+                representing the fraction of the body exposed to direct sunlight.
+                Note that this does not include the body’s self-shading; only the
+                shading from surroundings.
+                Default is 1 for a person standing in an open area.
+            sky_exposure: A Data Collection or number between 0 and 1 representing the
+                fraction of the sky vault in occupant’s view. Default is 1 for a person
+                standing in an open area.
+            floor_reflectance: A Data Collection or number between 0 and 1 that
+                represents the reflectance of the floor. Default is for 0.25 which
+                is characteristic of outdoor grass or dry bare soil.
+            window_transmittance: A Data Collection or number between 0 and 1 that
+                represents the broadband solar transmittance of the window through which
+                the sun is coming. Such values tend to be slightly less than the
+                SHGC. Values might be as low as 0.2 and could be as high as 0.85
+                for a single pane of glass. Default is 0.4 assuming a double pane
+                window with a relatively mild low-e coating.
+            solarcal_body_parameter: Optional SolarCalParameter object to account for
+                properties of the human geometry.
+        """
+        # check required inputs
+        self._input_collections = []
+        assert isinstance(location, Location), 'location must be a Ladybug Location' \
+            ' object. Got {}.'.format(type(location))
+        self._location = location
+        self._dir_norm = self._radiation_check(
+            direct_normal_solar, 'direct_normal_solar')
+        self._diff_horiz = self._radiation_check(
+            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._calc_length = len(self._dir_norm.values)
+        self._base_collection = self._dir_norm
+        self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
+
+        # check optional inputs
+        self._fract_exp = self._fraction_input_check(
+            fraction_body_exposed, 'fraction_body_exposed', 1)
+        self._sky_exp = self._fraction_input_check(
+            sky_exposure, 'sky_exposure', 1)
+        self._flr_ref = self._fraction_input_check(
+            floor_reflectance, 'floor_reflectance', 0.25)
+        self._win_trans = self._fraction_input_check(
+            window_transmittance, 'window_transmittance', 0.4)
+
+        # check that all input data collections are aligned.
+        HourlyDiscontinuousCollection.are_collections_aligned(self._input_collections)
+
+        # check comfort parameters
+        self._body_par_check(solarcal_body_parameter)
+
+        # compute SolarCal
+        self._calculate_solarcal()
+
+    def _calculate_solarcal(self):
+        """Compute SolarCal for each step of the Data Collection."""
+        # empty lists to be filled
+        self._erf = []
+        self._dmrt = []
+        self._mrt = []
+
+        # get altitudes and sharps from solar position
+        _altitudes, _sharps = self._get_altitudes_and_sharps()
+
+        # calculate final erfs and mrt deltas
+        for l_mrt, diff, dir, alt, sharp, sky_e, fract_e, flr_ref, w_trans in \
+                zip(self._l_mrt, self._diff_horiz, self._dir_norm, _altitudes, _sharps,
+                    self._sky_exp, self._fract_exp, self._flr_ref, self._win_trans):
+
+            result = indoor_sky_heat_exch(l_mrt, diff, dir, alt, sky_e, fract_e,
+                                          flr_ref, w_trans, self._body_par.posture,
+                                          sharp, self._body_par.body_absorptivity,
+                                          self._body_par.body_emissivity)
+            self._erf.append(result['erf'])
+            self._dmrt.append(result['dmrt'])
+            self._mrt.append(result['mrt'])
+
+    @property
+    def diffuse_horizontal_solar(self):
+        """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
+        return self._diff_horiz.duplicate()
+
+    @property
+    def direct_normal_solar(self):
+        """Data Collection of direct normal irradiance in Wh/m2 or W/m2."""
+        return self._dir_norm.duplicate()
+
+    @property
+    def longwave_mrt(self):
+        """Data Collection of surface temperature values in degrees C."""
+        return self._l_mrt.duplicate()
+
+    @property
+    def sky_exposure(self):
+        """Data Collection of sky view."""
+        return self._sky_exp.duplicate()
+
+    @property
+    def effective_radiant_field(self):
+        """Data Collection of shortwave effective radiant field in W/m2."""
+        return self._build_coll(self._erf, EffectiveRadiantField(), 'W/m2')
+
+    @property
+    def mrt_delta(self):
+        """Data Collection of shortwave MRT delta in C."""
+        return self._build_coll(self._dmrt, RadiantTemperatureDelta(), 'C')
+
+
+class HorizontalSolarCal(_SolarCalBase):
+    """SolarCal Collection object from horizontal solar components.
+
+    This is particularly useful when trying to estimate solar MRT deltas from
+    Radiance radiation simulation result.
+
+    Properties:
+        location
+        direct_horizontal_solar
+        diffuse_horizontal_solar
+        longwave_mrt
+        fraction_body_exposed
+        floor_reflectance
+        solarcal_body_parameter
+        effective_radiant_field
+        mrt_delta
+        mean_radiant_temperature
+    """
+    _model = 'Horizontal SolarCal'
+
+    def __init__(self, location, direct_horizontal_solar, diffuse_horizontal_solar,
+                 longwave_mrt, fraction_body_exposed=None,
+                 floor_reflectance=None, solarcal_body_parameter=None):
+        """Initalize Horizontal SolarCal object.
+
+        Args:
+            location: A Ladybug Location object.
+            direct_horizontal_solar: Hourly Data Collection with the direct horizontal
+                solar irradiance in W/m2.
+            diffuse_horizontal_solar: Hourly Data Collection with the diffuse
+                horizontal solar irradiance in W/m2.
+            longwave_mrt: Hourly Data Collection or individual value with the longwave
+                mean radiant temperature (MRT) expereinced as a result of indoor
+                surface temperatures in C.
+            fraction_body_exposed: A Data Collection or number between 0 and 1
+                representing the fraction of the body exposed to direct sunlight.
+                Note that this does not include the body’s self-shading; only the
+                shading from surroundings.
+                Default is 1 for a person standing in an open area.
+            floor_reflectance: A Data Collection or number between 0 and 1 that
+                represents the reflectance of the floor. Default is for 0.25 which
+                is characteristic of outdoor grass or dry bare soil.
+            solarcal_body_parameter: Optional SolarCalParameter object to account for
+                properties of the human geometry.
+        """
+        # check required inputs
+        self._input_collections = []
+        assert isinstance(location, Location), 'location must be a Ladybug Location' \
+            ' object. Got {}.'.format(type(location))
+        self._location = location
+        self._dir_horiz = self._radiation_check(
+            direct_horizontal_solar, 'direct_horizontal_solar')
+        self._diff_horiz = self._radiation_check(
+            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._calc_length = len(self._dir_horiz.values)
+        self._base_collection = self._dir_horiz
+        self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
+
+        # check optional inputs
+        self._fract_exp = self._fraction_input_check(
+            fraction_body_exposed, 'fraction_body_exposed', 1)
+        self._flr_ref = self._fraction_input_check(
+            floor_reflectance, 'floor_reflectance', 0.25)
+
+        # check that all input data collections are aligned.
+        HourlyDiscontinuousCollection.are_collections_aligned(self._input_collections)
+
+        # check comfort parameters
+        self._body_par_check(solarcal_body_parameter)
+
+        # compute SolarCal
+        self._calculate_solarcal()
+
+    def _calculate_solarcal(self):
+        """Compute SolarCal for each step of the Data Collection."""
+        # empty lists to be filled
+        self._erf = []
+        self._dmrt = []
+        self._mrt = []
+
+        # get altitudes and sharps from solar position
+        _altitudes, _sharps = self._get_altitudes_and_sharps()
+
+        # calculate final erfs and mrt deltas
+        for l_mrt, diff, dir, alt, sharp, fract_e, flr_ref, in \
+                zip(self._l_mrt, self._diff_horiz, self._dir_horiz, _altitudes, _sharps,
+                    self._fract_exp, self._flr_ref):
+
+            result = shortwave_from_horiz_solar(l_mrt, diff, dir, alt, fract_e,
+                                                flr_ref, self._body_par.posture,
+                                                sharp, self._body_par.body_absorptivity,
+                                                self._body_par.body_emissivity)
+            self._erf.append(result['erf'])
+            self._dmrt.append(result['dmrt'])
+            self._mrt.append(result['mrt'])
+
+    @property
+    def diffuse_horizontal_solar(self):
+        """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
+        return self._diff_horiz.duplicate()
+
+    @property
+    def direct_horizontal_solar(self):
+        """Data Collection of direct horizontal irradiance in Wh/m2 or W/m2."""
+        return self._dir_horiz.duplicate()
+
+    @property
+    def longwave_mrt(self):
+        """Data Collection of surface temperature values in degrees C."""
+        return self._l_mrt.duplicate()
+
+    @property
+    def effective_radiant_field(self):
+        """Data Collection of shortwave effective radiant field in W/m2."""
+        return self._build_coll(self._erf, EffectiveRadiantField(), 'W/m2')
+
+    @property
+    def mrt_delta(self):
+        """Data Collection of shortwave MRT delta in C."""
+        return self._build_coll(self._dmrt, RadiantTemperatureDelta(), 'C')

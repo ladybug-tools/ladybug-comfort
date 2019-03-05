@@ -101,7 +101,7 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
 
 def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
                          sky_exposure=1, fract_exposed=1, floor_reflectance=0.25,
-                         window_transmittance=1, posture='seated', sharp=135,
+                         window_transmittance=0.4, posture='seated', sharp=135,
                          body_absorptivity=0.7, body_emissivity=0.95):
     """Perform a full indoor sky radiant heat exchange.
 
@@ -120,10 +120,12 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
         floor_reflectance: A number between 0 and 1 the represents the
             reflectance of the floor. Default is for 0.25 which is characteristic
             of outdoor grass or dry bare soil.
-        window_transmittance: A number between 0 and 1 that represents the
-            transmittance of the window through which shortwave solar is coming.
-            Default is 1 assuming that window transmittance is accounted for
-            outside of this function.
+        window_transmittance: A number between 0 and 1 that represents the broadband
+            solar transmittance of the window through which the sun is coming. Such
+            values tend to be slightly less than the SHGC. Values might be as low as
+            0.2 and could be as high as 0.85 for a single pane of glass.
+            Default is 0.4 assuming a double pane window with a relatively mild
+            low-e coating.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".
             Default is "standing".

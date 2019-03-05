@@ -4,7 +4,7 @@ from __future__ import division
 
 from ..utci import universal_thermal_climate_index
 from ..parameter.utci import UTCIParameter
-from ._base import ComfortDataCollection
+from ._base import ComfortCollection
 
 from ladybug._datacollectionbase import BaseCollection
 
@@ -17,7 +17,7 @@ from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, 
     ThermalConditionNinePoint, ThermalConditionElevenPoint, UTCICategory
 
 
-class UTCI(ComfortDataCollection):
+class UTCI(ComfortCollection):
     """UTCI comfort DataCollection object.
 
     Properties:

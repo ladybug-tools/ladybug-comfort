@@ -4,7 +4,7 @@
 from ladybug._datacollectionbase import BaseCollection
 
 
-class ComfortDataCollection(object):
+class ComfortCollection(object):
     """Thermal comfort datacollection base class."""
     _model = None
 
@@ -50,11 +50,16 @@ class ComfortDataCollection(object):
     def _build_coll(self, value_list, dat_type, unit):
         return self._base_collection.get_aligned_collection(value_list, dat_type, unit)
 
+    @property
+    def isComfortCollection(self):
+        """The number of values in the Data Collections of this object."""
+        return self._calc_length
+
     def ToString(self):
         """Overwrite .NET ToString."""
         return self.__repr__()
 
     def __repr__(self):
         """Comfort model representation."""
-        return "{} Comfort Model\n{} values".format(
+        return "{} ComfortCollection [{} values]".format(
             self.comfort_model, self._calc_length)

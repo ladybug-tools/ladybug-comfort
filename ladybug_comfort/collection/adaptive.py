@@ -7,7 +7,7 @@ from ..adaptive import adaptive_comfort_ashrae55, adaptive_comfort_en15251, \
     cooling_effect_en15251, get_operative_temperature, \
     weighted_running_mean_hourly, weighted_running_mean_daily
 from ..parameter.adaptive import AdaptiveParameter
-from ._base import ComfortDataCollection
+from ._base import ComfortCollection
 
 from ladybug._datacollectionbase import BaseCollection
 from ladybug.datacollection import HourlyContinuousCollection, DailyCollection, \
@@ -21,7 +21,7 @@ from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
 
-class Adaptive(ComfortDataCollection):
+class Adaptive(ComfortCollection):
     """Adaptive comfort DataCollection object.
 
     Properties:
