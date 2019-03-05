@@ -55,6 +55,7 @@ class PMV(ComfortCollection):
         percent_humid
         humidity_ratio
         adjusted_air_temperature
+        cooling_effect
         heat_loss_conduction
         heat_loss_sweating
         heat_loss_latent_respiration
@@ -168,7 +169,7 @@ class PMV(ComfortCollection):
         Args:
             epw_file_address: Address to an EPW file on your system.
             include_wind: Set to True to include the epw wind speed in the calculation.
-                Default is False. Note that, if set to True, an autmatic conversion
+                Default is False. Note that, if set to True, an automatic conversion
                 will be done from the meteorological wind speed at 10 meters to
                 human height at 1 meter.
             include_sun: Set to True to include the MRT delta from sun directly

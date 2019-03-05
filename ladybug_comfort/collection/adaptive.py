@@ -147,15 +147,15 @@ class Adaptive(ComfortCollection):
             cooling_funct = cooling_effect_en15251
 
         # perform the Adaptive calculation
-        if self._comfort_par.ashrae55_or_en15251 is True:
-            for tp, to, vel in zip(self._prevail_temp, self._op_temp, self._air_speed):
-                result = comf_funct(tp, to, self._comfort_par.conditioning)
-                ce = cooling_funct(vel)
-                comf = self._comfort_par.is_comfortable(result, ce)
-                if comf is False:
-                    condit = 1 if comf > 0 else -1
-                else:
-                    comf = 0
+        for tp, to, vel in zip(self._prevail_temp, self._op_temp, self._air_speed):
+            result = comf_funct(tp, to)
+            ce = cooling_funct(vel, to)
+            comf = self._comfort_par.is_comfortable(result, ce)
+            if comf == 0:
+                condit = 1 if result['deg_comf'] > 0 else -1
+            else:
+                condit = 0
+
             self._neutral_temperature.append(result['t_comf'])
             self._degrees_from_neutral.append(result['deg_comf'])
             self._is_comfortable.append(comf)
@@ -414,11 +414,11 @@ class PrevailingTemperature(object):
 
     def _hourly_prevail_from_monthly(self):
         for i, days in enumerate(self._head.analysis_period._num_of_days_each_month):
-            self._hourly_prevail.extend(self._monthly_prevail[i] * days * 24)
+            self._hourly_prevail.extend([self._monthly_prevail[i]] * days * 24)
 
     def _daily_prevail_from_monthly(self):
         for i, days in enumerate(self._head.analysis_period._num_of_days_each_month):
-            self._daily_prevail.extend(self._monthly_prevail[i] * days)
+            self._daily_prevail.extend([self._monthly_prevail[i]] * days)
 
     def _daily_prevail_from_hourly(self):
         for i in range(0, len(self._hourly_prevail), 24):

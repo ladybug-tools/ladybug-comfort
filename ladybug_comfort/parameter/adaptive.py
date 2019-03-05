@@ -218,7 +218,7 @@ class AdaptiveParameter(ComfortParameter):
                 adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.
             cooling_effect: Cooling effect from elevated air speed
         """
-        if self.is_comfortable(comfort_result, cooling_effect) is False:
+        if self.is_comfortable(comfort_result, cooling_effect) == 0:
             return 1 if comfort_result['deg_comf'] > 0 else -1
         else:
             return 0

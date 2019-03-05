@@ -1,5 +1,5 @@
 # coding=utf-8
-"""Module for computing thermal comfort.
+"""Ladybug thermal comfort libraries.
 
 Properties:
     SOLARCALSPLINES: A dictionary with two keys: 'standing' and 'seated'.
@@ -10,6 +10,9 @@ Properties:
 
 __version__ = '0.1.0'
 
-from ._loadmannequin import load_solarcal_splines
+# load all functions that extend ladybug core objects.
+import ladybug_comfort._extend_ladybug
 
+# load the mannequin data and spline data that gets used in solarcal.
+from ._loadmannequin import load_solarcal_splines
 SOLARCALSPLINES = load_solarcal_splines()
