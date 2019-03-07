@@ -16,7 +16,7 @@ from ladybug.datatype.temperaturedelta import RadiantTemperatureDelta
 from ladybug.datatype.energyflux import Irradiance, EffectiveRadiantField, \
     HorizontalInfraredRadiationIntensity
 from ladybug.datatype.energyintensity import Radiation
-from ladybug.datatype.percentage import Percentage
+from ladybug.datatype.fraction import Fraction
 
 
 class _SolarCalBase(ComfortCollection):
@@ -66,10 +66,10 @@ class _SolarCalBase(ComfortCollection):
 
     def _fraction_input_check(self, data_coll, name, default):
         if data_coll is not None:
-            return self._check_input(data_coll, Percentage, 'fraction', name)
+            return self._check_input(data_coll, Fraction, 'fraction', name)
         else:
             return self._base_collection.get_aligned_collection(
-                default, Percentage(), 'fraction')
+                default, Fraction(), 'fraction')
 
     def _body_par_check(self, body_par):
         if body_par is None:

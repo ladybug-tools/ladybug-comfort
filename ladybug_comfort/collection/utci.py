@@ -10,7 +10,7 @@ from ladybug._datacollectionbase import BaseCollection
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     UniversalThermalClimateIndex
-from ladybug.datatype.percentage import RelativeHumidity
+from ladybug.datatype.fraction import RelativeHumidity
 from ladybug.datatype.speed import Speed, WindSpeed
 from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, \
     ThermalConditionFivePoint, ThermalConditionSevenPoint, \

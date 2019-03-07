@@ -7,12 +7,11 @@ from ..parameter.pmv import PMVParameter
 from ._base import ComfortCollection
 
 from ladybug._datacollectionbase import BaseCollection
-from ladybug.epw import EPW
 from ladybug.psychrometrics import humid_ratio_from_db_rh
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     StandardEffectiveTemperature, AirTemperature
-from ladybug.datatype.percentage import RelativeHumidity, HumidityRatio, \
+from ladybug.datatype.fraction import RelativeHumidity, HumidityRatio, \
     PercentagePeopleDissatisfied
 from ladybug.datatype.speed import Speed, AirSpeed
 from ladybug.datatype.energyflux import MetabolicRate
