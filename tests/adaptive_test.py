@@ -8,7 +8,7 @@ from ladybug_comfort.parameter.adaptive import AdaptiveParameter
 
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     adaptive_comfort_en15251, adaptive_comfort_conditioned, \
-    cooling_effect_ashrae55, cooling_effect_en15251, get_operative_temperature, \
+    cooling_effect_ashrae55, cooling_effect_en15251, t_operative, \
     ashrae55_neutral_offset_from_ppd, en15251_neutral_offset_from_comfort_class, \
     weighted_running_mean_hourly, weighted_running_mean_daily
 
@@ -25,9 +25,9 @@ from ladybug.datatype.speed import AirSpeed
 class AdaptiveTestCase(unittest.TestCase):
     """Test Adaptive functions."""
 
-    def test_get_operative_temperature(self):
-        """Test the get_operative_temperature function"""
-        op_temp = get_operative_temperature(22, 28)
+    def test_t_operative(self):
+        """Test the t_operative function"""
+        op_temp = t_operative(22, 28)
         assert op_temp == 25
 
     def test_adaptive_comfort_ashrae55(self):
