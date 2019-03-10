@@ -3,8 +3,8 @@
 from __future__ import division
 
 from ..adaptive import adaptive_comfort_ashrae55, adaptive_comfort_en15251, \
-    get_adaptive_comfort_conditioned_function, cooling_effect_ashrae55, \
-    cooling_effect_en15251, get_operative_temperature, \
+    adaptive_comfort_conditioned_function, cooling_effect_ashrae55, \
+    cooling_effect_en15251, t_operative, \
     weighted_running_mean_hourly, weighted_running_mean_daily
 from ..parameter.adaptive import AdaptiveParameter
 from ._base import ComfortCollection
@@ -94,17 +94,17 @@ class Adaptive(ComfortCollection):
             self._comfort_par = comfort_parameter
 
         # check outdoor_temperature
-        self._o_temp = outdoor_temperature
-        if isinstance(self._o_temp, BaseCollection) and not \
-                isinstance(self._o_temp.header.data_type, PrevailingOutdoorTemperature):
+        self._t_out = outdoor_temperature
+        if isinstance(self._t_out, BaseCollection) and not \
+                isinstance(self._t_out.header.data_type, PrevailingOutdoorTemperature):
             # it is a data collection of actual recorded outdoor temperatures
             prev_obj = PrevailingTemperature(
-                self._o_temp, self._comfort_par.avg_month_or_running_mean)
+                self._t_out, self._comfort_par.avg_month_or_running_mean)
             self._prevail_temp = prev_obj.get_aligned_prevailing(self._base_collection)
         else:
             # it is either a data collection or single value of prevailing temperature
             self._prevail_temp = self._check_input(
-                self._o_temp, PrevailingOutdoorTemperature, 'C', 'outdoor_temperature')
+                self._t_out, PrevailingOutdoorTemperature, 'C', 'outdoor_temperature')
 
         # calculate Adaptive comfort
         self._calculate_adaptive()
@@ -118,7 +118,7 @@ class Adaptive(ComfortCollection):
             to = air_temperature
         else:
             to = BaseCollection.compute_function_aligned(
-                get_operative_temperature, [air_temperature, rad_temperature],
+                t_operative, [air_temperature, rad_temperature],
                 OperativeTemperature(), 'C')
         return cls(outdoor_temperature, to, air_speed, comfort_parameter)
 
@@ -133,7 +133,7 @@ class Adaptive(ComfortCollection):
 
         # determine the comfort function to use
         if self._comfort_par.conditioning != 0:
-            comf_funct = get_adaptive_comfort_conditioned_function(
+            comf_funct = adaptive_comfort_conditioned_function(
                 self._comfort_par.conditioning, self._comfort_par.standard)
         elif self._comfort_par.ashrae55_or_en15251 is True:
             comf_funct = adaptive_comfort_ashrae55
@@ -266,33 +266,33 @@ class PrevailingTemperature(object):
         monthly_per_hour_prevailing_temperature
     """
 
-    def __init__(self, outdoor_temperature, avg_month_or_running_mean=True):
+    def __init__(self, outdoor_temperature, avg_month=True):
         """Initialize an prevailing temperature object from DataCollections of inputs.
 
         Args:
             outdoor_temperature: A Data Collection of outdoor temperatures recorded
                 over an entire year. This Data Collection must be continouous and
                 must either be an Hourly Collection or Daily Collection. In the event
-                that the input avg_month_or_running_mean is True (for average monthly
+                that the input avg_month is True (for average monthly
                 prevailing method), Monthly collections are also acceptable here.
-            avg_month_or_running_mean: A boolean to note whether the prevailing outdoor
+            avg_month: A boolean to note whether the prevailing outdoor
                 temperature is computed from the average monthly temperature (True) or
                 a weighted running mean of the last week (False).  The default is True.
         """
         # perform checks on the inputs
-        self._o_temp = outdoor_temperature
-        self._prevail_method = avg_month_or_running_mean
+        self._t_out = outdoor_temperature
+        self._avg_month = avg_month
         acceptabe = (HourlyContinuousCollection, DailyCollection, MonthlyCollection)
-        assert isinstance(self._o_temp, acceptabe), 'outdoor_temperature must be one ' \
-            'of the following: {}.\n Got {}'.format(acceptabe, type(self._o_temp))
-        self._head = self._o_temp.header
+        assert isinstance(self._t_out, acceptabe), 'outdoor_temperature must be one ' \
+            'of the following: {}.\n Got {}'.format(acceptabe, type(self._t_out))
+        self._head = self._t_out.header
         assert isinstance(self._head.data_type, Temperature) and self._head.unit == 'C',\
             'outdoor_temperature must be Temperature in C. Got {} in {}'.format(
                 self._head.data_type, self._head.unit)
-        assert self._o_temp.is_continuous, 'outdoor_temperature must be continuous.'
+        assert self._t_out.is_continuous, 'outdoor_temperature must be continuous.'
         assert self._head.analysis_period.is_annual, 'outdoor_temperature must be annual'
-        assert isinstance(self._prevail_method, bool), 'avg_month_or_running_mean' \
-            ' must be a boolean. Got {}.'.format(type(self._prevail_method))
+        assert isinstance(self._avg_month, bool), 'avg_month' \
+            ' must be a boolean. Got {}.'.format(type(self._avg_month))
 
         # defaults to be calculated
         self._hourly_prevail = []
@@ -300,31 +300,31 @@ class PrevailingTemperature(object):
         self._monthly_prevail = []
 
         # calculate the base data of prevailing temperature
-        if self._prevail_method is True:
-            if isinstance(self._o_temp, (HourlyContinuousCollection, DailyCollection)):
-                self._monthly_prevail = self._o_temp.average_monthly().values
-            elif isinstance(self._o_temp, MonthlyCollection):
-                self._monthly_prevail = self._o_temp.values
+        if self._avg_month is True:
+            if isinstance(self._t_out, (HourlyContinuousCollection, DailyCollection)):
+                self._monthly_prevail = self._t_out.average_monthly().values
+            elif isinstance(self._t_out, MonthlyCollection):
+                self._monthly_prevail = self._t_out.values
         else:
-            if isinstance(self._o_temp, HourlyContinuousCollection):
-                self._hourly_prevail = weighted_running_mean_hourly(self._o_temp.values)
-            elif isinstance(self._o_temp, DailyCollection):
-                self._daily_prevail = weighted_running_mean_daily(self._o_temp.values)
+            if isinstance(self._t_out, HourlyContinuousCollection):
+                self._hourly_prevail = weighted_running_mean_hourly(self._t_out.values)
+            elif isinstance(self._t_out, DailyCollection):
+                self._daily_prevail = weighted_running_mean_daily(self._t_out.values)
                 for val in self._daily_prevail:
                     self._hourly_prevail.extend([val] * 24)
             else:
                 raise TypeError('outdoor_temperature must be hourly or daily when '
-                                'avg_month_or_running_mean is False.')
+                                'avg_month is False.')
 
     @property
     def outdoor_temperature(self):
         """The input outdoor_temperature data collection."""
-        return self._o_temp
+        return self._t_out
 
     @property
-    def avg_month_or_running_mean(self):
-        """The input avg_month_or_running_mean."""
-        return self._prevail_method
+    def avg_month(self):
+        """The input avg_month."""
+        return self._avg_month
 
     @property
     def hourly_prevailing_temperature(self):
@@ -337,7 +337,7 @@ class PrevailingTemperature(object):
     def daily_prevailing_temperature(self):
         """DailyCollection of prevailing outdoor temperature in C."""
         if self._daily_prevail == []:
-            if self._prevail_method is True:
+            if self._avg_month is True:
                 self._daily_prevail_from_monthly()
             else:
                 self._daily_prevail_from_hourly()

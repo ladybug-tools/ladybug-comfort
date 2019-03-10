@@ -27,8 +27,11 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
     Args:
         srfs_temp: The temperature of surfaces around the person in degrees
             Celcius. This includes the ground and any other surfaces
-            blocking the view to the sky. Typically, the dry bulb temperature
-            is used when such surface temperatures are unknown.
+            blocking the view to the sky. When the temperature of these
+            individual surfaces are known, the input here should be the
+            average temperature of the surfaces weighted by view-factor to the human.
+            When such individaal surface temperatures are unknown, the outdoor
+            dry bulb temperature is typically used as a proxy.
         horiz_ir: The horizontal infrared radiation intensity from the sky in W/m2.
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_normal_solar: Direct normal solar irradiance in W/m2.

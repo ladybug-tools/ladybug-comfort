@@ -133,7 +133,7 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
     return result
 
 
-def get_adaptive_comfort_conditioned_function(conditioning, model):
+def adaptive_comfort_conditioned_function(conditioning, model):
     """Get an adaptive_comfort_conditioned function with pre-set conditioning/model.
 
     Args:
@@ -149,7 +149,7 @@ def get_adaptive_comfort_conditioned_function(conditioning, model):
     return comfort_funct
 
 
-def get_operative_temperature(ta, tr):
+def t_operative(ta, tr):
     """Get operative temperature from air and radiant temperature.
 
     Args:

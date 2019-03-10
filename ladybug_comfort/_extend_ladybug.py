@@ -18,7 +18,8 @@ def get_universal_thermal_climate_index(self, include_wind=False, include_sun=Fa
 
     Args:
         include_wind: Set to True to include the epw wind speed in the calculation.
-            Default is False assuming a condition that is shielded from wind.
+            Default is False assuming a condition that is shielded from wind and
+            that the human expereinces a very low wind speed of 0.1 m/s.
         include_sun: Set to True to include the mean radiant temperature (MRT) delta
             from both shortwave solar falling directly on people and long wave radiant
             exchange with the sky. Default is False assuming a shaded condition.
@@ -72,7 +73,7 @@ def get_standard_effective_temperature(self, include_wind=False, include_sun=Fal
             Specifcally, meteorological wind speeds will be multiplied by 2/3, which
             is also the underlying assumption of the universal thermal climate
             index model. Default is False assuming a condition that is shielded
-            from wind.
+            from wind and that the human expereinces a very low wind speed of 0.1 m/s.
         include_sun: Set to True to include the mean radiant temperature (MRT) delta
             from both shortwave solar falling directly on people and long wave radiant
             exchange with the sky. Default is False assuming a shaded condition.

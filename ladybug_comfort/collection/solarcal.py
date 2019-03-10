@@ -136,8 +136,11 @@ class OutdoorSolarCal(_SolarCalBase):
                 horizontal solar irradiance in W/m2.
             surface_temperatures: Hourly Data Collection with the temperature of surfaces
                 around the person in degrees Celcius. This includes the ground and
-                any other surfaces blocking the view to the sky. Typically, outdoor
-                dry bulb temperature is used when such surface temperatures are unknown.
+                any other surfaces blocking the view to the sky. When the temperature
+                of these individual surfaces are known, the input here should be the
+                average temperature of the surfaces weighted by view-factor to the human.
+                When such individaal surface temperatures are unknown, the outdoor
+                dry bulb temperature is typically used as a proxy.
             horizontal_infrared: Hourly Data Collection with the horizontal infrared
                 radiation intensity from the sky in W/m2.
             fraction_body_exposed: A Data Collection or number between 0 and 1
