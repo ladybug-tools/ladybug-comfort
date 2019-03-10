@@ -74,7 +74,10 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
             return se_temp - pierce_set(ta - ce, tr - ce, still_air_threshold,
                                         rh, met, clo, wme)
 
-        ce = secant(ce_l, ce_r, fn, eps)
+        try:
+            ce = secant(ce_l, ce_r, fn, eps)
+        except OverflowError:
+            ce = None
         if ce is None:
             ce = bisect(ce_l, ce_r, fn, eps, 0)
 
