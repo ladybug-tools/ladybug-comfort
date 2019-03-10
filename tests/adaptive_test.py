@@ -387,12 +387,12 @@ class AdaptiveTestCase(unittest.TestCase):
 
         assert adapt_obj.operative_temperature[0] == 26
         assert adapt_obj.air_speed[0] == 0.7
-        assert custom_par.ashrae55_or_en15251 is True
-        assert custom_par.neutral_offset == 2
-        assert custom_par.avg_month_or_running_mean is False
-        assert custom_par.discrete_or_continuous_air_speed is False
-        assert custom_par.cold_prevail_temp_limit == 15
-        assert custom_par.conditioning == 0.25
+        assert adapt_obj.comfort_parameter.ashrae55_or_en15251 is True
+        assert adapt_obj.comfort_parameter.neutral_offset == 2
+        assert adapt_obj.comfort_parameter.avg_month_or_running_mean is False
+        assert adapt_obj.comfort_parameter.discrete_or_continuous_air_speed is False
+        assert adapt_obj.comfort_parameter.cold_prevail_temp_limit == 15
+        assert adapt_obj.comfort_parameter.conditioning == 0.25
 
     def test_init_adaptive_collection_full_collection_input(self):
         """Test initialization of the Adaptive collection with inputs as collections."""

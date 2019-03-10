@@ -349,10 +349,10 @@ class PMVTestCase(unittest.TestCase):
         assert pmv_obj.met_rate[0] == 1.2
         assert pmv_obj.clo_value[0] == 0.85
         assert pmv_obj.external_work[0] == 0.1
-        assert custom_par.ppd_comfort_thresh == 15
-        assert custom_par.humid_ratio_upper == 0.012
-        assert custom_par.humid_ratio_lower == 0.004
-        assert custom_par.still_air_threshold == 0.2
+        assert pmv_obj.comfort_parameter.ppd_comfort_thresh == 15
+        assert pmv_obj.comfort_parameter.humid_ratio_upper == 0.012
+        assert pmv_obj.comfort_parameter.humid_ratio_lower == 0.004
+        assert pmv_obj.comfort_parameter.still_air_threshold == 0.2
 
     def test_init_pmv_collection_full_collection_input(self):
         """Test initialization of the PMV collection will all inputs as collections."""

@@ -393,6 +393,11 @@ class IndoorSolarCal(_SolarCalBase):
         return self._sky_exp.duplicate()
 
     @property
+    def window_transmittance(self):
+        """Data Collection of window transmittance."""
+        return self._win_trans.duplicate()
+
+    @property
     def effective_radiant_field(self):
         """Data Collection of shortwave effective radiant field in W/m2."""
         return self._build_coll(self._erf, EffectiveRadiantField(), 'W/m2')
