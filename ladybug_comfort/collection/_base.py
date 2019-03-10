@@ -29,7 +29,7 @@ class ComfortCollection(object):
             'Data Collection. Got {}.'.format(name, type(data_coll))
         assert isinstance(data_coll.header.data_type, dat_type) and \
             data_coll.header.unit == unit, '{} must be {} in {}. ' \
-            'Got {} in {}'.format(name, dat_type.name, unit,
+            'Got {} in {}'.format(name, dat_type().name, unit,
                                   data_coll.header.data_type.name,
                                   data_coll.header.unit)
         self._input_collections.append(data_coll)

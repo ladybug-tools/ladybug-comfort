@@ -26,7 +26,7 @@ class UTCI(ComfortCollection):
         air_speed
         rel_humidity
         comfort_parameter
-        utci
+        universal_thermal_climate_index
         is_comfortable
         thermal_condition
         thermal_condition_five_point
@@ -148,7 +148,7 @@ class UTCI(ComfortCollection):
         return self._comfort_par.duplicate()
 
     @property
-    def utci(self):
+    def universal_thermal_climate_index(self):
         """A Data Collection of Universal Thermal Climate Index (UTCI) in C."""
         return self._build_coll(self._utci, UniversalThermalClimateIndex(), 'C')
 

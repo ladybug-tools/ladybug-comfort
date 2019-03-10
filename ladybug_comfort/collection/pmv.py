@@ -39,8 +39,8 @@ class PMV(ComfortCollection):
         clo_value
         external_work
         comfort_parameter
-        pmv
-        ppd
+        predicted_mean_vote
+        percentage_people_dissatisfied
         standard_effective_temperature
         is_comfortable
         thermal_condition
@@ -276,7 +276,7 @@ class PMV(ComfortCollection):
         return self._comfort_par.duplicate()
 
     @property
-    def pmv(self):
+    def predicted_mean_vote(self):
         """Data Collection of predicted mean vote (PMV) for the input conditions.
 
         PMV is a seven-point scale from cold (-3) to hot (+3) that was used in comfort
@@ -293,7 +293,7 @@ class PMV(ComfortCollection):
         return self._build_coll(self._pmv, PredictedMeanVote(), 'PMV')
 
     @property
-    def ppd(self):
+    def percentage_people_dissatisfied(self):
         """Data Collection of percentage of people dissatisfied (PPD) for the input conditions.
 
         Specifically, this is defined by the percent of people who would have

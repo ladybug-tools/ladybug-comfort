@@ -318,23 +318,26 @@ def calc_missing_utci_input(target_utci, utci_inputs,
     # Determine the function that should be used given the missing input.
     if utci_inputs['ta'] is None:
         def fn(x):
-            return utci(x, utci_inputs['tr'], utci_inputs['vel'],
-                        utci_inputs['rh']) - target_utci
+            return universal_thermal_climate_index(
+                x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']
+                ) - target_utci
         missing_key = 'ta'
     elif utci_inputs['tr'] is None:
         def fn(x):
-            return utci(utci_inputs['ta'], x, utci_inputs['vel'],
-                        utci_inputs['rh']) - target_utci
+            return universal_thermal_climate_index(
+                utci_inputs['ta'], x, utci_inputs['vel'], utci_inputs['rh']
+                ) - target_utci
         missing_key = 'tr'
     elif utci_inputs['vel'] is None:
         def fn(x):
-            return target_utci - utci(utci_inputs['ta'], utci_inputs['tr'], x,
-                                      utci_inputs['rh'])
+            return target_utci - universal_thermal_climate_index(
+                utci_inputs['ta'], utci_inputs['tr'], x, utci_inputs['rh'])
         missing_key = 'vel'
     else:
         def fn(x):
-            return utci(utci_inputs['ta'], utci_inputs['tr'],
-                        utci_inputs['vel'], x) - target_utci
+            return universal_thermal_climate_index(
+                utci_inputs['ta'], utci_inputs['tr'], utci_inputs['vel'], x
+                ) - target_utci
         missing_key = 'rh'
 
     # Solve for the missing input using the function.

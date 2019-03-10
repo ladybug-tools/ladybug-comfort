@@ -29,7 +29,7 @@ class PMVParameter(ComfortParameter):
             humid_ratio_upper: A number between 0 and 1 indicating the upper limit of
                 humidity ratio that is considered acceptable. Default is 1 for
                 essentially no limit.
-            humid_ratio_low: A number between 0 and 1 indicating the lower limit of
+            humid_ratio_lower: A number between 0 and 1 indicating the lower limit of
                 humidity ratio considered acceptable. Default is 0 for essentially
                 no limit.
             still_air_threshold: The air speed threshold in m/s at which the standard

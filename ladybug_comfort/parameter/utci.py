@@ -9,29 +9,16 @@ class UTCIParameter(ComfortParameter):
     """Parameters of UTCI comfort.
 
     Properties:
-        cold_thresh:  UTCI temperature below which conditions
-            represent cold stress [C]. Default: 9C.
-        heat_thresh:  UTCI temperature above which conditions
-            represent heat stress [C]. Default: 26C.
-
-        extreme_cold_thresh:  UTCI temperature below which conditions
-            represent extreme cold stress [C]. Default: -40C.
-        very_strong_cold_thresh:  UTCI temperature below which conditions
-            represent very strong cold stress [C]. Default: -27C.
-        strong_cold_thresh:  UTCI temperature below which conditions
-            represent strong cold stress [C]. Default: -13C.
-
-        moderate_cold_thresh:  UTCI temperature below which conditions
-            represent moderate cold stress [C]. Default: 0C.
-        moderate_heat_thresh:  UTCI temperature above which conditions
-            represent moderateheat stress [C]. Default: 28C.
-
-        strong_heat_thresh:  UTCI temperature above which conditions
-            represent strong heat stress [C]. Default: 32C.
-        very_strong_heat_thresh:  UTCI temperature above which conditions
-            represent very strong heat stress [C]. Default: 38C.
-        extreme_heat_thresh:  UTCI temperature above which conditions
-            represent extreme heat stress [C]. Default: 46C.
+        cold_thresh
+        heat_thresh
+        extreme_cold_thresh
+        very_strong_cold_thresh
+        strong_cold_thresh
+        moderate_cold_thresh
+        moderate_heat_thresh
+        strong_heat_thresh
+        very_strong_heat_thresh
+        extreme_heat_thresh
     """
     _model = 'Universal Thermal Climate Index'
 

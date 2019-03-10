@@ -384,7 +384,8 @@ class PrevailingTemperature(object):
             new_coll = self.hourly_prevailing_temperature_timestep(
                 collection.header.analysis_period.timestep)
             if not collection.header.analysis_period.is_annual:
-                new_coll.filter_by_analysis_period(collection.header.analysis_period)
+                new_coll = new_coll.filter_by_analysis_period(
+                    collection.header.analysis_period)
             return new_coll
 
         new_coll = collection.get_aligned_collection(
