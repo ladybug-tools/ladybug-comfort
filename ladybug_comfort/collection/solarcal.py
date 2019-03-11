@@ -14,7 +14,8 @@ from ladybug.datacollection import HourlyDiscontinuousCollection
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature
 from ladybug.datatype.temperaturedelta import RadiantTemperatureDelta
 from ladybug.datatype.energyflux import Irradiance, EffectiveRadiantField, \
-    HorizontalInfraredRadiationIntensity
+    HorizontalInfraredRadiationIntensity, DiffuseHorizontalIrradiance, \
+    DirectNormalIrradiance, DirectHorizontalIrradiance
 from ladybug.datatype.energyintensity import Radiation
 from ladybug.datatype.fraction import Fraction
 
@@ -30,17 +31,19 @@ class _SolarCalBase(ComfortCollection):
     @property
     def fraction_body_exposed(self):
         """Data Collection of body fraction exposed to direct sun."""
-        return self._fract_exp.duplicate()
+        return self._build_coll(
+            self._fract_exp, Fraction('Fraction Body Exposed'), 'fraction')
 
     @property
     def floor_reflectance(self):
         """Data Collection of floor reflectance."""
-        return self._flr_ref.duplicate()
+        return self._build_coll(
+            self._flr_ref, Fraction('Floor Reflectance'), 'fraction')
 
     @property
     def solarcal_body_parameter(self):
         """SolarCal body parameters that are assigned to this object."""
-        return self._body_par.duplicate()
+        return self._body_par
 
     @property
     def mrt_delta(self):
@@ -67,8 +70,7 @@ class _SolarCalBase(ComfortCollection):
         if data_coll is not None:
             return self._check_input(data_coll, Fraction, 'fraction', name)
         else:
-            return self._base_collection.get_aligned_collection(
-                default, Fraction(), 'fraction')
+            return [default] * self._calc_length
 
     def _body_par_check(self, body_par):
         if body_par is None:
@@ -166,9 +168,9 @@ class OutdoorSolarCal(_SolarCalBase):
         # check required inputs
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
-        self._location = location
-        self._dir_norm = direct_normal_solar
-        self._diff_horiz = diffuse_horizontal_solar
+        self._location = location.duplicate()
+        self._dir_norm = direct_normal_solar.values
+        self._diff_horiz = diffuse_horizontal_solar.values
         self._horiz_ir = self._check_input(
             horizontal_infrared, HorizontalInfraredRadiationIntensity, 'W/m2',
             'horizontal_infrared')
@@ -223,28 +225,29 @@ class OutdoorSolarCal(_SolarCalBase):
 
     @property
     def diffuse_horizontal_solar(self):
-        """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
-        return self._diff_horiz.duplicate()
+        """Data Collection of diffuse horizontal irradiance in W/m2."""
+        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
 
     @property
     def direct_normal_solar(self):
-        """Data Collection of direct normal irradiance in Wh/m2 or W/m2."""
-        return self._dir_norm.duplicate()
+        """Data Collection of direct normal irradiance in W/m2."""
+        return self._build_coll(self._dir_norm, DirectNormalIrradiance(), 'W/m2')
 
     @property
     def surface_temperatures(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._srf_temp.duplicate()
+        return self._build_coll(self._srf_temp, Temperature('Surface Temperature'), 'C')
 
     @property
     def horizontal_infrared(self):
         """Data Collection of horizontal infrared radiation intensity in W/m2."""
-        return self._horiz_ir.duplicate()
+        return self._build_coll(
+            self._horiz_ir, HorizontalInfraredRadiationIntensity(), 'W/m2')
 
     @property
     def sky_exposure(self):
         """Data Collection of sky view."""
-        return self._sky_exp.duplicate()
+        return self._build_coll(self._sky_exp, Fraction('Sky Exposure'), 'fraction')
 
     @property
     def shortwave_effective_radiant_field(self):
@@ -331,9 +334,9 @@ class IndoorSolarCal(_SolarCalBase):
         # check required inputs
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
-        self._location = location
-        self._dir_norm = direct_normal_solar
-        self._diff_horiz = diffuse_horizontal_solar
+        self._location = location.duplicate()
+        self._dir_norm = direct_normal_solar.values
+        self._diff_horiz = diffuse_horizontal_solar.values
         self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
 
         # check optional inputs
@@ -381,27 +384,28 @@ class IndoorSolarCal(_SolarCalBase):
     @property
     def diffuse_horizontal_solar(self):
         """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
-        return self._diff_horiz.duplicate()
+        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
 
     @property
     def direct_normal_solar(self):
         """Data Collection of direct normal irradiance in Wh/m2 or W/m2."""
-        return self._dir_norm.duplicate()
+        return self._build_coll(self._dir_norm, DirectNormalIrradiance(), 'W/m2')
 
     @property
     def longwave_mrt(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._l_mrt.duplicate()
+        return self._build_coll(self._l_mrt, MeanRadiantTemperature(), 'C')
 
     @property
     def sky_exposure(self):
         """Data Collection of sky view."""
-        return self._sky_exp.duplicate()
+        return self._build_coll(self._sky_exp, Fraction('Sky Exposure'), 'fraction')
 
     @property
     def window_transmittance(self):
         """Data Collection of window transmittance."""
-        return self._win_trans.duplicate()
+        return self._build_coll(
+            self._win_trans, Fraction('Window Transmittance'), 'fraction')
 
     @property
     def effective_radiant_field(self):
@@ -469,9 +473,9 @@ class HorizontalSolarCal(_SolarCalBase):
         # check required inputs
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
-        self._location = location
-        self._dir_horiz = direct_horizontal_solar
-        self._diff_horiz = diffuse_horizontal_solar
+        self._location = location.duplicate()
+        self._dir_horiz = direct_horizontal_solar.values
+        self._diff_horiz = diffuse_horizontal_solar.values
         self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
 
         # check optional inputs
@@ -515,17 +519,17 @@ class HorizontalSolarCal(_SolarCalBase):
     @property
     def diffuse_horizontal_solar(self):
         """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
-        return self._diff_horiz.duplicate()
+        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
 
     @property
     def direct_horizontal_solar(self):
         """Data Collection of direct horizontal irradiance in Wh/m2 or W/m2."""
-        return self._dir_horiz.duplicate()
+        return self._build_coll(self._dir_horiz, DirectHorizontalIrradiance(), 'W/m2')
 
     @property
     def longwave_mrt(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._l_mrt.duplicate()
+        return self._build_coll(self._l_mrt, MeanRadiantTemperature(), 'C')
 
     @property
     def effective_radiant_field(self):

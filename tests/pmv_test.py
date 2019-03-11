@@ -315,22 +315,27 @@ class PMVTestCase(unittest.TestCase):
         air_temp = HourlyContinuousCollection(air_temp_header, [24] * calc_length)
         pmv_obj = PMV(air_temp, 50)
 
+        # check that editing the original collection does not mutate the object
+        air_temp[0] = 26
+        assert pmv_obj.air_temperature[0] == 24
+
+        # check that editing collection properties does not mutate the object
         pmv_obj.air_temperature[0] = 26
         assert pmv_obj.air_temperature[0] == 24
         pmv_obj.air_temperature.values = [26] * calc_length
         assert pmv_obj.air_temperature[0] == 24
-        with pytest.raises(Exception):
-            pmv_obj.air_temperature = air_temp
-
         pmv_obj.predicted_mean_vote[0] = 0.5
         assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.053570216, rel=1e-3)
         pmv_obj.predicted_mean_vote.values = [0.5] * calc_length
         assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.053570216, rel=1e-3)
-        with pytest.raises(Exception):
-            pmv_obj.predicted_mean_vote = air_temp
-
         pmv_obj.comfort_parameter.ppd_comfort_thresh = 15
         assert pmv_obj.comfort_parameter.ppd_comfort_thresh == 10
+
+        # check that properties cannot be edited directly
+        with pytest.raises(Exception):
+            pmv_obj.air_temperature = air_temp
+        with pytest.raises(Exception):
+            pmv_obj.predicted_mean_vote = air_temp
         with pytest.raises(Exception):
             pmv_obj.comfort_parameter = PMVParameter()
 

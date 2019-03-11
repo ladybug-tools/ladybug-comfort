@@ -320,20 +320,25 @@ class UTCITestCase(unittest.TestCase):
         air_temp = HourlyContinuousCollection(air_temp_header, [24] * calc_length)
         utci_obj = UTCI(air_temp, 50)
 
+        # check that editing the original collection does not mutate the object
+        air_temp[0] = 26
+        assert utci_obj.air_temperature[0] == 24
+
+        # check that editing collection properties does not mutate the object
         utci_obj.air_temperature[0] = 26
         assert utci_obj.air_temperature[0] == 24
         utci_obj.air_temperature.values = [26] * calc_length
         assert utci_obj.air_temperature[0] == 24
         with pytest.raises(Exception):
             utci_obj.air_temperature = air_temp
-
         utci_obj.universal_thermal_climate_index[0] = 20
         assert utci_obj.universal_thermal_climate_index[0] == pytest.approx(23.8110341, rel=1e-3)
         utci_obj.universal_thermal_climate_index.values = [20] * calc_length
         assert utci_obj.universal_thermal_climate_index[0] == pytest.approx(23.8110341, rel=1e-3)
+
+        # check that properties cannot be edited directly
         with pytest.raises(Exception):
             utci_obj.universal_thermal_climate_index = air_temp
-
         with pytest.raises(Exception):
             utci_obj.comfort_parameter = UTCIParameter()
 

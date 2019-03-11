@@ -9,7 +9,7 @@ from ._base import ComfortCollection
 from ladybug._datacollectionbase import BaseCollection
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
-    UniversalThermalClimateIndex
+    AirTemperature, UniversalThermalClimateIndex
 from ladybug.datatype.fraction import RelativeHumidity
 from ladybug.datatype.speed import Speed, WindSpeed
 from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, \
@@ -79,7 +79,7 @@ class UTCI(ComfortCollection):
         self._base_collection = air_temperature
 
         # check required inputs
-        self._air_temperature = air_temperature
+        self._air_temperature = air_temperature.values
         self._rel_humidity = self._check_input(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
@@ -88,15 +88,13 @@ class UTCI(ComfortCollection):
             self._rad_temperature = self._check_input(
                 rad_temperature, Temperature, 'C', 'rad_temperature')
         else:
-            self._rad_temperature = self._air_temperature.duplicate()
-            self._rad_temperature.header._data_type = MeanRadiantTemperature()
+            self._rad_temperature = self._air_temperature
 
         if wind_speed is not None:
             self._wind_speed = self._check_input(
                 wind_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._wind_speed = self._base_collection.get_aligned_collection(
-                0.1, WindSpeed(), 'm/s')
+            self._wind_speed = [0.1] * self.calc_length
 
         # check that all input data collections are aligned.
         BaseCollection.are_collections_aligned(self._input_collections)
@@ -127,27 +125,27 @@ class UTCI(ComfortCollection):
     @property
     def air_temperature(self):
         """Data Collection of air temperature values in degrees C."""
-        return self._air_temperature.duplicate()
+        return self._build_coll(self._air_temperature, AirTemperature(), 'C')
 
     @property
     def rad_temperature(self):
         """Data Collection of mean radiant temperature (MRT) values in degrees C."""
-        return self._rad_temperature.duplicate()
+        return self._build_coll(self._rad_temperature, MeanRadiantTemperature(), 'C')
 
     @property
     def wind_speed(self):
         """Data Collection of air speed values in m/s."""
-        return self._wind_speed.duplicate()
+        return self._build_coll(self._wind_speed, WindSpeed(), 'm/s')
 
     @property
     def rel_humidity(self):
         """Data Collection of relative humidity values in %."""
-        return self._rel_humidity.duplicate()
+        return self._build_coll(self._rel_humidity, RelativeHumidity(), '%')
 
     @property
     def comfort_parameter(self):
         """UTCI comfort parameters that are assigned to this object."""
-        return self._comfort_par.duplicate()
+        return self._comfort_par
 
     @property
     def universal_thermal_climate_index(self):

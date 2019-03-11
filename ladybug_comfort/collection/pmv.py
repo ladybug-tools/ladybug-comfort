@@ -101,7 +101,7 @@ class PMV(ComfortCollection):
         self._base_collection = air_temperature
 
         # check and set required inputs
-        self._air_temperature = air_temperature
+        self._air_temperature = air_temperature.values
         self._rel_humidity = self._check_input(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
@@ -110,36 +110,31 @@ class PMV(ComfortCollection):
             self._rad_temperature = self._check_input(
                 rad_temperature, Temperature, 'C', 'rad_temperature')
         else:
-            self._rad_temperature = self._air_temperature.duplicate()
-            self._rad_temperature.header._data_type = MeanRadiantTemperature()
+            self._rad_temperature = self._air_temperature
 
         if air_speed is not None:
             self._air_speed = self._check_input(
                 air_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._air_speed = self._base_collection.get_aligned_collection(
-                0.1, AirSpeed(), 'm/s')
+            self._air_speed = [0.1] * self.calc_length
 
         if met_rate is not None:
             self._met_rate = self._check_input(
                 met_rate, MetabolicRate, 'met', 'met_rate')
         else:
-            self._met_rate = self._base_collection.get_aligned_collection(
-                1.1, MetabolicRate(), 'met')
+            self._met_rate = [1.1] * self.calc_length
 
         if clo_value is not None:
             self._clo_value = self._check_input(
                 clo_value, ClothingInsulation, 'clo', 'clo_value')
         else:
-            self._clo_value = self._base_collection.get_aligned_collection(
-                0.7, ClothingInsulation(), 'clo')
+            self._clo_value = [0.7] * self.calc_length
 
         if external_work is not None:
             self._external_work = self._check_input(
                 external_work, MetabolicRate, 'met', 'external_work')
         else:
-            self._external_work = self._base_collection.get_aligned_collection(
-                0., MetabolicRate(), 'met')
+            self._external_work = [0.] * self.calc_length
 
         # check that all input data collections are aligned.
         BaseCollection.are_collections_aligned(self._input_collections)
@@ -228,22 +223,22 @@ class PMV(ComfortCollection):
     @property
     def air_temperature(self):
         """Data Collection of air temperature values in degrees C."""
-        return self._air_temperature.duplicate()
+        return self._build_coll(self._air_temperature, AirTemperature(), 'C')
 
     @property
     def rad_temperature(self):
         """Data Collection of mean radiant temperature (MRT) values in degrees C."""
-        return self._rad_temperature.duplicate()
+        return self._build_coll(self._rad_temperature, MeanRadiantTemperature(), 'C')
 
     @property
     def air_speed(self):
         """Data Collection of air speed values in m/s."""
-        return self._air_speed.duplicate()
+        return self._build_coll(self._air_speed, AirSpeed(), 'm/s')
 
     @property
     def rel_humidity(self):
         """Data Collection of relative humidity values in %."""
-        return self._rel_humidity.duplicate()
+        return self._build_coll(self._rel_humidity, RelativeHumidity(), '%')
 
     @property
     def met_rate(self):
@@ -254,7 +249,7 @@ class PMV(ComfortCollection):
         2 met = Metabolic rate of a wlaking person
         If left blank, default is set to 1.1 met (for seated, typing).
         """
-        return self._met_rate.duplicate()
+        return self._build_coll(self._met_rate, MetabolicRate(), 'met')
 
     @property
     def clo_value(self):
@@ -265,12 +260,12 @@ class PMV(ComfortCollection):
         0 clo = No clothing
         If left blank, default is set to 0.85 clo.
         """
-        return self._clo_value.duplicate()
+        return self._build_coll(self._clo_value, ClothingInsulation(), 'clo')
 
     @property
     def external_work(self):
         """Data Collection of the work done by the human subject in met."""
-        return self._external_work.duplicate()
+        return self._build_coll(self._external_work, MetabolicRate(), 'met')
 
     @property
     def comfort_parameter(self):

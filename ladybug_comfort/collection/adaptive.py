@@ -78,12 +78,11 @@ class Adaptive(ComfortCollection):
         self._base_collection = operative_temperature
 
         # check model inputs
-        self._op_temp = operative_temperature
+        self._op_temp = operative_temperature.values
         if air_speed is not None:
             self._air_speed = self._check_input(air_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._air_speed = self._base_collection.get_aligned_collection(
-                0.1, AirSpeed(), 'm/s')
+            self._air_speed = [0.1] * self.calc_length
 
         # check comfort parameters
         if comfort_parameter is None:
@@ -101,7 +100,8 @@ class Adaptive(ComfortCollection):
             # it is a data collection of actual recorded outdoor temperatures
             prev_obj = PrevailingTemperature(
                 self._t_out, self._comfort_par.avg_month_or_running_mean)
-            self._prevail_temp = prev_obj.get_aligned_prevailing(self._base_collection)
+            prevail_collection = prev_obj.get_aligned_prevailing(self._base_collection)
+            self._prevail_temp = prevail_collection.values
         else:
             # it is either a data collection or single value of prevailing temperature
             self._prevail_temp = self._check_input(
@@ -166,17 +166,17 @@ class Adaptive(ComfortCollection):
     @property
     def prevailing_outdoor_temperature(self):
         """Data Collection of prevailing outdoor temperature in degrees C."""
-        return self._prevail_temp.duplicate()
+        return self._build_coll(self._prevail_temp, PrevailingOutdoorTemperature(), 'C')
 
     @property
     def operative_temperature(self):
         """Data Collection of operative temperature in degrees C."""
-        return self._op_temp.duplicate()
+        return self._build_coll(self._op_temp, OperativeTemperature(), 'C')
 
     @property
     def air_speed(self):
         """Data Collection of air speed in m/s."""
-        return self._air_speed.duplicate()
+        return self._build_coll(self._air_speed, AirSpeed(), 'm/s')
 
     @property
     def comfort_parameter(self):
@@ -259,7 +259,6 @@ class PrevailingTemperature(object):
     """Determine prevailing temperature from annual DataCollections of outdoor temperature.
 
     Properties:
-        outdoor_temperature
         avg_month_or_running_mean
         hourly_prevailing_temperature
         daily_prevailing_temperature
@@ -281,12 +280,15 @@ class PrevailingTemperature(object):
                 a weighted running mean of the last week (False).  The default is True.
         """
         # perform checks on the inputs
-        self._t_out = outdoor_temperature
-        self._avg_month = avg_month
         acceptabe = (HourlyContinuousCollection, DailyCollection, MonthlyCollection)
-        assert isinstance(self._t_out, acceptabe), 'outdoor_temperature must be one ' \
-            'of the following: {}.\n Got {}'.format(acceptabe, type(self._t_out))
+        assert isinstance(outdoor_temperature, acceptabe), \
+            'outdoor_temperature must be one of the following: {}.\n Got {}'.format(
+                acceptabe, type(outdoor_temperature))
+
+        self._t_out = outdoor_temperature.duplicate()
         self._head = self._t_out.header
+        self._avg_month = avg_month
+
         assert isinstance(self._head.data_type, Temperature) and self._head.unit == 'C',\
             'outdoor_temperature must be Temperature in C. Got {} in {}'.format(
                 self._head.data_type, self._head.unit)
@@ -316,11 +318,6 @@ class PrevailingTemperature(object):
             else:
                 raise TypeError('outdoor_temperature must be hourly or daily when '
                                 'avg_month is False.')
-
-    @property
-    def outdoor_temperature(self):
-        """The input outdoor_temperature data collection."""
-        return self._t_out
 
     @property
     def avg_month(self):

@@ -358,20 +358,25 @@ class AdaptiveTestCase(unittest.TestCase):
         op_temp = HourlyContinuousCollection(op_temp_header, [26] * calc_length)
         adapt_obj = Adaptive(prevail_temp, op_temp)
 
+        # check that editing the original collection does not mutate the object
+        op_temp[0] = 28
+        assert adapt_obj.operative_temperature[0] == 26
+
+        # check that editing collection properties does not mutate the object
         adapt_obj.operative_temperature[0] = 28
         assert adapt_obj.operative_temperature[0] == 26
         adapt_obj.operative_temperature.values = [28] * calc_length
         assert adapt_obj.operative_temperature[0] == 26
-        with pytest.raises(Exception):
-            adapt_obj.operative_temperature = op_temp
-
         adapt_obj.degrees_from_neutral[0] = 0.5
         assert adapt_obj.degrees_from_neutral[0] == pytest.approx(1.3799, rel=1e-3)
         adapt_obj.degrees_from_neutral.values = [0.5] * calc_length
         assert adapt_obj.degrees_from_neutral[0] == pytest.approx(1.3799, rel=1e-3)
+
+        # check that properties cannot be edited directly
+        with pytest.raises(Exception):
+            adapt_obj.operative_temperature = op_temp
         with pytest.raises(Exception):
             adapt_obj.degrees_from_neutral = op_temp
-
         with pytest.raises(Exception):
             adapt_obj.comfort_parameter = AdaptiveParameter(False)
 
@@ -466,8 +471,6 @@ class AdaptiveTestCase(unittest.TestCase):
         epw = EPW(relative_path)
 
         prevail_obj = PrevailingTemperature(epw.dry_bulb_temperature, True)
-        assert isinstance(prevail_obj.outdoor_temperature, HourlyContinuousCollection)
-        assert len(prevail_obj.outdoor_temperature.values) == 8760
         assert isinstance(prevail_obj.hourly_prevailing_temperature, HourlyContinuousCollection)
         assert len(prevail_obj.hourly_prevailing_temperature.values) == 8760
         assert isinstance(prevail_obj.daily_prevailing_temperature, DailyCollection)
@@ -478,8 +481,6 @@ class AdaptiveTestCase(unittest.TestCase):
         assert len(prevail_obj.monthly_per_hour_prevailing_temperature.values) == 288
 
         prevail_obj = PrevailingTemperature(epw.dry_bulb_temperature, False)
-        assert isinstance(prevail_obj.outdoor_temperature, HourlyContinuousCollection)
-        assert len(prevail_obj.outdoor_temperature.values) == 8760
         assert isinstance(prevail_obj.hourly_prevailing_temperature, HourlyContinuousCollection)
         assert len(prevail_obj.hourly_prevailing_temperature.values) == 8760
         assert isinstance(prevail_obj.daily_prevailing_temperature, DailyCollection)
@@ -496,8 +497,6 @@ class AdaptiveTestCase(unittest.TestCase):
         outdoor_temp = outdoor_temp.validate_analysis_period()
 
         prevail_obj = PrevailingTemperature(outdoor_temp, True)
-        assert isinstance(prevail_obj.outdoor_temperature, DailyCollection)
-        assert len(prevail_obj.outdoor_temperature.values) == 365
         assert isinstance(prevail_obj.hourly_prevailing_temperature, HourlyContinuousCollection)
         assert len(prevail_obj.hourly_prevailing_temperature.values) == 8760
         assert isinstance(prevail_obj.daily_prevailing_temperature, DailyCollection)
@@ -508,8 +507,6 @@ class AdaptiveTestCase(unittest.TestCase):
         assert len(prevail_obj.monthly_per_hour_prevailing_temperature.values) == 288
 
         prevail_obj = PrevailingTemperature(outdoor_temp, False)
-        assert isinstance(prevail_obj.outdoor_temperature, DailyCollection)
-        assert len(prevail_obj.outdoor_temperature.values) == 365
         assert isinstance(prevail_obj.hourly_prevailing_temperature, HourlyContinuousCollection)
         assert len(prevail_obj.hourly_prevailing_temperature.values) == 8760
         assert isinstance(prevail_obj.daily_prevailing_temperature, DailyCollection)
@@ -526,8 +523,6 @@ class AdaptiveTestCase(unittest.TestCase):
         outdoor_temp = outdoor_temp.validate_analysis_period()
 
         prevail_obj = PrevailingTemperature(outdoor_temp, True)
-        assert isinstance(prevail_obj.outdoor_temperature, MonthlyCollection)
-        assert len(prevail_obj.outdoor_temperature.values) == 12
         assert isinstance(prevail_obj.hourly_prevailing_temperature, HourlyContinuousCollection)
         assert len(prevail_obj.hourly_prevailing_temperature.values) == 8760
         assert isinstance(prevail_obj.daily_prevailing_temperature, DailyCollection)

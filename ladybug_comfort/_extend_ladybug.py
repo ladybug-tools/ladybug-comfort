@@ -13,7 +13,7 @@ from .collection.solarcal import OutdoorSolarCal
 
 
 def get_universal_thermal_climate_index(self, include_wind=False, include_sun=False,
-                                        comfort_parameter=None):
+                                        utci_parameter=None):
     """Get a UTCI comfort object from the conditions within the EPW file.
 
     Args:
@@ -27,7 +27,7 @@ def get_universal_thermal_climate_index(self, include_wind=False, include_sun=Fa
             context, standing human geometry, and a solar horizontal angle relative to
             front of person (SHARP) of 135 degrees. A SHARP of 135 essentially assumes
             that a person typically faces their side or back to the sun to avoid glare.
-        comfort_parameter: Optional UTCIParameter object to specify parameters under
+        utci_parameter: Optional UTCIParameter object to specify parameters under
             which conditions are considered acceptable. If None, default will
             assume comfort thresholds consistent with those used by meterologists
             to categorize outdoor conditions.
@@ -57,13 +57,13 @@ def get_universal_thermal_climate_index(self, include_wind=False, include_sun=Fa
 
     # return the comfort object
     utci_obj = UTCI(self.dry_bulb_temperature, self.relative_humidity, mrt, wind_speed,
-                    comfort_parameter)
+                    utci_parameter)
     return utci_obj
 
 
 def get_standard_effective_temperature(self, include_wind=False, include_sun=False,
                                        met_rate=None, clo_value=None, external_work=None,
-                                       comfort_parameter=None):
+                                       pmv_parameter=None):
     """Get a SET comfort object from the conditions within the EPW file.
 
     Args:
@@ -90,7 +90,7 @@ def get_standard_effective_temperature(self, include_wind=False, include_sun=Fal
         external_work: Data Collection of external work in met or a single
             external work value to be used for the whole analysis. If None,
             default is set to 0 met.
-        comfort_parameter: Optional PMVParameter object to specify parameters under
+        pmv_parameter: Optional PMVParameter object to specify parameters under
             which conditions are considered acceptable. If None, default will
             assume a PPD threshold of 10%, no absolute humidity constraints
             and a still air threshold of 0.1 m/s.
@@ -123,7 +123,7 @@ def get_standard_effective_temperature(self, include_wind=False, include_sun=Fal
 
     # return the comfort object
     set_obj = PMV(self.dry_bulb_temperature, self.relative_humidity, mrt, wind_speed,
-                  met_rate, clo_value, external_work, comfort_parameter)
+                  met_rate, clo_value, external_work, pmv_parameter)
     return set_obj
 
 

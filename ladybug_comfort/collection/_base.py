@@ -38,11 +38,10 @@ class ComfortCollection(object):
         if isinstance(data_coll, BaseCollection):
             self._check_datacoll(data_coll, dat_type, unit, name)
             self._input_collections.append(data_coll)
-            return data_coll
+            return data_coll.values
         else:
             try:
-                return self._base_collection.get_aligned_collection(
-                    float(data_coll), dat_type(), unit)
+                return [float(data_coll)] * self.calc_length
             except ValueError:
                 raise TypeError('{} must be either a number or a Data Colleciton. '
                                 'Got {}'.format(name, type(data_coll)))
