@@ -10,7 +10,8 @@ from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     adaptive_comfort_en15251, adaptive_comfort_conditioned, \
     cooling_effect_ashrae55, cooling_effect_en15251, t_operative, \
     ashrae55_neutral_offset_from_ppd, en15251_neutral_offset_from_comfort_class, \
-    weighted_running_mean_hourly, weighted_running_mean_daily
+    weighted_running_mean_hourly, weighted_running_mean_daily, \
+    check_prevailing_temperatures_ashrae55, check_prevailing_temperatures_en15251
 
 from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.header import Header
@@ -172,6 +173,50 @@ class AdaptiveTestCase(unittest.TestCase):
         with pytest.raises(Exception):
             prevailing = weighted_running_mean_daily(outdoor)
 
+    def test_check_prevailing_temperatures_ashrae55(self):
+        """Test the check_prevailing_temperatures_ashrae55 function."""
+        prev_temps = [22] * 24
+        all_in_range, msg = check_prevailing_temperatures_ashrae55(prev_temps)
+        assert all_in_range is True
+        assert msg.startswith('All')
+
+        prev_temps = range(30)
+        all_in_range, msg = check_prevailing_temperatures_ashrae55(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('10')
+
+        prev_temps = range(18, 40)
+        all_in_range, msg = check_prevailing_temperatures_ashrae55(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('6')
+
+        prev_temps = range(50)
+        all_in_range, msg = check_prevailing_temperatures_ashrae55(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('10')
+
+    def test_check_prevailing_temperatures_en15251(self):
+        """Test the check_prevailing_temperatures_ashrae55 function."""
+        prev_temps = [22] * 24
+        all_in_range, msg = check_prevailing_temperatures_en15251(prev_temps)
+        assert all_in_range is True
+        assert msg.startswith('All')
+
+        prev_temps = range(30)
+        all_in_range, msg = check_prevailing_temperatures_en15251(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('10')
+
+        prev_temps = range(18, 38)
+        all_in_range, msg = check_prevailing_temperatures_en15251(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('7')
+
+        prev_temps = range(50)
+        all_in_range, msg = check_prevailing_temperatures_en15251(prev_temps)
+        assert all_in_range is False
+        assert msg.startswith('10')
+
     def test_adaptive_parameter_init(self):
         """Test the initialization of the AdaptiveParameter object."""
         ashrae55_or_en15251 = False
@@ -274,6 +319,33 @@ class AdaptiveTestCase(unittest.TestCase):
         op_temp_header = Header(Temperature(), 'C', AnalysisPeriod(end_month=1, end_day=1))
         op_temp = HourlyContinuousCollection(op_temp_header, [26] * calc_length)
         adapt_obj = Adaptive(prevail_temp, op_temp)
+
+        assert adapt_obj.comfort_model == 'Adaptive'
+        assert adapt_obj.calc_length == calc_length
+        str(adapt_obj)  # test that the string representaiton is ok
+
+        assert isinstance(adapt_obj.prevailing_outdoor_temperature, HourlyContinuousCollection)
+        assert len(adapt_obj.prevailing_outdoor_temperature.values) == calc_length
+        assert adapt_obj.prevailing_outdoor_temperature[0] == 22
+        assert isinstance(adapt_obj.operative_temperature, HourlyContinuousCollection)
+        assert len(adapt_obj.operative_temperature.values) == calc_length
+        assert adapt_obj.operative_temperature[0] == 26
+
+        assert isinstance(adapt_obj.neutral_temperature, HourlyContinuousCollection)
+        assert len(adapt_obj.neutral_temperature.values) == calc_length
+        assert adapt_obj.neutral_temperature[0] == pytest.approx(24.62, rel=1e-3)
+        assert isinstance(adapt_obj.degrees_from_neutral, HourlyContinuousCollection)
+        assert len(adapt_obj.degrees_from_neutral.values) == calc_length
+        assert adapt_obj.degrees_from_neutral[0] == pytest.approx(1.3799, rel=1e-3)
+
+    def test_init_adaptive_collection_mrt(self):
+        """Test the initialization of the Adaptive collection with MRT."""
+        calc_length = 24
+        prevail_header = Header(PrevailingOutdoorTemperature(), 'C', AnalysisPeriod(end_month=1, end_day=1))
+        prevail_temp = HourlyContinuousCollection(prevail_header, [22] * calc_length)
+        air_temp_header = Header(Temperature(), 'C', AnalysisPeriod(end_month=1, end_day=1))
+        air_temp = HourlyContinuousCollection(air_temp_header, [24] * calc_length)
+        adapt_obj = Adaptive.from_air_and_rad_temp(prevail_temp, air_temp, 28)
 
         assert adapt_obj.comfort_model == 'Adaptive'
         assert adapt_obj.calc_length == calc_length

@@ -12,21 +12,24 @@ from .collection.pmv import PMV
 from .collection.solarcal import OutdoorSolarCal
 
 
-def get_universal_thermal_climate_index(self, include_wind=False, include_sun=False,
+def get_universal_thermal_climate_index(self, include_wind=True, include_sun=True,
                                         utci_parameter=None):
     """Get a UTCI comfort object from the conditions within the EPW file.
 
     Args:
-        include_wind: Set to True to include the epw wind speed in the calculation.
-            Default is False assuming a condition that is shielded from wind and
-            that the human expereinces a very low wind speed of 0.1 m/s.
+        include_wind: Set to True to include the EPW wind speed in the calculation.
+            Setting to False will assume a condition that is shielded from wind
+            where the human expereinces a very low wind speed of 0.1 m/s.
+            Default is True to include wind.
         include_sun: Set to True to include the mean radiant temperature (MRT) delta
             from both shortwave solar falling directly on people and long wave radiant
-            exchange with the sky. Default is False assuming a shaded condition.
-            Note that, when set to True, this calculation will assume no surrounding
-            context, standing human geometry, and a solar horizontal angle relative to
-            front of person (SHARP) of 135 degrees. A SHARP of 135 essentially assumes
-            that a person typically faces their side or back to the sun to avoid glare.
+            exchange with the sky. Setting to False will assume a shaded condition
+            with MRT being equal to the EPW dry bulb temperature. When set to True,
+            this calculation will assume no surrounding shade context, standing human
+            geometry, and a solar horizontal angle relative to front of person (SHARP)
+            of 135 degrees. A SHARP of 135 essentially assumes that a person typically
+            faces their side or back to the sun to avoid glare.
+            Default is True to include sun.
         utci_parameter: Optional UTCIParameter object to specify parameters under
             which conditions are considered acceptable. If None, default will
             assume comfort thresholds consistent with those used by meterologists
@@ -61,26 +64,25 @@ def get_universal_thermal_climate_index(self, include_wind=False, include_sun=Fa
     return utci_obj
 
 
-def get_standard_effective_temperature(self, include_wind=False, include_sun=False,
+def get_standard_effective_temperature(self, include_wind=True, include_sun=True,
                                        met_rate=None, clo_value=None, external_work=None,
                                        pmv_parameter=None):
     """Get a SET comfort object from the conditions within the EPW file.
 
     Args:
-        include_wind: Set to True to include the epw wind speed in the calculation.
-            Note that, if set to True, an automatic conversion will be done from
-            the meteorological wind speed at 10 meters to human height at ~1 meter.
-            Specifcally, meteorological wind speeds will be multiplied by 2/3, which
-            is also the underlying assumption of the universal thermal climate
-            index model. Default is False assuming a condition that is shielded
-            from wind and that the human expereinces a very low wind speed of 0.1 m/s.
+        include_wind: Set to True to include the EPW wind speed in the calculation.
+            Setting to False will assume a condition that is shielded from wind
+            where the human expereinces a very low wind speed of 0.1 m/s.
+            Default is True to include wind.
         include_sun: Set to True to include the mean radiant temperature (MRT) delta
             from both shortwave solar falling directly on people and long wave radiant
-            exchange with the sky. Default is False assuming a shaded condition.
-            Note that, when set to True, this calculation will assume no surrounding
-            context, standing human geometry, and a solar horizontal angle relative to
-            front of person (SHARP) of 135 degrees. A SHARP of 135 essentially assumes
-            that a person typically faces their side or back to the sun to avoid glare.
+            exchange with the sky. Setting to False will assume a shaded condition
+            with MRT being equal to the EPW dry bulb temperature. When set to True,
+            this calculation will assume no surrounding shade context, standing human
+            geometry, and a solar horizontal angle relative to front of person (SHARP)
+            of 135 degrees. A SHARP of 135 essentially assumes that a person typically
+            faces their side or back to the sun to avoid glare.
+            Default is True to include sun.
         met_rate: Data Collection of metabolic rate in met or a single
             metabolic rate value to be used for the whole analysis. If None,
             default is set to 1.1 met (for seated, typing).

@@ -31,8 +31,8 @@ def adaptive_comfort_ashrae55(t_prevail, to):
                 indicate varm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
-    if t_prevail < 10.0:
-        t_prevail = 10.0
+    if t_prevail < 10.:
+        t_prevail = 10.
     elif t_prevail > 33.5:
         t_prevail = 33.5
 
@@ -72,10 +72,10 @@ def adaptive_comfort_en15251(t_prevail, to):
                 indicate varm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
-    if t_prevail < 10.0:
-        t_prevail = 10.0
-    elif t_prevail > 30:
-        t_prevail = 30
+    if t_prevail < 10.:
+        t_prevail = 10.
+    elif t_prevail > 30.:
+        t_prevail = 30.
 
     # get the neutral temperature
     t_comf = neutral_temperature_en15251(t_prevail)
@@ -443,3 +443,85 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
         daily_means.append(outdoor_temperatures[i])
 
     return daily_run_means
+
+
+def check_prevailing_temperatures_ashrae55(t_prevail):
+    """Check whethr prevailing temperatures are outside permissable ranges for ASHRAE-55.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    all_in_range, message = check_prevailing_temperatures_range(
+        t_prevail, 10., 33.5, 'ASHRAE-55')
+    return all_in_range, message
+
+
+def check_prevailing_temperatures_en15251(t_prevail):
+    """Check whethr prevailing temperatures are outside permissable ranges for EN-15251.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    all_in_range, message = check_prevailing_temperatures_range(
+        t_prevail, 10., 30., 'EN-15251')
+    return all_in_range, message
+
+
+def check_prevailing_temperatures_range(t_prevail, lower, upper, standard=''):
+    """Check prevailing temperatures to see how many are outside a certain range.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+        lower: A lower limit for the temperatures [C].
+        upper: An upper limit for the temperatures [C].
+        standard: Optional text for a standard name that will be used in the
+            output message (eg. ASHRAE-55).
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    # defaults to be changed
+    all_in_range = True
+    num_cold = 0
+    num_hot = 0
+
+    # check all values
+    for t in t_prevail:
+        if t < lower:
+            all_in_range = False
+            num_cold += 1
+        elif t > upper:
+            all_in_range = False
+            num_hot += 1
+
+    # build the message
+    if all_in_range is True:
+        message = 'All prevailing temperatures are within acceptable ASHRAE-55 ranges.'
+    else:
+        cold_msg = '{} prevailing temperatures are colder than the lower limit' \
+            ' permitted by {} ({} C).'.format(num_cold, standard, lower)
+        hot_msg = '{} prevailing temperatures are hotter than the upper limit' \
+            ' permitted by {} ({} C).'.format(num_hot, standard, upper)
+        if num_hot == 0:
+            message = cold_msg
+        elif num_cold == 0:
+            message = hot_msg
+        else:
+            message = '{}\n{}'.format(cold_msg, hot_msg)
+
+    return all_in_range, message

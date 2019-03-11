@@ -18,7 +18,7 @@ class EPWTestCase(unittest.TestCase):
         calc_length = 8760
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        utci_obj = epw.get_universal_thermal_climate_index()
+        utci_obj = epw.get_universal_thermal_climate_index(False, False)
 
         assert isinstance(utci_obj, UTCI)
         assert isinstance(utci_obj.air_temperature, HourlyContinuousCollection)
@@ -43,7 +43,7 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_universal_thermal_climate_index method with wind."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        utci_obj = epw.get_universal_thermal_climate_index(include_wind=True)
+        utci_obj = epw.get_universal_thermal_climate_index(True, False)
 
         assert utci_obj.percent_neutral == pytest.approx(35.6849315, rel=1e-3)
         assert utci_obj.percent_hot == pytest.approx(3.3447488, rel=1e-3)
@@ -53,7 +53,7 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_universal_thermal_climate_index method with sun."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        utci_obj = epw.get_universal_thermal_climate_index(include_sun=True)
+        utci_obj = epw.get_universal_thermal_climate_index(False, True)
 
         assert utci_obj.percent_neutral == pytest.approx(40.730593, rel=1e-3)
         assert utci_obj.percent_hot == pytest.approx(20.4223744, rel=1e-3)
@@ -63,8 +63,7 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_universal_thermal_climate_index method with wind and sun."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        utci_obj = epw.get_universal_thermal_climate_index(include_wind=True,
-                                                           include_sun=True)
+        utci_obj = epw.get_universal_thermal_climate_index(True, True)
 
         assert utci_obj.percent_neutral == pytest.approx(31.4269406, rel=1e-3)
         assert utci_obj.percent_hot == pytest.approx(11.4611872, rel=1e-3)
@@ -75,7 +74,8 @@ class EPWTestCase(unittest.TestCase):
         calc_length = 8760
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        set_obj = epw.get_standard_effective_temperature(met_rate=2.4, clo_value=1.0)
+        set_obj = epw.get_standard_effective_temperature(False, False,
+                                                         met_rate=2.4, clo_value=1.0)
 
         assert isinstance(set_obj, PMV)
         assert isinstance(set_obj.air_temperature, HourlyContinuousCollection)
@@ -100,8 +100,8 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_standard_effective_temperature method with wind."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        set_obj = epw.get_standard_effective_temperature(include_wind=True, met_rate=2.4,
-                                                         clo_value=1.0)
+        set_obj = epw.get_standard_effective_temperature(True, False,
+                                                         met_rate=2.4, clo_value=1.0)
 
         assert set_obj.percent_neutral == pytest.approx(21.14155, rel=1e-3)
         assert set_obj.percent_hot == pytest.approx(16.3356, rel=1e-3)
@@ -111,8 +111,8 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_standard_effective_temperature method with sun."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        set_obj = epw.get_standard_effective_temperature(include_sun=True, met_rate=2.4,
-                                                         clo_value=1.0)
+        set_obj = epw.get_standard_effective_temperature(False, True,
+                                                         met_rate=2.4, clo_value=1.0)
 
         assert set_obj.percent_neutral == pytest.approx(17.043378, rel=1e-3)
         assert set_obj.percent_hot == pytest.approx(44.56621, rel=1e-3)
@@ -122,8 +122,7 @@ class EPWTestCase(unittest.TestCase):
         """Test the get_standard_effective_temperature method with sun and wind."""
         relative_path = './tests/epw/chicago.epw'
         epw = EPW(relative_path)
-        set_obj = epw.get_standard_effective_temperature(include_sun=True,
-                                                         include_wind=True,
+        set_obj = epw.get_standard_effective_temperature(True, True,
                                                          met_rate=2.4, clo_value=1.0)
 
         assert set_obj.percent_neutral == pytest.approx(19.08675799, rel=1e-3)
