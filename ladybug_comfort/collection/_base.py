@@ -32,13 +32,13 @@ class ComfortCollection(object):
             'Got {} in {}'.format(name, dat_type().name, unit,
                                   data_coll.header.data_type.name,
                                   data_coll.header.unit)
-        self._input_collections.append(data_coll)
-        return data_coll
 
     def _check_input(self, data_coll, dat_type, unit, name):
         """Check the a Data Collection."""
         if isinstance(data_coll, BaseCollection):
-            return self._check_datacoll(data_coll, dat_type, unit, name)
+            self._check_datacoll(data_coll, dat_type, unit, name)
+            self._input_collections.append(data_coll)
+            return data_coll
         else:
             try:
                 return self._base_collection.get_aligned_collection(

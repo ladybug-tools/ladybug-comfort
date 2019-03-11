@@ -62,7 +62,6 @@ class _SolarCalBase(ComfortCollection):
                 'data type. Got timestep of {}'.format(name, timestep)
         else:
             self._check_datacoll(data_coll, Irradiance, 'W/m2', name)
-        return data_coll
 
     def _fraction_input_check(self, data_coll, name, default):
         if data_coll is not None:
@@ -157,17 +156,19 @@ class OutdoorSolarCal(_SolarCalBase):
             solarcal_body_parameter: Optional SolarCalParameter object to account for
                 properties of the human geometry.
         """
+        # set up the object using radiation as a base
+        self._radiation_check(direct_normal_solar, 'direct_normal_solar')
+        self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._input_collections = [direct_normal_solar, diffuse_horizontal_solar]
+        self._calc_length = len(direct_normal_solar.values)
+        self._base_collection = direct_normal_solar
+
         # check required inputs
-        self._input_collections = []
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
         self._location = location
-        self._dir_norm = self._radiation_check(
-            direct_normal_solar, 'direct_normal_solar')
-        self._diff_horiz = self._radiation_check(
-            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
-        self._calc_length = len(self._dir_norm.values)
-        self._base_collection = self._dir_norm
+        self._dir_norm = direct_normal_solar
+        self._diff_horiz = diffuse_horizontal_solar
         self._horiz_ir = self._check_input(
             horizontal_infrared, HorizontalInfraredRadiationIntensity, 'W/m2',
             'horizontal_infrared')
@@ -320,17 +321,19 @@ class IndoorSolarCal(_SolarCalBase):
             solarcal_body_parameter: Optional SolarCalParameter object to account for
                 properties of the human geometry.
         """
+        # set up the object using radiation as a base
+        self._radiation_check(direct_normal_solar, 'direct_normal_solar')
+        self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._input_collections = [direct_normal_solar, diffuse_horizontal_solar]
+        self._calc_length = len(direct_normal_solar.values)
+        self._base_collection = direct_normal_solar
+
         # check required inputs
-        self._input_collections = []
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
         self._location = location
-        self._dir_norm = self._radiation_check(
-            direct_normal_solar, 'direct_normal_solar')
-        self._diff_horiz = self._radiation_check(
-            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
-        self._calc_length = len(self._dir_norm.values)
-        self._base_collection = self._dir_norm
+        self._dir_norm = direct_normal_solar
+        self._diff_horiz = diffuse_horizontal_solar
         self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
 
         # check optional inputs
@@ -456,17 +459,19 @@ class HorizontalSolarCal(_SolarCalBase):
             solarcal_body_parameter: Optional SolarCalParameter object to account for
                 properties of the human geometry.
         """
+        # set up the object using radiation as a base
+        self._radiation_check(direct_horizontal_solar, 'direct_horizontal_solar')
+        self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._input_collections = [direct_horizontal_solar, diffuse_horizontal_solar]
+        self._calc_length = len(direct_horizontal_solar.values)
+        self._base_collection = direct_horizontal_solar
+
         # check required inputs
-        self._input_collections = []
         assert isinstance(location, Location), 'location must be a Ladybug Location' \
             ' object. Got {}.'.format(type(location))
         self._location = location
-        self._dir_horiz = self._radiation_check(
-            direct_horizontal_solar, 'direct_horizontal_solar')
-        self._diff_horiz = self._radiation_check(
-            diffuse_horizontal_solar, 'diffuse_horizontal_solar')
-        self._calc_length = len(self._dir_horiz.values)
-        self._base_collection = self._dir_horiz
+        self._dir_horiz = direct_horizontal_solar
+        self._diff_horiz = diffuse_horizontal_solar
         self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
 
         # check optional inputs

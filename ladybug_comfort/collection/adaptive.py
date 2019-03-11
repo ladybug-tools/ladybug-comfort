@@ -70,14 +70,15 @@ class Adaptive(ComfortCollection):
                 under which conditions are considered acceptable. If None, default will
                 assume ASHRAE-55 criteria.
         """
-        # check operative_temperature
-        self._input_collections = []
-        self._op_temp = self._check_datacoll(
-            operative_temperature, Temperature, 'C', 'operative_temperature')
-        self._calc_length = len(self._op_temp.values)
-        self._base_collection = self._op_temp
+        # set up the object using operative temperature as a base
+        self._check_datacoll(operative_temperature, Temperature,
+                             'C', 'operative_temperature')
+        self._input_collections = [operative_temperature]
+        self._calc_length = len(operative_temperature.values)
+        self._base_collection = operative_temperature
 
-        # check air_speed
+        # check model inputs
+        self._op_temp = operative_temperature
         if air_speed is not None:
             self._air_speed = self._check_input(air_speed, Speed, 'm/s', 'air_speed')
         else:

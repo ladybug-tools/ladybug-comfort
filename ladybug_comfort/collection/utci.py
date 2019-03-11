@@ -72,12 +72,14 @@ class UTCI(ComfortCollection):
                 assume comfort thresholds consistent with those used by meterologists
                 to categorize outdoor conditions.
         """
+        # set up the object using air temperature as a base
+        self._check_datacoll(air_temperature, Temperature, 'C', 'air_temperature')
+        self._input_collections = [air_temperature]
+        self._calc_length = len(air_temperature.values)
+        self._base_collection = air_temperature
+
         # check required inputs
-        self._input_collections = []
-        self._air_temperature = self._check_datacoll(
-            air_temperature, Temperature, 'C', 'air_temperature')
-        self._calc_length = len(self._air_temperature.values)
-        self._base_collection = self._air_temperature
+        self._air_temperature = air_temperature
         self._rel_humidity = self._check_input(
             rel_humidity, RelativeHumidity, '%', 'rel_humidity')
 
