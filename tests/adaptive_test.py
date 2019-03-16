@@ -435,14 +435,14 @@ class AdaptiveTestCase(unittest.TestCase):
         assert adapt_obj.operative_temperature[0] == 26
 
         # check that editing collection properties does not mutate the object
-        adapt_obj.operative_temperature[0] = 28
-        assert adapt_obj.operative_temperature[0] == 26
-        adapt_obj.operative_temperature.values = [28] * calc_length
-        assert adapt_obj.operative_temperature[0] == 26
-        adapt_obj.degrees_from_neutral[0] = 0.5
-        assert adapt_obj.degrees_from_neutral[0] == pytest.approx(1.3799, rel=1e-3)
-        adapt_obj.degrees_from_neutral.values = [0.5] * calc_length
-        assert adapt_obj.degrees_from_neutral[0] == pytest.approx(1.3799, rel=1e-3)
+        with pytest.raises(Exception):
+            adapt_obj.operative_temperature[0] = 28
+        with pytest.raises(Exception):
+            adapt_obj.operative_temperature.values = [28] * calc_length
+        with pytest.raises(Exception):
+            adapt_obj.degrees_from_neutral[0] = 0.5
+        with pytest.raises(Exception):
+            adapt_obj.degrees_from_neutral.values = [0.5] * calc_length
 
         # check that properties cannot be edited directly
         with pytest.raises(Exception):

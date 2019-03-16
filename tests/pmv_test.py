@@ -24,14 +24,6 @@ from ladybug.datatype.rvalue import ClothingInsulation
 class PMVTestCase(unittest.TestCase):
     """Test PMV calculation from single set of values"""
 
-    # preparing to test.
-    def setUp(self):
-        """set up."""
-
-    def tearDown(self):
-        """Nothing to tear down as nothing gets written to file."""
-        pass
-
     def test_fanger_pmv(self):
         """Test the fanger_pmv function"""
         pmv_comf, ppd, hl = fanger_pmv(19, 23, 0.1, 60, 1.5, 0.4)
@@ -320,14 +312,14 @@ class PMVTestCase(unittest.TestCase):
         assert pmv_obj.air_temperature[0] == 24
 
         # check that editing collection properties does not mutate the object
-        pmv_obj.air_temperature[0] = 26
-        assert pmv_obj.air_temperature[0] == 24
-        pmv_obj.air_temperature.values = [26] * calc_length
-        assert pmv_obj.air_temperature[0] == 24
-        pmv_obj.predicted_mean_vote[0] = 0.5
-        assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.053570216, rel=1e-3)
-        pmv_obj.predicted_mean_vote.values = [0.5] * calc_length
-        assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.053570216, rel=1e-3)
+        with pytest.raises(Exception):
+            pmv_obj.air_temperature[0] = 26
+        with pytest.raises(Exception):
+            pmv_obj.air_temperature.values = [26] * calc_length
+        with pytest.raises(Exception):
+            pmv_obj.predicted_mean_vote[0] = 0.5
+        with pytest.raises(Exception):
+            pmv_obj.predicted_mean_vote.values = [0.5] * calc_length
         pmv_obj.comfort_parameter.ppd_comfort_thresh = 15
         assert pmv_obj.comfort_parameter.ppd_comfort_thresh == 10
 

@@ -223,22 +223,26 @@ class PMV(ComfortCollection):
     @property
     def air_temperature(self):
         """Data Collection of air temperature values in degrees C."""
-        return self._build_coll(self._air_temperature, AirTemperature(), 'C')
+        return self._get_coll('_air_temperature_coll', self._air_temperature,
+                              AirTemperature, 'C')
 
     @property
     def rad_temperature(self):
         """Data Collection of mean radiant temperature (MRT) values in degrees C."""
-        return self._build_coll(self._rad_temperature, MeanRadiantTemperature(), 'C')
+        return self._get_coll('_rad_temperature_coll', self._rad_temperature,
+                              MeanRadiantTemperature, 'C')
 
     @property
     def air_speed(self):
         """Data Collection of air speed values in m/s."""
-        return self._build_coll(self._air_speed, AirSpeed(), 'm/s')
+        return self._get_coll('_air_speed_coll', self._air_speed,
+                              AirSpeed, 'm/s')
 
     @property
     def rel_humidity(self):
         """Data Collection of relative humidity values in %."""
-        return self._build_coll(self._rel_humidity, RelativeHumidity(), '%')
+        return self._get_coll('_rel_humidity_coll', self._rel_humidity,
+                              RelativeHumidity, '%')
 
     @property
     def met_rate(self):
@@ -249,7 +253,8 @@ class PMV(ComfortCollection):
         2 met = Metabolic rate of a wlaking person
         If left blank, default is set to 1.1 met (for seated, typing).
         """
-        return self._build_coll(self._met_rate, MetabolicRate(), 'met')
+        return self._get_coll('_met_rate_coll', self._met_rate,
+                              MetabolicRate, 'met')
 
     @property
     def clo_value(self):
@@ -260,17 +265,19 @@ class PMV(ComfortCollection):
         0 clo = No clothing
         If left blank, default is set to 0.85 clo.
         """
-        return self._build_coll(self._clo_value, ClothingInsulation(), 'clo')
+        return self._get_coll('_clo_value_coll', self._clo_value,
+                              ClothingInsulation, 'clo')
 
     @property
     def external_work(self):
         """Data Collection of the work done by the human subject in met."""
-        return self._build_coll(self._external_work, MetabolicRate(), 'met')
+        return self._get_coll('_external_work_coll', self._external_work,
+                              MetabolicRate, 'met')
 
     @property
     def comfort_parameter(self):
         """PMV comfort parameters that are assigned to this object."""
-        return self._comfort_par.duplicate()
+        return self._comfort_par.duplicate()  # duplicate since ppd_thresh is setable
 
     @property
     def predicted_mean_vote(self):
@@ -287,7 +294,7 @@ class PMV(ComfortCollection):
             +2 = Warm
             +3 = Hot
         """
-        return self._build_coll(self._pmv, PredictedMeanVote(), 'PMV')
+        return self._get_coll('_pmv_coll', self._pmv, PredictedMeanVote, 'PMV')
 
     @property
     def percentage_people_dissatisfied(self):
@@ -298,7 +305,7 @@ class PMV(ComfortCollection):
         Note that, with the PMV model, the best possible PPD achievable is 5%
         and most standards aim to have a PPD below 10%.
         """
-        return self._build_coll(self._ppd, PercentagePeopleDissatisfied(), '%')
+        return self._get_coll('_ppd_coll', self._ppd, PercentagePeopleDissatisfied, '%')
 
     @property
     def standard_effective_temperature(self):
@@ -311,7 +318,8 @@ class PMV(ComfortCollection):
         level of 1.0 met and a clothing level of 0.6 clo is the same as that from a
         person in the actual environment.
         """
-        return self._build_coll(self._set, StandardEffectiveTemperature(), 'C')
+        return self._get_coll('_set_coll', self._set,
+                              StandardEffectiveTemperature, 'C')
 
     @property
     def is_comfortable(self):
@@ -322,7 +330,8 @@ class PMV(ComfortCollection):
             0 = uncomfortable
             1 = comfortable
         """
-        return self._build_coll(self._is_comfortable, ThermalComfort(), 'condition')
+        return self._get_coll('_is_comfortable_coll', self._is_comfortable,
+                              ThermalComfort, 'condition')
 
     @property
     def thermal_condition(self):
@@ -334,7 +343,8 @@ class PMV(ComfortCollection):
              0 = netural
             +1 = hot
         """
-        return self._build_coll(self._thermal_condition, ThermalCondition(), 'condition')
+        return self._get_coll('_thermal_condition_coll', self._thermal_condition,
+                              ThermalCondition, 'condition')
 
     @property
     def discomfort_reason(self):
@@ -348,7 +358,8 @@ class PMV(ComfortCollection):
             +1 = too hot
             +2 = too humid
         """
-        return self._build_coll(self._discomfort_reason, DiscomfortReason(), 'condition')
+        return self._get_coll('_discomfort_reason_coll', self._discomfort_reason,
+                              DiscomfortReason, 'condition')
 
     @property
     def percent_comfortable(self):
@@ -395,15 +406,16 @@ class PMV(ComfortCollection):
         """Data Collection of humidity ratio for the dry bulb and relative humidity."""
         if self._hr_calculated is False:
             self._calculate_humidity_ratio()
-        return self._build_coll(self._humidity_ratio, HumidityRatio(), 'fraction')
+        return self._get_coll('_humidity_ratio_coll', self._humidity_ratio,
+                              HumidityRatio, 'fraction')
 
     @property
     def adjusted_air_temperature(self):
         """Data Collection of air temperatures that have been adjusted by the SET model
         to account for the effect of air speed [C].
         """
-        return self._build_coll(self._ta_adj,
-                                AirTemperature('Adjusted Air Temperature'), 'C')
+        return self._get_coll('_ta_adj_coll', self._ta_adj,
+                              AirTemperature('Adjusted Air Temperature'), 'C')
 
     @property
     def cooling_effect(self):
@@ -412,41 +424,43 @@ class PMV(ComfortCollection):
         This is the difference between the air temperature and the
         adjusted air temperature [C].
         """
-        return self._build_coll(self._cooling_effect,
-                                AirTemperatureDelta('Cooling Effect'), 'C')
+        return self._get_coll('_cooling_effect_coll', self._cooling_effect,
+                              AirTemperatureDelta('Cooling Effect'), 'C')
 
     @property
     def heat_loss_conduction(self):
         """Data Collection of heat loss by conduction in [W]."""
-        return self._build_coll(self._heat_loss_conduction,
-                                Power('Heat Loss From Conduction'), 'W')
+        return self._get_coll('_hl_conduction_coll', self._heat_loss_conduction,
+                              Power('Heat Loss From Conduction'), 'W')
 
     @property
     def heat_loss_sweating(self):
         """Data Collection of heat loss by sweating in [W]."""
-        return self._build_coll(self._heat_loss_sweating,
-                                Power('Heat Loss From Sweating'), 'W')
+        return self._get_coll('_hl_sweating', self._heat_loss_sweating,
+                              Power('Heat Loss From Sweating'), 'W')
 
     @property
     def heat_loss_latent_respiration(self):
         """Data Collection of heat loss by latent respiration in [W]."""
-        return self._build_coll(self._heat_loss_latent_respiration,
-                                Power('Heat Loss From Latent Respiration'), 'W')
+        return self._get_coll(
+            '_hl_latent_respiration_coll', self._heat_loss_latent_respiration,
+            Power('Heat Loss From Latent Respiration'), 'W')
 
     @property
     def heat_loss_dry_respiration(self):
         """Data Collection of heat loss by dry respiration in [W]."""
-        return self._build_coll(self._heat_loss_dry_respiration,
-                                Power('Heat Loss From Dry Respiration'), 'W')
+        return self._get_coll(
+            '_hl_dry_respiration_coll', self._heat_loss_dry_respiration,
+            Power('Heat Loss From Dry Respiration'), 'W')
 
     @property
     def heat_loss_radiation(self):
         """Data Collection of heat loss by radiation in [W]."""
-        return self._build_coll(self._heat_loss_radiation,
-                                Power('Heat Loss From Radiation'), 'W')
+        return self._get_coll('_hl_radiation_coll', self._heat_loss_radiation,
+                              Power('Heat Loss From Radiation'), 'W')
 
     @property
     def heat_loss_convection(self):
         """Data Collection of heat loss by convection in [W]."""
-        return self._build_coll(self._heat_loss_convection,
-                                Power('Heat Loss From Convection'), 'W')
+        return self._get_coll('_hl_convection_coll', self._heat_loss_convection,
+                              Power('Heat Loss From Convection'), 'W')

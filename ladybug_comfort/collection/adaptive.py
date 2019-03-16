@@ -166,33 +166,35 @@ class Adaptive(ComfortCollection):
     @property
     def prevailing_outdoor_temperature(self):
         """Data Collection of prevailing outdoor temperature in degrees C."""
-        return self._build_coll(self._prevail_temp, PrevailingOutdoorTemperature(), 'C')
+        return self._get_coll('_prevail_temp_coll', self._prevail_temp,
+                              PrevailingOutdoorTemperature, 'C')
 
     @property
     def operative_temperature(self):
         """Data Collection of operative temperature in degrees C."""
-        return self._build_coll(self._op_temp, OperativeTemperature(), 'C')
+        return self._get_coll('_op_temp_coll', self._op_temp, OperativeTemperature, 'C')
 
     @property
     def air_speed(self):
         """Data Collection of air speed in m/s."""
-        return self._build_coll(self._air_speed, AirSpeed(), 'm/s')
+        return self._get_coll('_air_speed_coll', self._air_speed, AirSpeed, 'm/s')
 
     @property
     def comfort_parameter(self):
         """Adaptive comfort parameters that are assigned to this object."""
-        return self._comfort_par.duplicate()
+        return self._comfort_par.duplicate()  # duplicate since neutral_offset is setable
 
     @property
     def neutral_temperature(self):
         """Data Collection of the desired neutral temperature in degrees C."""
-        return self._build_coll(self._neutral_temperature, OperativeTemperature(), 'C')
+        return self._get_coll('_neutral_temperature_coll', self._neutral_temperature,
+                              OperativeTemperature, 'C')
 
     @property
     def degrees_from_neutral(self):
         """Data Collection of the degrees from desired neutral temperature in C."""
-        return self._build_coll(self._degrees_from_neutral,
-                                OperativeTemperatureDelta(), 'C')
+        return self._get_coll('_degrees_from_neutral_coll', self._degrees_from_neutral,
+                              OperativeTemperatureDelta, 'C')
 
     @property
     def is_comfortable(self):
@@ -203,7 +205,8 @@ class Adaptive(ComfortCollection):
             0 = uncomfortable
             1 = comfortable
         """
-        return self._build_coll(self._is_comfortable, ThermalComfort(), 'condition')
+        return self._get_coll('_is_comfortable_coll', self._is_comfortable,
+                              ThermalComfort, 'condition')
 
     @property
     def thermal_condition(self):
@@ -215,7 +218,8 @@ class Adaptive(ComfortCollection):
              0 = netural
             +1 = hot
         """
-        return self._build_coll(self._thermal_condition, ThermalCondition(), 'condition')
+        return self._get_coll('_thermal_condition_coll', self._thermal_condition,
+                              ThermalCondition, 'condition')
 
     @property
     def cooling_effect(self):
@@ -224,7 +228,8 @@ class Adaptive(ComfortCollection):
         This is the difference between the air temperature and the
         adjusted air temperature [C].
         """
-        return self._build_coll(self._cooling_effect, OperativeTemperatureDelta(), 'C')
+        return self._get_coll('_cooling_effect_coll', self._cooling_effect,
+                              OperativeTemperatureDelta, 'C')
 
     @property
     def percent_comfortable(self):

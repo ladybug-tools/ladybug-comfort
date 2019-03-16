@@ -21,14 +21,6 @@ from ladybug.datatype.speed import AirSpeed
 class UTCITestCase(unittest.TestCase):
     """Test UTCI calculation from single set of values"""
 
-    # preparing to test.
-    def setUp(self):
-        """set up."""
-
-    def tearDown(self):
-        """Nothing to tear down as nothing gets written to file."""
-        pass
-
     def test_utci(self):
         """Test the utci function"""
         assert universal_thermal_climate_index(20, 20, 3, 50) == \
@@ -325,16 +317,16 @@ class UTCITestCase(unittest.TestCase):
         assert utci_obj.air_temperature[0] == 24
 
         # check that editing collection properties does not mutate the object
-        utci_obj.air_temperature[0] = 26
-        assert utci_obj.air_temperature[0] == 24
-        utci_obj.air_temperature.values = [26] * calc_length
-        assert utci_obj.air_temperature[0] == 24
+        with pytest.raises(Exception):
+            utci_obj.air_temperature[0] = 26
+        with pytest.raises(Exception):
+            utci_obj.air_temperature.values = [26] * calc_length
         with pytest.raises(Exception):
             utci_obj.air_temperature = air_temp
-        utci_obj.universal_thermal_climate_index[0] = 20
-        assert utci_obj.universal_thermal_climate_index[0] == pytest.approx(23.8110341, rel=1e-3)
-        utci_obj.universal_thermal_climate_index.values = [20] * calc_length
-        assert utci_obj.universal_thermal_climate_index[0] == pytest.approx(23.8110341, rel=1e-3)
+        with pytest.raises(Exception):
+            utci_obj.universal_thermal_climate_index[0] = 20
+        with pytest.raises(Exception):
+            utci_obj.universal_thermal_climate_index.values = [20] * calc_length
 
         # check that properties cannot be edited directly
         with pytest.raises(Exception):

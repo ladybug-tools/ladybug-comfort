@@ -125,22 +125,26 @@ class UTCI(ComfortCollection):
     @property
     def air_temperature(self):
         """Data Collection of air temperature values in degrees C."""
-        return self._build_coll(self._air_temperature, AirTemperature(), 'C')
+        return self._get_coll('_air_temperature_coll', self._air_temperature,
+                              AirTemperature, 'C')
 
     @property
     def rad_temperature(self):
         """Data Collection of mean radiant temperature (MRT) values in degrees C."""
-        return self._build_coll(self._rad_temperature, MeanRadiantTemperature(), 'C')
+        return self._get_coll('_rad_temperature_coll', self._rad_temperature,
+                              MeanRadiantTemperature, 'C')
 
     @property
     def wind_speed(self):
         """Data Collection of air speed values in m/s."""
-        return self._build_coll(self._wind_speed, WindSpeed(), 'm/s')
+        return self._get_coll('_wind_speed_coll', self._wind_speed,
+                              WindSpeed, 'm/s')
 
     @property
     def rel_humidity(self):
         """Data Collection of relative humidity values in %."""
-        return self._build_coll(self._rel_humidity, RelativeHumidity(), '%')
+        return self._get_coll('_rel_humidity_coll', self._rel_humidity,
+                              RelativeHumidity, '%')
 
     @property
     def comfort_parameter(self):
@@ -150,7 +154,8 @@ class UTCI(ComfortCollection):
     @property
     def universal_thermal_climate_index(self):
         """A Data Collection of Universal Thermal Climate Index (UTCI) in C."""
-        return self._build_coll(self._utci, UniversalThermalClimateIndex(), 'C')
+        return self._get_coll('_utci_coll', self._utci,
+                              UniversalThermalClimateIndex, 'C')
 
     @property
     def is_comfortable(self):
@@ -161,8 +166,8 @@ class UTCI(ComfortCollection):
             0 = uncomfortable
             1 = comfortable
         """
-        comf_vals = [self._comfort_par.is_comfortable(t) for t in self._utci]
-        return self._build_coll(comf_vals, ThermalComfort(), 'condition')
+        return self._get_coll('_is_comfortable_coll', self._comf_val_funct,
+                              ThermalComfort, 'condition')
 
     @property
     def thermal_condition(self):
@@ -174,8 +179,8 @@ class UTCI(ComfortCollection):
              0 = netural
             +1 = hot
         """
-        condit_vals = [self._comfort_par.thermal_condition(t) for t in self._utci]
-        return self._build_coll(condit_vals, ThermalCondition(), 'condition')
+        return self._get_coll('_thermal_condition_coll', self._condit_val_funct,
+                              ThermalCondition, 'condition')
 
     @property
     def thermal_condition_five_point(self):
@@ -188,9 +193,8 @@ class UTCI(ComfortCollection):
             +1 = moderate heat stress
             +2 = strong/extreme heat stress
         """
-        condit_vals = [self._comfort_par.thermal_condition_five_point(t)
-                       for t in self._utci]
-        return self._build_coll(condit_vals, ThermalConditionFivePoint(), 'condition')
+        return self._get_coll('_five_point_coll', self._five_pt_funct,
+                              ThermalConditionFivePoint, 'condition')
 
     @property
     def thermal_condition_seven_point(self):
@@ -205,9 +209,8 @@ class UTCI(ComfortCollection):
             +2 = strong heat stress
             +3 = very strong/extreme heat stress
         """
-        condit_vals = [self._comfort_par.thermal_condition_seven_point(t)
-                       for t in self._utci]
-        return self._build_coll(condit_vals, ThermalConditionSevenPoint(), 'condition')
+        return self._get_coll('_seven_point_coll', self._seven_pt_funct,
+                              ThermalConditionSevenPoint, 'condition')
 
     @property
     def thermal_condition_nine_point(self):
@@ -224,9 +227,8 @@ class UTCI(ComfortCollection):
             +3 = strong heat stress
             +4 = very strong/extreme heat stress
         """
-        condit_vals = [self._comfort_par.thermal_condition_nine_point(t)
-                       for t in self._utci]
-        return self._build_coll(condit_vals, ThermalConditionNinePoint(), 'condition')
+        return self._get_coll('_nine_point_coll', self._nine_pt_funct,
+                              ThermalConditionNinePoint, 'condition')
 
     @property
     def thermal_condition_eleven_point(self):
@@ -245,8 +247,8 @@ class UTCI(ComfortCollection):
             +4 = very strong heat stress
             +5 = extreme heat stress
         """
-        return self._build_coll(self._thermal_category,
-                                ThermalConditionElevenPoint(), 'condition')
+        return self._get_coll('_eleven_point_coll', self._thermal_category,
+                              ThermalConditionElevenPoint, 'condition')
 
     @property
     def original_utci_category(self):
@@ -267,9 +269,8 @@ class UTCI(ComfortCollection):
             8 = strong heat stress
             9 = extreme heat stress
         """
-        condit_vals = [self._comfort_par.original_utci_category(t)
-                       for t in self._utci]
-        return self._build_coll(condit_vals, UTCICategory(), 'condition')
+        return self._get_coll('_original_category_coll', self._original_category_funct,
+                              UTCICategory, 'condition')
 
     @property
     def percent_comfortable(self):
@@ -358,3 +359,21 @@ class UTCI(ComfortCollection):
         """The percent of time that conditions have very strong heat stress."""
         _vals = [1 for x in self._thermal_category if x == 5]
         return (sum(_vals) / self._calc_length) * 100
+
+    def _comf_val_funct(self):
+        return [self._comfort_par.is_comfortable(t) for t in self._utci]
+
+    def _condit_val_funct(self):
+        return [self._comfort_par.thermal_condition(t) for t in self._utci]
+
+    def _five_pt_funct(self):
+        return [self._comfort_par.thermal_condition_five_point(t) for t in self._utci]
+
+    def _seven_pt_funct(self):
+        return [self._comfort_par.thermal_condition_seven_point(t) for t in self._utci]
+
+    def _nine_pt_funct(self):
+        return [self._comfort_par.thermal_condition_nine_point(t) for t in self._utci]
+
+    def _original_category_funct(self):
+        return [self._comfort_par.original_utci_category(t) for t in self._utci]

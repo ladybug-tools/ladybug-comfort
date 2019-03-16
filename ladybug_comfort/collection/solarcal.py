@@ -31,14 +31,14 @@ class _SolarCalBase(ComfortCollection):
     @property
     def fraction_body_exposed(self):
         """Data Collection of body fraction exposed to direct sun."""
-        return self._build_coll(
-            self._fract_exp, Fraction('Fraction Body Exposed'), 'fraction')
+        return self._get_coll('_fract_exp_coll', self._fract_exp,
+                              Fraction('Fraction Body Exposed'), 'fraction')
 
     @property
     def floor_reflectance(self):
         """Data Collection of floor reflectance."""
-        return self._build_coll(
-            self._flr_ref, Fraction('Floor Reflectance'), 'fraction')
+        return self._get_coll('_flr_ref_coll', self._flr_ref,
+                              Fraction('Floor Reflectance'), 'fraction')
 
     @property
     def solarcal_body_parameter(self):
@@ -48,12 +48,12 @@ class _SolarCalBase(ComfortCollection):
     @property
     def mrt_delta(self):
         """Data Collection of total MRT delta in C."""
-        return self._build_coll(self._dmrt, RadiantTemperatureDelta(), 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')
 
     @property
     def mean_radiant_temperature(self):
         """Data Collection of total mean radiant temperature in C."""
-        return self._build_coll(self._mrt, MeanRadiantTemperature(), 'C')
+        return self._get_coll('_mrt_coll', self._mrt, MeanRadiantTemperature, 'C')
 
     def _radiation_check(self, data_coll, name):
         assert isinstance(data_coll, HourlyDiscontinuousCollection), \
@@ -226,48 +226,56 @@ class OutdoorSolarCal(_SolarCalBase):
     @property
     def diffuse_horizontal_solar(self):
         """Data Collection of diffuse horizontal irradiance in W/m2."""
-        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
+        return self._get_coll('_diff_horiz_coll', self._diff_horiz,
+                              DiffuseHorizontalIrradiance, 'W/m2')
 
     @property
     def direct_normal_solar(self):
         """Data Collection of direct normal irradiance in W/m2."""
-        return self._build_coll(self._dir_norm, DirectNormalIrradiance(), 'W/m2')
+        return self._get_coll('_dir_norm_coll', self._dir_norm,
+                              DirectNormalIrradiance, 'W/m2')
 
     @property
     def surface_temperatures(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._build_coll(self._srf_temp, Temperature('Surface Temperature'), 'C')
+        return self._get_coll('_srf_temp_coll', self._srf_temp,
+                              Temperature('Surface Temperature'), 'C')
 
     @property
     def horizontal_infrared(self):
         """Data Collection of horizontal infrared radiation intensity in W/m2."""
-        return self._build_coll(
-            self._horiz_ir, HorizontalInfraredRadiationIntensity(), 'W/m2')
+        return self._get_coll('_horiz_ir_coll', self._horiz_ir,
+                              HorizontalInfraredRadiationIntensity, 'W/m2')
 
     @property
     def sky_exposure(self):
         """Data Collection of sky view."""
-        return self._build_coll(self._sky_exp, Fraction('Sky Exposure'), 'fraction')
+        return self._get_coll('_sky_exp_coll', self._sky_exp,
+                              Fraction('Sky Exposure'), 'fraction')
 
     @property
     def shortwave_effective_radiant_field(self):
         """Data Collection of shortwave effective radiant field in W/m2."""
-        return self._build_coll(self._s_erf, EffectiveRadiantField(), 'W/m2')
+        return self._get_coll('_s_erf_coll', self._s_erf,
+                              EffectiveRadiantField, 'W/m2')
 
     @property
     def longwave_effective_radiant_field(self):
         """Data Collection of longwave effective radiant field in W/m2."""
-        return self._build_coll(self._l_erf, EffectiveRadiantField(), 'W/m2')
+        return self._get_coll('_l_erf_coll', self._l_erf,
+                              EffectiveRadiantField, 'W/m2')
 
     @property
     def shortwave_mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
-        return self._build_coll(self._s_dmrt, RadiantTemperatureDelta(), 'C')
+        return self._get_coll('_s_dmrt_coll', self._s_dmrt,
+                              RadiantTemperatureDelta, 'C')
 
     @property
     def longwave_mrt_delta(self):
         """Data Collection of longwave MRT delta in C."""
-        return self._build_coll(self._l_dmrt, RadiantTemperatureDelta(), 'C')
+        return self._get_coll('_l_dmrt_coll', self._l_dmrt,
+                              RadiantTemperatureDelta, 'C')
 
 
 class IndoorSolarCal(_SolarCalBase):
@@ -384,38 +392,42 @@ class IndoorSolarCal(_SolarCalBase):
     @property
     def diffuse_horizontal_solar(self):
         """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
-        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
+        return self._get_coll('_diff_horiz_coll', self._diff_horiz,
+                              DiffuseHorizontalIrradiance, 'W/m2')
 
     @property
     def direct_normal_solar(self):
         """Data Collection of direct normal irradiance in Wh/m2 or W/m2."""
-        return self._build_coll(self._dir_norm, DirectNormalIrradiance(), 'W/m2')
+        return self._get_coll('_dir_norm_coll', self._dir_norm,
+                              DirectNormalIrradiance, 'W/m2')
 
     @property
     def longwave_mrt(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._build_coll(self._l_mrt, MeanRadiantTemperature(), 'C')
+        return self._get_coll('_l_mrt_coll', self._l_mrt,
+                              MeanRadiantTemperature, 'C')
 
     @property
     def sky_exposure(self):
         """Data Collection of sky view."""
-        return self._build_coll(self._sky_exp, Fraction('Sky Exposure'), 'fraction')
+        return self._get_coll('_sky_exp_coll', self._sky_exp,
+                              Fraction('Sky Exposure'), 'fraction')
 
     @property
     def window_transmittance(self):
         """Data Collection of window transmittance."""
-        return self._build_coll(
-            self._win_trans, Fraction('Window Transmittance'), 'fraction')
+        return self._get_coll('_win_trans_coll', self._win_trans,
+                              Fraction('Window Transmittance'), 'fraction')
 
     @property
     def effective_radiant_field(self):
         """Data Collection of shortwave effective radiant field in W/m2."""
-        return self._build_coll(self._erf, EffectiveRadiantField(), 'W/m2')
+        return self._get_coll('_erf_coll', self._erf, EffectiveRadiantField, 'W/m2')
 
     @property
     def mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
-        return self._build_coll(self._dmrt, RadiantTemperatureDelta(), 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')
 
 
 class HorizontalSolarCal(_SolarCalBase):
@@ -519,24 +531,26 @@ class HorizontalSolarCal(_SolarCalBase):
     @property
     def diffuse_horizontal_solar(self):
         """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
-        return self._build_coll(self._diff_horiz, DiffuseHorizontalIrradiance(), 'W/m2')
+        return self._get_coll('_diff_horiz_coll', self._diff_horiz,
+                              DiffuseHorizontalIrradiance, 'W/m2')
 
     @property
     def direct_horizontal_solar(self):
         """Data Collection of direct horizontal irradiance in Wh/m2 or W/m2."""
-        return self._build_coll(self._dir_horiz, DirectHorizontalIrradiance(), 'W/m2')
+        return self._get_coll('_dir_horiz_coll', self._dir_horiz,
+                              DirectHorizontalIrradiance, 'W/m2')
 
     @property
     def longwave_mrt(self):
         """Data Collection of surface temperature values in degrees C."""
-        return self._build_coll(self._l_mrt, MeanRadiantTemperature(), 'C')
+        return self._get_coll('_l_mrt_coll', self._l_mrt, MeanRadiantTemperature, 'C')
 
     @property
     def effective_radiant_field(self):
         """Data Collection of shortwave effective radiant field in W/m2."""
-        return self._build_coll(self._erf, EffectiveRadiantField(), 'W/m2')
+        return self._get_coll('_erf_coll', self._erf, EffectiveRadiantField, 'W/m2')
 
     @property
     def mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
-        return self._build_coll(self._dmrt, RadiantTemperatureDelta(), 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')

@@ -2,6 +2,7 @@
 """Comfort data collection base object."""
 
 from ladybug._datacollectionbase import BaseCollection
+from  ladybug.datatype.base import DataTypeBase
 
 
 class ComfortCollection(object):
@@ -46,8 +47,16 @@ class ComfortCollection(object):
                 raise TypeError('{} must be either a number or a Data Colleciton. '
                                 'Got {}'.format(name, type(data_coll)))
 
-    def _build_coll(self, value_list, dat_type, unit):
-        return self._base_collection.get_aligned_collection(value_list, dat_type, unit)
+    def _get_coll(self, attr_name, value_list, dat_type, unit):
+        if not hasattr(self, attr_name):
+            if callable(value_list):
+                value_list = value_list()  # get values if passed a function
+            if not isinstance(dat_type, DataTypeBase):
+                dat_type = dat_type()  # convert the class to an instance
+            coll = self._base_collection.get_aligned_collection(
+                value_list, dat_type, unit, mutable=False)
+            setattr(self, attr_name, coll)
+        return getattr(self, attr_name)
 
     @property
     def isComfortCollection(self):
