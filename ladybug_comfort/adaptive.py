@@ -8,7 +8,7 @@ if (sys.version_info > (3, 0)):
     xrange = range
 
 
-def adaptive_comfort_ashrae55(t_prevail, ta, tr, vel, conditioning=0):
+def adaptive_comfort_ashrae55(t_prevail, to):
     """Get adaptive comfort criteria according to ASHRAE-55.
 
     Note:
@@ -19,54 +19,34 @@ def adaptive_comfort_ashrae55(t_prevail, ta, tr, vel, conditioning=0):
     Args:
         t_prevail: The prevailing outdoor temperature [C].  For the ASHRAE-55 adaptive
             comfort model, this is typically the average monthly outdoor temperature.
-        ta: Air temperature [C]
-        tr: Mean radiant temperature [C]
-        vel: Relative air velocity [m/s]
-        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
-            "free-running" the building is.
-                0 = free-running (completely passive with no installed air conditioning)
-                1 = conditioned (no operable windows and fully air conditioned)
-            Note that this parameter is not an official part of the ASHRAE-55 standard.
-            For more information on how adaptive comfort methods can be applied
-            to conditioned buildings, see the neutral_temperature_conditioned function.
+        to: Operative temperature [C]
 
     Returns:
         result: A dictionary containing results with the following keys:
             to : Operative Temperature [C].
             t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
-            ce : Cooling effect as a result of elevated air speed [C].
             deg_comf: The difference between the operative temperature (to)
                 and the adaptive comfort neutral temperature (t_comf) [C].
                 Negative values inidcate cool conditions and positive values
                 indicate varm conditions.
     """
-    to = (ta + tr) / 2  # operative temperature
-
     # fix upper and lower outdoor temperatures if outside the range of the model
-    if t_prevail < 10.0:
-        t_prevail = 10.0
+    if t_prevail < 10.:
+        t_prevail = 10.
     elif t_prevail > 33.5:
         t_prevail = 33.5
 
     # get the neutral temperature
-    if conditioning == 0:
-        t_comf = neutral_temperature_ashrae55(t_prevail)
-    else:
-        t_comf = neutral_temperature_conditioned(t_prevail, conditioning, 'ASHRAE-55')
-
-    # get the cooling effect as a result of elevated air speed
-    ce = cooling_effect_ashrae55(vel, to)
-
+    t_comf = neutral_temperature_ashrae55(t_prevail)
     result = {}
     result['to'] = to
     result['t_comf'] = t_comf
-    result['ce'] = ce
     result['deg_comf'] = to - t_comf
 
     return result
 
 
-def adaptive_comfort_en15251(t_prevail, ta, tr, vel, conditioning=0):
+def adaptive_comfort_en15251(t_prevail, to):
     """Get adaptive comfort criteria according to EN-15251.
 
     Note:
@@ -80,29 +60,63 @@ def adaptive_comfort_en15251(t_prevail, ta, tr, vel, conditioning=0):
             comfort model, this is typically the exponentially weighted running mean
             of the outdoor temperature over the past week.  Use the weighted_running_mean
             functions to compute this value.
-        ta: Air temperature [C]
-        tr: Mean radiant temperature [C]
-        vel: Relative air velocity [m/s]
-        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
-            "free-running" the building is.
-                0 = free-running (completely passive with no running air conditioning)
-                1 = conditioned (no operable windows and fully air conditioned)
-            Note that this parameter is not an official part of the EN-15251 standard.
-            For more information on how adaptive comfort methods can be applied
-            to conditioned buildings, see the neutral_temperature_conditioned function.
+        to: Operative temperature [C]
 
     Returns:
         result: A dictionary containing results with the following keys:
             to : Operative Temperature [C].
             t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
-            ce : Cooling effect as a result of elevated air speed [C].
             deg_comf: The difference between the operative temperature (to)
                 and the adaptive comfort neutral temperature (t_comf) [C].
                 Negative values inidcate cool conditions and positive values
                 indicate varm conditions.
     """
-    to = (ta + tr) / 2  # operative temperature
+    # fix upper and lower outdoor temperatures if outside the range of the model
+    if t_prevail < 10.:
+        t_prevail = 10.
+    elif t_prevail > 30.:
+        t_prevail = 30.
 
+    # get the neutral temperature
+    t_comf = neutral_temperature_en15251(t_prevail)
+    result = {}
+    result['to'] = to
+    result['t_comf'] = t_comf
+    result['deg_comf'] = to - t_comf
+
+    return result
+
+
+def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
+    """Get adaptive comfort using SCATs neutral temp function for heated/cooled operation.
+
+    Note that the use of adative comfort methods in conditioned buildings is not
+    an official part of either ASHRAE-55 or EN-15251. For more information on how
+    adaptive comfort methods can be applied to conditioned buildings, see the
+    neutral_temperature_conditioned function.
+
+    Args:
+        t_prevail: The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+            comfort model, this is typically the exponentially weighted running mean
+            of the outdoor temperature over the past week.  Use the weighted_running_mean
+            functions to compute this value.
+        to: Operative temperature [C]
+        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
+            "free-running" the building is.
+                0 = free-running (completely passive with no air conditioning)
+                1 = conditioned (no operable windows and fully air conditioned)
+        model: The comfort standard, which will be used to represent the "free-running"
+            function.  Chose from: 'EN-15251', 'ASHRAE-55'.
+
+    Returns:
+        result: A dictionary containing results with the following keys:
+            to : Operative Temperature [C].
+            t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
+            deg_comf: The difference between the operative temperature (to)
+                and the adaptive comfort neutral temperature (t_comf) [C].
+                Negative values inidcate cool conditions and positive values
+                indicate varm conditions.
+    """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.0:
         t_prevail = 10.0
@@ -110,21 +124,42 @@ def adaptive_comfort_en15251(t_prevail, ta, tr, vel, conditioning=0):
         t_prevail = 30
 
     # get the neutral temperature
-    if conditioning == 0:
-        t_comf = neutral_temperature_en15251(t_prevail)
-    else:
-        t_comf = neutral_temperature_conditioned(t_prevail, conditioning, 'EN-15251')
-
-    # get the cooling effect as a result of elevated air speed
-    ce = cooling_effect_en15251(vel, to)
-
+    t_comf = neutral_temperature_conditioned(t_prevail, conditioning, model)
     result = {}
     result['to'] = to
     result['t_comf'] = t_comf
-    result['ce'] = ce
     result['deg_comf'] = to - t_comf
 
     return result
+
+
+def adaptive_comfort_conditioned_function(conditioning, model):
+    """Get an adaptive_comfort_conditioned function with pre-set conditioning/model.
+
+    Args:
+        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
+            "free-running" the building is.
+                0 = free-running (completely passive with no air conditioning)
+                1 = conditioned (no operable windows and fully air conditioned)
+        model: The comfort standard, which will be used to represent the "free-running"
+            function.  Chose from: 'EN-15251', 'ASHRAE-55'.
+    """
+    def comfort_funct(t_prevail, to):
+        return adaptive_comfort_conditioned(t_prevail, to, conditioning, model)
+    return comfort_funct
+
+
+def t_operative(ta, tr):
+    """Get operative temperature from air and radiant temperature.
+
+    Args:
+        ta: Air temperature [C]
+        tr: Mean radiant temperature [C]
+
+    Return:
+        Operative temperature [C]
+    """
+    return (ta + tr) / 2
 
 
 def neutral_temperature_ashrae55(t_prevail):
@@ -408,3 +443,85 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
         daily_means.append(outdoor_temperatures[i])
 
     return daily_run_means
+
+
+def check_prevailing_temperatures_ashrae55(t_prevail):
+    """Check whethr prevailing temperatures are outside permissable ranges for ASHRAE-55.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    all_in_range, message = check_prevailing_temperatures_range(
+        t_prevail, 10., 33.5, 'ASHRAE-55')
+    return all_in_range, message
+
+
+def check_prevailing_temperatures_en15251(t_prevail):
+    """Check whethr prevailing temperatures are outside permissable ranges for EN-15251.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    all_in_range, message = check_prevailing_temperatures_range(
+        t_prevail, 10., 30., 'EN-15251')
+    return all_in_range, message
+
+
+def check_prevailing_temperatures_range(t_prevail, lower, upper, standard=''):
+    """Check prevailing temperatures to see how many are outside a certain range.
+
+    Args:
+        t_prevail: A list of prevailing outdoor temperature [C].
+        lower: A lower limit for the temperatures [C].
+        upper: An upper limit for the temperatures [C].
+        standard: Optional text for a standard name that will be used in the
+            output message (eg. ASHRAE-55).
+
+    Returns:
+        all_in_range: A boolean to note whether all of the input t_prevail values
+            are in acceptable ranges.
+        message: Text indicating the number of values that are above and below
+            acceptable ranges.
+    """
+    # defaults to be changed
+    all_in_range = True
+    num_cold = 0
+    num_hot = 0
+
+    # check all values
+    for t in t_prevail:
+        if t < lower:
+            all_in_range = False
+            num_cold += 1
+        elif t > upper:
+            all_in_range = False
+            num_hot += 1
+
+    # build the message
+    if all_in_range is True:
+        message = 'All prevailing temperatures are within acceptable ASHRAE-55 ranges.'
+    else:
+        cold_msg = '{} prevailing temperatures are colder than the lower limit' \
+            ' permitted by {} ({} C).'.format(num_cold, standard, lower)
+        hot_msg = '{} prevailing temperatures are hotter than the upper limit' \
+            ' permitted by {} ({} C).'.format(num_hot, standard, upper)
+        if num_hot == 0:
+            message = cold_msg
+        elif num_cold == 0:
+            message = hot_msg
+        else:
+            message = '{}\n{}'.format(cold_msg, hot_msg)
+
+    return all_in_range, message

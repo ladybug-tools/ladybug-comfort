@@ -8,8 +8,7 @@ from ladybug.rootfind import bisect
 import math
 
 
-def pmv(ta, tr, vel, rh, met, clo, wme=0,
-        still_air_threshold=0.1):
+def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
     """Calculate PMV using Fanger's original equation and Pierce SET model when necessary.
 
     This method is the officially corrent way to calculate PMV comfort according to.
@@ -75,7 +74,10 @@ def pmv(ta, tr, vel, rh, met, clo, wme=0,
             return se_temp - pierce_set(ta - ce, tr - ce, still_air_threshold,
                                         rh, met, clo, wme)
 
-        ce = secant(ce_l, ce_r, fn, eps)
+        try:
+            ce = secant(ce_l, ce_r, fn, eps)
+        except OverflowError:
+            ce = None
         if ce is None:
             ce = bisect(ce_l, ce_r, fn, eps, 0)
 
@@ -527,46 +529,52 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
     # Determine the function that should be used given the missing input.
     if pmv_inputs['ta'] is None:
         def fn(x):
-            return pmv(x, pmv_inputs['tr'], pmv_inputs['vel'],
-                       pmv_inputs['rh'], pmv_inputs['met'], pmv_inputs['clo'],
-                       pmv_inputs['wme'], still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                x, pmv_inputs['tr'], pmv_inputs['vel'], pmv_inputs['rh'],
+                pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'ta'
     elif pmv_inputs['tr'] is None:
         def fn(x):
-            return pmv(pmv_inputs['ta'], x, pmv_inputs['vel'],
-                       pmv_inputs['rh'], pmv_inputs['met'], pmv_inputs['clo'],
-                       pmv_inputs['wme'], still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                pmv_inputs['ta'], x, pmv_inputs['vel'], pmv_inputs['rh'],
+                pmv_inputs['met'], pmv_inputs['clo'],  pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'tr'
     elif pmv_inputs['vel'] is None:
         def fn(x):
-            return target_pmv - pmv(pmv_inputs['ta'], pmv_inputs['tr'], x,
-                                    pmv_inputs['rh'], pmv_inputs['met'],
-                                    pmv_inputs['clo'], pmv_inputs['wme'],
-                                    still_air_threshold)['pmv']
+            return target_pmv - predicted_mean_vote(
+                pmv_inputs['ta'], pmv_inputs['tr'], x, pmv_inputs['rh'],
+                pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
+                still_air_threshold)['pmv']
         missing_key = 'vel'
     elif pmv_inputs['rh'] is None:
         def fn(x):
-            return pmv(pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
-                       x, pmv_inputs['met'], pmv_inputs['clo'],
-                       pmv_inputs['wme'], still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'], x,
+                pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'rh'
     elif pmv_inputs['met'] is None:
         def fn(x):
-            return pmv(pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
-                       pmv_inputs['rh'], x, pmv_inputs['clo'],
-                       pmv_inputs['wme'], still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
+                pmv_inputs['rh'], x, pmv_inputs['clo'], pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'met'
     elif pmv_inputs['clo'] is None:
         def fn(x):
-            return pmv(pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
-                       pmv_inputs['rh'], pmv_inputs['met'], x,
-                       pmv_inputs['wme'], still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
+                pmv_inputs['rh'], pmv_inputs['met'], x, pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'clo'
     else:
         def fn(x):
-            return pmv(pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
-                       pmv_inputs['rh'], pmv_inputs['met'], pmv_inputs['clo'],
-                       x, still_air_threshold)['pmv'] - target_pmv
+            return predicted_mean_vote(
+                pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
+                pmv_inputs['rh'], pmv_inputs['met'], pmv_inputs['clo'], x,
+                still_air_threshold)['pmv'] - target_pmv
         missing_key = 'wme'
 
     # Solve for the missing input using the function.

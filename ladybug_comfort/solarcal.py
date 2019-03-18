@@ -27,8 +27,11 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
     Args:
         srfs_temp: The temperature of surfaces around the person in degrees
             Celcius. This includes the ground and any other surfaces
-            blocking the view to the sky. Typically, the dry bulb temperature
-            is used when such surface temperatures are unknown.
+            blocking the view to the sky. When the temperature of these
+            individual surfaces are known, the input here should be the
+            average temperature of the surfaces weighted by view-factor to the human.
+            When such individaal surface temperatures are unknown, the outdoor
+            dry bulb temperature is typically used as a proxy.
         horiz_ir: The horizontal infrared radiation intensity from the sky in W/m2.
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_normal_solar: Direct normal solar irradiance in W/m2.
@@ -101,7 +104,7 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
 
 def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
                          sky_exposure=1, fract_exposed=1, floor_reflectance=0.25,
-                         window_transmittance=1, posture='seated', sharp=135,
+                         window_transmittance=0.4, posture='seated', sharp=135,
                          body_absorptivity=0.7, body_emissivity=0.95):
     """Perform a full indoor sky radiant heat exchange.
 
@@ -120,10 +123,12 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
         floor_reflectance: A number between 0 and 1 the represents the
             reflectance of the floor. Default is for 0.25 which is characteristic
             of outdoor grass or dry bare soil.
-        window_transmittance: A number between 0 and 1 that represents the
-            transmittance of the window through which shortwave solar is coming.
-            Default is 1 assuming that window transmittance is accounted for
-            outside of this function.
+        window_transmittance: A number between 0 and 1 that represents the broadband
+            solar transmittance of the window through which the sun is coming. Such
+            values tend to be slightly less than the SHGC. Values might be as low as
+            0.2 and could be as high as 0.85 for a single pane of glass.
+            Default is 0.4 assuming a double pane window with a relatively mild
+            low-e coating.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".
             Default is "standing".
@@ -520,7 +525,7 @@ def sharp_from_solar_and_body_azimuth(solar_azimuth, body_azimuth=0):
     if angle_diff <= 180:
         return angle_diff
     else:
-        return angle_diff - 180
+        return 360 - angle_diff
 
 
 def get_projection_factor(altitude, sharp=135, posture='standing'):

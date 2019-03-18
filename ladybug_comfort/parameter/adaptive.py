@@ -18,7 +18,7 @@ class AdaptiveParameter(ComfortParameter):
         cold_prevail_temp_limit
         conditioning
         standard
-        prevailing_temperture_method
+        prevailing_temperature_method
         minimum_operative
     """
     _model = 'Adaptive'
@@ -154,7 +154,7 @@ class AdaptiveParameter(ComfortParameter):
             return 'EN-15251'
 
     @property
-    def prevailing_temperture_method(self):
+    def prevailing_temperature_method(self):
         """Text denoting previaling temperature method.
 
         Either 'Averaged Monthly' or 'Running Mean'.
@@ -188,7 +188,7 @@ class AdaptiveParameter(ComfortParameter):
         """Set the offset from neutral temperature given the EN-15251 comfort class."""
         self.neutral_offset = en15251_neutral_offset_from_comfort_class(comfort_class)
 
-    def is_comfortable(self, comfort_result):
+    def is_comfortable(self, comfort_result, cooling_effect=0):
         """Determine if conditions are comfortable or not.
 
         Values are one of the following:
@@ -198,24 +198,37 @@ class AdaptiveParameter(ComfortParameter):
         Args:
             comfort_result: An adaptive comfort result dictionary from the
                 adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.
+            cooling_effect: Cooling effect from elevated air speed.
         """
-        return True if (comfort_result['to'] >= self._min_operative and
-                        comfort_result['deg_comf'] >= -self.neutral_offset and
-                        comfort_result['deg_comf'] <= self.neutral_offset +
-                        comfort_result['ce']) else False
+        return 1 if (comfort_result['to'] >= self._min_operative and
+                    comfort_result['deg_comf'] >= -self.neutral_offset and
+                    comfort_result['deg_comf'] <= self.neutral_offset +
+                    cooling_effect) else 0
 
-    def thermal_condition(self, comfort_result):
+    def thermal_condition(self, comfort_result, cooling_effect=0):
         """Determine whether conditions are cold, neutral or hot.
 
         Values are one of the following:
             -1 = cold
              0 = netural
             +1 = hot
+
+        Args:
+            comfort_result: An adaptive comfort result dictionary from the
+                adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.
+            cooling_effect: Cooling effect from elevated air speed
         """
-        if self.is_comfortable(comfort_result) is False:
+        if self.is_comfortable(comfort_result, cooling_effect) == 0:
             return 1 if comfort_result['deg_comf'] > 0 else -1
         else:
             return 0
+
+    def duplicate(self):
+        """Duplicate comfort parameters."""
+        return AdaptiveParameter(self.ashrae55_or_en15251, self.neutral_offset,
+                                 self.avg_month_or_running_mean,
+                                 self.discrete_or_continuous_air_speed,
+                                 self.cold_prevail_temp_limit, self.conditioning)
 
     def _calc_min_operative_temperature(self):
         """Set operative temperature below which conditions cannot be comfortable."""
@@ -223,14 +236,10 @@ class AdaptiveParameter(ComfortParameter):
             self._cold_prevail_temp_limit, self._conditioning, self.standard) \
             - self._neutral_offset
 
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
-
     def __repr__(self):
         """Adaptive comfort parameters representation."""
         return "Adaptive Comfort Parameters\n Standard: {}\n Neutral Offset: {}"\
             "\n Prevailing Temperture Method: {}\n Air Speed Method: {}"\
             "\n Cold Prevailing Temperature Limit: {}\n Conditioning Level: {}".format(
-                self.standard, self.neutral_offset, self.prevailing_temperture_method,
+                self.standard, self.neutral_offset, self.prevailing_temperature_method,
                 self.air_speed_method, self.cold_prevail_temp_limit, self.conditioning)

@@ -22,12 +22,20 @@ class PMVParameter(ComfortParameter):
         """Initalize PMV Parameters.
 
         Args:
-            ppd_comfort_thresh:  Upper threshold of PPD that is considered acceptable
-            humid_ratio_upper:  Upper limit of humidity ratio considered acceptable.
-            humid_ratio_low: Lower limit of humidity ratioc onsidered acceptable.
-            still_air_threshold: The threshold at which the standard effective
-                temperature (SET) model will be used to correct for the
+            ppd_comfort_thresh: A number between 5 and 100 that represents the upper
+                threshold of PPD that is considered acceptable.
+                Default is 10, which charcterizes most buildings in the ASHRAE-55 and
+                EN-15251 standards.
+            humid_ratio_upper: A number between 0 and 1 indicating the upper limit of
+                humidity ratio that is considered acceptable. Default is 1 for
+                essentially no limit.
+            humid_ratio_lower: A number between 0 and 1 indicating the lower limit of
+                humidity ratio considered acceptable. Default is 0 for essentially
+                no limit.
+            still_air_threshold: The air speed threshold in m/s at which the standard
+                effective temperature (SET) model will be used to correct for the
                 cooling effect of elevated air speeds.
+                Default is 0.1 m/s, which is the limit according to ASHRAE-55.
         """
 
         self.ppd_comfort_thresh = \
@@ -92,16 +100,15 @@ class PMVParameter(ComfortParameter):
         """Set the PPD threshold given the EN-15251 comfort class."""
         self.ppd_comfort_thresh = ppd_threshold_from_comfort_class(comfort_class)
 
-    def is_comfortable(self, ppd, humidity_ratio):
+    def is_comfortable(self, ppd, humidity_ratio=0):
         """Determine if conditions are comfortable or not.
 
         Values are one of the following:
             0 = uncomfortable
             1 = comfortable
         """
-        return True if (ppd <= self._ppd_thresh and
-                        humidity_ratio >= self._hr_lower and
-                        humidity_ratio <= self._hr_upper) else False
+        return 1 if (ppd <= self._ppd_thresh and humidity_ratio >= self._hr_lower and
+                     humidity_ratio <= self._hr_upper) else 0
 
     def thermal_condition(self, pmv, ppd):
         """Determine whether conditions are cold, neutral or hot.
@@ -116,7 +123,7 @@ class PMVParameter(ComfortParameter):
         else:
             return 0
 
-    def discomfort_reason(self, pmv, ppd, humidity_ratio):
+    def discomfort_reason(self, pmv, ppd, humidity_ratio=0):
         """Determine the reason why conditions are comfortable or not.
 
         Values are one of the following:
@@ -135,9 +142,10 @@ class PMVParameter(ComfortParameter):
         else:
             return 0
 
-    def ToString(self):
-        """Overwrite .NET ToString."""
-        return self.__repr__()
+    def duplicate(self):
+        """Duplicate these comfort parameters."""
+        return PMVParameter(self.ppd_comfort_thresh, self.humid_ratio_upper,
+                            self.humid_ratio_lower, self.still_air_threshold)
 
     def __repr__(self):
         """PMV comfort parameters representation."""
