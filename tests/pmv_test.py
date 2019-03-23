@@ -81,6 +81,8 @@ class PMVTestCase(unittest.TestCase):
                    'met': 1.2, 'clo': None, 'wme': 0}
         input_7 = {'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': 50,
                    'met': 1.4, 'clo': 0.75, 'wme': None}
+        input_8 = {'ta': None, 'tr': None, 'vel': 0.05, 'rh': 50,
+                   'met': 1.2, 'clo': 0.75, 'wme': 0}
         updated_input_1 = calc_missing_pmv_input(-1, input_1)
         updated_input_2 = calc_missing_pmv_input(-1, input_2)
         updated_input_3 = calc_missing_pmv_input(-1, input_3, up_bound=1)
@@ -88,6 +90,7 @@ class PMVTestCase(unittest.TestCase):
         updated_input_5 = calc_missing_pmv_input(-1, input_5, up_bound=1)
         updated_input_6 = calc_missing_pmv_input(-1, input_6, up_bound=1)
         updated_input_7 = calc_missing_pmv_input(-1, input_7, up_bound=1)
+        updated_input_8 = calc_missing_pmv_input(-1, input_8, up_bound=1)
         assert updated_input_1['ta'] == pytest.approx(18.529, rel=1e-1)
         assert updated_input_2['tr'] == pytest.approx(17.912, rel=1e-1)
         assert updated_input_3['vel'] == pytest.approx(0.720, rel=1e-1)
@@ -95,6 +98,8 @@ class PMVTestCase(unittest.TestCase):
         assert updated_input_5['met'] == pytest.approx(1.1234, rel=1e-2)
         assert updated_input_6['clo'] == pytest.approx(0.6546, rel=1e-2)
         assert updated_input_7['wme'] == pytest.approx(0.3577, rel=1e-2)
+        assert updated_input_8['ta'] == pytest.approx(19.13548, rel=1e-3)
+        assert updated_input_8['ta'] == updated_input_8['tr']
 
     def test_pmv_parameter(self):
         """Test PMVParameter."""

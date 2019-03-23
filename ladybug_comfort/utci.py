@@ -292,11 +292,14 @@ def calc_missing_utci_input(target_utci, utci_inputs,
     Args:
         target_utci: The target UTCI temperature that you are trying to produce
             from the inputs to the UTCI model.
-        pmv_inputs: A dictionary of 4 pmv inputs with the following keys:
+        utci_inputs: A dictionary of 4 UTCI inputs with the following keys:
             'ta', 'tr', 'vel', 'rh'.  Each key should correspond to a value
             that represents that UTCI input but one of these inputs should
             have a value of None.
             The input corresponding to None will be solved for by this function.
+            One can also input None for both 'ta' and 'tr' to solve for the operative
+            temperature that meets the target_utci. In this case, both 'ta' and 'tr'
+            in the output dictionary will be the same.
             Example (solving for relative humidity):
                 `{'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None}`
         low_bound: The lowest possible value of the missing input you are tying to
@@ -316,7 +319,13 @@ def calc_missing_utci_input(target_utci, utci_inputs,
         'utci_inputs must have 4 keys. Got {}.'.format(len(utci_inputs.keys()))
 
     # Determine the function that should be used given the missing input.
-    if utci_inputs['ta'] is None:
+    if utci_inputs['ta'] is None and utci_inputs['tr'] is None:
+        def fn(x):
+            return universal_thermal_climate_index(
+                x, x, utci_inputs['vel'], utci_inputs['rh']
+                ) - target_utci
+        missing_key = ('ta', 'tr')
+    elif utci_inputs['ta'] is None:
         def fn(x):
             return universal_thermal_climate_index(
                 x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']
@@ -346,5 +355,9 @@ def calc_missing_utci_input(target_utci, utci_inputs,
         missing_val = bisect(low_bound, up_bound, fn, tolerance, 0)
 
     # complete the input dictionary
-    utci_inputs[missing_key] = missing_val
+    if isinstance(missing_key, str):
+        utci_inputs[missing_key] = missing_val
+    else:
+        for key in missing_key:
+            utci_inputs[key] = missing_val
     return utci_inputs
