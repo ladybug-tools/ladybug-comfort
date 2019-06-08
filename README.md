@@ -27,8 +27,8 @@ For the legacy Ladybug Grasshopper plugin see [this repository](https://github.c
 """Get the percentage of time outdoor conditions are comfortable with/without sun + wind"""
 from ladybug.epw import EPW
 
-relative_path = './tests/epw/chicago.epw'
-epw = EPW(relative_path)
+epw_file_path = './tests/epw/chicago.epw'
+epw = EPW(epw_file_path)
 utci_obj_exposed = epw.get_universal_thermal_climate_index(
   include_wind=True, include_sun=True)
 utci_obj_protected = epw.get_universal_thermal_climate_index(

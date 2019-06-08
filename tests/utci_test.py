@@ -34,14 +34,18 @@ class UTCITestCase(unittest.TestCase):
         input_2 = {'ta': 20, 'tr': None, 'vel': 0.5, 'rh': 50}
         input_3 = {'ta': 22, 'tr': 22, 'vel': None, 'rh': 50}
         input_4 = {'ta': 20, 'tr': 20, 'vel': 0.5, 'rh': None}
+        input_5 = {'ta': None, 'tr': None, 'vel': 5, 'rh': 50}
         updated_input_1 = calc_missing_utci_input(25, input_1)
         updated_input_2 = calc_missing_utci_input(25, input_2)
         updated_input_3 = calc_missing_utci_input(15, input_3, up_bound=1)
         updated_input_4 = calc_missing_utci_input(22, input_4)
+        updated_input_5 = calc_missing_utci_input(22, input_5)
         assert updated_input_1['ta'] == pytest.approx(26.9827, rel=1e-2)
         assert updated_input_2['tr'] == pytest.approx(36.3803, rel=1e-2)
         assert updated_input_3['vel'] == pytest.approx(5.77514, rel=1e-2)
         assert updated_input_4['rh'] == pytest.approx(90.388989, rel=1e-2)
+        assert updated_input_5['ta'] == pytest.approx(26.413594, rel=1e-2)
+        assert updated_input_5['ta'] == updated_input_5['tr']
 
     def test_utci_parameters(self):
         """Test UTCI Parameters."""
