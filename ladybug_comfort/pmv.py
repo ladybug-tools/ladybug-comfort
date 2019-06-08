@@ -503,6 +503,9 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
             should correspond to a value that represents that pmv input
             but one of these inputs should have a value of None.
             The input corresponding to None will be solved for by this function.
+            One can also input None for both 'ta' and 'tr' to solve for the operative
+            temperature that meets the target_pmv. In this case, both 'ta' and 'tr'
+            in the output dictionary will be the same.
             Example (solving for relative humidity):
                 `{'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None,
                 'met': 1.2, 'clo': 0.75, 'wme': 0}`
@@ -527,7 +530,14 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
         'pmv_inputs must have 7 keys. Got {}.'.format(len(pmv_inputs.keys()))
 
     # Determine the function that should be used given the missing input.
-    if pmv_inputs['ta'] is None:
+    if pmv_inputs['ta'] is None and pmv_inputs['tr'] is None:
+        def fn(x):
+            return predicted_mean_vote(
+                x, x, pmv_inputs['vel'], pmv_inputs['rh'],
+                pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
+                still_air_threshold)['pmv'] - target_pmv
+        missing_key = ('ta', 'tr')
+    elif pmv_inputs['ta'] is None:
         def fn(x):
             return predicted_mean_vote(
                 x, pmv_inputs['tr'], pmv_inputs['vel'], pmv_inputs['rh'],
@@ -585,5 +595,9 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
         missing_val = bisect(low_bound, up_bound, fn, tolerance, 0)
 
     # complete the input dictionary
-    pmv_inputs[missing_key] = missing_val
+    if isinstance(missing_key, str):
+        pmv_inputs[missing_key] = missing_val
+    else:
+        for key in missing_key:
+            pmv_inputs[key] = missing_val
     return pmv_inputs
