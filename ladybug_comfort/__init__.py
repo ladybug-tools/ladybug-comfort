@@ -8,8 +8,6 @@ Properties:
         colum refers to a degree of altitude.
 """
 
-__version__ = '0.3.0'
-
 # load all functions that extend ladybug core objects.
 import ladybug_comfort._extend_ladybug
 

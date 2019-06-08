@@ -1,26 +1,12 @@
-import re
 import setuptools
-import sys
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open('ladybug_comfort/__init__.py', 'r') as fd:
-    version = re.search(
-        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-        fd.read(),
-        re.MULTILINE
-    ).group(1)
-
-try:
-    from semantic_release import setup_hook
-    setup_hook(sys.argv)
-except ImportError:
-    pass
-
 setuptools.setup(
     name="ladybug-comfort",
-    version=version,
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
     author="Ladybug Tools",
     author_email="info@ladybug.tools",
     description="Ladybug comfort is a Python library that adds the functionalities for modeling thermal comfort to Ladybug.",
