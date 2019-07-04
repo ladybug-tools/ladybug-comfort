@@ -195,9 +195,6 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
         alt: The altitude of the sun in degrees [0-90].
-        sky_exposure: A number between 0 and 1 representing the fraction of the
-            sky vault in occupant’s view. Default is 1 for outdoors in an
-            open field.
         fract_exposed: A number between 0 and 1 representing the fraction of
             the body exposed to direct sunlight. Note that this does not include the
             body’s self-shading; only the shading from surroundings.

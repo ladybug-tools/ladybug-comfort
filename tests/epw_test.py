@@ -87,7 +87,7 @@ class EPWTestCase(unittest.TestCase):
 
         assert isinstance(set_obj.standard_effective_temperature, HourlyContinuousCollection)
         assert len(set_obj.standard_effective_temperature.values) == calc_length
-        assert set_obj.standard_effective_temperature[0] == pytest.approx(11.99527, rel=1e-3)
+        assert set_obj.standard_effective_temperature[0] == pytest.approx(12.76, rel=1e-2)
         assert isinstance(set_obj.thermal_condition, HourlyContinuousCollection)
         assert len(set_obj.thermal_condition.values) == calc_length
         assert set_obj.thermal_condition[0] == -1
@@ -103,9 +103,9 @@ class EPWTestCase(unittest.TestCase):
         set_obj = epw.get_standard_effective_temperature(True, False,
                                                          met_rate=2.4, clo_value=1.0)
 
-        assert set_obj.percent_neutral == pytest.approx(21.14155, rel=1e-3)
-        assert set_obj.percent_hot == pytest.approx(16.3356, rel=1e-3)
-        assert set_obj.percent_cold == pytest.approx(62.52283, rel=1e-3)
+        assert set_obj.percent_neutral == pytest.approx(19.82, rel=1e-2)
+        assert set_obj.percent_hot == pytest.approx(15.56, rel=1e-2)
+        assert set_obj.percent_cold == pytest.approx(64.61, rel=1e-2)
 
     def test_get_standard_effective_temperature_with_sun(self):
         """Test the get_standard_effective_temperature method with sun."""
@@ -125,9 +125,9 @@ class EPWTestCase(unittest.TestCase):
         set_obj = epw.get_standard_effective_temperature(True, True,
                                                          met_rate=2.4, clo_value=1.0)
 
-        assert set_obj.percent_neutral == pytest.approx(19.08675799, rel=1e-3)
-        assert set_obj.percent_hot == pytest.approx(18.458904, rel=1e-3)
-        assert set_obj.percent_cold == pytest.approx(62.454337, rel=1e-3)
+        assert set_obj.percent_neutral == pytest.approx(17.95, rel=1e-2)
+        assert set_obj.percent_hot == pytest.approx(18.82, rel=1e-2)
+        assert set_obj.percent_cold == pytest.approx(63.23, rel=1e-2)
 
 
 if __name__ == "__main__":
