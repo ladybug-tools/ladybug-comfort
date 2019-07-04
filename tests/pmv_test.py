@@ -1,5 +1,4 @@
 # coding utf-8
-
 import unittest
 import pytest
 
@@ -37,17 +36,22 @@ class PMVTestCase(unittest.TestCase):
         assert hl['conv'] == pytest.approx(44.745778, rel=1e-2)
         assert sum(hl.values()) == pytest.approx(103.78, rel=1e-2)
 
-    def test_pierce_set(self):
-        """Test the pierce_set function"""
-        set = pierce_set(19, 23, 0.5, 60, 1.5, 0.4)
-        assert set == pytest.approx(18.8911, rel=1e-2)
+    def test_pierce_set_validation(self):
+        """Test the pierce_set function against the reference table from ASHRAE-55 2017.
+        """
+        validation_csv_file_path = './tests/validation_tables/set_validation.csv'
+        with open(validation_csv_file_path) as csv_data_file:
+            csv_data_file.readline()
+            for row in csv_data_file:
+                values = [float(val) for val in row.split(',')]
+                assert pierce_set(*values[:-1]) == pytest.approx(values[-1], rel=1e-2)
 
     def test_predicted_mean_vote(self):
         """Test the pmv function"""
         result = predicted_mean_vote(19, 23, 0.5, 60, 1.5, 0.4)
-        assert result['pmv'] == pytest.approx(-1.6745, rel=1e-2)
-        assert round(result['ppd']) == pytest.approx(60.382974, rel=1e-2)
-        assert result['set'] == pytest.approx(18.8911, rel=1e-2)
+        assert result['pmv'] == pytest.approx(-1.734, rel=1e-2)
+        assert result['ppd'] == pytest.approx(63.568386, rel=1e-2)
+        assert result['set'] == pytest.approx(18.745, rel=1e-2)
 
     def test_ppd_from_pmv(self):
         """Test the ppd_from_pmv function"""
@@ -93,7 +97,7 @@ class PMVTestCase(unittest.TestCase):
         updated_input_8 = calc_missing_pmv_input(-1, input_8, up_bound=1)
         assert updated_input_1['ta'] == pytest.approx(18.529, rel=1e-1)
         assert updated_input_2['tr'] == pytest.approx(17.912, rel=1e-1)
-        assert updated_input_3['vel'] == pytest.approx(0.720, rel=1e-1)
+        assert updated_input_3['vel'] == pytest.approx(0.6396, rel=1e-1)
         assert updated_input_4['rh'] == pytest.approx(7.0, rel=1e-1)
         assert updated_input_5['met'] == pytest.approx(1.1234, rel=1e-2)
         assert updated_input_6['clo'] == pytest.approx(0.6546, rel=1e-2)
@@ -136,9 +140,9 @@ class PMVTestCase(unittest.TestCase):
         """Test comfort check on PMVParameter."""
         pmv_comf = PMVParameter()
         comf_test = pmv_comf.is_comfortable(13, 0.01)
-        assert comf_test is 0
+        assert comf_test == 0
         comf_test = pmv_comf.is_comfortable(7, 0.01)
-        assert comf_test is 1
+        assert comf_test == 1
 
     def test_thermal_condition_check(self):
         """Test the thermal condition check on PMVParameter."""
@@ -178,13 +182,13 @@ class PMVTestCase(unittest.TestCase):
 
         assert isinstance(pmv_obj.predicted_mean_vote, HourlyContinuousCollection)
         assert len(pmv_obj.predicted_mean_vote.values) == calc_length
-        assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.053570216, rel=1e-3)
+        assert pmv_obj.predicted_mean_vote[0] == pytest.approx(-0.0535, rel=1e-2)
         assert isinstance(pmv_obj.percentage_people_dissatisfied, HourlyContinuousCollection)
         assert len(pmv_obj.percentage_people_dissatisfied.values) == calc_length
-        assert pmv_obj.percentage_people_dissatisfied[0] == pytest.approx(5.0594, rel=1e-3)
+        assert pmv_obj.percentage_people_dissatisfied[0] == pytest.approx(5.0594, rel=1e-2)
         assert isinstance(pmv_obj.standard_effective_temperature, HourlyContinuousCollection)
         assert len(pmv_obj.standard_effective_temperature.values) == calc_length
-        assert pmv_obj.standard_effective_temperature[0] == pytest.approx(24.9656, rel=1e-3)
+        assert pmv_obj.standard_effective_temperature[0] == pytest.approx(25.0694, rel=1e-2)
 
     def test_pmv_collection_defaults(self):
         """Test the default inputs assigned to the PMV collection."""
@@ -254,35 +258,35 @@ class PMVTestCase(unittest.TestCase):
 
         assert isinstance(pmv_obj.adjusted_air_temperature, HourlyContinuousCollection)
         assert len(pmv_obj.adjusted_air_temperature.values) == calc_length
-        assert pmv_obj.adjusted_air_temperature[0] == pytest.approx(21.914306, rel=1e-3)
+        assert pmv_obj.adjusted_air_temperature[0] == pytest.approx(21.79, rel=1e-2)
 
         assert isinstance(pmv_obj.cooling_effect, HourlyContinuousCollection)
         assert len(pmv_obj.cooling_effect.values) == calc_length
-        assert pmv_obj.cooling_effect[0] == pytest.approx(2.08569, rel=1e-3)
+        assert pmv_obj.cooling_effect[0] == pytest.approx(2.215, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_conduction, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_conduction.values) == calc_length
-        assert pmv_obj.heat_loss_conduction[0] == pytest.approx(12.11224, rel=1e-3)
+        assert pmv_obj.heat_loss_conduction[0] == pytest.approx(12.14, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_sweating, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_sweating.values) == calc_length
-        assert pmv_obj.heat_loss_sweating[0] == pytest.approx(2.4423, rel=1e-3)
+        assert pmv_obj.heat_loss_sweating[0] == pytest.approx(2.44, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_latent_respiration, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_latent_respiration.values) == calc_length
-        assert pmv_obj.heat_loss_latent_respiration[0] == pytest.approx(4.950239787, rel=1e-3)
+        assert pmv_obj.heat_loss_latent_respiration[0] == pytest.approx(4.95, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_dry_respiration, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_dry_respiration.values) == calc_length
-        assert pmv_obj.heat_loss_dry_respiration[0] == pytest.approx(1.0822859, rel=1e-3)
+        assert pmv_obj.heat_loss_dry_respiration[0] == pytest.approx(1.093, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_radiation, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_radiation.values) == calc_length
-        assert pmv_obj.heat_loss_radiation[0] == pytest.approx(28.49618812, rel=1e-3)
+        assert pmv_obj.heat_loss_radiation[0] == pytest.approx(28.78, rel=1e-2)
 
         assert isinstance(pmv_obj.heat_loss_convection, HourlyContinuousCollection)
         assert len(pmv_obj.heat_loss_convection.values) == calc_length
-        assert pmv_obj.heat_loss_convection[0] == pytest.approx(26.0219599, rel=1e-3)
+        assert pmv_obj.heat_loss_convection[0] == pytest.approx(26.296, rel=1e-2)
 
     def test_pmv_collection_humidity_ratio_outputs(self):
         """Test the humudity ratio outputs of the PMV collection."""
@@ -401,7 +405,7 @@ class PMVTestCase(unittest.TestCase):
         assert len(pmv_obj.percentage_people_dissatisfied.values) == calc_length
         assert pmv_obj.percentage_people_dissatisfied[0] == pytest.approx(100.0, rel=1e-1)
         assert len(pmv_obj.standard_effective_temperature.values) == calc_length
-        assert pmv_obj.standard_effective_temperature[0] == pytest.approx(-3.7553724, rel=1e-3)
+        assert pmv_obj.standard_effective_temperature[0] == pytest.approx(-3.65, rel=1e-2)
 
     def test_pmv_collection_comfort_percent_outputs(self):
         """Test the percent outputs of the PMV collection."""

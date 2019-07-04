@@ -242,9 +242,8 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
     cstr = 0.5
 
     temp_skin_neutral = 33.7  # setpoint (neutral) value for Tsk
-    temp_core_neutral = 36.49  # setpoint value for Tcr
-    # setpoint for Tb (.1*temp_skin_neutral + .9*temp_core_neutral)
-    temp_body_neutral = 36.49
+    temp_core_neutral = 36.8  # setpoint value for Tcr
+    temp_body_neutral = 36.49  # setpoint for Tb
     skin_blood_flow_neutral = 6.3  # neutral value for skin_blood_flow
 
     # INITIAL VALUES - start of 1st experiment
@@ -295,17 +294,19 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
     # Tcl and chr are solved iteratively using: H(Tsk - To) = ctc(Tcl - To),
     # where H = 1/(ra + Rcl) and ra = 1/Facl*ctc
 
-    tcl_old = tcl
-    while abs(tcl - tcl_old) > 0.01:
-        tcl_old = tcl
-        chr = 4.0 * sbc * pow(((tcl + tr) / 2.0 + 273.15), 3.0) * 0.72
-        ctc = chr + chc
-        # resistance of air layer to dry heat transfer
-        ra = 1.0 / (facl * ctc)
-        top = (chr * tr + chc * ta) / ctc
-        tcl = (ra * temp_skin + rcl * top) / (ra + rcl)
-
+    tcl_old = False
+    flag = True
     for i in range(ltime - 1):
+        while abs(tcl - tcl_old) > 0.01:
+            if flag:
+                tcl_old = tcl
+                chr = 4.0 * sbc * pow(((tcl + tr) / 2.0 + 273.15), 3.0) * 0.72
+                ctc = chr + chc
+                ra = 1.0 / (facl * ctc)  # resistance of air layer to dry heat transfer
+                top = (chr * tr + chc * ta) / ctc
+            tcl = (ra * temp_skin + rcl * top) / (ra + rcl)
+            flag = True
+        flag = False
         dry = (temp_skin - top) / (ra + rcl)
         hfcs = (temp_core - temp_skin) * (5.28 + 1.163 * skin_blood_flow)
         eres = 0.0023 * M * (44.0 - vapor_pressure)
