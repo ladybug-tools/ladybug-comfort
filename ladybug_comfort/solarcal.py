@@ -75,7 +75,7 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shorwave irradiance
-    if alt > 0:
+    if alt >= 0:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
                                             fract_exposed, floor_reflectance, posture)
@@ -156,7 +156,7 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shorwave irradiance
-    if alt > 0:
+    if alt >= 0:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
                                             fract_exposed, floor_reflectance, posture)
@@ -229,7 +229,7 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shorwave irradiance
-    if alt > 0:
+    if alt >= 0:
         s_flux = body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar,
                                                   alt, sharp, fract_exposed,
                                                   floor_reflectance, posture)
