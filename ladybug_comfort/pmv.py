@@ -153,7 +153,7 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
     p2 = p1 * 3.96
     p3 = p1 * 100.
     p4 = p1 * taa
-    p5 = (308.7 - 0.028 * mw) + (p2 * math.pow(tra / 100., 4))
+    p5 = 308.7 - 0.028 * mw + (p2 * ((tra / 100.) ** 4))
     xn = tcla / 100.
     xf = tcla / 50.
     eps = 0.00015
@@ -161,12 +161,12 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
     n = 0
     while abs(xn - xf) > eps:
         xf = (xf + xn) / 2.
-        hcn = 2.38 * math.pow(abs(100.0 * xf - taa), 0.25)
+        hcn = 2.38 * (abs(100.0 * xf - taa) ** 0.25)
         if hcf > hcn:
             hc = hcf
         else:
             hc = hcn
-        xn = (p5 + p4 * hc - p2 * math.pow(xf, 4)) / (100. + p3 * hc)
+        xn = (p5 + p4 * hc - p2 * (xf ** 4)) / (100. + p3 * hc)
         n += 1
         if n > 150:
             print('Max iterations exceeded')
