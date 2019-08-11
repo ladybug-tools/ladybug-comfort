@@ -1,2 +1,0 @@
-[run]
-omit = ladybug/euclid.py, ladybug/color.py, ladybug/legendparameters.py, tests/*

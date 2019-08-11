@@ -9,7 +9,7 @@ setuptools.setup(
     setup_requires=['setuptools_scm'],
     author="Ladybug Tools",
     author_email="info@ladybug.tools",
-    description="Ladybug comfort is a Python library that adds the functionalities for modeling thermal comfort to Ladybug.",
+    description="Ladybug comfort is a Python library that adds thermal comfort functionalities to Ladybug.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ladybug-tools/ladybug-comfort",
