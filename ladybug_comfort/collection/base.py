@@ -2,11 +2,19 @@
 """Comfort data collection base object."""
 
 from ladybug._datacollectionbase import BaseCollection
-from  ladybug.datatype.base import DataTypeBase
+from ladybug.datatype.base import DataTypeBase
 
 
 class ComfortCollection(object):
-    """Thermal comfort datacollection base class."""
+    """Base class for all thermal comfort collections.
+
+    Properties:
+        comfort_model
+        calc_length
+        percent_neutral
+        percent_hot
+        percent_cold
+    """
     _model = None
 
     def __init__(self):
@@ -23,6 +31,24 @@ class ComfortCollection(object):
     def calc_length(self):
         """The number of values in the Data Collections of this object."""
         return self._calc_length
+
+    @property
+    def percent_neutral(self):
+        """The percent of time that the thermal_condiiton is neutral."""
+        raise NotImplementedError('percent_neutral has not yet been implemented for '
+                                  '{}.'.format(self.__class__.__name__))
+
+    @property
+    def percent_cold(self):
+        """The percent of time that the thermal_condiiton is cold."""
+        raise NotImplementedError('percent_cold has not yet been implemented for '
+                                  '{}.'.format(self.__class__.__name__))
+
+    @property
+    def percent_hot(self):
+        """The percent of time that the thermal_condiiton is hot."""
+        raise NotImplementedError('percent_hot has not yet been implemented for '
+                                  '{}.'.format(self.__class__.__name__))
 
     def _check_datacoll(self, data_coll, dat_type, unit, name):
         """Check the data type and units of a Data Collection."""
@@ -57,11 +83,6 @@ class ComfortCollection(object):
                 value_list, dat_type, unit, mutable=False)
             setattr(self, attr_name, coll)
         return getattr(self, attr_name)
-
-    @property
-    def isComfortCollection(self):
-        """The number of values in the Data Collections of this object."""
-        return self._calc_length
 
     def ToString(self):
         """Overwrite .NET ToString."""

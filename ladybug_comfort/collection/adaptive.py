@@ -7,7 +7,7 @@ from ..adaptive import adaptive_comfort_ashrae55, adaptive_comfort_en15251, \
     cooling_effect_en15251, t_operative, \
     weighted_running_mean_hourly, weighted_running_mean_daily
 from ..parameter.adaptive import AdaptiveParameter
-from ._base import ComfortCollection
+from .base import ComfortCollection
 
 from ladybug._datacollectionbase import BaseCollection
 from ladybug.datacollection import HourlyContinuousCollection, DailyCollection, \
