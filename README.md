@@ -11,10 +11,7 @@
 
 Ladybug-comfort is a Python library that adds thermal comfort functionalities to Ladybug.
 
-## note
-For the legacy Ladybug Grasshopper plugin see [this repository](https://github.com/mostaphaRoudsari/ladybug).
-
-## API Documentation
+## [API Documentation](https://www.ladybug.tools/ladybug-comfort/docs/)
 
 ## Installation
 
