@@ -5,7 +5,7 @@ from __future__ import division
 from ..solarcal import outdoor_sky_heat_exch, indoor_sky_heat_exch, \
     shortwave_from_horiz_solar, sharp_from_solar_and_body_azimuth
 from ..parameter.solarcal import SolarCalParameter
-from ._base import ComfortCollection
+from .base import ComfortCollection
 
 from ladybug.location import Location
 from ladybug.sunpath import Sunpath

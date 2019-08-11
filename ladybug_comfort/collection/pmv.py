@@ -4,7 +4,7 @@ from __future__ import division
 
 from ..pmv import predicted_mean_vote
 from ..parameter.pmv import PMVParameter
-from ._base import ComfortCollection
+from .base import ComfortCollection
 
 from ladybug._datacollectionbase import BaseCollection
 from ladybug.psychrometrics import humid_ratio_from_db_rh
