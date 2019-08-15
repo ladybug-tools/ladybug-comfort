@@ -9,13 +9,38 @@ Building and Environment, 88, 3-9. http://dx.doi.org/10.1016/j.buildenv.2014.09.
 https://escholarship.org/uc/item/89m1h2dg
 
 [2] ASHRAE Standard 55 (2017). "Thermal Environmental Conditions for Human Occupancy".
+
+Properties:
+    SOLARCAL_SPLINES: A dictionary with two keys: 'standing' and 'seated'.
+        Each value for these keys is a 2D matrix of projection factors
+        for human geometry.  Each row refers to an degree of azimuth and each
+        colum refers to a degree of altitude.
 """
 from __future__ import division
 
 from ladybug.skymodel import calc_sky_temperature
-from .__init__ import SOLARCALSPLINES
+from ladybug.futil import csv_to_num_matrix
 
+from os.path import dirname, abspath
+import inspect
 import math
+
+
+def _load_solarcal_splines():
+    """load the spline data that gets used in solarcal."""
+    try:
+        cur_dir = dirname(abspath(inspect.getfile(inspect.currentframe())))
+        solarcal_splines = {
+            'seated': csv_to_num_matrix(cur_dir + '/_mannequin/seatedspline.csv'),
+            'standing': csv_to_num_matrix(cur_dir + '/_mannequin/standingspline.csv')}
+    except IOError:
+        solarcal_splines = {}
+        print('Failed to import projection factor splines from CSV.'
+              '\nA simpler interoplation method for Solarcal will be used.')
+    return solarcal_splines
+
+
+SOLARCAL_SPLINES = _load_solarcal_splines()
 
 
 def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_solar, alt,
@@ -547,7 +572,7 @@ def get_projection_factor(altitude, sharp=135, posture='standing'):
         altitude = 1 if altitude == 0 else altitude
         posture = 'standing'
     try:
-        return SOLARCALSPLINES[posture][int(sharp)][int(math.ceil(altitude) - 1)]
+        return SOLARCAL_SPLINES[posture][int(sharp)][int(math.ceil(altitude) - 1)]
     except IndexError:
         raise ValueError('altitude|azimuth {}|{} is outside of acceptable ranges'.format(
             altitude, sharp))
