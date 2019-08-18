@@ -21,18 +21,19 @@ from __future__ import division
 from ladybug.skymodel import calc_sky_temperature
 from ladybug.futil import csv_to_num_matrix
 
-from os.path import dirname, abspath
-import inspect
+import os
 import math
 
 
 def _load_solarcal_splines():
     """load the spline data that gets used in solarcal."""
     try:
-        cur_dir = dirname(abspath(inspect.getfile(inspect.currentframe())))
+        cur_dir = os.path.dirname(__file__)
         solarcal_splines = {
-            'seated': csv_to_num_matrix(cur_dir + '/_mannequin/seatedspline.csv'),
-            'standing': csv_to_num_matrix(cur_dir + '/_mannequin/standingspline.csv')}
+            'seated': csv_to_num_matrix(os.path.join(
+                cur_dir, '_mannequin', 'seatedspline.csv')),
+            'standing': csv_to_num_matrix(os.path.join(
+                cur_dir, '_mannequin', 'standingspline.csv'))}
     except IOError:
         solarcal_splines = {}
         print('Failed to import projection factor splines from CSV.'
