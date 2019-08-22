@@ -22,13 +22,16 @@ from ladybug.skymodel import calc_sky_temperature
 from ladybug.futil import csv_to_num_matrix
 
 import os
+import inspect
 import math
 
 
 def _load_solarcal_splines():
     """load the spline data that gets used in solarcal."""
     try:
-        cur_dir = os.path.dirname(__file__)
+        # Once we are free of Rhino5 IronPython use: cur_dir = os.path.dirname(__file__)
+        cur_dir = os.path.dirname(os.path.abspath(
+            inspect.getfile(inspect.currentframe())))
         solarcal_splines = {
             'seated': csv_to_num_matrix(os.path.join(
                 cur_dir, '_mannequin', 'seatedspline.csv')),
