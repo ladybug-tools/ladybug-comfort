@@ -14,6 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/ladybug-tools/ladybug-comfort",
     packages=setuptools.find_packages(),
+    include_package_data=True,
     install_requires=[
         'lbt-ladybug>=0.1.0'
     ],
