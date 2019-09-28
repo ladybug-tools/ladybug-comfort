@@ -6,6 +6,7 @@ python:
 
 install:
  - pip install -r dev-requirements.txt
+ - pip install -r requirements.txt
 
 
 script:
@@ -19,15 +20,23 @@ jobs:
   include:
     - stage: deploy
       if: branch = master AND (NOT type IN (pull_request))
-      before_install: npm i -g npm@6.6.0
-      python: "3.6"
+      before_install:
+      - npm i -g npm@6.6.0
+      python:
+      - "3.6"
       install:
       - pip install -r dev-requirements.txt
+      - pip install -r requirements.txt
       - npm install @semantic-release/exec
       script:
-        - git config --global user.name "ladybugbot"
-        - git config --global user.email "release@ladybug.tools"
-        - npx semantic-release
+      - git config --global user.email "releases@ladybug.tools"
+      - git config --global user.name "ladybugbot"
+      - npx semantic-release
+    - stage: docs
+      if: branch = master AND (NOT type IN (pull_request))
+      script:
+      - sphinx-apidoc -f -e -d 4 -o ./docs ./ladybug_comfort
+      - sphinx-build -b html ./docs ./docs/_build/docs
       deploy:
         provider: pages
         skip_cleanup: true
