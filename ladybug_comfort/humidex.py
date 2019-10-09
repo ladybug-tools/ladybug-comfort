@@ -39,10 +39,10 @@ def humidex(ta, tdp):
     dew_point_k = tdp + 273.15  # celsius to kelvin
 
     e = 6.11 * math.exp(5417.7530 * ((1 / 273.15) - (1 / dew_point_k)))
-    h = (0.5555) * (e - 10.0)
+    h = 0.5555 * (e - 10.0)
 
-    humidex = float(ta + h)
-    return humidex
+    humidex_value = float(ta + h)
+    return humidex_value
 
 
 def humidex_degree_of_comfort(humidex):
