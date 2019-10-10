@@ -9,7 +9,7 @@ def heat_index(ta, rh):
     """Calculate heat index (HI) from air temperature and relative humidity.
 
     Heat index is derived from original work carried out by Robert G. Steadman [1],
-    which defined heat index through large tables of emprical data.
+    which defined heat index through large tables of empirical data.
     The formula here approximates the heat index to within +/- 0.7C and is
     the result of a multivariate fit [2].
     Heat index was adopted by the US's National Weather Service (NWS) in 1979.
@@ -31,7 +31,7 @@ def heat_index(ta, rh):
     Returns:
         hi: Heat index [C]
     """
-    tf = ta * 9. / 5. + 32.  # convert to farenheit
+    tf = ta * 9. / 5. + 32.  # convert to fahrenheit
 
     if tf < 80:
         hif = 0.5 * (tf + 61.0 + ((tf - 68.0) * 1.2) + (rh * 0.094))
