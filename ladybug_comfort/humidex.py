@@ -6,7 +6,7 @@ import math
 
 
 def humidex(ta, tdp):
-    """Calculate Humidex  from air temperature and the Dew Point.
+    """Calculate Humidex from air temperature and the Dew Point.
 
     The Humidex is a Canadian innovation first used in 1965.
         It combines the temperature and humidity into one number to reflect the
