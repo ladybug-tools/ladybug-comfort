@@ -37,10 +37,10 @@ print(utci_obj_protected.percent_neutral)  # comfortable percent of time without
 
 
 ### derivative work
-Ladybug-comfort is a derivative work of the following software projects:
+**Ladybug-comfort is a derivative work of the following software projects:**
 
-[ladybug](https://github.com/ladybug). Available under GPL.
-[CBE Comfort Tool](https://github.com/CenterForTheBuiltEnvironment/comfort_tool) for indoor thermal comfort calculations.  Available under GPL.
-[UTCI Fortran Code](http://www.utci.org/utci_doku.php) for outdoor thermal comfort calculations.  Available under MIT.
+* [ladybug](https://github.com/ladybug) (Available under GPL).
+* [CBE Comfort Tool](https://github.com/CenterForTheBuiltEnvironment/comfort_tool) for indoor thermal comfort calculations (Available under GPL).
+* [UTCI Fortran Code](http://www.utci.org/utci_doku.php) for outdoor thermal comfort calculations (Available under MIT).
 
 Applicable copyright notices for theses works can be found within the relevant .py files.
