@@ -55,8 +55,6 @@ def discomfort_index_effect_category(di):
         category = -3
     elif di >= -20:
         category = -4
-    elif di >= 26.5:
-        category = 2
     elif di >= -40:
         category = -5
     else:
