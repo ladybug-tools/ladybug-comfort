@@ -8,7 +8,7 @@ from ladybug_comfort.di import discomfort_index, discomfort_index_effect_categor
 def test_discomfort_index():
     """Test the discomfort_index function."""
     assert discomfort_index(32, 85) == pytest.approx(30.55625, rel=1e-3)
-    assert discomfort_index(20, 50) == pytest.approx(19.4875, rel=1e-3)
+    assert discomfort_index(20, 50) == pytest.approx(18.4875, rel=1e-3)
 
     assert discomfort_index_effect_category(35) == 3
     assert discomfort_index_effect_category(28) == 2
