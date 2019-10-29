@@ -12,6 +12,7 @@ def discomfort_index(ta, rh):
 
     Note:
         [1]  Thom, E.C. (1959) "The Discomfort Index". Weatherwise, 12, 57-61.
+
     Args:
         ta: Air temperature [C]
         rh: Relative humidity  [%]
@@ -37,7 +38,7 @@ def discomfort_index_effect_category(di):
 
     Returns:
         category: An integer indicating the level of effect associated with the
-        discomfort index. Values range from -6 to +3.
+                  discomfort index. Values range from -6 to +3.
     """
     if di >= 30:
         category = 3
