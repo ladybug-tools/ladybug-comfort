@@ -20,7 +20,3 @@ def test_apparent_temperature():
     assert apparent_temperature_warning_category(5) == -4
     assert apparent_temperature_warning_category(0) == -5
     assert apparent_temperature_warning_category(-5) == -6
-
-
-
-

@@ -6,15 +6,18 @@ import math
 
 
 def apparent_temperature(ta, rh, ws):
-    """Calculate apparent temperature (AT) from air temperature, relative humidity, and wind speed.
+    """Calculate apparent temperature (AT) from air temperature, relative humidity,
+     and wind speed.
 
-    The Australian Apparent Temperature (AT) is a type of heat index that was used by the
-    Australian Bureau of Meteorology(ABM). It is based on a mathematical model published
-    by Robert G. Steadman in 1994 [1]. Two forms of the model are available, one including
-    radiation and one without. This algorithm uses the non-radiation version. [2]
+    The Australian Apparent Temperature (AT) is a type of heat index that was used by
+    the Australian Bureau of Meteorology (ABM). It is based on a mathematical model
+    published by Robert G. Steadman in 1994 [1]. Two forms of the model are available,
+    one including radiation and one without. This algorithm uses the non-radiation
+    version. [2]
 
     Note:
-        [1] Steadman, R. G. (1994). Norms of apparent temperature in Australia. Aust. Met. Mag, 43, 1-16.
+        [1] Steadman, R. G. (1994). Norms of apparent temperature in Australia. Aust.
+        Met. Mag, 43, 1-16.
         [2] Thermal Comfort observations. (n.d.). Retrieved May 20, 2016,
         from http://www.bom.gov.au/info/thermal_stress/
 
@@ -35,12 +38,12 @@ def apparent_temperature(ta, rh, ws):
 
 
 def apparent_temperature_warning_category(at):
-
-    """Get the category of apparent suggestion associated with a given apparent temperature (AT).
+    """Get the category of apparent suggestion associated with a given apparent
+    temperature (AT).
 
     Categories to indicate apparent suggestion:
-        4 = (>40 C) Minimal; sun protection required.
-        3 = (35-40 C) Minimal; sun protection as needed.
+        4 = (>40 C) Minimal clothing; sun protection required.
+        3 = (35-40 C) Minimal clothing; sun protection as needed.
         2 = (30-35 C) Short sleeve, shirt and shorts.
         1 = (25-30 C) Light undershirt.
         0 = (20-25 C) Cotton-type slacks (pants).
@@ -57,8 +60,8 @@ def apparent_temperature_warning_category(at):
     Returns:
         category: An integer indicating the level of warning associated with the
             heat index. Values are one of the following:
-                4 = Minimal.
-                3 = Minimal.
+                4 = Minimal clothing.
+                3 = Minimal clothing.
                 2 = Short sleeve, shirt and shorts.
                 1 = Light undershirt.
                 0 = Cotton-type slacks (pants).
@@ -72,23 +75,23 @@ def apparent_temperature_warning_category(at):
 
     if at > 40:
         category = 4
-    elif at > 35 and at <= 40:
+    elif at > 35:
         category = 3
-    elif at > 30 and at <= 35:
+    elif at > 30:
         category = 2
-    elif at > 25 and at <= 30:
+    elif at > 25:
         category = 1
-    elif at > 20 and at <= 25:
+    elif at > 20:
         category = 0
-    elif at > 15 and at <= 20:
+    elif at > 15:
         category = -1
-    elif at > 10 and at <= 15:
+    elif at > 10:
         category = -2
-    elif at > 5 and at <= 10:
+    elif at > 5:
         category = -3
-    elif at > 0 and at <= 5:
+    elif at > 0:
         category = -4
-    elif at > -5 and at <= 0:
+    elif at > -5:
         category = -5
     else:
         category = -6
