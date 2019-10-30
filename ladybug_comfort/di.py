@@ -8,7 +8,8 @@ def discomfort_index(ta, rh):
 
     Discomfort Index is derived from original work carried out by Eral C. Thom
     [1] which defined discomfort index based on dry-bulb and wet-bulb
-    temperature.
+    temperature. It is the human-perceived increase in air temperature due to
+    humidity increase.
 
     Note:
         [1]  Thom, E.C. (1959) "The Discomfort Index". Weatherwise, 12, 57-61.
@@ -29,16 +30,35 @@ def discomfort_index_effect_category(di):
     """Get the category of effect associated with a given discomfort index
     (DI).
 
-    Note:
-        The categories have been taken with reference to categories by Kyle,
-        1994 in Unger, 1999.
+    Each number (from -6 to 3) represents a certain DI thermal sensation 
+    category. With categories being the following:
+    -6 = Hyper-glacial
+    -5 = Glacial
+    -4 = Extremely cold
+    -3 = Very cold
+    -2 = Cold
+    -1 = Cool
+     0 = Comfortable
+     1 = Hot
+     2 = Very hot
+     3 = Torrid
 
     Args:
-        di: Discomfort Index
+        di: Discomfort Index [C]
 
     Returns:
         category: An integer indicating the level of effect associated with the
-                  discomfort index. Values range from -6 to +3.
+        discomfort index. Values are one of the following:
+                -6 = Hyper-glacial
+                -5 = Glacial
+                -4 = Extremely cold
+                -3 = Very cold
+                -2 = Cold
+                -1 = Cool
+                 0 = Comfortable
+                 1 = Hot
+                 2 = Very hot
+                 3 = Torrid
     """
     if di >= 30:
         category = 3
