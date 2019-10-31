@@ -6,11 +6,11 @@ import math
 
 
 def windchill_index(ta, ws):
-    """Calculate the Wind Chill Index (WCI) from air temperature  and wind
+    """Calculate the Wind Chill Index (WCI) from air temperature and wind
     speed.
 
     Wind Chill Index is derived from original work carried out by Gregorczuk[1].
-    It qualifies thermal sensations of man in wintertime. It is especially
+    It qualifies thermal sensations of a person in wintertime. It is especially
     useful at low and very low air temperature and at high wind speed.
 
     Note:
