@@ -1,10 +1,10 @@
 # coding utf-8
 import pytest
 
-from ladybug_comfort.windchill import windchill_index
-from ladybug_comfort.windchill import windchill_index_effect_category
-from ladybug_comfort.windchill import windchill_temp
-from ladybug_comfort.windchill import windchill_temp_effect_category
+from ladybug_comfort.wc import windchill_index
+from ladybug_comfort.wc import windchill_index_effect_category
+from ladybug_comfort.wc import windchill_temp
+from ladybug_comfort.wc import windchill_temp_effect_category
 
 
 def test_windchill_index():
