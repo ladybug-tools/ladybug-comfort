@@ -3,6 +3,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setuptools.setup(
     name="ladybug-comfort",
     use_scm_version=True,
@@ -15,9 +18,7 @@ setuptools.setup(
     url="https://github.com/ladybug-tools/ladybug-comfort",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=[
-        'lbt-ladybug>=0.1.0'
-    ],
+    install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.6",
