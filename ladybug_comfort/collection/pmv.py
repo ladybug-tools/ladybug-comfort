@@ -5,6 +5,7 @@ from __future__ import division
 from ..pmv import predicted_mean_vote
 from ..parameter.pmv import PMVParameter
 from .base import ComfortCollection
+from .solarcal import OutdoorSolarCal
 
 from ladybug._datacollectionbase import BaseCollection
 from ladybug.psychrometrics import humid_ratio_from_db_rh
@@ -63,6 +64,22 @@ class PMV(ComfortCollection):
         heat_loss_convection
     """
     _model = 'Predicted Mean Vote'
+    __slots__ = ('_air_temperature', '_rel_humidity', '_rad_temperature', '_air_speed',
+                 '_met_rate', '_clo_value', '_external_work', '_comfort_par',
+                 '_hr_calculated', '_hr_comfort_required', '_humidity_ratio',
+                 '_pmv', '_ppd', '_set', '_is_comfortable', '_thermal_condition',
+                 '_discomfort_reason', '_ta_adj', '_cooling_effect',
+                 '_heat_loss_conduction', '_heat_loss_sweating',
+                 '_heat_loss_latent_respiration', '_heat_loss_dry_respiration',
+                 '_heat_loss_radiation', '_heat_loss_convection', '_air_temperature_coll',
+                 '_rel_humidity_coll', '_rad_temperature_coll', '_air_speed_coll',
+                 '_met_rate_coll', '_clo_value_coll', '_external_work_coll',
+                 '_humidity_ratio_coll', '_pmv_coll', '_ppd_coll', '_set_coll',
+                 '_is_comfortable_coll', '_thermal_condition_coll',
+                 '_discomfort_reason_coll', '_ta_adj_coll', '_cooling_effect_coll',
+                 '_hl_conduction_coll', '_hl_sweating_coll',
+                 '_hl_latent_respiration_coll', '_hl_dry_respiration_coll',
+                 '_hl_radiation_coll', '_hl_convection_coll')
 
     def __init__(self, air_temperature, rel_humidity,
                  rad_temperature=None, air_speed=None,
@@ -156,6 +173,83 @@ class PMV(ComfortCollection):
 
         # calculate PMV
         self._calculate_pmv()
+
+    @classmethod
+    def from_epw(cls, epw, include_wind=True, include_sun=True, met_rate=None,
+                 clo_value=None, external_work=None, pmv_parameter=None):
+        """Get a PMV comfort object from the conditions within an EPW file.
+
+        Args:
+            epw: A ladybug EPW object from which the UTCI object will be created.
+            include_wind: Set to True to include the EPW wind speed in the calculation.
+                Setting to False will assume a condition that is shielded from wind
+                where the human expereinces a very low wind speed of 0.1 m/s. If
+                included, the wind speed at ground level will be assumed to be 2/3
+                times the meteorological wind speed in the EPW (usually at 10 meters).
+                This follows the standard assumed for UTCI. Default: True to include wind.
+            include_sun: Set to True to include the mean radiant temperature (MRT) delta
+                from both shortwave solar falling directly on people and long wave radiant
+                exchange with the sky. Setting to False will assume a shaded condition
+                with MRT being equal to the EPW dry bulb temperature. When set to True,
+                this calculation will assume no surrounding shade context, standing human
+                geometry, and a solar horizontal angle relative to front of person (SHARP)
+                of 135 degrees. A SHARP of 135 essentially assumes that a person typically
+                faces their side or back to the sun to avoid glare.
+                Default: True to include sun.
+            met_rate: Data Collection of metabolic rate in met or a single
+                metabolic rate value to be used for the whole analysis. Default: 2.4 met
+                (walking at 1 m/s, which is the same assumption used in UTCI).
+            clo_value: Data Collection of clothing values rate in clo or a single
+                clothing value to be used for the whole analysis. Dfault: 0.7 clo
+                (long sleeve shirt and pants).
+            external_work: Data Collection of external work in met or a single
+                external work value to be used for the whole analysis. Default: 0 met.
+            pmv_parameter: Optional PMVParameter object to specify parameters under
+                which conditions are considered acceptable. If None, default will
+                assume a PPD threshold of 10%, no absolute humidity constraints
+                and a still air threshold of 0.1 m/s.
+
+        Returns:
+            An object with data collections of the PMV results as properties.
+
+        Usage:
+
+            .. code-block:: python
+
+                from ladybug.epw import EPW
+                from ladybug_comfort.collection.pmv import PMV
+
+                epw_file_path = './tests/epw/chicago.epw'
+                epw = EPW(epw_file_path)
+                pmv = PMV.from_epw(epw, include_wind=True, include_sun=True)
+
+                # 12 values for the average SET in each month
+                print(pmv.standard_effective_temperature.average_monthly_per_hour().values)
+        """
+        # get wind input
+        if include_wind is True:
+            wind_speed = epw.wind_speed.duplicate()
+            for i, spd in enumerate(wind_speed):
+                wind_speed[i] = spd * (2 / 3)  # 2/3 is the conversion used by UTCI
+        else:
+            wind_speed = 0.1
+
+        # get the mrt input
+        if include_sun is True:
+            solarcal_obj = OutdoorSolarCal(epw.location, epw.direct_normal_radiation,
+                                           epw.diffuse_horizontal_radiation,
+                                           epw.horizontal_infrared_radiation_intensity,
+                                           epw.dry_bulb_temperature)
+            mrt = solarcal_obj.mean_radiant_temperature
+        else:
+            mrt = epw.dry_bulb_temperature
+
+        # check the met input
+        met_rate = 2.4 if met_rate is None else met_rate
+
+        # return the comfort object
+        return cls(epw.dry_bulb_temperature, epw.relative_humidity, mrt, wind_speed,
+                   met_rate, clo_value, external_work, pmv_parameter)
 
     def _calculate_humidity_ratio(self):
         """Compute the humidity ratio at each step of the Data Collection."""
@@ -436,7 +530,7 @@ class PMV(ComfortCollection):
     @property
     def heat_loss_sweating(self):
         """Data Collection of heat loss by sweating in [W]."""
-        return self._get_coll('_hl_sweating', self._heat_loss_sweating,
+        return self._get_coll('_hl_sweating_coll', self._heat_loss_sweating,
                               Power('Heat Loss From Sweating'), 'W')
 
     @property

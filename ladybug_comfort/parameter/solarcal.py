@@ -15,10 +15,11 @@ class SolarCalParameter(ComfortParameter):
         body_azimuth
         body_absorptivity
         body_emissivity
-        acceptable_postures
     """
     _model = 'SolarCal'
-    _acceptable_postures = ('standing', 'seated', 'supine')
+    POSTURES = ('standing', 'seated', 'supine')
+    __slots__ = ('_posture', '_sharp', '_body_azimuth', '_body_absorptivity',
+                 '_body_emissivity')
 
     def __init__(self, posture=None, sharp=None, body_azimuth=None,
                  body_absorptivity=None, body_emissivity=None):
@@ -51,8 +52,8 @@ class SolarCalParameter(ComfortParameter):
         if posture is not None:
             assert isinstance(posture, str), 'posture must be a string.'\
                 ' Got {}'.format(type(posture))
-            assert posture.lower() in self._acceptable_postures, 'posture {} is not '\
-                'acceptable. Choose from {}'.format(posture, self._acceptable_postures)
+            assert posture.lower() in self.POSTURES, 'posture {} is not '\
+                'acceptable. Choose from {}'.format(posture, self.POSTURES)
             self._posture = posture
         else:
             self._posture = 'standing'
@@ -126,11 +127,6 @@ class SolarCalParameter(ComfortParameter):
 
         Between 0 and 1. Typically 0.95."""
         return self._body_emissivity
-
-    @property
-    def acceptable_postures(self):
-        """Tuple with acceptable inputs for the posture property."""
-        return self._acceptable_postures
 
     def get_sharp(self, solar_azimuth):
         if self.sharp is not None:

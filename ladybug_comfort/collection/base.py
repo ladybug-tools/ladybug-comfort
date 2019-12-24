@@ -16,6 +16,7 @@ class ComfortCollection(object):
         percent_cold
     """
     _model = None
+    __slots__ = ('_calc_length', '_base_collection', '_input_collections')
 
     def __init__(self):
         self._calc_length = 0

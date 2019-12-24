@@ -5,6 +5,7 @@ from __future__ import division
 from ..utci import universal_thermal_climate_index
 from ..parameter.utci import UTCIParameter
 from .base import ComfortCollection
+from .solarcal import OutdoorSolarCal
 
 from ladybug._datacollectionbase import BaseCollection
 
@@ -51,6 +52,12 @@ class UTCI(ComfortCollection):
         percent_extreme_heat_stress
     """
     _model = 'Universal Thermal Climate Index'
+    __slots__ = ('_air_temperature', '_rel_humidity', '_rad_temperature', '_wind_speed',
+                 '_comfort_par', '_utci', '_thermal_category', '_air_temperature_coll',
+                 '_rel_humidity_coll', '_rad_temperature_coll', '_wind_speed_coll',
+                 '_utci_coll', '_is_comfortable_coll', '_thermal_condition_coll',
+                 '_five_point_coll', '_seven_point_coll', '_nine_point_coll',
+                 '_eleven_point_coll', '_original_category_coll')
 
     def __init__(self, air_temperature, rel_humidity, rad_temperature=None,
                  wind_speed=None, comfort_parameter=None):
@@ -109,6 +116,64 @@ class UTCI(ComfortCollection):
 
         # compute UTCI
         self._calculate_utci()
+    
+    @classmethod
+    def from_epw(cls, epw, include_wind=True, include_sun=True,
+                 utci_parameter=None):
+        """Get a UTCI comfort object from the conditions within an EPW file.
+
+        Args:
+            epw: A ladybug EPW object from which the UTCI object will be created.
+            include_wind: Set to True to include the EPW wind speed in the calculation.
+                Setting to False will assume a condition that is shielded from wind
+                where the human expereinces a very low wind speed of 0.1 m/s.
+                Default is True to include wind.
+            include_sun: Set to True to include the mean radiant temperature (MRT) delta
+                from both shortwave solar falling directly on people and long wave
+                radiant exchange with the sky. Setting to False will assume a shaded
+                condition with MRT being equal to the EPW dry bulb temperature. When
+                set to True, this calculation will assume no surrounding shade context,
+                standing human geometry, and a solar horizontal angle relative to
+                front of person (SHARP) of 135 degrees. A SHARP of 135 essentially
+                assumes that a person typically faces their side or back to the sun
+                to avoid glare. Default: True to include sun.
+            utci_parameter: Optional UTCIParameter object to specify parameters under
+                which conditions are considered acceptable. If None, default will
+                assume comfort thresholds consistent with those used by meterologists
+                to categorize outdoor conditions.
+
+        Returns:
+            A UTCI object with data collections of the results as properties.
+
+        Usage:
+
+            .. code-block:: python
+
+                from ladybug.epw import EPW
+                from ladybug_comfort.collection.utci import UTCI
+
+                epw_file_path = './tests/epw/chicago.epw'
+                epw = EPW(epw_file_path)
+                utci_exposed = UTCI.from_epw(epw, include_wind=True, include_sun=True)
+                utci_protected = UTCI.from_epw(epw, include_wind=False, include_sun=False)
+
+                print(utci_exposed.percent_neutral)  # comfortable % with sun + wind
+                print(utci_protected.percent_neutral)  # comfortable % without sun + wind
+        """
+        # Get wind and mrt inputs
+        wind_speed = epw.wind_speed if include_wind is True else 0.1
+        if include_sun is True:
+            solarcal_obj = OutdoorSolarCal(epw.location, epw.direct_normal_radiation,
+                                           epw.diffuse_horizontal_radiation,
+                                           epw.horizontal_infrared_radiation_intensity,
+                                           epw.dry_bulb_temperature)
+            mrt = solarcal_obj.mean_radiant_temperature
+        else:
+            mrt = epw.dry_bulb_temperature
+
+        # return the comfort object
+        return cls(epw.dry_bulb_temperature, epw.relative_humidity, mrt, wind_speed,
+                   utci_parameter)
 
     def _calculate_utci(self):
         """Compute UTCI for each step of the Data Collection."""

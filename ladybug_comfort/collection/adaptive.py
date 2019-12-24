@@ -41,6 +41,13 @@ class Adaptive(ComfortCollection):
         percent_cold
     """
     _model = 'Adaptive'
+    __slots__ = ('_op_temp', '_air_speed', '_comfort_par', '_t_out', '_prevail_temp',
+                 '_neutral_temperature', '_degrees_from_neutral', '_is_comfortable',
+                 '_thermal_condition', '_cooling_effect', '_is_comfortable_coll',
+                 '_thermal_condition_coll', '_op_temp_coll', '_air_speed_coll',
+                 '_comfort_par_coll', '_t_out_coll', '_prevail_temp_coll',
+                 '_neutral_temperature_coll', '_degrees_from_neutral_coll',
+                 '_cooling_effect_coll')
 
     def __init__(self, outdoor_temperature, operative_temperature, air_speed=None,
                  comfort_parameter=None):
@@ -261,7 +268,7 @@ class Adaptive(ComfortCollection):
 
 
 class PrevailingTemperature(object):
-    """Determine prevailing temperature from annual DataCollections of outdoor temperature.
+    """Get prevailing temperature from annual DataCollections of outdoor temperature.
 
     Properties:
         avg_month_or_running_mean
@@ -270,6 +277,8 @@ class PrevailingTemperature(object):
         monthly_prevailing_temperature
         monthly_per_hour_prevailing_temperature
     """
+    __slots__ = ('_t_out', '_head', '_avg_month', '_hourly_prevail',
+                 '_daily_prevail', '_monthly_prevail')
 
     def __init__(self, outdoor_temperature, avg_month=True):
         """Initialize an prevailing temperature object from DataCollections of inputs.

@@ -23,13 +23,12 @@ Ladybug-comfort is a Python library that adds thermal comfort functionalities to
 ```
 """Get the percentage of time outdoor conditions are comfortable with/without sun + wind"""
 from ladybug.epw import EPW
+from ladybug_comfort.collection.utci import UTCI
 
 epw_file_path = './tests/epw/chicago.epw'
 epw = EPW(epw_file_path)
-utci_obj_exposed = epw.get_universal_thermal_climate_index(
-  include_wind=True, include_sun=True)
-utci_obj_protected = epw.get_universal_thermal_climate_index(
-  include_wind=False, include_sun=False)
+utci_obj_exposed = UTCI.from_epw(epw, include_wind=True, include_sun=True)
+utci_obj_protected = UTCI.from_epw(epw, include_wind=False, include_sun=False)
 
 print(utci_obj_exposed.percent_neutral)  # comfortable percent of time with sun + wind
 print(utci_obj_protected.percent_neutral)  # comfortable percent of time without sun + wind
