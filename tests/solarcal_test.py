@@ -210,7 +210,7 @@ def test_solarcal_parameter_default():
     assert solarcal_par.body_azimuth is None
     assert solarcal_par.body_absorptivity == 0.7
     assert solarcal_par.body_emissivity == 0.95
-    solarcal_par.acceptable_postures  # test that the acceptable postures are there
+    solarcal_par.POSTURES  # test that the acceptable postures are there
 
 
 def test_solarcal_parameter_incorrect():

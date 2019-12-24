@@ -16,6 +16,7 @@ class PMVParameter(ComfortParameter):
         still_air_threshold
     """
     _model = 'Predicted Mean Vote'
+    __slots__ = ('_ppd_thresh', '_hr_upper', '_hr_lower', '_still_thresh')
 
     def __init__(self, ppd_comfort_thresh=None, humid_ratio_upper=None,
                  humid_ratio_lower=None, still_air_threshold=None):

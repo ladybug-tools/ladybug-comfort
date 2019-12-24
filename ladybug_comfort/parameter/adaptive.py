@@ -22,6 +22,8 @@ class AdaptiveParameter(ComfortParameter):
         minimum_operative
     """
     _model = 'Adaptive'
+    __slots__ = ('_standard', '_neutral_offset', '_prevail_method', '_air_speed_method',
+                 '_cold_prevail_temp_limit', '_conditioning', '_min_operative')
 
     def __init__(self, ashrae55_or_en15251=None, neutral_offset=None,
                  avg_month_or_running_mean=None, discrete_or_continuous_air_speed=None,

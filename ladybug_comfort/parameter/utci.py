@@ -21,6 +21,10 @@ class UTCIParameter(ComfortParameter):
         extreme_heat_thresh
     """
     _model = 'Universal Thermal Climate Index'
+    __slots__ = ('_cold_thresh', '_heat_thresh', '_extreme_cold_thresh',
+                 '_very_strong_cold_thresh', '_strong_cold_thresh',
+                 '_moderate_cold_thresh', '_moderate_heat_thresh', '_strong_heat_thresh',
+                 '_very_strong_heat_thresh', '_extreme_heat_thresh')
 
     def __init__(self, cold_thresh=None, heat_thresh=None,
                  extreme_cold_thresh=None, very_strong_cold_thresh=None,

@@ -5,6 +5,7 @@
 class ComfortParameter(object):
     """Thermal comfort parameter base class."""
     _model = None
+    __slots__ = ()
 
     @property
     def comfort_model(self):

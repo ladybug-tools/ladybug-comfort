@@ -1,7 +1,7 @@
 # coding utf-8
 import pytest
 
-from ladybug_comfort.apparent import apparent_temperature, apparent_temperature_warning_category
+from ladybug_comfort.at import apparent_temperature, apparent_temperature_warning_category
 
 
 def test_apparent_temperature():
