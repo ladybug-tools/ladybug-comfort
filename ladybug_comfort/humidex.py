@@ -9,23 +9,24 @@ def humidex(ta, tdp):
     """Calculate Humidex from air temperature and the Dew Point.
 
     The Humidex is a Canadian innovation first used in 1965.
-        It combines the temperature and humidity into one number to reflect the
-        perceived temperature.
-        Because it takes into account the two most important
-        factors that affect summer comfort, it can be a better
-        measure of how stifling the air feels than either temperature or
-        humidity alone. [1]
+    It combines the temperature and humidity into one number to reflect the
+    perceived temperature.
+    Because it takes into account the two most important
+    factors that affect summer comfort, it can be a better
+    measure of how stifling the air feels than either temperature or
+    humidity alone. [1]
 
     Air temperatures below 20c will give a generally meaningless result as the Humidex
-        only describes perceived heat.
+    only describes perceived heat.
 
     The Humidex is a "nominally dimensionless quantity" but is generally
-        recognized by the public as equivalent to the degree Celsius [2]
+    recognized by the public as equivalent to the degree Celsius [2]
 
     Note:
         [1] Environment Canada (October 2017). "Warm Season Weather Hazards".
-            "https://www.canada.ca/en/environment-climate-change/services/
-               seasonal-weather-hazards/warm-season-weather-hazards.html#toc7"
+            https://www.canada.ca/en/environment-climate-change/services/seasonal\
+-weather-hazards/warm-season-weather-hazards.html#toc7
+
         [2] https://en.wikipedia.org/wiki/Humidex
 
     Args:
@@ -33,7 +34,7 @@ def humidex(ta, tdp):
         tdp: The Dew Point [C]
 
     Returns:
-        float: Humidex
+        float -- Humidex
     """
 
     dew_point_k = tdp + 273.15  # celsius to kelvin
@@ -50,20 +51,21 @@ def humidex_degree_of_comfort(humidex):
 
     Degrees of comfort are provided by the Government of Canada and are indicated
     here with the following integer values:
-        0 = No discomfort (Humidex of 19 and below)
-        1 = Little discomfort (Humidex between 20 - 29)
-        2 = Some discomfort (Humidex between 30 - 39)
-        3 = Great discomfort; avoid exertion (Humidex between 40 - 45)
-        4 = Dangerous; heat stroke possible (Humidex of 45 and above)
 
-    See: https://www.canada.ca/en/environment-climate-change/services/
-            seasonal-weather-hazards/warm-season-weather-hazards.html#toc7
+    *   0 = No discomfort (Humidex of 19 and below)
+    *   1 = Little discomfort (Humidex between 20 - 29)
+    *   2 = Some discomfort (Humidex between 30 - 39)
+    *   3 = Great discomfort; avoid exertion (Humidex between 40 - 45)
+    *   4 = Dangerous; heat stroke possible (Humidex of 45 and above)
+
+    See: https://www.canada.ca/en/environment-climate-change/services/seasonal-\
+weather-hazards/warm-season-weather-hazards.html#toc7
 
     Args:
         humidex: Humidex
 
     Returns:
-        int: Degree of Comfort
+        int -- Degree of Comfort
     """
 
     if humidex < 20.0:

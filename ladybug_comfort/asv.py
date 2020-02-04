@@ -24,7 +24,7 @@ def actual_sensation_vote(ta, ws, rh, sr):
         sr: Solar radiation [Wh/m2]
 
     Returns:
-        asv: Actual sensation vote [unitless]
+        asv -- Actual sensation vote [unitless]
     """
     asv = 0.049 * ta + 0.001 * sr - 0.051 * ws + 0.014 * rh - 2.079
 
@@ -37,23 +37,24 @@ def actual_sensation_vote_effect_category(asv):
 
     Each number (from -2 to 2) represents a certain ASV thermal sensation
     category. With categories being the following:
-        -2 = Very cold
-        -1 = Cold
-         0 = Comfort
-         1 = Hot
-         2 = Very Hot
+    *   -2 = Very cold
+    *   -1 = Cold
+    *   0 = Comfort
+    *   1 = Hot
+    *   2 = Very Hot
 
     Args:
-        asv: Actual Sensation Vote [unitless]
+        asv -- Actual Sensation Vote [unitless]
 
     Returns:
-        category: An integer indicating the level of effect associated with the
+        category -- An integer indicating the level of effect associated with the
         thermal sensation. Values are one of the following:
-                -2 = Very cold
-                -1 = Cold
-                 0 = Comfort
-                 1 = Hot
-                 2 = Very Hot
+
+        -   -2 = Very cold
+        -   -1 = Cold
+        -   0 = Comfort
+        -   1 = Hot
+        -   2 = Very Hot
     """
     if asv > 2:
         category = 2

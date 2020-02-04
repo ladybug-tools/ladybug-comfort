@@ -19,7 +19,7 @@ def discomfort_index(ta, rh):
         rh: Relative humidity  [%]
 
     Returns:
-        di: Discomfort index [C]
+        di -- Discomfort index [C]
     """
     di = ta - (0.55 - 0.0055 * rh) * (ta - 14.5)
 
@@ -30,35 +30,37 @@ def discomfort_index_effect_category(di):
     """Get the category of effect associated with a given discomfort index
     (DI).
 
-    Each number (from -6 to 3) represents a certain DI thermal sensation 
+    Each number (from -6 to 3) represents a certain DI thermal sensation
     category. With categories being the following:
-    -6 = Hyper-glacial
-    -5 = Glacial
-    -4 = Extremely cold
-    -3 = Very cold
-    -2 = Cold
-    -1 = Cool
-     0 = Comfortable
-     1 = Hot
-     2 = Very hot
-     3 = Torrid
+
+    *   -6 = Hyper-glacial
+    *   -5 = Glacial
+    *   -4 = Extremely cold
+    *   -3 = Very cold
+    *   -2 = Cold
+    *   -1 = Cool
+    *   0 = Comfortable
+    *   1 = Hot
+    *   2 = Very hot
+    *   3 = Torrid
 
     Args:
         di: Discomfort Index [C]
 
     Returns:
-        category: An integer indicating the level of effect associated with the
+        category -- An integer indicating the level of effect associated with the
         discomfort index. Values are one of the following:
-                -6 = Hyper-glacial
-                -5 = Glacial
-                -4 = Extremely cold
-                -3 = Very cold
-                -2 = Cold
-                -1 = Cool
-                 0 = Comfortable
-                 1 = Hot
-                 2 = Very hot
-                 3 = Torrid
+
+        -   -6 = Hyper-glacial
+        -   -5 = Glacial
+        -   -4 = Extremely cold
+        -   -3 = Very cold
+        -   -2 = Cold
+        -   -1 = Cool
+        -   0 = Comfortable
+        -   1 = Hot
+        -   2 = Very hot
+        -   3 = Torrid
     """
     if di >= 30:
         category = 3

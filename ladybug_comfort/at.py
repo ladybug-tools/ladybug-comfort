@@ -27,7 +27,7 @@ def apparent_temperature(ta, rh, ws):
         ws: Wind speed (km /h)
 
     Returns:
-        at: Apparent Temperature[C]
+        at -- Apparent Temperature[C]
     """
 
     # e =  Water vapour pressure (hPa) [humidity]
@@ -42,35 +42,37 @@ def apparent_temperature_warning_category(at):
     temperature (AT).
 
     Categories to indicate apparent suggestion:
-        4 = (>40 C) Minimal clothing; sun protection required.
-        3 = (35-40 C) Minimal clothing; sun protection as needed.
-        2 = (30-35 C) Short sleeve, shirt and shorts.
-        1 = (25-30 C) Light undershirt.
-        0 = (20-25 C) Cotton-type slacks (pants).
-        -1 = (15-20 C) Normal office wear.
-        -2 = (10-15 C) Thin or sleeveless sweater.
-        -3 = (5-10 C) Sweater. Thicker underwear.
-        -4 = (0-5 C) Coat and sweater.
-        -5 = (-5-0 C) Overcoat. Wind protection as needed.
-        -6 = (<-5 C) Overcoat. Head insulation. Heavier footwear.
+
+    *   4 = (>40 C) Minimal clothing; sun protection required.
+    *   3 = (35-40 C) Minimal clothing; sun protection as needed.
+    *   2 = (30-35 C) Short sleeve, shirt and shorts.
+    *   1 = (25-30 C) Light undershirt.
+    *   0 = (20-25 C) Cotton-type slacks (pants).
+    *   -1 = (15-20 C) Normal office wear.
+    *   -2 = (10-15 C) Thin or sleeveless sweater.
+    *   -3 = (5-10 C) Sweater. Thicker underwear.
+    *   -4 = (0-5 C) Coat and sweater.
+    *   -5 = (-5-0 C) Overcoat. Wind protection as needed.
+    *   -6 = (<-5 C) Overcoat. Head insulation. Heavier footwear.
 
     Args:
         at: Apparent temperature [C]
 
     Returns:
-        category: An integer indicating the level of warning associated with the
-            heat index. Values are one of the following:
-                4 = Minimal clothing.
-                3 = Minimal clothing.
-                2 = Short sleeve, shirt and shorts.
-                1 = Light undershirt.
-                0 = Cotton-type slacks (pants).
-                -1 = Normal office wear.
-                -2 = Thin or sleeveless sweater.
-                -3 = Sweater. Thicker underwear.
-                -4 = Coat and sweater.
-                -5 = Overcoat.
-                -6 = Overcoat.
+        category -- An integer indicating the level of warning associated with the
+        heat index. Values are one of the following:
+
+        -   4 = Minimal clothing.
+        -   3 = Minimal clothing.
+        -   2 = Short sleeve, shirt and shorts.
+        -   1 = Light undershirt.
+        -   0 = Cotton-type slacks (pants).
+        -   -1 = Normal office wear.
+        -   -2 = Thin or sleeveless sweater.
+        -   -3 = Sweater. Thicker underwear.
+        -   -4 = Coat and sweater.
+        -   -5 = Overcoat.
+        -   -6 = Overcoat.
     """
 
     if at > 40:

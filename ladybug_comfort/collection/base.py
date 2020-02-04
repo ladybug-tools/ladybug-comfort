@@ -9,11 +9,11 @@ class ComfortCollection(object):
     """Base class for all thermal comfort collections.
 
     Properties:
-        comfort_model
-        calc_length
-        percent_neutral
-        percent_hot
-        percent_cold
+        *    comfort_model
+        *    calc_length
+        *    percent_neutral
+        *    percent_hot
+        *    percent_cold
     """
     _model = None
     __slots__ = ('_calc_length', '_base_collection', '_input_collections')

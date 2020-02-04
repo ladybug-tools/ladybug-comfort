@@ -29,7 +29,7 @@ def heat_index(ta, rh):
         rh: Relative humidity [%]
 
     Returns:
-        hi: Heat index [C]
+        hi -- Heat index [C]
     """
     tf = ta * 9. / 5. + 32.  # convert to fahrenheit
 
@@ -61,26 +61,28 @@ def heat_index_warning_category(hi):
 
     Categories are used by the US National Weather Service (NWS) and National
     Oceanic and Atmospheric Administration (NOAA) to issue the following warnings:
-        0 = No Warning. Satisfactory temperature. Can continue with activity.
-        1 = Caution: Fatigue is possible with prolonged exposure and activity.
-            Continuing activity could result in heat cramps.
-        2 = Extreme caution: Heat cramps and heat exhaustion are possible.
-            Continuing activity could result in heat stroke.
-        3 = Danger: Heat cramps and heat exhaustion are likely.
-            Heat stroke is probable with continued activity.
-        4 = Extreme danger: Heat stroke is imminent.
+
+    *   0 = No Warning. Satisfactory temperature. Can continue with activity.
+    *   1 = Caution: Fatigue is possible with prolonged exposure and activity.
+        Continuing activity could result in heat cramps.
+    *   2 = Extreme caution: Heat cramps and heat exhaustion are possible.
+        Continuing activity could result in heat stroke.
+    *   3 = Danger: Heat cramps and heat exhaustion are likely.
+        Heat stroke is probable with continued activity.
+    *   4 = Extreme danger: Heat stroke is imminent.
 
     Args:
         hi: Heat index [C]
 
     Returns:
-        category: An integer indicating the level of warning associated with the
-            heat index. Values are one of the following:
-                0 = No Warning
-                1 = Caution
-                2 = Extreme Caution
-                3 = Danger
-                4 = Extreme Danger
+        category -- An integer indicating the level of warning associated with the
+        heat index. Values are one of the following:
+
+        -   0 = No Warning
+        -   1 = Caution
+        -   2 = Extreme Caution
+        -   3 = Danger
+        -   4 = Extreme Danger
     """
     if hi < 26.6:
         category = 0

@@ -14,10 +14,11 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
     UTCI is an interational standard for outdoor temperature sensation
     (aka. "feels-like" temperature) that attempts to fill the
     follwoing requirements:
-        1)	Thermo-physiological significance in the whole range of heat
-            exchange conditions of existing thermal environments
-        2)	Valid in all climates, seasons, and scales
-        3)	Useful for key applications in human biometeorology.
+
+    1)	Thermo-physiological significance in the whole range of heat
+        exchange conditions of existing thermal environments
+    2)	Valid in all climates, seasons, and scales
+    3)	Useful for key applications in human biometeorology.
 
     This function here is a Python version of the original UTCI_approx
     application written in Fortran. Version a 0.002, October 2009
@@ -40,8 +41,8 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
         rh: Relative humidity [%]
 
     Returns:
-        UTCI_approx: The Universal Thermal Climate Index (UTCI) for the input
-            conditions as approximated by a 4-D polynomial.
+        UTCI_approx -- The Universal Thermal Climate Index (UTCI) for the input
+        conditions as approximated by a 4-D polynomial.
     """
     # set upper and lower limits of air velocity according to Fiala model scenarios
     vel = 0.5 if vel < 0.5 else vel
@@ -301,7 +302,11 @@ def calc_missing_utci_input(target_utci, utci_inputs,
             temperature that meets the target_utci. In this case, both 'ta' and 'tr'
             in the output dictionary will be the same.
             Example (solving for relative humidity):
-                `{'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None}`
+
+         .. code-block:: python
+
+            {'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None}
+
         low_bound: The lowest possible value of the missing input you are tying to
             find. Putting in a good value here will help the model converge to a
             solution faster.
@@ -311,9 +316,9 @@ def calc_missing_utci_input(target_utci, utci_inputs,
         tolerance: The acceptable error in the target_utci. The default is set to 0.001
 
     Returns:
-        complete_utci_inputs: The utci_inputs dictionary but with values for all inputs.
-            The missing input to the UTCI model will be filled by the value
-            that returns the target_utci.
+        complete_utci_inputs -- The utci_inputs dictionary but with values for
+        all inputs. The missing input to the UTCI model will be filled by the value
+        that returns the target_utci.
     """
     assert len(utci_inputs.keys()) == 4, \
         'utci_inputs must have 4 keys. Got {}.'.format(len(utci_inputs.keys()))

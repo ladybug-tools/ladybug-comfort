@@ -43,21 +43,23 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
             Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.
 
     Returns:
-        result: A dictionary containing results of the PMV model with the following keys:
-            pmv : Predicted mean vote (PMV)
-            ppd : Percent predicted dissatisfied (PPD) [%]
-            se_temp: Standard effective temperature (SET) [C]
-            ta_adj: Air temperature adjusted for air speed [C]
-            ce : Cooling effect. The difference between the air temperature
-                and the adjusted air temperature [C]
-            heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
-                The dictionary items are as follows:
-                    'cond': heat loss by conduction [W]
-                    'sweat': heat loss by sweating [W]
-                    'res_l': heat loss by latent respiration [W]
-                    'res_s' heat loss by dry respiration [W]
-                    'rad': heat loss by radiation [W]
-                    'conv' heat loss by convection [W]
+        A dictionary containing results of the PMV model with the following keys:
+
+        -   pmv : Predicted mean vote (PMV)
+        -   ppd : Percent predicted dissatisfied (PPD) [%]
+        -   se_temp: Standard effective temperature (SET) [C]
+        -   ta_adj: Air temperature adjusted for air speed [C]
+        -   ce : Cooling effect. The difference between the air temperature
+            and the adjusted air temperature [C]
+        -   heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
+            The dictionary items are as follows:
+
+            -   'cond': heat loss by conduction [W]
+            -   'sweat': heat loss by sweating [W]
+            -   'res_l': heat loss by latent respiration [W]
+            -   'res_s' heat loss by dry respiration [W]
+            -   'rad': heat loss by radiation [W]
+            -   'conv' heat loss by convection [W]
     """
     se_temp = pierce_set(ta, tr, vel, rh, met, clo, wme)
 
@@ -120,16 +122,19 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
         wme: External work [met], normally around 0 when seated
 
     Returns:
-        pmv: Predicted mean vote (PMV)
-        ppd: Percentage of people dissatisfied (PPD) [%]
-        heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
+        A tuple with three elements
+
+        -   pmv: Predicted mean vote (PMV)
+        -   ppd: Percentage of people dissatisfied (PPD) [%]
+        -   heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
             The dictionary items are as follows:
-                'cond': heat loss by conduction [W]
-                'sweat': heat loss by sweating [W]
-                'res_l': heat loss by latent respiration [W]
-                'res_s' heat loss by dry respiration [W]
-                'rad': heat loss by radiation [W]
-                'conv' heat loss by convection [W]
+
+            -   'cond': heat loss by conduction [W]
+            -   'sweat': heat loss by sweating [W]
+            -   'res_l': heat loss by latent respiration [W]
+            -   'res_s' heat loss by dry respiration [W]
+            -   'rad': heat loss by radiation [W]
+            -   'conv' heat loss by convection [W]
     """
 
     pa = rh * 10. * math.exp(16.6536 - 4030.183 / (ta + 235.))
@@ -226,7 +231,7 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
         wme: External work [met], normally around 0 when seated
 
     Returns:
-        se_temp: Standard effective temperature [C]
+        se_temp -- Standard effective temperature [C]
     """
 
     # Key initial variables.
@@ -430,7 +435,7 @@ def ppd_from_pmv(pmv):
         pmv: The predicted mean vote (PMV) for which you want to know the PPD.
 
     Returns:
-        ppd: The percentage of people dissatisfied (PPD) for the input PMV.
+        ppd -- The percentage of people dissatisfied (PPD) for the input PMV.
     """
     return 100.0 - 95.0 * math.exp(-0.03353 * pow(pmv, 4.0) - 0.2179 * pow(pmv, 2.0))
 
@@ -447,8 +452,10 @@ def pmv_from_ppd(ppd, pmv_up_bound=3, ppd_tolerance=0.001):
         ppd_tolerance: The acceptable error in meeting the target PPD.  Default = 0.001.
 
     Returns:
-        pmv_lower: The lower (cold) PMV value that will produce the input ppd.
-        pmv_upper: The upper (hot) PMV value that will produce the input ppd.
+        A tuple with two elements
+
+        -   pmv_lower: The lower (cold) PMV value that will produce the input ppd.
+        -   pmv_upper: The upper (hot) PMV value that will produce the input ppd.
     """
     assert ppd > 5 and ppd < 100, \
         'PPD value {}% is outside acceptable limits of the PMV model.'.format(ppd)
@@ -474,7 +481,7 @@ def ppd_threshold_from_comfort_class(comf_class):
             Choose from: 1, 2, 3 (the higher the class, the greater the PPD threshold)
 
     Returns:
-        ppd_thresh : Acceptable PPD threshold.
+        ppd_thresh -- Acceptable PPD threshold.
     """
     if comf_class == 1:
         ppd_thresh = 6
@@ -508,8 +515,11 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
             temperature that meets the target_pmv. In this case, both 'ta' and 'tr'
             in the output dictionary will be the same.
             Example (solving for relative humidity):
-                `{'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None,
-                'met': 1.2, 'clo': 0.75, 'wme': 0}`
+
+            .. code-block:: python
+
+                {'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None,'met': 1.2, 'clo': 0.75, 'wme': 0}
+
         low_bound: The lowest possible value of the missing input you are tying to
             find. Putting in a good value here will help the model converge to a
             solution faster.
@@ -523,7 +533,7 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
             Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.
 
     Returns:
-        complete_pmv_inputs: The pmv_inputs dictionary but with values for all inputs.
+        complete_pmv_inputs -- The pmv_inputs dictionary but with values for all inputs.
             The missing input to the PMV model will be filled by the value
             that returns the target_pmv.
     """

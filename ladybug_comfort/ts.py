@@ -26,7 +26,7 @@ def thermal_sensation(ta, ws, rh, sr, tground):
         tground: Ground temperature [C]
 
     Returns:
-        ts: Thermal sensation [unitless]
+        ts -- Thermal sensation [unitless]
     """
     ts = 1.7 + 0.1118 * ta + 0.0019 * sr - 0.322 * ws - 0.0073 * rh + 0.0054 \
         * tground
@@ -40,27 +40,29 @@ def thermal_sensation_effect_category(ts):
 
     Each number (from -3 to 3) represents a certain TS thermal sensation
     category. With categories being the following:
-    -3 = Very cold
-    -2 = Quite cold
-    -1 = Cold
-     0 = Comfort
-     1 = Hot
-     2 = Quite Hot
-     3 = Very hot
+
+    *   -3 = Very cold
+    *   -2 = Quite cold
+    *   -1 = Cold
+    *    0 = Comfort
+    *    1 = Hot
+    *    2 = Quite Hot
+    *    3 = Very hot
 
     Args:
         ts: Thermal Sensation [unitless]
 
     Returns:
-        category: An integer indicating the level of effect associated with the
+        category -- An integer indicating the level of effect associated with the
         thermal sensation. Values are one of the following:
-                -3 = Very cold
-                -2 = Quite cold
-                -1 = Cold
-                 0 = Comfort
-                 1 = Hot
-                 2 = Quite Hot
-                 3 = Very hot
+
+        -   -3 = Very cold
+        -   -2 = Quite cold
+        -   -1 = Cold
+        -    0 = Comfort
+        -    1 = Hot
+        -    2 = Quite Hot
+        -    3 = Very hot
     """
     if ts >= 7:
         category = 3
