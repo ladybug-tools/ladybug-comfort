@@ -21,35 +21,51 @@ from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, 
 class UTCI(ComfortCollection):
     """UTCI comfort DataCollection object.
 
+    Args:
+        air_temperature: Data Collection of air temperature values in Celcius.
+        rel_humidity: Data Collection of relative humidity values in % or a
+            single relative humdity value to be used for the whole analysis.
+        rad_temperature: Data Collection of mean radiant temperature (MRT)
+            values in degrees Celcius or a single MRT value to be used for the whole
+            analysis. If None, this will be the same as the air_temperature.
+        wind_speed: Data Collection of meteorological wind speed values in m/s
+            (measured 10 m above the ground) or a single wind speed value to be
+            used for the whole analysis. If None, this will default to a very
+            low wind speed of 0.1 m/s.
+        comfort_parameter: Optional UTCIParameter object to specify parameters under
+            which conditions are considered acceptable. If None, default will
+            assume comfort thresholds consistent with those used by meterologists
+            to categorize outdoor conditions.
+
     Properties:
-        air_temperature
-        rad_temperature
-        air_speed
-        rel_humidity
-        comfort_parameter
-        universal_thermal_climate_index
-        is_comfortable
-        thermal_condition
-        thermal_condition_five_point
-        thermal_condition_seven_point
-        thermal_condition_nine_point
-        thermal_condition_eleven_point
-        original_utci_category
-        percent_comfortable
-        percent_uncomfortable
-        percent_neutral
-        percent_hot
-        percent_cold
-        percent_extreme_cold_stress
-        percent_very_strong_cold_stress
-        percent_strong_cold_stress
-        percent_moderate_cold_stress
-        percent_slight_cold_stress
-        percent_slight_heat_stress
-        percent_moderate_heat_stress
-        percent_strong_heat_stress
-        percent_very_strong_heat_stress
-        percent_extreme_heat_stress
+        *    air_temperature
+        *    rad_temperature
+        *    air_speed
+        *    rel_humidity
+        *    comfort_parameter
+        *    universal_thermal_climate_index
+        *    is_comfortable
+        *    thermal_condition
+        *    thermal_condition_five_point
+        *    thermal_condition_seven_point
+        *    thermal_condition_nine_point
+        *    thermal_condition_eleven_point
+        *    original_utci_category
+        *    percent_comfortable
+        *    percent_uncomfortable
+        *    percent_neutral
+        *    percent_hot
+        *    percent_cold
+        *    percent_extreme_cold_stress
+        *    percent_very_strong_cold_stress
+        *    percent_strong_cold_stress
+        *    percent_moderate_cold_stress
+        *    percent_slight_cold_stress
+        *    percent_slight_heat_stress
+        *    percent_moderate_heat_stress
+        *    percent_strong_heat_stress
+        *    percent_very_strong_heat_stress
+        *    percent_extreme_heat_stress
     """
     _model = 'Universal Thermal Climate Index'
     __slots__ = ('_air_temperature', '_rel_humidity', '_rad_temperature', '_wind_speed',
@@ -62,22 +78,6 @@ class UTCI(ComfortCollection):
     def __init__(self, air_temperature, rel_humidity, rad_temperature=None,
                  wind_speed=None, comfort_parameter=None):
         """Initialize a UTCI comfort object from DataCollections of UTCI inputs.
-
-        Args:
-            air_temperature: Data Collection of air temperature values in Celcius.
-            rel_humidity: Data Collection of relative humidity values in % or a
-                single relative humdity value to be used for the whole analysis.
-            rad_temperature: Data Collection of mean radiant temperature (MRT)
-                values in degrees Celcius or a single MRT value to be used for the whole
-                analysis. If None, this will be the same as the air_temperature.
-            wind_speed: Data Collection of meteorological wind speed values in m/s
-                (measured 10 m above the ground) or a single wind speed value to be
-                used for the whole analysis. If None, this will default to a very
-                low wind speed of 0.1 m/s.
-            comfort_parameter: Optional UTCIParameter object to specify parameters under
-                which conditions are considered acceptable. If None, default will
-                assume comfort thresholds consistent with those used by meterologists
-                to categorize outdoor conditions.
         """
         # set up the object using air temperature as a base
         self._check_datacoll(air_temperature, Temperature, 'C', 'air_temperature')
@@ -116,7 +116,7 @@ class UTCI(ComfortCollection):
 
         # compute UTCI
         self._calculate_utci()
-    
+
     @classmethod
     def from_epw(cls, epw, include_wind=True, include_sun=True,
                  utci_parameter=None):
@@ -147,18 +147,18 @@ class UTCI(ComfortCollection):
 
         Usage:
 
-            .. code-block:: python
+        .. code-block:: python
 
-                from ladybug.epw import EPW
-                from ladybug_comfort.collection.utci import UTCI
+            from ladybug.epw import EPW
+            from ladybug_comfort.collection.utci import UTCI
 
-                epw_file_path = './tests/epw/chicago.epw'
-                epw = EPW(epw_file_path)
-                utci_exposed = UTCI.from_epw(epw, include_wind=True, include_sun=True)
-                utci_protected = UTCI.from_epw(epw, include_wind=False, include_sun=False)
+            epw_file_path = './tests/epw/chicago.epw'
+            epw = EPW(epw_file_path)
+            utci_exposed = UTCI.from_epw(epw, include_wind=True, include_sun=True)
+            utci_protected = UTCI.from_epw(epw, include_wind=False, include_sun=False)
 
-                print(utci_exposed.percent_neutral)  # comfortable % with sun + wind
-                print(utci_protected.percent_neutral)  # comfortable % without sun + wind
+            print(utci_exposed.percent_neutral)  # comfortable % with sun + wind
+            print(utci_protected.percent_neutral)  # comfortable % without sun + wind
         """
         # Get wind and mrt inputs
         wind_speed = epw.wind_speed if include_wind is True else 0.1
@@ -228,8 +228,9 @@ class UTCI(ComfortCollection):
         acceptable according to the assigned comfort_parameter.
 
         Values are one of the following:
-            0 = uncomfortable
-            1 = comfortable
+
+        *    0 = uncomfortable
+        *    1 = comfortable
         """
         return self._get_coll('_is_comfortable_coll', self._comf_val_funct,
                               ThermalComfort, 'condition')
@@ -240,9 +241,10 @@ class UTCI(ComfortCollection):
         according to the assigned comfort_parameter.
 
         Values are one of the following:
-            -1 = cold
-             0 = netural
-            +1 = hot
+
+        *    -1 = cold
+        *     0 = netural
+        *    +1 = hot
         """
         return self._get_coll('_thermal_condition_coll', self._condit_val_funct,
                               ThermalCondition, 'condition')
@@ -252,11 +254,12 @@ class UTCI(ComfortCollection):
         """Data Collection of integers noting the thermal status on a five-point scale.
 
         Values are one of the following:
-            -2 = strong/extreme cold stress
-            -1 = moderate cold stress
-             0 = no thermal stress
-            +1 = moderate heat stress
-            +2 = strong/extreme heat stress
+
+        *    -2 = strong/extreme cold stress
+        *    -1 = moderate cold stress
+        *     0 = no thermal stress
+        *    +1 = moderate heat stress
+        *    +2 = strong/extreme heat stress
         """
         return self._get_coll('_five_point_coll', self._five_pt_funct,
                               ThermalConditionFivePoint, 'condition')
@@ -266,13 +269,14 @@ class UTCI(ComfortCollection):
         """Data Collection of integers noting the thermal status on a seven-point scale.
 
         Values are one of the following:
-            -3 = very strong/extreme cold stress
-            -2 = strong cold stress
-            -1 = moderate cold stress
-             0 = no thermal stress
-            +1 = moderate heat stress
-            +2 = strong heat stress
-            +3 = very strong/extreme heat stress
+
+        *    -3 = very strong/extreme cold stress
+        *    -2 = strong cold stress
+        *    -1 = moderate cold stress
+        *     0 = no thermal stress
+        *    +1 = moderate heat stress
+        *    +2 = strong heat stress
+        *    +3 = very strong/extreme heat stress
         """
         return self._get_coll('_seven_point_coll', self._seven_pt_funct,
                               ThermalConditionSevenPoint, 'condition')
@@ -282,15 +286,16 @@ class UTCI(ComfortCollection):
         """Data Collection of integers noting the thermal status on a nine-point scale.
 
         Values are one of the following:
-            -4 = very strong/extreme cold stress
-            -3 = strong cold stress
-            -2 = moderate cold stress
-            -1 = slight cold stress
-             0 = no thermal stress
-            +1 = slight heat stress
-            +2 = moderate heat stress
-            +3 = strong heat stress
-            +4 = very strong/extreme heat stress
+
+        *    -4 = very strong/extreme cold stress
+        *    -3 = strong cold stress
+        *    -2 = moderate cold stress
+        *    -1 = slight cold stress
+        *     0 = no thermal stress
+        *    +1 = slight heat stress
+        *    +2 = moderate heat stress
+        *    +3 = strong heat stress
+        *    +4 = very strong/extreme heat stress
         """
         return self._get_coll('_nine_point_coll', self._nine_pt_funct,
                               ThermalConditionNinePoint, 'condition')
@@ -300,17 +305,18 @@ class UTCI(ComfortCollection):
         """Data Collection of integers noting the thermal status on an eleven-point scale.
 
         Values are one of the following:
-            -5 = extreme cold stress
-            -4 = very strong cold stress
-            -3 = strong cold stress
-            -2 = moderate cold stress
-            -1 = slight cold stress
-             0 = no thermal stress
-            +1 = slight heat stress
-            +2 = moderate heat stress
-            +3 = strong heat stress
-            +4 = very strong heat stress
-            +5 = extreme heat stress
+
+        *    -5 = extreme cold stress
+        *    -4 = very strong cold stress
+        *    -3 = strong cold stress
+        *    -2 = moderate cold stress
+        *    -1 = slight cold stress
+        *     0 = no thermal stress
+        *    +1 = slight heat stress
+        *    +2 = moderate heat stress
+        *    +3 = strong heat stress
+        *    +4 = very strong heat stress
+        *    +5 = extreme heat stress
         """
         return self._get_coll('_eleven_point_coll', self._thermal_category,
                               ThermalConditionElevenPoint, 'condition')
@@ -323,16 +329,17 @@ class UTCI(ComfortCollection):
         Journal of Thermal Biology 28, 75-106
 
         Values are one of the following:
-            0 = extreme cold stress
-            1 = very strong cold stress
-            2 = strong cold stress
-            3 = moderate cold stress
-            4 = slight cold stress
-            5 = no thermal stress
-            6 = moderate heat stress
-            7 = strong heat stress
-            8 = strong heat stress
-            9 = extreme heat stress
+
+        *    0 = extreme cold stress
+        *    1 = very strong cold stress
+        *    2 = strong cold stress
+        *    3 = moderate cold stress
+        *    4 = slight cold stress
+        *    5 = no thermal stress
+        *    6 = moderate heat stress
+        *    7 = strong heat stress
+        *    8 = strong heat stress
+        *    9 = extreme heat stress
         """
         return self._get_coll('_original_category_coll', self._original_category_funct,
                               UTCICategory, 'condition')

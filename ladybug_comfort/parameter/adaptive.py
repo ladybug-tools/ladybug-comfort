@@ -10,16 +10,53 @@ from ..adaptive import neutral_temperature_conditioned, \
 class AdaptiveParameter(ComfortParameter):
     """Parameters of Adaptive comfort.
 
+    Args:
+        ashrae55_or_en15251: A boolean to note whether to use the ASHRAE-55 neutral
+            temperature function (True) or the EN-15251 function (False).
+            Note that this input will also determine default values for many of
+            the other properties of this object.
+        neutral_offset:  The number of degrees Celcius from the neutral temperature
+            where the input operative temperature is considered acceptable.
+            The default is 2.5C when the neutral temperature function is ASHRAE-55
+            and 3C when the neutral temperature function is EN-15251.
+            You may want to use the set_neutral_offset_from_ppd() or the
+            set_neutral_offset_from_comfort_class() methods on this object to set
+            this value using ppd from the ASHRAE-55 standard or comfort classes
+            from the EN-15251 standard respectively.
+        avg_month_or_running_mean: A boolean to note whether the prevailing outdoor
+            temperature is computed from the average monthly temperature (True) or
+            a weighted running mean of the last week (False).  The default is True
+            when the neutral temperature function is ASHRAE-55 and False when the
+            neutral temperature function is EN-15251.
+        discrete_or_continuous_air_speed: A boolean to note whether discrete
+            categories should be used to assess the effect of elevated air speed
+            (True) or whether a continuous function should be used (False).
+            The default is True when the neutral temperature function is ASHRAE-55
+            and False when the neutral temperature function is EN-15251.
+        cold_prevail_temp_limit: A number indicating the prevailing outdoor
+            temperature below which acceptable indoor operative temperatures
+            flatline. The default is 10C when the neutral temperature function is
+            ASHRAE-55 and 15C when the neutral temperature function is EN-15251.
+            This number cannot be greater than 22C and cannot be less than 10C.
+        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
+            "free-running" the building is.
+
+            *    0 = free-running (completely passive with no air conditioning)
+            *    1 = conditioned (no operable windows and fully air conditioned)
+
+            The default is 0 since both the ASHRAE-55 and EN-15251 standards forbid
+            the use of adaptive comfort methods when a cooling system is active.
+
     Properties:
-        ashrae55_or_en15251
-        neutral_offset
-        avg_month_or_running_mean
-        discrete_or_continuous_air_speed
-        cold_prevail_temp_limit
-        conditioning
-        standard
-        prevailing_temperature_method
-        minimum_operative
+        *    ashrae55_or_en15251
+        *    neutral_offset
+        *    avg_month_or_running_mean
+        *    discrete_or_continuous_air_speed
+        *    cold_prevail_temp_limit
+        *    conditioning
+        *    standard
+        *    prevailing_temperature_method
+        *    minimum_operative
     """
     _model = 'Adaptive'
     __slots__ = ('_standard', '_neutral_offset', '_prevail_method', '_air_speed_method',
@@ -29,41 +66,6 @@ class AdaptiveParameter(ComfortParameter):
                  avg_month_or_running_mean=None, discrete_or_continuous_air_speed=None,
                  cold_prevail_temp_limit=None, conditioning=None):
         """Initalize Adaptive Parameters.
-
-        Args:
-            ashrae55_or_en15251: A boolean to note whether to use the ASHRAE-55 neutral
-                temperature function (True) or the EN-15251 function (False).
-                Note that this input will also determine default values for many of
-                the other properties of this object.
-            neutral_offset:  The number of degrees Celcius from the neutral temperature
-                where the input operative temperature is considered acceptable.
-                The default is 2.5C when the neutral temperature function is ASHRAE-55
-                and 3C when the neutral temperature function is EN-15251.
-                You may want to use the set_neutral_offset_from_ppd() or the
-                set_neutral_offset_from_comfort_class() methods on this object to set
-                this value using ppd from the ASHRAE-55 standard or comfort classes
-                from the EN-15251 standard respectively.
-            avg_month_or_running_mean: A boolean to note whether the prevailing outdoor
-                temperature is computed from the average monthly temperature (True) or
-                a weighted running mean of the last week (False).  The default is True
-                when the neutral temperature function is ASHRAE-55 and False when the
-                neutral temperature function is EN-15251.
-            discrete_or_continuous_air_speed: A boolean to note whether discrete
-                categories should be used to assess the effect of elevated air speed
-                (True) or whether a continuous function should be used (False).
-                The default is True when the neutral temperature function is ASHRAE-55
-                and False when the neutral temperature function is EN-15251.
-            cold_prevail_temp_limit: A number indicating the prevailing outdoor
-                temperature below which acceptable indoor operative temperatures
-                flatline. The default is 10C when the neutral temperature function is
-                ASHRAE-55 and 15C when the neutral temperature function is EN-15251.
-                This number cannot be greater than 22C and cannot be less than 10C.
-            conditioning: A number between 0 and 1 that represents how "conditioned" vs.
-                "free-running" the building is.
-                    0 = free-running (completely passive with no air conditioning)
-                    1 = conditioned (no operable windows and fully air conditioned)
-                The default is 0 since both the ASHRAE-55 and EN-15251 standards forbid
-                the use of adaptive comfort methods when a cooling system is active.
         """
         # get the standard
         self._standard = ashrae55_or_en15251 if ashrae55_or_en15251 is not None else True
@@ -194,8 +196,9 @@ class AdaptiveParameter(ComfortParameter):
         """Determine if conditions are comfortable or not.
 
         Values are one of the following:
-            0 = uncomfortable
-            1 = comfortable
+
+        *    0 = uncomfortable
+        *    1 = comfortable
 
         Args:
             comfort_result: An adaptive comfort result dictionary from the
@@ -211,9 +214,10 @@ class AdaptiveParameter(ComfortParameter):
         """Determine whether conditions are cold, neutral or hot.
 
         Values are one of the following:
-            -1 = cold
-             0 = netural
-            +1 = hot
+
+        *    -1 = cold
+        *     0 = netural
+        *    +1 = hot
 
         Args:
             comfort_result: An adaptive comfort result dictionary from the

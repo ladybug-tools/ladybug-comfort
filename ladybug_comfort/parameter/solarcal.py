@@ -9,12 +9,36 @@ from ..solarcal import sharp_from_solar_and_body_azimuth
 class SolarCalParameter(ComfortParameter):
     """Parameters specifying body characteristics for the SolarCal model.
 
+    Args:
+        posture: A text string indicating the posture of the body. Letters must
+            be lowercase.  Choose from the following: "standing", "seated", "supine".
+            Default is "standing".
+        sharp: A number between 0 and 180 representing the solar horizontal
+            angle relative to front of person (SHARP). 0 signifies sun that is
+            shining directly into the person's face and 180 signifies sun that
+            is shining at the person's back. Default is 135, asuming that a person
+            typically faces their side or back to the sun to avoid glare.
+        body_azimuth: A number (between 0 and 360) representing the direction that
+            the human is facing in degrees (0=North, 90=East, 180=South, 270=West).
+            If this number is greater than 360 or less than 0, it will be converted
+            to the correct angle within this range.
+            Default is None, which will assume that the sharp input dictates the
+            degrees the human is facing from the sun.
+        body_absorptivity: A number between 0 and 1 representing the average
+            shortwave absorptivity of the body (including clothing and skin color).
+            Typical clothing values - white: 0.2, khaki: 0.57, black: 0.88
+            Typical skin values - white: 0.57, brown: 0.65, black: 0.84
+            Default is 0.7 for average (brown) skin and medium clothing.
+        body_emissivity: A number between 0 and 1 representing the average
+            longwave emissivity of the body.  Default is 0.95, which is almost
+            always the case except in rare situations of wearing metalic clothing.
+
     Properties:
-        posture
-        sharp
-        body_azimuth
-        body_absorptivity
-        body_emissivity
+        *    posture
+        *    sharp
+        *    body_azimuth
+        *    body_absorptivity
+        *    body_emissivity
     """
     _model = 'SolarCal'
     POSTURES = ('standing', 'seated', 'supine')
@@ -24,30 +48,6 @@ class SolarCalParameter(ComfortParameter):
     def __init__(self, posture=None, sharp=None, body_azimuth=None,
                  body_absorptivity=None, body_emissivity=None):
         """Initalize SolarCal Body Parameters.
-
-        Args:
-            posture: A text string indicating the posture of the body. Letters must
-                be lowercase.  Choose from the following: "standing", "seated", "supine".
-                Default is "standing".
-            sharp: A number between 0 and 180 representing the solar horizontal
-                angle relative to front of person (SHARP). 0 signifies sun that is
-                shining directly into the person's face and 180 signifies sun that
-                is shining at the person's back. Default is 135, asuming that a person
-                typically faces their side or back to the sun to avoid glare.
-            body_azimuth: A number (between 0 and 360) representing the direction that
-                the human is facing in degrees (0=North, 90=East, 180=South, 270=West).
-                If this number is greater than 360 or less than 0, it will be converted
-                to the correct angle within this range.
-                Default is None, which will assume that the sharp input dictates the
-                degrees the human is facing from the sun.
-            body_absorptivity: A number between 0 and 1 representing the average
-                shortwave absorptivity of the body (including clothing and skin color).
-                Typical clothing values - white: 0.2, khaki: 0.57, black: 0.88
-                Typical skin values - white: 0.57, brown: 0.65, black: 0.84
-                Default is 0.7 for average (brown) skin and medium clothing.
-            body_emissivity: A number between 0 and 1 representing the average
-                longwave emissivity of the body.  Default is 0.95, which is almost
-                always the case except in rare situations of wearing metalic clothing.
         """
         if posture is not None:
             assert isinstance(posture, str), 'posture must be a string.'\

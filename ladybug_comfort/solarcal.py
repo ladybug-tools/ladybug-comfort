@@ -11,7 +11,8 @@ https://escholarship.org/uc/item/89m1h2dg
 [2] ASHRAE Standard 55 (2017). "Thermal Environmental Conditions for Human Occupancy".
 
 Properties:
-    SOLARCAL_SPLINES: A dictionary with two keys: 'standing' and 'seated'.
+    * SOLARCAL_SPLINES:
+        A dictionary with two keys: 'standing' and 'seated'.
         Each value for these keys is a 2D matrix of projection factors
         for human geometry.  Each row refers to an degree of azimuth and each
         colum refers to a degree of altitude.
@@ -90,12 +91,13 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
             always the case except in rare situations of wearing metalic clothing.
 
     Returns:
-        heat_exch_result: A dictionary containing results with the following keys:
-            s_erf : The shortwave effective radiant field (ERF) in W/m2.
-            s_dmrt : The MRT delta as a result of shortwave irradinace in C.
-            l_erf : The longwave effective radiant field (ERF) in W/m2.
-            l_dmrt : The MRT delta as a result of longwave sky exchange in C.
-            mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        A dictionary containing results with the following keys
+
+        -   s_erf : The shortwave effective radiant field (ERF) in W/m2.
+        -   s_dmrt : The MRT delta as a result of shortwave irradinace in C.
+        -   l_erf : The longwave effective radiant field (ERF) in W/m2.
+        -   l_dmrt : The MRT delta as a result of longwave sky exchange in C.
+        -   mrt: The final MRT expereinced as a result of sky heat excahnge in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
@@ -173,10 +175,11 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
             always the case except in rare situations of wearing metalic clothing.
 
     Returns:
-        heat_exch_result: A dictionary containing results with the following keys:
-            erf : The shortwave effective radiant field (ERF) in W/m2.
-            dmrt : The MRT delta as a result of shortwave irradinace in C.
-            mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        A dictionary containing results with the following keys
+
+        -    erf : The shortwave effective radiant field (ERF) in W/m2.
+        -    dmrt : The MRT delta as a result of shortwave irradinace in C.
+        -    mrt: The final MRT expereinced as a result of sky heat excahnge in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
@@ -246,10 +249,11 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
             always the case except in rare situations of wearing metalic clothing.
 
     Returns:
-        heat_exch_result: A dictionary containing results with the following keys:
-            erf : The shortwave effective radiant field (ERF) in W/m2.
-            dmrt : The MRT delta as a result of shortwave irradinace in C.
-            mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        A dictionary containing results with the following keys
+
+        -    erf : The shortwave effective radiant field (ERF) in W/m2.
+        -    dmrt : The MRT delta as a result of shortwave irradinace in C.
+        -    mrt: The final MRT expereinced as a result of sky heat excahnge in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725

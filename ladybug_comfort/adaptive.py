@@ -22,13 +22,14 @@ def adaptive_comfort_ashrae55(t_prevail, to):
         to: Operative temperature [C]
 
     Returns:
-        result: A dictionary containing results with the following keys:
-            to : Operative Temperature [C].
-            t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
-            deg_comf: The difference between the operative temperature (to)
-                and the adaptive comfort neutral temperature (t_comf) [C].
-                Negative values inidcate cool conditions and positive values
-                indicate varm conditions.
+        A dictionary containing results with the following keys
+
+        -   to : Operative Temperature [C].
+        -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
+        -   deg_comf: The difference between the operative temperature (to)
+            and the adaptive comfort neutral temperature (t_comf) [C].
+            Negative values inidcate cool conditions and positive values
+            indicate varm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.:
@@ -63,13 +64,14 @@ def adaptive_comfort_en15251(t_prevail, to):
         to: Operative temperature [C]
 
     Returns:
-        result: A dictionary containing results with the following keys:
-            to : Operative Temperature [C].
-            t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
-            deg_comf: The difference between the operative temperature (to)
-                and the adaptive comfort neutral temperature (t_comf) [C].
-                Negative values inidcate cool conditions and positive values
-                indicate varm conditions.
+        A dictionary containing results with the following keys
+
+        -   to : Operative Temperature [C].
+        -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
+        -   deg_comf: The difference between the operative temperature (to)
+            and the adaptive comfort neutral temperature (t_comf) [C].
+            Negative values inidcate cool conditions and positive values
+            indicate varm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.:
@@ -103,19 +105,22 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
         to: Operative temperature [C]
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
-                0 = free-running (completely passive with no air conditioning)
-                1 = conditioned (no operable windows and fully air conditioned)
+
+            *   0 = free-running (completely passive with no air conditioning)
+            *   1 = conditioned (no operable windows and fully air conditioned)
+
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
 
     Returns:
-        result: A dictionary containing results with the following keys:
-            to : Operative Temperature [C].
-            t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
-            deg_comf: The difference between the operative temperature (to)
-                and the adaptive comfort neutral temperature (t_comf) [C].
-                Negative values inidcate cool conditions and positive values
-                indicate varm conditions.
+        A dictionary containing results with the following keys
+
+        -   to : Operative Temperature [C].
+        -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
+        -   deg_comf: The difference between the operative temperature (to)
+            and the adaptive comfort neutral temperature (t_comf) [C].
+            Negative values inidcate cool conditions and positive values
+            indicate varm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.0:
@@ -139,8 +144,10 @@ def adaptive_comfort_conditioned_function(conditioning, model):
     Args:
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
-                0 = free-running (completely passive with no air conditioning)
-                1 = conditioned (no operable windows and fully air conditioned)
+
+            *   0 = free-running (completely passive with no air conditioning)
+            *   1 = conditioned (no operable windows and fully air conditioned)
+
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
     """
@@ -214,13 +221,16 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
     official part of any standard. Both the American ASHRAE-55 standard and the
     European EN-15251 standard state that the adaptive model should only be used
     when the following criteria are met:
-        (a) There is no mechanical cooling or heating system in operation
-            (in the case of ASHRAE-55, no mechanical cooling system is installed
-            and no heating system is in operation)
-        (b) Metabolic rates of occupants range from 1.0 to 1.3 met
-        (c) Occupants are allowed to freely adapt their clothing insulation
-            (in the case of ASHRAE-55, occupants must specifically be allowed
-            to adapt clothing within a range at least as wide as 0.5 - 1.0 clo)
+
+    (a) There is no mechanical cooling or heating system in operation
+        (in the case of ASHRAE-55, no mechanical cooling system is installed
+        and no heating system is in operation)
+
+    (b) Metabolic rates of occupants range from 1.0 to 1.3 met
+
+    (c) Occupants are allowed to freely adapt their clothing insulation
+        (in the case of ASHRAE-55, occupants must specifically be allowed
+        to adapt clothing within a range at least as wide as 0.5 - 1.0 clo)
 
     However, the SCATs project[1], from which EN-15251 is derived, involved the survey
     of conditioned buildings and a neutral temperature function was obtained for
@@ -248,8 +258,10 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
         t_prevail: The prevailing outdoor temperature [C].
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
-                0 = free-running (completely passive with no air conditioning)
-                1 = conditioned (no operable windows and fully air conditioned)
+
+            *   0 = free-running (completely passive with no air conditioning)
+            *   1 = conditioned (no operable windows and fully air conditioned)
+
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
 
@@ -281,7 +293,7 @@ def cooling_effect_ashrae55(vel, to):
         to : Operative Temperature [C]
 
     Returns:
-        ce : Cooling effect as a result of elevated air speed [C]
+        ce -- Cooling effect as a result of elevated air speed [C]
     """
     ce = 0
     if vel >= 0.6 and to >= 25:
@@ -302,7 +314,7 @@ def cooling_effect_en15251(vel, to):
         to : Operative Temperature [C]
 
     Returns:
-        ce : Cooling effect as a result of elevated air speed [C]
+        ce -- Cooling effect as a result of elevated air speed [C]
     """
     ce = 0
     if vel >= 0.2 and to >= 25:
@@ -318,7 +330,7 @@ def ashrae55_neutral_offset_from_ppd(ppd=90):
             Usually, this is 90% but it can be 80% in some cases.
 
     Returns:
-        offset : Acceptable temperature offset from neutral temperature [C]
+        offset -- Acceptable temperature offset from neutral temperature [C]
     """
     assert 0 <= ppd <= 100, 'ppd must be between 0 and 100. Got {}'.format(ppd)
     return -0.1 * ppd + 11.5
@@ -332,7 +344,7 @@ def en15251_neutral_offset_from_comfort_class(comf_class):
             Choose from: 1, 2, 3 (the higher the class, the greater the offset)
 
     Returns:
-        offset : Acceptable temperature offset from neutral temperature [C]
+        offset -- Acceptable temperature offset from neutral temperature [C]
     """
     if comf_class == 1:
         offset = 2
@@ -364,8 +376,8 @@ def weighted_running_mean_hourly(outdoor_temperatures, alpha=0.8):
             be most suitable by Nicol and McCartney[1].
 
     Returns:
-        prevailing_temp: A list of prevailing outdoor temperatures with a length that
-            matches the input outdoor_temperatures.
+        prevailing_temp -- A list of prevailing outdoor temperatures with a length that
+        matches the input outdoor_temperatures.
     """
     # ensure that there are at least a day's worth of values
     assert len(outdoor_temperatures) >= 168, 'outdoor_temperatures must be for '\
@@ -420,8 +432,8 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
             be most suitable by Nicol and McCartney[1].
 
     Returns:
-        daily_run_means: A list of prevailing outdoor temperatures with a length that
-            matches the input outdoor_temperatures.
+        daily_run_means -- A list of prevailing outdoor temperatures with a length that
+        matches the input outdoor_temperatures.
     """
     # ensure that there are at least one value
     assert len(outdoor_temperatures) >= 7, 'outdoor_temperatures must have '\
@@ -452,9 +464,11 @@ def check_prevailing_temperatures_ashrae55(t_prevail):
         t_prevail: A list of prevailing outdoor temperature [C].
 
     Returns:
-        all_in_range: A boolean to note whether all of the input t_prevail values
+        A tuple with two elements
+
+        -   all_in_range: A boolean to note whether all of the input t_prevail values
             are in acceptable ranges.
-        message: Text indicating the number of values that are above and below
+        -   message: Text indicating the number of values that are above and below
             acceptable ranges.
     """
     all_in_range, message = check_prevailing_temperatures_range(
@@ -469,9 +483,11 @@ def check_prevailing_temperatures_en15251(t_prevail):
         t_prevail: A list of prevailing outdoor temperature [C].
 
     Returns:
-        all_in_range: A boolean to note whether all of the input t_prevail values
+        A tuple with two elements
+
+        -   all_in_range: A boolean to note whether all of the input t_prevail values
             are in acceptable ranges.
-        message: Text indicating the number of values that are above and below
+        -   message: Text indicating the number of values that are above and below
             acceptable ranges.
     """
     all_in_range, message = check_prevailing_temperatures_range(
@@ -490,9 +506,11 @@ def check_prevailing_temperatures_range(t_prevail, lower, upper, standard=''):
             output message (eg. ASHRAE-55).
 
     Returns:
-        all_in_range: A boolean to note whether all of the input t_prevail values
+        A tuple with two elements
+
+        -   all_in_range: A boolean to note whether all of the input t_prevail values
             are in acceptable ranges.
-        message: Text indicating the number of values that are above and below
+        -   message: Text indicating the number of values that are above and below
             acceptable ranges.
     """
     # defaults to be changed

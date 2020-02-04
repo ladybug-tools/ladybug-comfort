@@ -24,21 +24,47 @@ from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 class Adaptive(ComfortCollection):
     """Adaptive comfort DataCollection object.
 
+    Args:
+        outdoor_temperature: Either one of the following inputs are acceptable:
+
+            *   1 - A Data Collection of prevailing outdoor temperature values in C.
+                Such a Data Collection must align with the operative_temperature
+                input and bear the PrevailingOutdoorTemperature data type in
+                its header.
+            *   2 - A single prevailing outdoor temperature value in C to be used
+                for all of the operative_temperature inputs below.
+            *   3 - A Data Collection of actual outdoor temperatures recorded over
+                the entire year. This Data Collection must be continouous and
+                must either be an Hourly Collection or Daily Collection. In the event
+                that the input comfort_parameter has a prevailing_temperature_method
+                of 'Monthly', Monthly collections are also acceptable here. Note
+                that, because an annual input is required, this input collection
+                does not have to align with the operative_temperature input.
+
+        operative_temperature: Data Collection of operative temperature (To)
+            values in degrees Celcius.
+        air_speed: Data Collection of air speed values in m/s or a single
+            air_speed value to be used for the whole analysis. If None, this
+            will default to 0.1 m/s.
+        comfort_parameter: Optional AdaptiveParameter object to specify parameters
+            under which conditions are considered acceptable. If None, default will
+            assume ASHRAE-55 criteria.
+
     Properties:
-        prevailing_outdoor_temperature
-        operative_temperature
-        air_speed
-        comfort_parameter
-        neutral_temperature
-        degrees_from_neutral
-        is_comfortable
-        thermal_condition
-        cooling_effect
-        percent_comfortable
-        percent_uncomfortable
-        percent_neutral
-        percent_hot
-        percent_cold
+        *    prevailing_outdoor_temperature
+        *    operative_temperature
+        *    air_speed
+        *    comfort_parameter
+        *    neutral_temperature
+        *    degrees_from_neutral
+        *    is_comfortable
+        *    thermal_condition
+        *    cooling_effect
+        *    percent_comfortable
+        *    percent_uncomfortable
+        *    percent_neutral
+        *    percent_hot
+        *    percent_cold
     """
     _model = 'Adaptive'
     __slots__ = ('_op_temp', '_air_speed', '_comfort_par', '_t_out', '_prevail_temp',
@@ -52,30 +78,6 @@ class Adaptive(ComfortCollection):
     def __init__(self, outdoor_temperature, operative_temperature, air_speed=None,
                  comfort_parameter=None):
         """Initialize an Adaptive comfort object from DataCollections of inputs.
-
-        Args:
-            outdoor_temperature: Either one of the following inputs are acceptable:
-                1 - A Data Collection of prevailing outdoor temperature values in C.
-                    Such a Data Collection must align with the operative_temperature
-                    input and bear the PrevailingOutdoorTemperature data type in
-                    its header.
-                2 - A single prevailing outdoor temperature value in C to be used
-                    for all of the operative_temperature inputs below.
-                3 - A Data Collection of actual outdoor temperatures recorded over
-                    the entire year. This Data Collection must be continouous and
-                    must either be an Hourly Collection or Daily Collection. In the event
-                    that the input comfort_parameter has a prevailing_temperature_method
-                    of 'Monthly', Monthly collections are also acceptable here. Note
-                    that, because an annual input is required, this input collection
-                    does not have to align with the operative_temperature input.
-            operative_temperature: Data Collection of operative temperature (To)
-                values in degrees Celcius.
-            air_speed: Data Collection of air speed values in m/s or a single
-                air_speed value to be used for the whole analysis. If None, this
-                will default to 0.1 m/s.
-            comfort_parameter: Optional AdaptiveParameter object to specify parameters
-                under which conditions are considered acceptable. If None, default will
-                assume ASHRAE-55 criteria.
         """
         # set up the object using operative temperature as a base
         self._check_datacoll(operative_temperature, Temperature,
@@ -209,8 +211,8 @@ class Adaptive(ComfortCollection):
         acceptable according to the assigned comfort_parameter.
 
         Values are one of the following:
-            0 = uncomfortable
-            1 = comfortable
+        *   0 = uncomfortable
+        *   1 = comfortable
         """
         return self._get_coll('_is_comfortable_coll', self._is_comfortable,
                               ThermalComfort, 'condition')
@@ -221,9 +223,9 @@ class Adaptive(ComfortCollection):
         according to the assigned comfort_parameter.
 
         Values are one of the following:
-            -1 = cold
-             0 = netural
-            +1 = hot
+        *   -1 = cold
+        *    0 = netural
+        *   +1 = hot
         """
         return self._get_coll('_thermal_condition_coll', self._thermal_condition,
                               ThermalCondition, 'condition')
@@ -270,28 +272,28 @@ class Adaptive(ComfortCollection):
 class PrevailingTemperature(object):
     """Get prevailing temperature from annual DataCollections of outdoor temperature.
 
+    Args:
+        outdoor_temperature: A Data Collection of outdoor temperatures recorded
+            over an entire year. This Data Collection must be continouous and
+            must either be an Hourly Collection or Daily Collection. In the event
+            that the input avg_month is True (for average monthly
+            prevailing method), Monthly collections are also acceptable here.
+        avg_month: A boolean to note whether the prevailing outdoor
+            temperature is computed from the average monthly temperature (True) or
+            a weighted running mean of the last week (False).  The default is True.
+
     Properties:
-        avg_month_or_running_mean
-        hourly_prevailing_temperature
-        daily_prevailing_temperature
-        monthly_prevailing_temperature
-        monthly_per_hour_prevailing_temperature
+        *   avg_month_or_running_mean
+        *   hourly_prevailing_temperature
+        *   daily_prevailing_temperature
+        *   monthly_prevailing_temperature
+        *   monthly_per_hour_prevailing_temperature
     """
     __slots__ = ('_t_out', '_head', '_avg_month', '_hourly_prevail',
                  '_daily_prevail', '_monthly_prevail')
 
     def __init__(self, outdoor_temperature, avg_month=True):
         """Initialize an prevailing temperature object from DataCollections of inputs.
-
-        Args:
-            outdoor_temperature: A Data Collection of outdoor temperatures recorded
-                over an entire year. This Data Collection must be continouous and
-                must either be an Hourly Collection or Daily Collection. In the event
-                that the input avg_month is True (for average monthly
-                prevailing method), Monthly collections are also acceptable here.
-            avg_month: A boolean to note whether the prevailing outdoor
-                temperature is computed from the average monthly temperature (True) or
-                a weighted running mean of the last week (False).  The default is True.
         """
         # perform checks on the inputs
         acceptabe = (HourlyContinuousCollection, DailyCollection, MonthlyCollection)

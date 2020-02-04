@@ -8,17 +8,39 @@ from ._base import ComfortParameter
 class UTCIParameter(ComfortParameter):
     """Parameters of UTCI comfort.
 
+    Args:
+        cold_thresh:  UTCI temperature below which conditions
+            represent cold stress [C]. Default: 9C.
+        heat_thresh:  UTCI temperature above which conditions
+            represent heat stress [C]. Default: 26C.
+        extreme_cold_thresh:  UTCI temperature below which conditions
+            represent extreme cold stress [C]. Default: -40C.
+        very_strong_cold_thresh:  UTCI temperature below which conditions
+            represent very strong cold stress [C]. Default: -27C.
+        strong_cold_thresh:  UTCI temperature below which conditions
+            represent strong cold stress [C]. Default: -13C.
+        moderate_cold_thresh:  UTCI temperature below which conditions
+            represent moderate cold stress [C]. Default: 0C.
+        moderate_heat_thresh:  UTCI temperature above which conditions
+            represent moderateheat stress [C]. Default: 28C.
+        strong_heat_thresh:  UTCI temperature above which conditions
+            represent strong heat stress [C]. Default: 32C.
+        very_strong_heat_thresh:  UTCI temperature above which conditions
+            represent very strong heat stress [C]. Default: 38C.
+        extreme_heat_thresh:  UTCI temperature above which conditions
+            represent extreme heat stress [C]. Default: 46C.
+
     Properties:
-        cold_thresh
-        heat_thresh
-        extreme_cold_thresh
-        very_strong_cold_thresh
-        strong_cold_thresh
-        moderate_cold_thresh
-        moderate_heat_thresh
-        strong_heat_thresh
-        very_strong_heat_thresh
-        extreme_heat_thresh
+        *    cold_thresh
+        *    heat_thresh
+        *    extreme_cold_thresh
+        *    very_strong_cold_thresh
+        *    strong_cold_thresh
+        *    moderate_cold_thresh
+        *    moderate_heat_thresh
+        *    strong_heat_thresh
+        *    very_strong_heat_thresh
+        *    extreme_heat_thresh
     """
     _model = 'Universal Thermal Climate Index'
     __slots__ = ('_cold_thresh', '_heat_thresh', '_extreme_cold_thresh',
@@ -33,28 +55,6 @@ class UTCIParameter(ComfortParameter):
                  strong_heat_thresh=None,
                  very_strong_heat_thresh=None, extreme_heat_thresh=None):
         """Initalize UTCI Parameters.
-
-        Args:
-            cold_thresh:  UTCI temperature below which conditions
-                represent cold stress [C]. Default: 9C.
-            heat_thresh:  UTCI temperature above which conditions
-                represent heat stress [C]. Default: 26C.
-            extreme_cold_thresh:  UTCI temperature below which conditions
-                represent extreme cold stress [C]. Default: -40C.
-            very_strong_cold_thresh:  UTCI temperature below which conditions
-                represent very strong cold stress [C]. Default: -27C.
-            strong_cold_thresh:  UTCI temperature below which conditions
-                represent strong cold stress [C]. Default: -13C.
-            moderate_cold_thresh:  UTCI temperature below which conditions
-                represent moderate cold stress [C]. Default: 0C.
-            moderate_heat_thresh:  UTCI temperature above which conditions
-                represent moderateheat stress [C]. Default: 28C.
-            strong_heat_thresh:  UTCI temperature above which conditions
-                represent strong heat stress [C]. Default: 32C.
-            very_strong_heat_thresh:  UTCI temperature above which conditions
-                represent very strong heat stress [C]. Default: 38C.
-            extreme_heat_thresh:  UTCI temperature above which conditions
-                represent extreme heat stress [C]. Default: 46C.
         """
 
         self._cold_thresh = cold_thresh if cold_thresh is not None else 9
@@ -191,9 +191,10 @@ class UTCIParameter(ComfortParameter):
         """Determine whether conditions are cold, neutral or hot.
 
         Values are one of the following:
-            -1 = cold
-             0 = netural
-            +1 = hot
+
+        *    -1 = cold
+        *     0 = netural
+        *    +1 = hot
         """
         if utci < self._cold_thresh:
             return -1
@@ -206,11 +207,12 @@ class UTCIParameter(ComfortParameter):
         """Determine the thermal condition on a five-point scale.
 
         Values are one of the following:
-            -2 = strong/extreme cold stress
-            -1 = moderate cold stress
-             0 = no thermal stress
-            +1 = moderate heat stress
-            +2 = strong/extreme heat stress
+
+        *    -2 = strong/extreme cold stress
+        *    -1 = moderate cold stress
+        *     0 = no thermal stress
+        *    +1 = moderate heat stress
+        *    +2 = strong/extreme heat stress
         """
         if utci < self._strong_cold_thresh:
             return -2
@@ -227,13 +229,14 @@ class UTCIParameter(ComfortParameter):
         """Determine the thermal condition on a seven-point scale.
 
         Values are one of the following:
-            -3 = very strong/extreme cold stress
-            -2 = strong cold stress
-            -1 = moderate cold stress
-             0 = no thermal stress
-            +1 = moderate heat stress
-            +2 = strong heat stress
-            +3 = very strong/extreme heat stress
+
+        *    -3 = very strong/extreme cold stress
+        *    -2 = strong cold stress
+        *    -1 = moderate cold stress
+        *     0 = no thermal stress
+        *    +1 = moderate heat stress
+        *    +2 = strong heat stress
+        *    +3 = very strong/extreme heat stress
         """
         if utci < self._very_strong_cold_thresh:
             return -3
@@ -254,15 +257,16 @@ class UTCIParameter(ComfortParameter):
         """Determine the thermal condition on a nine-point scale.
 
         Values are one of the following:
-            -4 = very strong/extreme cold stress
-            -3 = strong cold stress
-            -2 = moderate cold stress
-            -1 = slight cold stress
-             0 = no thermal stress
-            +1 = slight heat stress
-            +2 = moderate heat stress
-            +3 = strong heat stress
-            +4 = very strong/extreme heat stress
+
+        *    -4 = very strong/extreme cold stress
+        *    -3 = strong cold stress
+        *    -2 = moderate cold stress
+        *    -1 = slight cold stress
+        *     0 = no thermal stress
+        *    +1 = slight heat stress
+        *    +2 = moderate heat stress
+        *    +3 = strong heat stress
+        *    +4 = very strong/extreme heat stress
         """
         if utci < self._very_strong_cold_thresh:
             return -4
@@ -287,17 +291,18 @@ class UTCIParameter(ComfortParameter):
         """Determine the thermal condition on an eleven-point scale.
 
         Values are one of the following:
-            -5 = extreme cold stress
-            -4 = very strong cold stress
-            -3 = strong cold stress
-            -2 = moderate cold stress
-            -1 = slight cold stress
-             0 = no thermal stress
-            +1 = slight heat stress
-            +2 = moderate heat stress
-            +3 = strong heat stress
-            +4 = very strong heat stress
-            +5 = extreme heat stress
+
+        *    -5 = extreme cold stress
+        *    -4 = very strong cold stress
+        *    -3 = strong cold stress
+        *    -2 = moderate cold stress
+        *    -1 = slight cold stress
+        *     0 = no thermal stress
+        *    +1 = slight heat stress
+        *    +2 = moderate heat stress
+        *    +3 = strong heat stress
+        *    +4 = very strong heat stress
+        *    +5 = extreme heat stress
         """
         if utci < self._extreme_cold_thresh:
             return -5
@@ -329,16 +334,17 @@ class UTCIParameter(ComfortParameter):
         Journal of Thermal Biology 28, 75-106
 
         Values are one of the following:
-            0 = extreme cold stress
-            1 = very strong cold stress
-            2 = strong cold stress
-            3 = moderate cold stress
-            4 = slight cold stress
-            5 = no thermal stress
-            6 = moderate heat stress
-            7 = strong heat stress
-            8 = strong heat stress
-            9 = extreme heat stress
+
+        *    0 = extreme cold stress
+        *    1 = very strong cold stress
+        *    2 = strong cold stress
+        *    3 = moderate cold stress
+        *    4 = slight cold stress
+        *    5 = no thermal stress
+        *    6 = moderate heat stress
+        *    7 = strong heat stress
+        *    8 = strong heat stress
+        *    9 = extreme heat stress
         """
         if utci < self._extreme_cold_thresh:
             return 0
