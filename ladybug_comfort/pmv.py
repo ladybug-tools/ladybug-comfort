@@ -43,7 +43,7 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
             Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.
 
     Returns:
-        A dictionary containing results of the PMV model with the following keys:
+        A dictionary containing results of the PMV model with the following keys
 
         -   pmv : Predicted mean vote (PMV)
         -   ppd : Percent predicted dissatisfied (PPD) [%]
@@ -534,8 +534,8 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
 
     Returns:
         complete_pmv_inputs -- The pmv_inputs dictionary but with values for all inputs.
-            The missing input to the PMV model will be filled by the value
-            that returns the target_pmv.
+        The missing input to the PMV model will be filled by the value
+        that returns the target_pmv.
     """
     assert len(pmv_inputs.keys()) == 7, \
         'pmv_inputs must have 7 keys. Got {}.'.format(len(pmv_inputs.keys()))
