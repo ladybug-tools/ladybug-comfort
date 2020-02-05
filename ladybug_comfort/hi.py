@@ -62,14 +62,14 @@ def heat_index_warning_category(hi):
     Categories are used by the US National Weather Service (NWS) and National
     Oceanic and Atmospheric Administration (NOAA) to issue the following warnings:
 
-    *   0 = No Warning. Satisfactory temperature. Can continue with activity.
-    *   1 = Caution: Fatigue is possible with prolonged exposure and activity.
-        Continuing activity could result in heat cramps.
-    *   2 = Extreme caution: Heat cramps and heat exhaustion are possible.
-        Continuing activity could result in heat stroke.
-    *   3 = Danger: Heat cramps and heat exhaustion are likely.
-        Heat stroke is probable with continued activity.
-    *   4 = Extreme danger: Heat stroke is imminent.
+    * 0 = No Warning. Satisfactory temperature. Can continue with activity.
+    * 1 = Caution: Fatigue is possible with prolonged exposure and activity.
+      Continuing activity could result in heat cramps.
+    * 2 = Extreme caution: Heat cramps and heat exhaustion are possible.
+      Continuing activity could result in heat stroke.
+    * 3 = Danger: Heat cramps and heat exhaustion are likely.
+      Heat stroke is probable with continued activity.
+    * 4 = Extreme danger: Heat stroke is imminent.
 
     Args:
         hi: Heat index [C]

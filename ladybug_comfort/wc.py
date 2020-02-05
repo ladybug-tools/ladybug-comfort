@@ -36,14 +36,14 @@ def windchill_index_effect_category(wci):
     Each number (from -4 to 3) represents a certain WCI thermal sensation
     category. With categories being the following:
 
-    *    -4 = Extreme frost
-    *    -3 = Frosty
-    *    -2 = Cold
-    *    -1 = Cool
-    *     0 = Comfortable
-    *     1 = Warm
-    *     2 = Hot
-    *     3 = Extremely hot
+    * -4 = Extreme frost
+    * -3 = Frosty
+    * -2 = Cold
+    * -1 = Cool
+    * 0 = Comfortable
+    * 1 = Warm
+    * 2 = Hot
+    * 3 = Extremely hot
 
     Args:
         wci: Wind Chill Index [W/m2]
@@ -115,21 +115,21 @@ def windchill_temp_effect_category(twc):
     Each number (from -6 to 0) represents a certain WCT thermal sensation
     category. With categories being the following:
 
-    *    0 = No discomfort. No risk of frostbite formost people
-    *   -1 = Slight increase in discomfort. Low risk of frostbite for most people
-    *   -2 = Risk of hypothermia if outside for long periods without adequate
-        protection. Low risk of frostbite for most people
-    *   -3 = Risk of hypothermia if outside for long periods without adequate
-        clothing or shelter from wind and cold. Increasing risk of frostbite
-        for most people in 10 to 30 minutes of exposure
-    *   -4 = Risk of hypothermia if outside for long periods without adequate
-        clothing or shelter from wind and cold. High risk of frostbite
-        for most people in 5 to 10 minutes of exposure
-    *   -5 = Serious risk of hypothermia if outside for long periods without
-        adequate clothing or shelter from wind and cold. High risk of
-        frostbite for most people in 2 to 5 minutes of exposure
-    *   -6 = Danger! Outdoor conditions are hazardous. High risk of frostbite for
-        most people in 2 minutes of exposure or less
+    * 0 = No discomfort. No risk of frostbite formost people
+    * -1 = Slight increase in discomfort. Low risk of frostbite for most people
+    * -2 = Risk of hypothermia if outside for long periods without adequate
+      protection. Low risk of frostbite for most people
+    * -3 = Risk of hypothermia if outside for long periods without adequate
+      clothing or shelter from wind and cold. Increasing risk of frostbite
+      for most people in 10 to 30 minutes of exposure
+    * -4 = Risk of hypothermia if outside for long periods without adequate
+      clothing or shelter from wind and cold. High risk of frostbite
+      for most people in 5 to 10 minutes of exposure
+    * -5 = Serious risk of hypothermia if outside for long periods without
+      adequate clothing or shelter from wind and cold. High risk of
+      frostbite for most people in 2 to 5 minutes of exposure
+    * -6 = Danger! Outdoor conditions are hazardous. High risk of frostbite for
+      most people in 2 minutes of exposure or less
 
     Args:
         twc: Wind Chill Temperature [C]

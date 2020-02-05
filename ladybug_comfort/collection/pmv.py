@@ -56,36 +56,36 @@ class PMV(ComfortCollection):
             and a still air threshold of 0.1 m/s.
 
     Properties:
-        *   air_temperature
-        *   rad_temperature
-        *   air_speed
-        *   rel_humidity
-        *   met_rate
-        *   clo_value
-        *   external_work
-        *   comfort_parameter
-        *   predicted_mean_vote
-        *   percentage_people_dissatisfied
-        *   standard_effective_temperature
-        *   is_comfortable
-        *   thermal_condition
-        *   discomfort_reason
-        *   percent_comfortable
-        *   percent_uncomfortable
-        *   percent_neutral
-        *   percent_hot
-        *   percent_cold
-        *   percent_dry
-        *   percent_humid
-        *   humidity_ratio
-        *   adjusted_air_temperature
-        *   cooling_effect
-        *   heat_loss_conduction
-        *   heat_loss_sweating
-        *   heat_loss_latent_respiration
-        *   heat_loss_dry_respiration
-        *   heat_loss_radiation
-        *   heat_loss_convection
+        * air_temperature
+        * rad_temperature
+        * air_speed
+        * rel_humidity
+        * met_rate
+        * clo_value
+        * external_work
+        * comfort_parameter
+        * predicted_mean_vote
+        * percentage_people_dissatisfied
+        * standard_effective_temperature
+        * is_comfortable
+        * thermal_condition
+        * discomfort_reason
+        * percent_comfortable
+        * percent_uncomfortable
+        * percent_neutral
+        * percent_hot
+        * percent_cold
+        * percent_dry
+        * percent_humid
+        * humidity_ratio
+        * adjusted_air_temperature
+        * cooling_effect
+        * heat_loss_conduction
+        * heat_loss_sweating
+        * heat_loss_latent_respiration
+        * heat_loss_dry_respiration
+        * heat_loss_radiation
+        * heat_loss_convection
     """
     _model = 'Predicted Mean Vote'
     __slots__ = ('_air_temperature', '_rel_humidity', '_rad_temperature', '_air_speed',
@@ -342,10 +342,10 @@ class PMV(ComfortCollection):
     def met_rate(self):
         """Data Collection of metabolic rate in met.
 
-        *   1 met = Metabolic rate of a resting seated person
-        *   1.2 met = Metabolic rate of a standing person
-        *   2 met = Metabolic rate of a wlaking person
-        *   If left blank, default is set to 1.1 met (for seated, typing).
+        * 1 met = Metabolic rate of a resting seated person
+        * 1.2 met = Metabolic rate of a standing person
+        * 2 met = Metabolic rate of a wlaking person
+        * If left blank, default is set to 1.1 met (for seated, typing).
         """
         return self._get_coll('_met_rate_coll', self._met_rate,
                               MetabolicRate, 'met')
@@ -354,10 +354,10 @@ class PMV(ComfortCollection):
     def clo_value(self):
         """Data Collection of clothing level of the human subject in clo.
 
-        *   1 clo = Three-piece suit
-        *   0.5 clo = Shorts + T-shirt
-        *   0 clo = No clothing
-        *   If left blank, default is set to 0.85 clo.
+        * 1 clo = Three-piece suit
+        * 0.5 clo = Shorts + T-shirt
+        * 0 clo = No clothing
+        * If left blank, default is set to 0.85 clo.
         """
         return self._get_coll('_clo_value_coll', self._clo_value,
                               ClothingInsulation, 'clo')
@@ -381,13 +381,13 @@ class PMV(ComfortCollection):
         surveys of P.O. Fanger.
         Each interger value of the scale indicates the following:
 
-        *   -3 = Cold
-        *   -2 = Cool
-        *   -1 = Slightly Cool
-        *    0 = Neutral
-        *   +1 = Slightly Warm
-        *   +2 = Warm
-        *   +3 = Hot
+        * -3 = Cold
+        * -2 = Cool
+        * -1 = Slightly Cool
+        * 0 = Neutral
+        * +1 = Slightly Warm
+        * +2 = Warm
+        * +3 = Hot
         """
         return self._get_coll('_pmv_coll', self._pmv, PredictedMeanVote, 'PMV')
 
@@ -423,8 +423,8 @@ class PMV(ComfortCollection):
 
         Values are one of the following:
 
-        *   0 = uncomfortable
-        *   1 = comfortable
+        * 0 = uncomfortable
+        * 1 = comfortable
         """
         return self._get_coll('_is_comfortable_coll', self._is_comfortable,
                               ThermalComfort, 'condition')
@@ -436,9 +436,9 @@ class PMV(ComfortCollection):
 
         Values are one of the following:
 
-        *   -1 = cold
-        *    0 = netural
-        *   +1 = hot
+        * -1 = cold
+        * 0 = netural
+        * +1 = hot
         """
         return self._get_coll('_thermal_condition_coll', self._thermal_condition,
                               ThermalCondition, 'condition')
@@ -450,11 +450,11 @@ class PMV(ComfortCollection):
 
         Values are one of the following:
 
-        *   -2 = too dry
-        *   -1 = too cold
-        *    0 = comfortable
-        *   +1 = too hot
-        *   +2 = too humid
+        * -2 = too dry
+        * -1 = too cold
+        * 0 = comfortable
+        * +1 = too hot
+        * +2 = too humid
         """
         return self._get_coll('_discomfort_reason_coll', self._discomfort_reason,
                               DiscomfortReason, 'condition')

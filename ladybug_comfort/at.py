@@ -43,17 +43,17 @@ def apparent_temperature_warning_category(at):
 
     Categories to indicate apparent suggestion:
 
-    *   4 = (>40 C) Minimal clothing; sun protection required.
-    *   3 = (35-40 C) Minimal clothing; sun protection as needed.
-    *   2 = (30-35 C) Short sleeve, shirt and shorts.
-    *   1 = (25-30 C) Light undershirt.
-    *   0 = (20-25 C) Cotton-type slacks (pants).
-    *   -1 = (15-20 C) Normal office wear.
-    *   -2 = (10-15 C) Thin or sleeveless sweater.
-    *   -3 = (5-10 C) Sweater. Thicker underwear.
-    *   -4 = (0-5 C) Coat and sweater.
-    *   -5 = (-5-0 C) Overcoat. Wind protection as needed.
-    *   -6 = (<-5 C) Overcoat. Head insulation. Heavier footwear.
+    * 4 = (>40 C) Minimal clothing; sun protection required.
+    * 3 = (35-40 C) Minimal clothing; sun protection as needed.
+    * 2 = (30-35 C) Short sleeve, shirt and shorts.
+    * 1 = (25-30 C) Light undershirt.
+    * 0 = (20-25 C) Cotton-type slacks (pants).
+    * -1 = (15-20 C) Normal office wear.
+    * -2 = (10-15 C) Thin or sleeveless sweater.
+    * -3 = (5-10 C) Sweater. Thicker underwear.
+    * -4 = (0-5 C) Coat and sweater.
+    * -5 = (-5-0 C) Overcoat. Wind protection as needed.
+    * -6 = (<-5 C) Overcoat. Head insulation. Heavier footwear.
 
     Args:
         at: Apparent temperature [C]

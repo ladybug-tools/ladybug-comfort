@@ -37,11 +37,12 @@ def actual_sensation_vote_effect_category(asv):
 
     Each number (from -2 to 2) represents a certain ASV thermal sensation
     category. With categories being the following:
-    *   -2 = Very cold
-    *   -1 = Cold
-    *   0 = Comfort
-    *   1 = Hot
-    *   2 = Very Hot
+
+    * -2 = Very cold
+    * -1 = Cold
+    * 0 = Comfort
+    * 1 = Hot
+    * 2 = Very Hot
 
     Args:
         asv -- Actual Sensation Vote [unitless]

@@ -15,10 +15,10 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
     (aka. "feels-like" temperature) that attempts to fill the
     follwoing requirements:
 
-    1)	Thermo-physiological significance in the whole range of heat
-        exchange conditions of existing thermal environments
-    2)	Valid in all climates, seasons, and scales
-    3)	Useful for key applications in human biometeorology.
+    1) Thermo-physiological significance in the whole range of heat
+       exchange conditions of existing thermal environments
+    2) Valid in all climates, seasons, and scales
+    3) Useful for key applications in human biometeorology.
 
     This function here is a Python version of the original UTCI_approx
     application written in Fortran. Version a 0.002, October 2009
