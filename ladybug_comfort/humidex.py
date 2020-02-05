@@ -52,11 +52,11 @@ def humidex_degree_of_comfort(humidex):
     Degrees of comfort are provided by the Government of Canada and are indicated
     here with the following integer values:
 
-    *   0 = No discomfort (Humidex of 19 and below)
-    *   1 = Little discomfort (Humidex between 20 - 29)
-    *   2 = Some discomfort (Humidex between 30 - 39)
-    *   3 = Great discomfort; avoid exertion (Humidex between 40 - 45)
-    *   4 = Dangerous; heat stroke possible (Humidex of 45 and above)
+    * 0 = No discomfort (Humidex of 19 and below)
+    * 1 = Little discomfort (Humidex between 20 - 29)
+    * 2 = Some discomfort (Humidex between 30 - 39)
+    * 3 = Great discomfort; avoid exertion (Humidex between 40 - 45)
+    * 4 = Dangerous; heat stroke possible (Humidex of 45 and above)
 
     See: https://www.canada.ca/en/environment-climate-change/services/seasonal-\
 weather-hazards/warm-season-weather-hazards.html#toc7

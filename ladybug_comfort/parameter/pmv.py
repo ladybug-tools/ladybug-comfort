@@ -26,10 +26,10 @@ class PMVParameter(ComfortParameter):
             Default is 0.1 m/s, which is the limit according to ASHRAE-55.
 
     Properties:
-        *    ppd_comfort_thresh
-        *    humid_ratio_upper
-        *    humid_ratio_low
-        *    still_air_threshold
+        * ppd_comfort_thresh
+        * humid_ratio_upper
+        * humid_ratio_low
+        * still_air_threshold
     """
     _model = 'Predicted Mean Vote'
     __slots__ = ('_ppd_thresh', '_hr_upper', '_hr_lower', '_still_thresh')
@@ -105,8 +105,9 @@ class PMVParameter(ComfortParameter):
         """Determine if conditions are comfortable or not.
 
         Values are one of the following:
-            0 = uncomfortable
-            1 = comfortable
+
+        * 0 = uncomfortable
+        * 1 = comfortable
         """
         return 1 if (ppd <= self._ppd_thresh and humidity_ratio >= self._hr_lower and
                      humidity_ratio <= self._hr_upper) else 0
@@ -116,9 +117,9 @@ class PMVParameter(ComfortParameter):
 
         Values are one of the following:
 
-        *    -1 = cold
-        *     0 = netural
-        *    +1 = hot
+        * -1 = cold
+        * 0 = netural
+        * +1 = hot
         """
         if ppd >= self._ppd_thresh:
             return 1 if pmv > 0 else -1
@@ -130,11 +131,11 @@ class PMVParameter(ComfortParameter):
 
         Values are one of the following:
 
-        *    -2 = too dry
-        *    -1 = too cold
-        *     0 = comfortable
-        *    +1 = too hot
-        *    +2 = too humid
+        * -2 = too dry
+        * -1 = too cold
+        * 0 = comfortable
+        * +1 = too hot
+        * +2 = too humid
         """
         if ppd >= self._ppd_thresh:
             return 1 if pmv > 0 else -1

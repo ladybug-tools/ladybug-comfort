@@ -34,11 +34,11 @@ class SolarCalParameter(ComfortParameter):
             always the case except in rare situations of wearing metalic clothing.
 
     Properties:
-        *    posture
-        *    sharp
-        *    body_azimuth
-        *    body_absorptivity
-        *    body_emissivity
+        * posture
+        * sharp
+        * body_azimuth
+        * body_absorptivity
+        * body_emissivity
     """
     _model = 'SolarCal'
     POSTURES = ('standing', 'seated', 'supine')

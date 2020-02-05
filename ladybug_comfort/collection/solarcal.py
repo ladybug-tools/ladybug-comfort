@@ -156,21 +156,21 @@ class OutdoorSolarCal(_SolarCalBase):
             properties of the human geometry.
 
     Properties:
-        *    location
-        *    direct_normal_solar
-        *    diffuse_horizontal_solar
-        *    horizontal_infrared
-        *    surface_temperatures
-        *    fraction_body_exposed
-        *    sky_exposure
-        *    floor_reflectance
-        *    solarcal_body_parameter
-        *    shortwave_effective_radiant_field
-        *    longwave_effective_radiant_field
-        *    shortwave_mrt_delta
-        *    longwave_mrt_delta
-        *    mrt_delta
-        *    mean_radiant_temperature
+        * location
+        * direct_normal_solar
+        * diffuse_horizontal_solar
+        * horizontal_infrared
+        * surface_temperatures
+        * fraction_body_exposed
+        * sky_exposure
+        * floor_reflectance
+        * solarcal_body_parameter
+        * shortwave_effective_radiant_field
+        * longwave_effective_radiant_field
+        * shortwave_mrt_delta
+        * longwave_mrt_delta
+        * mrt_delta
+        * mean_radiant_temperature
     """
     _model = 'Outdoor SolarCal'
     __slots__ = ('_dir_norm', '_diff_horiz', '_horiz_ir', '_srf_temp', '_sky_exp',
@@ -326,18 +326,18 @@ class IndoorSolarCal(_SolarCalBase):
             properties of the human geometry.
 
     Properties:
-        *    location
-        *    direct_normal_solar
-        *    diffuse_horizontal_solar
-        *    longwave_mrt
-        *    fraction_body_exposed
-        *    sky_exposure
-        *    floor_reflectance
-        *    window_transmittance
-        *    solarcal_body_parameter
-        *    effective_radiant_field
-        *    mrt_delta
-        *    mean_radiant_temperature
+        * location
+        * direct_normal_solar
+        * diffuse_horizontal_solar
+        * longwave_mrt
+        * fraction_body_exposed
+        * sky_exposure
+        * floor_reflectance
+        * window_transmittance
+        * solarcal_body_parameter
+        * effective_radiant_field
+        * mrt_delta
+        * mean_radiant_temperature
     """
     _model = 'Indoor SolarCal'
     __slots__ = ('_dir_norm', '_diff_horiz', '_l_mrt', '_sky_exp', '_win_trans',
@@ -465,16 +465,16 @@ class HorizontalSolarCal(_SolarCalBase):
             properties of the human geometry.
 
     Properties:
-        *    location
-        *    direct_horizontal_solar
-        *    diffuse_horizontal_solar
-        *    longwave_mrt
-        *    fraction_body_exposed
-        *    floor_reflectance
-        *    solarcal_body_parameter
-        *    effective_radiant_field
-        *    mrt_delta
-        *    mean_radiant_temperature
+        * location
+        * direct_horizontal_solar
+        * diffuse_horizontal_solar
+        * longwave_mrt
+        * fraction_body_exposed
+        * floor_reflectance
+        * solarcal_body_parameter
+        * effective_radiant_field
+        * mrt_delta
+        * mean_radiant_temperature
     """
     _model = 'Horizontal SolarCal'
     __slots__ = ('_dir_horiz', '_diff_horiz', '_l_mrt', '_erf', '_dmrt',

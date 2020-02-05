@@ -41,22 +41,22 @@ class AdaptiveParameter(ComfortParameter):
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
 
-            *    0 = free-running (completely passive with no air conditioning)
-            *    1 = conditioned (no operable windows and fully air conditioned)
+            * 0 = free-running (completely passive with no air conditioning)
+            * 1 = conditioned (no operable windows and fully air conditioned)
 
             The default is 0 since both the ASHRAE-55 and EN-15251 standards forbid
             the use of adaptive comfort methods when a cooling system is active.
 
     Properties:
-        *    ashrae55_or_en15251
-        *    neutral_offset
-        *    avg_month_or_running_mean
-        *    discrete_or_continuous_air_speed
-        *    cold_prevail_temp_limit
-        *    conditioning
-        *    standard
-        *    prevailing_temperature_method
-        *    minimum_operative
+        * ashrae55_or_en15251
+        * neutral_offset
+        * avg_month_or_running_mean
+        * discrete_or_continuous_air_speed
+        * cold_prevail_temp_limit
+        * conditioning
+        * standard
+        * prevailing_temperature_method
+        * minimum_operative
     """
     _model = 'Adaptive'
     __slots__ = ('_standard', '_neutral_offset', '_prevail_method', '_air_speed_method',
@@ -197,8 +197,8 @@ class AdaptiveParameter(ComfortParameter):
 
         Values are one of the following:
 
-        *    0 = uncomfortable
-        *    1 = comfortable
+        * 0 = uncomfortable
+        * 1 = comfortable
 
         Args:
             comfort_result: An adaptive comfort result dictionary from the
@@ -215,9 +215,9 @@ class AdaptiveParameter(ComfortParameter):
 
         Values are one of the following:
 
-        *    -1 = cold
-        *     0 = netural
-        *    +1 = hot
+        * -1 = cold
+        * 0 = netural
+        * +1 = hot
 
         Args:
             comfort_result: An adaptive comfort result dictionary from the

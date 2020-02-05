@@ -41,13 +41,13 @@ def thermal_sensation_effect_category(ts):
     Each number (from -3 to 3) represents a certain TS thermal sensation
     category. With categories being the following:
 
-    *   -3 = Very cold
-    *   -2 = Quite cold
-    *   -1 = Cold
-    *    0 = Comfort
-    *    1 = Hot
-    *    2 = Quite Hot
-    *    3 = Very hot
+    * -3 = Very cold
+    * -2 = Quite cold
+    * -1 = Cold
+    * 0 = Comfort
+    * 1 = Hot
+    * 2 = Quite Hot
+    * 3 = Very hot
 
     Args:
         ts: Thermal Sensation [unitless]

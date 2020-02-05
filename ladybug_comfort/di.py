@@ -33,16 +33,16 @@ def discomfort_index_effect_category(di):
     Each number (from -6 to 3) represents a certain DI thermal sensation
     category. With categories being the following:
 
-    *   -6 = Hyper-glacial
-    *   -5 = Glacial
-    *   -4 = Extremely cold
-    *   -3 = Very cold
-    *   -2 = Cold
-    *   -1 = Cool
-    *   0 = Comfortable
-    *   1 = Hot
-    *   2 = Very hot
-    *   3 = Torrid
+    * -6 = Hyper-glacial
+    * -5 = Glacial
+    * -4 = Extremely cold
+    * -3 = Very cold
+    * -2 = Cold
+    * -1 = Cool
+    * 0 = Comfortable
+    * 1 = Hot
+    * 2 = Very hot
+    * 3 = Torrid
 
     Args:
         di: Discomfort Index [C]

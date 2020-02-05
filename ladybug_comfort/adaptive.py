@@ -106,8 +106,8 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
 
-            *   0 = free-running (completely passive with no air conditioning)
-            *   1 = conditioned (no operable windows and fully air conditioned)
+            * 0 = free-running (completely passive with no air conditioning)
+            * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
@@ -145,8 +145,8 @@ def adaptive_comfort_conditioned_function(conditioning, model):
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
 
-            *   0 = free-running (completely passive with no air conditioning)
-            *   1 = conditioned (no operable windows and fully air conditioned)
+            * 0 = free-running (completely passive with no air conditioning)
+            * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
@@ -259,8 +259,8 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
 
-            *   0 = free-running (completely passive with no air conditioning)
-            *   1 = conditioned (no operable windows and fully air conditioned)
+            * 0 = free-running (completely passive with no air conditioning)
+            * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
             function.  Chose from: 'EN-15251', 'ASHRAE-55'.
