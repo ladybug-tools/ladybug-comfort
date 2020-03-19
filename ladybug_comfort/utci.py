@@ -2,8 +2,8 @@
 """Utility functions for calculating UTCI."""
 from __future__ import division
 
-from ladybug.rootfind import secant
-from ladybug.rootfind import bisect
+from ladybug.rootfinding import secant
+from ladybug.rootfinding import bisect
 
 import math
 
