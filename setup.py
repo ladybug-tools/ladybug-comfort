@@ -12,11 +12,12 @@ setuptools.setup(
     setup_requires=['setuptools_scm'],
     author="Ladybug Tools",
     author_email="info@ladybug.tools",
-    description="Ladybug comfort is a Python library that adds thermal comfort functionalities to Ladybug.",
+    description="Ladybug comfort is a Python library that adds thermal comfort "
+    "functionalities to Ladybug.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ladybug-tools/ladybug-comfort",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=['tests']),
     include_package_data=True,
     install_requires=requirements,
     classifiers=[
