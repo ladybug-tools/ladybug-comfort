@@ -32,11 +32,11 @@ class PMV(ComfortCollection):
     """PMV comfort DataCollection object.
 
     Args:
-        air_temperature: Data Collection of air temperature values in Celcius.
+        air_temperature: Data Collection of air temperature values in Celsius.
         rel_humidity: Data Collection of relative humidity values in % or a
-            single relative humdity value to be used for the whole analysis.
+            single relative humidity value to be used for the whole analysis.
         rad_temperature: Data Collection of mean radiant temperature (MRT)
-            values in degrees Celcius or a single MRT value to be used for the whole
+            values in degrees Celsius or a single MRT value to be used for the whole
             analysis. If None, this will be the same as the air_temperature.
         air_speed: Data Collection of air speed values in m/s or a single
             air_speed value to be used for the whole analysis. If None, this
@@ -183,7 +183,7 @@ class PMV(ComfortCollection):
             epw: A ladybug EPW object from which the UTCI object will be created.
             include_wind: Set to True to include the EPW wind speed in the calculation.
                 Setting to False will assume a condition that is shielded from wind
-                where the human expereinces a very low wind speed of 0.1 m/s. If
+                where the human experiences a very low wind speed of 0.1 m/s. If
                 included, the wind speed at ground level will be assumed to be 2/3
                 times the meteorological wind speed in the EPW (usually at 10 meters).
                 This follows the standard assumed for UTCI. Default: True to include wind.
@@ -200,7 +200,7 @@ class PMV(ComfortCollection):
                 metabolic rate value to be used for the whole analysis. Default: 2.4 met
                 (walking at 1 m/s, which is the same assumption used in UTCI).
             clo_value: Data Collection of clothing values rate in clo or a single
-                clothing value to be used for the whole analysis. Dfault: 0.7 clo
+                clothing value to be used for the whole analysis. Default: 0.7 clo
                 (long sleeve shirt and pants).
             external_work: Data Collection of external work in met or a single
                 external work value to be used for the whole analysis. Default: 0 met.
@@ -262,7 +262,7 @@ class PMV(ComfortCollection):
         if self._hr_comfort_required is True:
             self._calculate_humidity_ratio()
 
-        # empty properties to be caulculated
+        # empty properties to be calculated
         self._pmv = []
         self._ppd = []
         self._set = []
@@ -344,7 +344,7 @@ class PMV(ComfortCollection):
 
         * 1 met = Metabolic rate of a resting seated person
         * 1.2 met = Metabolic rate of a standing person
-        * 2 met = Metabolic rate of a wlaking person
+        * 2 met = Metabolic rate of a walking person
         * If left blank, default is set to 1.1 met (for seated, typing).
         """
         return self._get_coll('_met_rate_coll', self._met_rate,
@@ -466,36 +466,36 @@ class PMV(ComfortCollection):
 
     @property
     def percent_uncomfortable(self):
-        """The percent of time uncomfortabe given by the assigned comfort_parameter."""
+        """The percent of time uncomfortable given by the assigned comfort_parameter."""
         return 100 - self.percent_comfortable
 
     @property
     def percent_neutral(self):
-        """The percent of time that the thermal_condiiton is neutral."""
+        """The percent of time that the thermal_condition is neutral."""
         _vals = [1 for x in self._thermal_condition if x == 0]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_cold(self):
-        """The percent of time that the thermal_condiiton is cold."""
+        """The percent of time that the thermal_condition is cold."""
         _vals = [1 for x in self._thermal_condition if x == -1]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_hot(self):
-        """The percent of time that the thermal_condiiton is hot."""
+        """The percent of time that the thermal_condition is hot."""
         _vals = [1 for x in self._thermal_condition if x == 1]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_dry(self):
-        """The percent of time that the thermal_condiiton neutral but it is too dry."""
+        """The percent of time that the thermal_condition neutral but it is too dry."""
         _vals = [1 for x in self._discomfort_reason if x == -2]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_humid(self):
-        """The percent of time that the thermal_condiiton neutral but it is too humid."""
+        """The percent of time that the thermal_condition neutral but it is too humid."""
         _vals = [1 for x in self._discomfort_reason if x == 2]
         return (sum(_vals) / self._calc_length) * 100
 
@@ -517,13 +517,13 @@ class PMV(ComfortCollection):
 
     @property
     def cooling_effect(self):
-        """Data Collection of the cooling effect of the air speed in degrees Celcius.
+        """Data Collection of the cooling effect of the air speed in degrees Celsius.
 
         This is the difference between the air temperature and the
         adjusted air temperature [C].
         """
         return self._get_coll('_cooling_effect_coll', self._cooling_effect,
-                              AirTemperatureDelta('Cooling Effect'), 'C')
+                              AirTemperatureDelta('Cooling Effect'), 'dC')
 
     @property
     def heat_loss_conduction(self):

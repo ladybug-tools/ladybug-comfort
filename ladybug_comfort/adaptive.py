@@ -28,8 +28,8 @@ def adaptive_comfort_ashrae55(t_prevail, to):
         -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
         -   deg_comf: The difference between the operative temperature (to)
             and the adaptive comfort neutral temperature (t_comf) [C].
-            Negative values inidcate cool conditions and positive values
-            indicate varm conditions.
+            Negative values indicate cool conditions and positive values
+            indicate warm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.:
@@ -53,7 +53,7 @@ def adaptive_comfort_en15251(t_prevail, to):
     Note:
         [1] CEN (2007) Standard EN15251. Indoor Environmental Input Parameters for
         Design and Assessment of Energy Performance of Buildings: Addressing indoor
-        air quality, thermal environmnet, lighting and acoustics, Brussels: Comite
+        air quality, thermal environment, lighting and acoustics, Brussels: Comite
         Europeen de Normalisation.
 
     Args:
@@ -70,8 +70,8 @@ def adaptive_comfort_en15251(t_prevail, to):
         -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
         -   deg_comf: The difference between the operative temperature (to)
             and the adaptive comfort neutral temperature (t_comf) [C].
-            Negative values inidcate cool conditions and positive values
-            indicate varm conditions.
+            Negative values indicate cool conditions and positive values
+            indicate warm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.:
@@ -92,7 +92,7 @@ def adaptive_comfort_en15251(t_prevail, to):
 def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
     """Get adaptive comfort using SCATs neutral temp function for heated/cooled operation.
 
-    Note that the use of adative comfort methods in conditioned buildings is not
+    Note that the use of adaptive comfort methods in conditioned buildings is not
     an official part of either ASHRAE-55 or EN-15251. For more information on how
     adaptive comfort methods can be applied to conditioned buildings, see the
     neutral_temperature_conditioned function.
@@ -119,8 +119,8 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
         -   t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].
         -   deg_comf: The difference between the operative temperature (to)
             and the adaptive comfort neutral temperature (t_comf) [C].
-            Negative values inidcate cool conditions and positive values
-            indicate varm conditions.
+            Negative values indicate cool conditions and positive values
+            indicate warm conditions.
     """
     # fix upper and lower outdoor temperatures if outside the range of the model
     if t_prevail < 10.0:
@@ -217,7 +217,7 @@ def neutral_temperature_en15251(t_prevail):
 def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
     """Get the neutral temperature for a conditioned or partly conditioned building.
 
-    Note that the use of adative comfort methods in conditioned buildings is not an
+    Note that the use of adaptive comfort methods in conditioned buildings is not an
     official part of any standard. Both the American ASHRAE-55 standard and the
     European EN-15251 standard state that the adaptive model should only be used
     when the following criteria are met:
@@ -280,7 +280,7 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
         t_comf = ((0.09 * conditioning) + (0.33 * inv_conditioning)) * t_prevail + \
             ((22.6 * conditioning) + (18.8 * inv_conditioning))
     else:
-        raise ValueError('Adpative comfort model type {} not recongized. '
+        raise ValueError('Adaptive comfort model type {} not recognized. '
                          'Choose: EN-15251 or ASHRAE-55'.format(model))
     return t_comf
 
@@ -367,7 +367,7 @@ def weighted_running_mean_hourly(outdoor_temperatures, alpha=0.8):
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
     Args:
-        outdoor_temperatures: A list of hourly outdoor temperatures in Celcius for which
+        outdoor_temperatures: A list of hourly outdoor temperatures in Celsius for which
             running mean values will be computed.  The list should contain at least
             168 values (1 week of data) in order to be meaningful.  Lists shorter
             than 24 are not acceptable.
@@ -424,7 +424,7 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
     Args:
-        outdoor_temperatures: A list of daily outdoor temperatures in Celcius for which
+        outdoor_temperatures: A list of daily outdoor temperatures in Celsius for which
             running mean values will be computed.  The list should contain at least
             7 values in order to be meaningful.  Lists shorter than 1 are not acceptable.
         alpha: A constant between 0 and 1 that governs how quickly the running mean
@@ -458,7 +458,7 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
 
 
 def check_prevailing_temperatures_ashrae55(t_prevail):
-    """Check whethr prevailing temperatures are outside permissable ranges for ASHRAE-55.
+    """Check whether prevailing temperatures are outside permissable ranges for ASHRAE-55.
 
     Args:
         t_prevail: A list of prevailing outdoor temperature [C].
@@ -477,7 +477,7 @@ def check_prevailing_temperatures_ashrae55(t_prevail):
 
 
 def check_prevailing_temperatures_en15251(t_prevail):
-    """Check whethr prevailing temperatures are outside permissable ranges for EN-15251.
+    """Check whether prevailing temperatures are outside permissable ranges for EN-15251.
 
     Args:
         t_prevail: A list of prevailing outdoor temperature [C].

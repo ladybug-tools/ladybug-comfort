@@ -34,7 +34,7 @@ class Adaptive(ComfortCollection):
             * A single prevailing outdoor temperature value in C to be used
               for all of the operative_temperature inputs below.
             * A Data Collection of actual outdoor temperatures recorded over
-              the entire year. This Data Collection must be continouous and
+              the entire year. This Data Collection must be continuous and
               must either be an Hourly Collection or Daily Collection. In the event
               that the input comfort_parameter has a prevailing_temperature_method
               of 'Monthly', Monthly collections are also acceptable here. Note
@@ -42,7 +42,7 @@ class Adaptive(ComfortCollection):
               does not have to align with the operative_temperature input.
 
         operative_temperature: Data Collection of operative temperature (To)
-            values in degrees Celcius.
+            values in degrees Celsius.
         air_speed: Data Collection of air speed values in m/s or a single
             air_speed value to be used for the whole analysis. If None, this
             will default to 0.1 m/s.
@@ -123,7 +123,7 @@ class Adaptive(ComfortCollection):
     def from_air_and_rad_temp(cls, outdoor_temperature, air_temperature,
                               rad_temperature=None, air_speed=None,
                               comfort_parameter=None):
-        """Initalize an Adaptive Comfort object from air and radiant temperature."""
+        """Initialize an Adaptive Comfort object from air and radiant temperature."""
         if rad_temperature is None:
             to = air_temperature
         else:
@@ -134,7 +134,7 @@ class Adaptive(ComfortCollection):
 
     def _calculate_adaptive(self):
         """Compute Adaptive comfort for each step of the Data Collection."""
-        # empty properties to be caulculated
+        # empty properties to be calculated
         self._neutral_temperature = []
         self._degrees_from_neutral = []
         self._is_comfortable = []
@@ -203,7 +203,7 @@ class Adaptive(ComfortCollection):
     def degrees_from_neutral(self):
         """Data Collection of the degrees from desired neutral temperature in C."""
         return self._get_coll('_degrees_from_neutral_coll', self._degrees_from_neutral,
-                              OperativeTemperatureDelta, 'C')
+                              OperativeTemperatureDelta, 'dC')
 
     @property
     def is_comfortable(self):
@@ -232,13 +232,13 @@ class Adaptive(ComfortCollection):
 
     @property
     def cooling_effect(self):
-        """Data Collection of the cooling effect of the air speed in degrees Celcius.
+        """Data Collection of the cooling effect of the air speed in degrees Celsius.
 
         This is the difference between the air temperature and the
         adjusted air temperature [C].
         """
         return self._get_coll('_cooling_effect_coll', self._cooling_effect,
-                              OperativeTemperatureDelta, 'C')
+                              OperativeTemperatureDelta, 'dC')
 
     @property
     def percent_comfortable(self):
@@ -247,24 +247,24 @@ class Adaptive(ComfortCollection):
 
     @property
     def percent_uncomfortable(self):
-        """The percent of time uncomfortabe given by the assigned comfort_parameter."""
+        """The percent of time uncomfortable given by the assigned comfort_parameter."""
         return 100 - self.percent_comfortable
 
     @property
     def percent_neutral(self):
-        """The percent of time that the thermal_condiiton is neutral."""
+        """The percent of time that the thermal_condition is neutral."""
         _vals = [1 for x in self._thermal_condition if x == 0]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_cold(self):
-        """The percent of time that the thermal_condiiton is cold."""
+        """The percent of time that the thermal_condition is cold."""
         _vals = [1 for x in self._thermal_condition if x == -1]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_hot(self):
-        """The percent of time that the thermal_condiiton is hot."""
+        """The percent of time that the thermal_condition is hot."""
         _vals = [1 for x in self._thermal_condition if x == 1]
         return (sum(_vals) / self._calc_length) * 100
 
@@ -274,7 +274,7 @@ class PrevailingTemperature(object):
 
     Args:
         outdoor_temperature: A Data Collection of outdoor temperatures recorded
-            over an entire year. This Data Collection must be continouous and
+            over an entire year. This Data Collection must be continuous and
             must either be an Hourly Collection or Daily Collection. In the event
             that the input avg_month is True (for average monthly
             prevailing method), Monthly collections are also acceptable here.

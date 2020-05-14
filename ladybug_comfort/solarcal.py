@@ -38,7 +38,7 @@ def _load_solarcal_splines():
     except IOError:
         solarcal_splines = {}
         print('Failed to import projection factor splines from CSV.'
-              '\nA simpler interoplation method for Solarcal will be used.')
+              '\nA simpler interpolation method for Solarcal will be used.')
     return solarcal_splines
 
 
@@ -53,11 +53,11 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
 
     Args:
         srfs_temp: The temperature of surfaces around the person in degrees
-            Celcius. This includes the ground and any other surfaces
+            Celsius. This includes the ground and any other surfaces
             blocking the view to the sky. When the temperature of these
             individual surfaces are known, the input here should be the
             average temperature of the surfaces weighted by view-factor to the human.
-            When such individaal surface temperatures are unknown, the outdoor
+            When such individual surface temperatures are unknown, the outdoor
             dry bulb temperature is typically used as a proxy.
         horiz_ir: The horizontal infrared radiation intensity from the sky in W/m2.
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
@@ -79,7 +79,7 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         body_absorptivity: A number between 0 and 1 representing the average
             shortwave absorptivity of the body (including clothing and skin color).
@@ -88,21 +88,21 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
             Default is 0.7 for average (brown) skin and medium clothing.
         body_emissivity: A number between 0 and 1 representing the average
             longwave emissivity of the body.  Default is 0.95, which is almost
-            always the case except in rare situations of wearing metalic clothing.
+            always the case except in rare situations of wearing metallic clothing.
 
     Returns:
         A dictionary containing results with the following keys
 
         -   s_erf : The shortwave effective radiant field (ERF) in W/m2.
-        -   s_dmrt : The MRT delta as a result of shortwave irradinace in C.
+        -   s_dmrt : The MRT delta as a result of shortwave irradiance in C.
         -   l_erf : The longwave effective radiant field (ERF) in W/m2.
         -   l_dmrt : The MRT delta as a result of longwave sky exchange in C.
-        -   mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        -   mrt: The final MRT expereinced as a result of sky heat exchange in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
-    # calculate the influence of shorwave irradiance
+    # calculate the influence of shortwave irradiance
     if alt >= 0:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
@@ -163,7 +163,7 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         body_absorptivity: A number between 0 and 1 representing the average
             shortwave absorptivity of the body (including clothing and skin color).
@@ -172,19 +172,19 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
             Default is 0.7 for average (brown) skin and medium clothing.
         body_emissivity: A number between 0 and 1 representing the average
             longwave emissivity of the body.  Default is 0.95, which is almost
-            always the case except in rare situations of wearing metalic clothing.
+            always the case except in rare situations of wearing metallic clothing.
 
     Returns:
         A dictionary containing results with the following keys
 
         -    erf : The shortwave effective radiant field (ERF) in W/m2.
-        -    dmrt : The MRT delta as a result of shortwave irradinace in C.
-        -    mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        -    dmrt : The MRT delta as a result of shortwave irradiance in C.
+        -    mrt: The final MRT expereinced as a result of sky heat exchange in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
-    # calculate the influence of shorwave irradiance
+    # calculate the influence of shortwave irradiance
     if alt >= 0:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
@@ -237,7 +237,7 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         body_absorptivity: A number between 0 and 1 representing the average
             shortwave absorptivity of the body (including clothing and skin color).
@@ -246,19 +246,19 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
             Default is 0.7 for average (brown) skin and medium clothing.
         body_emissivity: A number between 0 and 1 representing the average
             longwave emissivity of the body.  Default is 0.95, which is almost
-            always the case except in rare situations of wearing metalic clothing.
+            always the case except in rare situations of wearing metallic clothing.
 
     Returns:
         A dictionary containing results with the following keys
 
         -    erf : The shortwave effective radiant field (ERF) in W/m2.
-        -    dmrt : The MRT delta as a result of shortwave irradinace in C.
-        -    mrt: The final MRT expereinced as a result of sky heat excahnge in C.
+        -    dmrt : The MRT delta as a result of shortwave irradiance in C.
+        -    mrt: The final MRT expereinced as a result of sky heat exchange in C.
     """
     # set defaults using the input parameters
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
-    # calculate the influence of shorwave irradiance
+    # calculate the influence of shortwave irradiance
     if alt >= 0:
         s_flux = body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar,
                                                   alt, sharp, fract_exposed,
@@ -299,7 +299,7 @@ def erf_from_mrt_delta(mrt_delta, fract_efficiency=0.725, rad_trans_coeff=6.012)
     """Calculate the effective radiant field (ERF) from a MRT delta.
 
     Args:
-        mrt_delta: A mean radiant temperature (MRT) delta in Kelvin or degrees Celcius.
+        mrt_delta: A mean radiant temperature (MRT) delta in Kelvin or degrees Celsius.
         fract_efficiency: A number representing the fraction of the body
             surface exposed to radiation from the environment. This is typically
             either 0.725 for a standing or supine person or 0.696 for a seated
@@ -321,7 +321,7 @@ def longwave_mrt_delta_from_horiz_ir(horiz_ir, srfs_temp, sky_exposure=1,
         horiz_ir: A float value that represents the downwelling horizontal
             infrared radiation intensity in W/m2.
         srfs_temp: The temperature of surfaces around the person in degrees
-            Celcius. This includes the ground and any other surfaces
+            Celsius. This includes the ground and any other surfaces
             blocking the view to the sky. Typically, the dry bulb temperature
             is used when such surface temperatures are unknown.
         sky_exposure: A number between 0 and 1 representing the fraction of the
@@ -339,9 +339,9 @@ def longwave_mrt_delta_from_sky_temp(sky_temp, srfs_temp, sky_exposure=1):
     tend to radiate heat out to space in the longwave portion of the spectrum.
 
     Args:
-        sky_temp: The sky temperature in degrees Celcius.
+        sky_temp: The sky temperature in degrees Celsius.
         srfs_temp: The temperature of surfaces around the person in degrees
-            Celcius. This includes the ground and any other surfaces
+            Celsius. This includes the ground and any other surfaces
             blocking the view to the sky. Typically, the dry bulb temperature
             is used when such surface temperatures are unknown.
         sky_exposure: A number between 0 and 1 representing the fraction of the
@@ -363,7 +363,7 @@ def erf_from_body_solar_flux(solar_flux, body_absorptivity=0.7, body_emissivity=
             Default is 0.7 for average (brown) skin and medium clothing.
         body_emissivity: A number between 0 and 1 representing the average
             longwave emissivity of the body.  Default is 0.95, which is almost
-            always the case except in rare situations of wearing metalic clothing.
+            always the case except in rare situations of wearing metallic clothing.
     """
     return solar_flux * (body_absorptivity / body_emissivity)
 
@@ -380,7 +380,7 @@ def body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar, altitude,
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         sky_exposure: A number between 0 and 1 representing the fraction of the
             sky vault in occupant’s view. Default is 1 for outdoors in an
@@ -423,7 +423,7 @@ def body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar, altitude
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         fract_exposed: A number between 0 and 1 representing the fraction of
             the body exposed to direct sunlight. Note that this does not include the
@@ -493,7 +493,7 @@ def body_dir_from_dir_horiz(dir_horiz_solar, altitude, sharp=135,
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".
@@ -522,7 +522,7 @@ def body_dir_from_dir_normal(dir_normal_solar, altitude, sharp=135,
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".
@@ -566,7 +566,7 @@ def get_projection_factor(altitude, sharp=135, posture='standing'):
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".
@@ -598,7 +598,7 @@ def get_projection_factor_simple(altitude, sharp=135, posture='standing'):
         altitude: A number between 0 and 90 representing the altitude of the
             sun in degrees.
         sharp: A number between 0 and 180 representing the solar horizontal
-            angle relative to front of person (SHARP). Default is 135, asuming
+            angle relative to front of person (SHARP). Default is 135, assuming
             a person typically faces their side or back to the sun to avoid glare.
         posture: A text string indicating the posture of the body. Letters must
             be lowercase.  Choose from the following: "standing", "seated", "supine".

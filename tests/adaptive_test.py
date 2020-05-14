@@ -360,7 +360,7 @@ def test_init_adaptive_collection_mrt():
 
     assert adapt_obj.comfort_model == 'Adaptive'
     assert adapt_obj.calc_length == calc_length
-    str(adapt_obj)  # test that the string representaiton is ok
+    str(adapt_obj)  # test that the string representation is ok
 
     assert isinstance(adapt_obj.prevailing_outdoor_temperature, HourlyContinuousCollection)
     assert len(adapt_obj.prevailing_outdoor_temperature.values) == calc_length

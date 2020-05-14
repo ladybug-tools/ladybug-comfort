@@ -10,7 +10,7 @@ def heating_degree_time(t, t_base=18):
         t: The temperature at a given time interval.
         t_base: The base temperature below which a given time is considered
             to be in heating mode. This should be in the same units as the input
-            temperature. Default is 18 Celcius, which is a common balance point for
+            temperature. Default is 18 Celsius, which is a common balance point for
             buildings.
     """
     if t < t_base:
@@ -26,7 +26,7 @@ def cooling_degree_time(t, t_base=23):
         t: The temperature at a given time interval.
         t_base: The base temperature above which a given time is considered
             to be in cooling mode. This should be in the same units as the input
-            temperature. Default is 23 Celcius, which is a common balance point for
+            temperature. Default is 23 Celsius, which is a common balance point for
             buildings.
     """
     if t > t_base:
