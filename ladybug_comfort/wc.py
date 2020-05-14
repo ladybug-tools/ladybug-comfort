@@ -88,7 +88,7 @@ def windchill_temp(ta, ws):
     It is the perceived decrease in air temperature felt by the body on
     exposed skin due to the flow of air. It's used by both National
     Weather Service (NSW) in US and Canadian Meteorologist service.
-    The formula is derived from Envirnoment Canada [1].
+    The formula is derived from Environment Canada [1].
 
     Note:
         [1]  "Environment Canada - Weather and Meteorology - Canada's Wind

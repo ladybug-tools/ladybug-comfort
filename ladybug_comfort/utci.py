@@ -11,9 +11,9 @@ import math
 def universal_thermal_climate_index(ta, tr, vel, rh):
     """Calculate Universal Thermal Climate Index (UTCI) using a polynomial approximation.
 
-    UTCI is an interational standard for outdoor temperature sensation
+    UTCI is an international standard for outdoor temperature sensation
     (aka. "feels-like" temperature) that attempts to fill the
-    follwoing requirements:
+    following requirements:
 
     1) Thermo-physiological significance in the whole range of heat
        exchange conditions of existing thermal environments
@@ -36,7 +36,7 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
         ta: Air temperature [C]
         tr: Mean radiant temperature [C]
         vel: Wind speed 10 m above ground level [m/s].
-            Note that this meteorolical speed at 10 m is simply 1.5 times the
+            Note that this meteorological speed at 10 m is simply 1.5 times the
             speed felt at ground in the original Fiala model used to build UTCI.
         rh: Relative humidity [%]
 

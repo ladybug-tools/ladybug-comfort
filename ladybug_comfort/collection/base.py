@@ -35,19 +35,19 @@ class ComfortCollection(object):
 
     @property
     def percent_neutral(self):
-        """The percent of time that the thermal_condiiton is neutral."""
+        """The percent of time that the thermal_condition is neutral."""
         raise NotImplementedError('percent_neutral has not yet been implemented for '
                                   '{}.'.format(self.__class__.__name__))
 
     @property
     def percent_cold(self):
-        """The percent of time that the thermal_condiiton is cold."""
+        """The percent of time that the thermal_condition is cold."""
         raise NotImplementedError('percent_cold has not yet been implemented for '
                                   '{}.'.format(self.__class__.__name__))
 
     @property
     def percent_hot(self):
-        """The percent of time that the thermal_condiiton is hot."""
+        """The percent of time that the thermal_condition is hot."""
         raise NotImplementedError('percent_hot has not yet been implemented for '
                                   '{}.'.format(self.__class__.__name__))
 
@@ -71,7 +71,7 @@ class ComfortCollection(object):
             try:
                 return [float(data_coll)] * self.calc_length
             except ValueError:
-                raise TypeError('{} must be either a number or a Data Colleciton. '
+                raise TypeError('{} must be either a number or a Data Collection. '
                                 'Got {}'.format(name, type(data_coll)))
 
     def _get_coll(self, attr_name, value_list, dat_type, unit):

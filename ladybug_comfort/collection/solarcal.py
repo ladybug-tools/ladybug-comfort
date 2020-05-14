@@ -70,7 +70,7 @@ class _SolarCalBase(ComfortCollection):
     @property
     def mrt_delta(self):
         """Data Collection of total MRT delta in C."""
-        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'dC')
 
     @property
     def mean_radiant_temperature(self):
@@ -133,11 +133,11 @@ class OutdoorSolarCal(_SolarCalBase):
         diffuse_horizontal_solar: Hourly Data Collection with the diffuse
             horizontal solar irradiance in W/m2.
         surface_temperatures: Hourly Data Collection with the temperature of surfaces
-            around the person in degrees Celcius. This includes the ground and
+            around the person in degrees Celsius. This includes the ground and
             any other surfaces blocking the view to the sky. When the temperature
             of these individual surfaces are known, the input here should be the
             average temperature of the surfaces weighted by view-factor to the human.
-            When such individaal surface temperatures are unknown, the outdoor
+            When such individual surface temperatures are unknown, the outdoor
             dry bulb temperature is typically used as a proxy.
         horizontal_infrared: Hourly Data Collection with the horizontal infrared
             radiation intensity from the sky in W/m2.
@@ -182,7 +182,7 @@ class OutdoorSolarCal(_SolarCalBase):
                  horizontal_infrared, surface_temperatures,
                  fraction_body_exposed=None, sky_exposure=None,
                  floor_reflectance=None, solarcal_body_parameter=None):
-        """Initalize Outdoor SolarCal object.
+        """Initialize Outdoor SolarCal object.
         """
         # set up the object using radiation as a base
         self._radiation_check(direct_normal_solar, 'direct_normal_solar')
@@ -284,13 +284,13 @@ class OutdoorSolarCal(_SolarCalBase):
     def shortwave_mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
         return self._get_coll('_s_dmrt_coll', self._s_dmrt,
-                              RadiantTemperatureDelta, 'C')
+                              RadiantTemperatureDelta, 'dC')
 
     @property
     def longwave_mrt_delta(self):
         """Data Collection of longwave MRT delta in C."""
         return self._get_coll('_l_dmrt_coll', self._l_dmrt,
-                              RadiantTemperatureDelta, 'C')
+                              RadiantTemperatureDelta, 'dC')
 
 
 class IndoorSolarCal(_SolarCalBase):
@@ -348,7 +348,7 @@ class IndoorSolarCal(_SolarCalBase):
                  longwave_mrt, fraction_body_exposed=None, sky_exposure=None,
                  floor_reflectance=None, window_transmittance=None,
                  solarcal_body_parameter=None):
-        """Initalize Indoor SolarCal object.
+        """Initialize Indoor SolarCal object.
         """
         # set up the object using radiation as a base
         self._radiation_check(direct_normal_solar, 'direct_normal_solar')
@@ -435,7 +435,7 @@ class IndoorSolarCal(_SolarCalBase):
     @property
     def mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
-        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'dC')
 
 
 class HorizontalSolarCal(_SolarCalBase):
@@ -484,7 +484,7 @@ class HorizontalSolarCal(_SolarCalBase):
     def __init__(self, location, direct_horizontal_solar, diffuse_horizontal_solar,
                  longwave_mrt, fraction_body_exposed=None,
                  floor_reflectance=None, solarcal_body_parameter=None):
-        """Initalize Horizontal SolarCal object.
+        """Initialize Horizontal SolarCal object.
         """
         # set up the object using radiation as a base
         self._radiation_check(direct_horizontal_solar, 'direct_horizontal_solar')
@@ -552,4 +552,4 @@ class HorizontalSolarCal(_SolarCalBase):
     @property
     def mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
-        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'C')
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'dC')

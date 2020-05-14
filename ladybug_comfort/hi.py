@@ -51,7 +51,7 @@ def heat_index(ta, rh):
             adjust = ((rh - 85) / 10) * ((87 - tf) / 5)
             hif = hif + adjust
 
-    hi = (hif - 32.) * 5. / 9.  # convert to celcius
+    hi = (hif - 32.) * 5. / 9.  # convert to celsius
 
     return hi
 

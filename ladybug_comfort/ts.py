@@ -4,7 +4,7 @@
 
 def thermal_sensation(ta, ws, rh, sr, tground):
     """Calculate Thermal Sensation (TS) from air temperature, wind speed,
-    relative humidity, solar radiation and groud temperature.
+    relative humidity, solar radiation and ground temperature.
 
     Thermal Sensation is an index which predicts sensation of
     satisfaction/dissatisfaction under the prevailing outdoor climatic

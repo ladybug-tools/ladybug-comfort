@@ -22,11 +22,11 @@ class UTCI(ComfortCollection):
     """UTCI comfort DataCollection object.
 
     Args:
-        air_temperature: Data Collection of air temperature values in Celcius.
+        air_temperature: Data Collection of air temperature values in Celsius.
         rel_humidity: Data Collection of relative humidity values in % or a
-            single relative humdity value to be used for the whole analysis.
+            single relative humidity value to be used for the whole analysis.
         rad_temperature: Data Collection of mean radiant temperature (MRT)
-            values in degrees Celcius or a single MRT value to be used for the whole
+            values in degrees Celsius or a single MRT value to be used for the whole
             analysis. If None, this will be the same as the air_temperature.
         wind_speed: Data Collection of meteorological wind speed values in m/s
             (measured 10 m above the ground) or a single wind speed value to be
@@ -126,7 +126,7 @@ class UTCI(ComfortCollection):
             epw: A ladybug EPW object from which the UTCI object will be created.
             include_wind: Set to True to include the EPW wind speed in the calculation.
                 Setting to False will assume a condition that is shielded from wind
-                where the human expereinces a very low wind speed of 0.1 m/s.
+                where the human experiences a very low wind speed of 0.1 m/s.
                 Default is True to include wind.
             include_sun: Set to True to include the mean radiant temperature (MRT) delta
                 from both shortwave solar falling directly on people and long wave
@@ -352,23 +352,23 @@ class UTCI(ComfortCollection):
 
     @property
     def percent_uncomfortable(self):
-        """The percent of time uncomfortabe given by the assigned comfort_parameter."""
+        """The percent of time uncomfortable given by the assigned comfort_parameter."""
         return 100 - self.percent_comfortable
 
     @property
     def percent_neutral(self):
-        """The percent of time that the thermal_condiiton is neutral."""
+        """The percent of time that the thermal_condition is neutral."""
         return self.percent_comfortable
 
     @property
     def percent_cold(self):
-        """The percent of time that the thermal_condiiton is cold."""
+        """The percent of time that the thermal_condition is cold."""
         _vals = [1 for x in self._thermal_category if x < 0]
         return (sum(_vals) / self._calc_length) * 100
 
     @property
     def percent_hot(self):
-        """The percent of time that the thermal_condiiton is hot."""
+        """The percent of time that the thermal_condition is hot."""
         _vals = [1 for x in self._thermal_category if x > 0]
         return (sum(_vals) / self._calc_length) * 100
 
