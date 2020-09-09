@@ -223,7 +223,7 @@ def test_init_utci_collection():
 
     assert utci_obj.comfort_model == 'Universal Thermal Climate Index'
     assert utci_obj.calc_length == calc_length
-    str(utci_obj)  # test that the string representaiton is ok
+    str(utci_obj)  # test that the string representation is ok
 
     assert isinstance(utci_obj.air_temperature, HourlyContinuousCollection)
     assert len(utci_obj.air_temperature.values) == calc_length
@@ -250,7 +250,7 @@ def test_utci_collection_defaults():
 
     assert isinstance(utci_obj.wind_speed, HourlyContinuousCollection)
     assert len(utci_obj.wind_speed.values) == calc_length
-    assert utci_obj.wind_speed[0] == 0.1
+    assert utci_obj.wind_speed[0] == 0.5
 
     assert isinstance(utci_obj.comfort_parameter, UTCIParameter)
     default_par = UTCIParameter()
