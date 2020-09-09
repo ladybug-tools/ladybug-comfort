@@ -93,7 +93,7 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
         3.45433048e-6 * ta * ta * vel * d_tr + \
         -3.77925774e-7 * ta * ta * ta * vel * d_tr + \
         -1.69699377e-9 * ta * ta * ta * ta * vel * d_tr + \
-        1.69992415e-4 * vel*vel*d_tr + \
+        1.69992415e-4 * vel * vel * d_tr + \
         -4.99204314e-5 * ta * vel * vel * d_tr + \
         2.47417178e-7 * ta * ta * vel * vel * d_tr + \
         1.07596466e-8 * ta * ta * ta * vel * vel * d_tr + \
@@ -327,20 +327,17 @@ def calc_missing_utci_input(target_utci, utci_inputs,
     if utci_inputs['ta'] is None and utci_inputs['tr'] is None:
         def fn(x):
             return universal_thermal_climate_index(
-                x, x, utci_inputs['vel'], utci_inputs['rh']
-                ) - target_utci
+                x, x, utci_inputs['vel'], utci_inputs['rh']) - target_utci
         missing_key = ('ta', 'tr')
     elif utci_inputs['ta'] is None:
         def fn(x):
             return universal_thermal_climate_index(
-                x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']
-                ) - target_utci
+                x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']) - target_utci
         missing_key = 'ta'
     elif utci_inputs['tr'] is None:
         def fn(x):
             return universal_thermal_climate_index(
-                utci_inputs['ta'], x, utci_inputs['vel'], utci_inputs['rh']
-                ) - target_utci
+                utci_inputs['ta'], x, utci_inputs['vel'], utci_inputs['rh']) - target_utci
         missing_key = 'tr'
     elif utci_inputs['vel'] is None:
         def fn(x):
@@ -350,8 +347,7 @@ def calc_missing_utci_input(target_utci, utci_inputs,
     else:
         def fn(x):
             return universal_thermal_climate_index(
-                utci_inputs['ta'], utci_inputs['tr'], utci_inputs['vel'], x
-                ) - target_utci
+                utci_inputs['ta'], utci_inputs['tr'], utci_inputs['vel'], x) - target_utci
         missing_key = 'rh'
 
     # Solve for the missing input using the function.

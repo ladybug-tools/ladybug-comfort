@@ -30,8 +30,9 @@ class UTCI(ComfortCollection):
             analysis. If None, this will be the same as the air_temperature.
         wind_speed: Data Collection of meteorological wind speed values in m/s
             (measured 10 m above the ground) or a single wind speed value to be
-            used for the whole analysis. If None, this will default to a very
-            low wind speed of 0.1 m/s.
+            used for the whole analysis. If None, this will default to a low
+            wind speed of 0.5 m/s, which is the lowest input speed that is
+            recommended for the UTCI model.
         comfort_parameter: Optional UTCIParameter object to specify parameters under
             which conditions are considered acceptable. If None, default will
             assume comfort thresholds consistent with those used by meterologists
@@ -101,7 +102,7 @@ class UTCI(ComfortCollection):
             self._wind_speed = self._check_input(
                 wind_speed, Speed, 'm/s', 'air_speed')
         else:
-            self._wind_speed = [0.1] * self.calc_length
+            self._wind_speed = [0.5] * self.calc_length
 
         # check that all input data collections are aligned.
         BaseCollection.are_collections_aligned(self._input_collections)
@@ -125,9 +126,10 @@ class UTCI(ComfortCollection):
         Args:
             epw: A ladybug EPW object from which the UTCI object will be created.
             include_wind: Set to True to include the EPW wind speed in the calculation.
-                Setting to False will assume a condition that is shielded from wind
-                where the human experiences a very low wind speed of 0.1 m/s.
-                Default is True to include wind.
+                Setting to False will assume a condition that is shielded from
+                wind where the human subject experiences a low wind speed of 0.5 m/s,
+                which is the lowest input speed that is recommended for the UTCI
+                model. Default: True to include wind.
             include_sun: Set to True to include the mean radiant temperature (MRT) delta
                 from both shortwave solar falling directly on people and long wave
                 radiant exchange with the sky. Setting to False will assume a shaded
@@ -161,7 +163,7 @@ class UTCI(ComfortCollection):
             print(utci_protected.percent_neutral)  # comfortable % without sun + wind
         """
         # Get wind and mrt inputs
-        wind_speed = epw.wind_speed if include_wind is True else 0.1
+        wind_speed = epw.wind_speed if include_wind is True else 0.5
         if include_sun is True:
             solarcal_obj = OutdoorSolarCal(epw.location, epw.direct_normal_radiation,
                                            epw.diffuse_horizontal_radiation,
