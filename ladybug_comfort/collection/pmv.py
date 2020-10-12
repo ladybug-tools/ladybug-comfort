@@ -12,7 +12,7 @@ from ladybug.psychrometrics import humid_ratio_from_db_rh
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     StandardEffectiveTemperature, AirTemperature
-from ladybug.datatype.fraction import RelativeHumidity, HumidityRatio, \
+from ladybug.datatype.fraction import Fraction, RelativeHumidity, HumidityRatio, \
     PercentagePeopleDissatisfied
 from ladybug.datatype.speed import Speed, AirSpeed
 from ladybug.datatype.energyflux import MetabolicRate
@@ -120,7 +120,7 @@ class PMV(ComfortCollection):
         # check and set required inputs
         self._air_temperature = air_temperature.values
         self._rel_humidity = self._check_input(
-            rel_humidity, RelativeHumidity, '%', 'rel_humidity')
+            rel_humidity, Fraction, '%', 'rel_humidity')
 
         # check parameters with defaults
         if rad_temperature is not None:
