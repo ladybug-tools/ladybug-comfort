@@ -11,7 +11,7 @@ from ladybug._datacollectionbase import BaseCollection
 
 from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
     AirTemperature, UniversalThermalClimateIndex
-from ladybug.datatype.fraction import RelativeHumidity
+from ladybug.datatype.fraction import Fraction, RelativeHumidity
 from ladybug.datatype.speed import Speed, WindSpeed
 from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition, \
     ThermalConditionFivePoint, ThermalConditionSevenPoint, \
@@ -89,7 +89,7 @@ class UTCI(ComfortCollection):
         # check required inputs
         self._air_temperature = air_temperature.values
         self._rel_humidity = self._check_input(
-            rel_humidity, RelativeHumidity, '%', 'rel_humidity')
+            rel_humidity, Fraction, '%', 'rel_humidity')
 
         # check inputs with defaults
         if rad_temperature is not None:
