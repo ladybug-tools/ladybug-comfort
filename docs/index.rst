@@ -1,10 +1,18 @@
-.. Ladybug Comfort documentation master file, created by
-   sphinx-quickstart on Wed Mar 13 20:09:41 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to Ladybug Comfort's documentation!
 ===================================
+
+.. image:: http://www.ladybug.tools/assets/img/ladybug.png
+
+Ladybug-comfort is a Python library that adds thermal comfort functionalities to
+`ladybug-core <https://github.com/ladybug-tools/ladybug/>`_.
+
+Installation
+============
+
+``pip install -U ladybug-comfort``
+
+Documentation
+=============
 
 .. toctree::
    :maxdepth: 2
