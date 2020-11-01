@@ -11,8 +11,6 @@ Installation
 
 ``pip install -U ladybug-comfort``
 
-Documentation
-=============
 
 .. toctree::
    :maxdepth: 2
