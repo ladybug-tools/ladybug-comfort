@@ -12,7 +12,7 @@ class PMVParameter(ComfortParameter):
     Args:
         ppd_comfort_thresh: A number between 5 and 100 that represents the upper
             threshold of PPD that is considered acceptable.
-            Default is 10, which charcterizes most buildings in the ASHRAE-55 and
+            Default is 10, which characterizes most buildings in the ASHRAE-55 and
             EN-15251 standards.
         humid_ratio_upper: A number between 0 and 1 indicating the upper limit of
             humidity ratio that is considered acceptable. Default is 1 for
@@ -36,9 +36,7 @@ class PMVParameter(ComfortParameter):
 
     def __init__(self, ppd_comfort_thresh=None, humid_ratio_upper=None,
                  humid_ratio_lower=None, still_air_threshold=None):
-        """Initalize PMV Parameters.
-        """
-
+        """Initialize PMV Parameters."""
         self.ppd_comfort_thresh = \
             ppd_comfort_thresh if ppd_comfort_thresh is not None else 10
         self._hr_upper = humid_ratio_upper if humid_ratio_upper is not None else 1
@@ -46,15 +44,12 @@ class PMVParameter(ComfortParameter):
         self._still_thresh = \
             still_air_threshold if still_air_threshold is not None else 0.1
 
-        assert 0 <= self._hr_upper <= 1, \
-            'humid_ratio_upper must be between 0 and 1. Got {}'.format(
+        assert 0.008 <= self._hr_upper <= 1, \
+            'humid_ratio_upper must be between 0.008 and 1. Got {}'.format(
                 self._hr_upper)
-        assert 0 <= self._hr_lower <= 1, \
-            'humid_ratio_lower must be between 0 and 1. Got {}'.format(
+        assert 0 <= self._hr_lower <= 0.005, \
+            'humid_ratio_lower must be between 0 and 0.005. Got {}'.format(
                 self._hr_lower)
-        assert self._hr_lower <= self._hr_upper, \
-            'humid_ratio_lower must be less than humid_ratio_upper. {} > {}'.format(
-                self._hr_lower, self._hr_upper)
 
         assert 0 <= self._still_thresh, \
             'still_air_threshold must be greater than 0. Got {}'.format(
@@ -92,7 +87,7 @@ class PMVParameter(ComfortParameter):
     @property
     def still_air_threshold(self):
         """A number representing the wind speed beyond which the formula for Standard
-        Effective Temperature (SET) is used to dtermine PMV/PPD (as opposed to Fanger's
+        Effective Temperature (SET) is used to determine PMV/PPD (as opposed to Fanger's
         original equation). The default is set to 0.1 m/s.
         """
         return self._still_thresh

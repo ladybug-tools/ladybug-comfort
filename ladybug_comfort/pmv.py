@@ -495,9 +495,8 @@ def ppd_threshold_from_comfort_class(comf_class):
     return ppd_thresh
 
 
-def calc_missing_pmv_input(target_pmv, pmv_inputs,
-                           low_bound=0., up_bound=100., tolerance=0.001,
-                           still_air_threshold=0.1):
+def calc_missing_pmv_input(target_pmv, pmv_inputs, low_bound=0., up_bound=100.,
+                           tolerance=0.001, still_air_threshold=0.1):
     """Return the value of a missing_pmv_input given a target_pmv and the 6 other inputs.
 
     This is particularly useful when trying to draw comfort polygons on charts
@@ -518,7 +517,15 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
 
             .. code-block:: python
 
-                {'ta': 20, 'tr': 20, 'vel': 0.05, 'rh': None,'met': 1.2, 'clo': 0.75, 'wme': 0}
+                {
+                'ta': 20,
+                'tr': 20,
+                'vel': 0.05,
+                'rh': None,
+                'met': 1.2,
+                'clo': 0.75,
+                'wme': 0
+                }
 
         low_bound: The lowest possible value of the missing input you are tying to
             find. Putting in a good value here will help the model converge to a
@@ -533,8 +540,8 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
             Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.
 
     Returns:
-        complete_pmv_inputs -- The pmv_inputs dictionary but with values for all inputs.
-        The missing input to the PMV model will be filled by the value
+        complete_pmv_inputs -- A copy of the pmv_inputs dictionary but with values
+        for all inputs. The missing input to the PMV model will be filled by the value
         that returns the target_pmv.
     """
     assert len(pmv_inputs.keys()) == 7, \
@@ -605,7 +612,8 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs,
     if missing_val is None:
         missing_val = bisect(low_bound, up_bound, fn, tolerance, 0)
 
-    # complete the input dictionary
+    # copy and complete the input dictionary
+    pmv_inputs = pmv_inputs.copy()
     if isinstance(missing_key, str):
         pmv_inputs[missing_key] = missing_val
     else:
