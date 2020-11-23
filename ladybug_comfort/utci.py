@@ -283,8 +283,8 @@ def saturated_vapor_pressure_hpa(db_temp):
     return es
 
 
-def calc_missing_utci_input(target_utci, utci_inputs,
-                            low_bound=0., up_bound=100., tolerance=0.001):
+def calc_missing_utci_input(target_utci, utci_inputs, low_bound=0., up_bound=100.,
+                            tolerance=0.001):
     """Return the value of a missing_utci_input given a target_utci and the 3 other inputs.
 
     This is particularly useful when trying to draw comfort polygons on charts
@@ -316,7 +316,7 @@ def calc_missing_utci_input(target_utci, utci_inputs,
         tolerance: The acceptable error in the target_utci. The default is set to 0.001
 
     Returns:
-        complete_utci_inputs -- The utci_inputs dictionary but with values for
+        complete_utci_inputs -- A copy of the utci_inputs dictionary but with values for
         all inputs. The missing input to the UTCI model will be filled by the value
         that returns the target_utci.
     """
@@ -355,7 +355,8 @@ def calc_missing_utci_input(target_utci, utci_inputs,
     if missing_val is None:
         missing_val = bisect(low_bound, up_bound, fn, tolerance, 0)
 
-    # complete the input dictionary
+    # copy and complete the input dictionary
+    utci_inputs = utci_inputs.copy()
     if isinstance(missing_key, str):
         utci_inputs[missing_key] = missing_val
     else:

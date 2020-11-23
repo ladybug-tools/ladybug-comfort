@@ -44,8 +44,8 @@ class PMV(ComfortCollection):
         met_rate: Data Collection of metabolic rate in met or a single
             metabolic rate value to be used for the whole analysis. If None,
             default is set to 1.1 met (for seated, typing).
-        clo_value: Data Collection of clothing values rate in clo or a single
-            clothing value to be used for the whole analysis. If None, default is
+        clo_value: Data Collection of clothing level in clo or a single clothing
+            value to be used for the whole analysis. If None, default is
             set to 0.7 clo (for long sleeve shirt and pants).
         external_work: Data Collection of external work in met or a single
             external work value to be used for the whole analysis. If None,
