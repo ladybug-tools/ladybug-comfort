@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.utci &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <h1>Source code for ladybug_comfort.utci</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Utility functions for calculating UTCI.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">ladybug.rootfinding</span> <span class="kn">import</span> <span class="n">secant</span>
+<span class="kn">from</span> <span class="nn">ladybug.rootfinding</span> <span class="kn">import</span> <span class="n">bisect</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<div class="viewcode-block" id="universal_thermal_climate_index"><a class="viewcode-back" href="../../ladybug_comfort.utci.html#ladybug_comfort.utci.universal_thermal_climate_index">[docs]</a><span class="k">def</span> <span class="nf">universal_thermal_climate_index</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate Universal Thermal Climate Index (UTCI) using a polynomial approximation.</span>
+
+<span class="sd">    UTCI is an international standard for outdoor temperature sensation</span>
+<span class="sd">    (aka. &quot;feels-like&quot; temperature) that attempts to fill the</span>
+<span class="sd">    following requirements:</span>
+
+<span class="sd">    1) Thermo-physiological significance in the whole range of heat</span>
+<span class="sd">       exchange conditions of existing thermal environments</span>
+<span class="sd">    2) Valid in all climates, seasons, and scales</span>
+<span class="sd">    3) Useful for key applications in human biometeorology.</span>
+
+<span class="sd">    This function here is a Python version of the original UTCI_approx</span>
+<span class="sd">    application written in Fortran. Version a 0.002, October 2009</span>
+<span class="sd">    The original Fortran code can be found at www.utci.org.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        [1] Peter Bröde, Dusan Fiala, Krzysztof Blazejczyk, Yoram Epstein,</span>
+<span class="sd">        Ingvar Holmér, Gerd Jendritzky, Bernhard Kampmann, Mark Richards,</span>
+<span class="sd">        Hannu Rintamäki, Avraham Shitzer, George Havenith. 2009.</span>
+<span class="sd">        Calculating UTCI Equivalent Temperature. In: JW Castellani &amp; TL</span>
+<span class="sd">        Endrusick, eds. Proceedings of the 13th International Conference</span>
+<span class="sd">        on Environmental Ergonomics, USARIEM, Natick, MA.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ta: Air temperature [C]</span>
+<span class="sd">        tr: Mean radiant temperature [C]</span>
+<span class="sd">        vel: Wind speed 10 m above ground level [m/s].</span>
+<span class="sd">            Note that this meteorological speed at 10 m is simply 1.5 times the</span>
+<span class="sd">            speed felt at ground in the original Fiala model used to build UTCI.</span>
+<span class="sd">        rh: Relative humidity [%]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        UTCI_approx -- The Universal Thermal Climate Index (UTCI) for the input</span>
+<span class="sd">        conditions as approximated by a 4-D polynomial.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># set upper and lower limits of air velocity according to Fiala model scenarios</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="k">if</span> <span class="n">vel</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="n">vel</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="mi">17</span> <span class="k">if</span> <span class="n">vel</span> <span class="o">&gt;</span> <span class="mi">17</span> <span class="k">else</span> <span class="n">vel</span>
+
+    <span class="c1"># metrics derived from the inputs used in the polynomial equation</span>
+    <span class="n">eh_pa</span> <span class="o">=</span> <span class="n">saturated_vapor_pressure_hpa</span><span class="p">(</span><span class="n">ta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">rh</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span>  <span class="c1"># partial vapor pressure</span>
+    <span class="n">pa_pr</span> <span class="o">=</span> <span class="n">eh_pa</span> <span class="o">/</span> <span class="mf">10.0</span>  <span class="c1"># convert vapour pressure to kPa</span>
+    <span class="n">d_tr</span> <span class="o">=</span> <span class="n">tr</span> <span class="o">-</span> <span class="n">ta</span>  <span class="c1"># difference between radiant and air temperature</span>
+
+    <span class="n">utci_approx</span> <span class="o">=</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="mf">0.607562052</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0227712343</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="mf">8.06470249e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.54271372e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.24651735e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="mf">7.32602852e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="mf">1.35959073e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.25836520</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">0.0880326035</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">0.00216844454</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.53347087e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.72983704e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.55090145e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.751269505</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00408350271</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.21670675e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">1.94544667e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">1.14099531e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">0.158137256</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.57263143e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">2.22697524e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.16117031e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0127762753</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">9.66891875e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">2.52785852e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">4.56306672e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.74202546e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.91491269e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">+</span> \
+        <span class="mf">0.398374029</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.83945314e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.73754510e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.60781159e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">3.77830287e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">5.43079673e-10</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0200518269</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">8.92859837e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">3.45433048e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.77925774e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.69699377e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.69992415e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.99204314e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">2.47417178e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.07596466e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">8.49242932e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.35191328e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.21531254e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.99410301e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.89489258e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">8.15300114e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">7.55043090e-4</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.65095215e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.52166564e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">2.46688878e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">2.42674348e-10</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.54547250e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">5.24110970e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">8.75874982e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.50743064e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.56236307e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.33895614e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">2.49709824e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">6.51711721e-7</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.94960053e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.00361113e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.21206673e-5</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.18203660e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">7.51269482e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">9.79063848e-11</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.25006734e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.81584736e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.52197671e-10</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.36514630e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.35908359e-10</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">4.17032620e-10</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.30369025e-9</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">4.13908461e-10</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">9.22652254e-12</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.08220384e-9</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.24730961e-11</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.17139133e-10</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">6.62154879e-10</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">4.03863260e-13</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">1.95087203e-12</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.73602469e-12</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">+</span> \
+        <span class="mf">5.12733497</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.312788561</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0196701861</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">9.99690870e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">9.51738512e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.66426341e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.548050612</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00330552823</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00164119440</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.16670694e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">9.52692432e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0429223622</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00500845667</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.00601257e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.81748644e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.25813502e-3</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.79330391e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.34994441e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.29735808e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.29064870e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.28558686e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0369476348</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00162325322</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.14279680e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.59835559e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.77136523e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">8.64203390e-3</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.87405181e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">9.13863872e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">5.15916806e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.59217476e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.28696511e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.10542454e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.24382300e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.38584400e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.20609296e-7</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.32469180e-4</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.87381964e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">4.80925239e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">8.75492040e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.77862930e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.06004592e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.14325367e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.53016723e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.72857035e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.95079398e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.59413173e-7</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">7.04388046e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.89309167e-8</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.79768731e-7</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">7.96079978e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.62897058e-9</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.94367674e-8</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.18566247e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.34678041e-10</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.15606447e-10</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.80626406</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.548712484</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00399428410</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">9.54009191e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.93090978e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.308806365</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.0116952364</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">4.95271903e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.90710882e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00210787756</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.98445738e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.30109073e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">4.17856590e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.27043871e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.04620472e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.0514507424</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00432510997</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">8.99281156e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.14663943e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.66016305e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.63789586e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.01199003e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">1.06823306e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.61341136e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.29748967e-7</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.04788893e-4</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.42070836e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.16257971e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">7.68023384e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.47446896e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">3.59937910e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.36497725e-6</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.68737969e-7</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.67489271e-8</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.23926897e-9</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0353874123</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.221201190</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.0155126038</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">2.63917279e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.0453433455</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00432943862</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.45389826e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.17508610e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.66724702e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.33217140e-5</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00226921615</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.80261982e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.45314314e-9</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">7.96355448e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.53458034e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.31223658e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">3.02122035e-4</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.77403547e-6</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.73825715e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.09087898e-7</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.614155345</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.0616755931</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00133374846</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00355375387</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">5.13027851e-4</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">1.02449757e-4</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00148526421</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">4.11469183e-5</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">6.80434415e-6</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">9.77675906e-6</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.0882773108</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="o">-</span><span class="mf">0.00301859306</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00104452989</span> <span class="o">*</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">2.47090539e-4</span> <span class="o">*</span> <span class="n">d_tr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">+</span> \
+        <span class="mf">0.00148348065</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span> <span class="o">*</span> <span class="n">pa_pr</span>
+
+    <span class="k">return</span> <span class="n">utci_approx</span></div>
+
+
+<div class="viewcode-block" id="saturated_vapor_pressure_hpa"><a class="viewcode-back" href="../../ladybug_comfort.utci.html#ladybug_comfort.utci.saturated_vapor_pressure_hpa">[docs]</a><span class="k">def</span> <span class="nf">saturated_vapor_pressure_hpa</span><span class="p">(</span><span class="n">db_temp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate saturated vapor pressure (hPa) at temperature (C).</span>
+
+<span class="sd">    This equation of saturation vapor pressure is specific to the UTCI model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">2836.5744</span><span class="p">,</span> <span class="o">-</span><span class="mf">6028.076559</span><span class="p">,</span> <span class="mf">19.54263612</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02737830188</span><span class="p">,</span> <span class="mf">0.000016261698</span><span class="p">,</span>
+         <span class="mf">7.0229056e-10</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8680009e-13</span><span class="p">)</span>
+    <span class="n">tk</span> <span class="o">=</span> <span class="n">db_temp</span> <span class="o">+</span> <span class="mf">273.15</span>  <span class="c1"># air temp in K</span>
+    <span class="n">es</span> <span class="o">=</span> <span class="mf">2.7150305</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tk</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        <span class="n">es</span> <span class="o">=</span> <span class="n">es</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">tk</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)))</span>
+    <span class="n">es</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">es</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span>
+    <span class="k">return</span> <span class="n">es</span></div>
+
+
+<div class="viewcode-block" id="calc_missing_utci_input"><a class="viewcode-back" href="../../ladybug_comfort.utci.html#ladybug_comfort.utci.calc_missing_utci_input">[docs]</a><span class="k">def</span> <span class="nf">calc_missing_utci_input</span><span class="p">(</span><span class="n">target_utci</span><span class="p">,</span> <span class="n">utci_inputs</span><span class="p">,</span> <span class="n">low_bound</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">up_bound</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
+                            <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the value of a missing_utci_input given a target_utci and the 3 other inputs.</span>
+
+<span class="sd">    This is particularly useful when trying to draw comfort polygons on charts</span>
+<span class="sd">    using the UTCI model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_utci: The target UTCI temperature that you are trying to produce</span>
+<span class="sd">            from the inputs to the UTCI model.</span>
+<span class="sd">        utci_inputs: A dictionary of 4 UTCI inputs with the following keys:</span>
+<span class="sd">            &#39;ta&#39;, &#39;tr&#39;, &#39;vel&#39;, &#39;rh&#39;.  Each key should correspond to a value</span>
+<span class="sd">            that represents that UTCI input but one of these inputs should</span>
+<span class="sd">            have a value of None.</span>
+<span class="sd">            The input corresponding to None will be solved for by this function.</span>
+<span class="sd">            One can also input None for both &#39;ta&#39; and &#39;tr&#39; to solve for the operative</span>
+<span class="sd">            temperature that meets the target_utci. In this case, both &#39;ta&#39; and &#39;tr&#39;</span>
+<span class="sd">            in the output dictionary will be the same.</span>
+<span class="sd">            Example (solving for relative humidity):</span>
+
+<span class="sd">         .. code-block:: python</span>
+
+<span class="sd">            {&#39;ta&#39;: 20, &#39;tr&#39;: 20, &#39;vel&#39;: 0.05, &#39;rh&#39;: None}</span>
+
+<span class="sd">        low_bound: The lowest possible value of the missing input you are tying to</span>
+<span class="sd">            find. Putting in a good value here will help the model converge to a</span>
+<span class="sd">            solution faster.</span>
+<span class="sd">        up_bound: The highest possible value of the missing input you are tying to</span>
+<span class="sd">            find. Putting in a good value here will help the model converge to a</span>
+<span class="sd">            solution faster.</span>
+<span class="sd">        tolerance: The acceptable error in the target_utci. The default is set to 0.001</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        complete_utci_inputs -- A copy of the utci_inputs dictionary but with values for</span>
+<span class="sd">        all inputs. The missing input to the UTCI model will be filled by the value</span>
+<span class="sd">        that returns the target_utci.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">utci_inputs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">4</span><span class="p">,</span> \
+        <span class="s1">&#39;utci_inputs must have 4 keys. Got </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">utci_inputs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+    <span class="c1"># Determine the function that should be used given the missing input.</span>
+    <span class="k">if</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">target_utci</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ta&#39;</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">target_utci</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;ta&#39;</span>
+    <span class="k">elif</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span>
+                <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">target_utci</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;tr&#39;</span>
+    <span class="k">elif</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">target_utci</span> <span class="o">-</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span>
+                <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">])</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;vel&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span>
+                <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">utci_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">target_utci</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;rh&#39;</span>
+
+    <span class="c1"># Solve for the missing input using the function.</span>
+    <span class="n">missing_val</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">low_bound</span><span class="p">,</span> <span class="n">up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing_val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">missing_val</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">low_bound</span><span class="p">,</span> <span class="n">up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># copy and complete the input dictionary</span>
+    <span class="n">utci_inputs</span> <span class="o">=</span> <span class="n">utci_inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">missing_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">utci_inputs</span><span class="p">[</span><span class="n">missing_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing_val</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">missing_key</span><span class="p">:</span>
+            <span class="n">utci_inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing_val</span>
+    <span class="k">return</span> <span class="n">utci_inputs</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

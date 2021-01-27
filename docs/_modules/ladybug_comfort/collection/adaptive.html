@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.collection.adaptive &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <h1>Source code for ladybug_comfort.collection.adaptive</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Object for calculating Adaptive comfort from DataCollections.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..adaptive</span> <span class="kn">import</span> <span class="n">adaptive_comfort_ashrae55</span><span class="p">,</span> <span class="n">adaptive_comfort_en15251</span><span class="p">,</span> \
+    <span class="n">adaptive_comfort_conditioned_function</span><span class="p">,</span> <span class="n">cooling_effect_ashrae55</span><span class="p">,</span> \
+    <span class="n">cooling_effect_en15251</span><span class="p">,</span> <span class="n">t_operative</span><span class="p">,</span> \
+    <span class="n">weighted_running_mean_hourly</span><span class="p">,</span> <span class="n">weighted_running_mean_daily</span>
+<span class="kn">from</span> <span class="nn">..parameter.adaptive</span> <span class="kn">import</span> <span class="n">AdaptiveParameter</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">ComfortCollection</span>
+
+<span class="kn">from</span> <span class="nn">ladybug._datacollectionbase</span> <span class="kn">import</span> <span class="n">BaseCollection</span>
+<span class="kn">from</span> <span class="nn">ladybug.datacollection</span> <span class="kn">import</span> <span class="n">HourlyContinuousCollection</span><span class="p">,</span> <span class="n">DailyCollection</span><span class="p">,</span> \
+    <span class="n">MonthlyCollection</span><span class="p">,</span> <span class="n">MonthlyPerHourCollection</span><span class="p">,</span> <span class="n">HourlyDiscontinuousCollection</span>
+<span class="kn">from</span> <span class="nn">ladybug.analysisperiod</span> <span class="kn">import</span> <span class="n">AnalysisPeriod</span>
+
+<span class="kn">from</span> <span class="nn">ladybug.datatype.temperature</span> <span class="kn">import</span> <span class="n">Temperature</span><span class="p">,</span> <span class="n">OperativeTemperature</span><span class="p">,</span> \
+    <span class="n">PrevailingOutdoorTemperature</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.speed</span> <span class="kn">import</span> <span class="n">Speed</span><span class="p">,</span> <span class="n">AirSpeed</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.thermalcondition</span> <span class="kn">import</span> <span class="n">ThermalComfort</span><span class="p">,</span> <span class="n">ThermalCondition</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.temperaturedelta</span> <span class="kn">import</span> <span class="n">OperativeTemperatureDelta</span>
+
+
+<div class="viewcode-block" id="Adaptive"><a class="viewcode-back" href="../../../ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive">[docs]</a><span class="k">class</span> <span class="nc">Adaptive</span><span class="p">(</span><span class="n">ComfortCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Adaptive comfort DataCollection object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outdoor_temperature: Either one of the following inputs are acceptable:</span>
+
+<span class="sd">            * A Data Collection of prevailing outdoor temperature values in C.</span>
+<span class="sd">              Such a Data Collection must align with the operative_temperature</span>
+<span class="sd">              input and bear the PrevailingOutdoorTemperature data type in</span>
+<span class="sd">              its header.</span>
+<span class="sd">            * A single prevailing outdoor temperature value in C to be used</span>
+<span class="sd">              for all of the operative_temperature inputs below.</span>
+<span class="sd">            * A Data Collection of actual outdoor temperatures recorded over</span>
+<span class="sd">              the entire year. This Data Collection must be continuous and</span>
+<span class="sd">              must either be an Hourly Collection or Daily Collection. In the event</span>
+<span class="sd">              that the input comfort_parameter has a prevailing_temperature_method</span>
+<span class="sd">              of &#39;Monthly&#39;, Monthly collections are also acceptable here. Note</span>
+<span class="sd">              that, because an annual input is required, this input collection</span>
+<span class="sd">              does not have to align with the operative_temperature input.</span>
+
+<span class="sd">        operative_temperature: Data Collection of operative temperature (To)</span>
+<span class="sd">            values in degrees Celsius.</span>
+<span class="sd">        air_speed: Data Collection of air speed values in m/s or a single</span>
+<span class="sd">            air_speed value to be used for the whole analysis. If None, this</span>
+<span class="sd">            will default to 0.1 m/s.</span>
+<span class="sd">        comfort_parameter: Optional AdaptiveParameter object to specify parameters</span>
+<span class="sd">            under which conditions are considered acceptable. If None, default will</span>
+<span class="sd">            assume ASHRAE-55 criteria.</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        * prevailing_outdoor_temperature</span>
+<span class="sd">        * operative_temperature</span>
+<span class="sd">        * air_speed</span>
+<span class="sd">        * comfort_parameter</span>
+<span class="sd">        * neutral_temperature</span>
+<span class="sd">        * degrees_from_neutral</span>
+<span class="sd">        * is_comfortable</span>
+<span class="sd">        * thermal_condition</span>
+<span class="sd">        * cooling_effect</span>
+<span class="sd">        * percent_comfortable</span>
+<span class="sd">        * percent_uncomfortable</span>
+<span class="sd">        * percent_neutral</span>
+<span class="sd">        * percent_hot</span>
+<span class="sd">        * percent_cold</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_model</span> <span class="o">=</span> <span class="s1">&#39;Adaptive&#39;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_op_temp&#39;</span><span class="p">,</span> <span class="s1">&#39;_air_speed&#39;</span><span class="p">,</span> <span class="s1">&#39;_comfort_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_t_out&#39;</span><span class="p">,</span> <span class="s1">&#39;_prevail_temp&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_neutral_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;_degrees_from_neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;_is_comfortable&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_thermal_condition&#39;</span><span class="p">,</span> <span class="s1">&#39;_cooling_effect&#39;</span><span class="p">,</span> <span class="s1">&#39;_is_comfortable_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_thermal_condition_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_op_temp_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_air_speed_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_comfort_par_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_t_out_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_prevail_temp_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_neutral_temperature_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_degrees_from_neutral_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_cooling_effect_coll&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outdoor_temperature</span><span class="p">,</span> <span class="n">operative_temperature</span><span class="p">,</span> <span class="n">air_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">comfort_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize an Adaptive comfort object from DataCollections of inputs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># set up the object using operative temperature as a base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_datacoll</span><span class="p">(</span><span class="n">operative_temperature</span><span class="p">,</span> <span class="n">Temperature</span><span class="p">,</span>
+                             <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;operative_temperature&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">operative_temperature</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">operative_temperature</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_collection</span> <span class="o">=</span> <span class="n">operative_temperature</span>
+
+        <span class="c1"># check model inputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_op_temp</span> <span class="o">=</span> <span class="n">operative_temperature</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">if</span> <span class="n">air_speed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span><span class="n">air_speed</span><span class="p">,</span> <span class="n">Speed</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span><span class="p">,</span> <span class="s1">&#39;air_speed&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_length</span>
+
+        <span class="c1"># check comfort parameters</span>
+        <span class="k">if</span> <span class="n">comfort_parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span> <span class="o">=</span> <span class="n">AdaptiveParameter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comfort_parameter</span><span class="p">,</span> <span class="n">AdaptiveParameter</span><span class="p">),</span> \
+                <span class="s1">&#39;comfort_parameter must be an AdaptiveParameter object. &#39;</span>\
+                <span class="s1">&#39;Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">comfort_parameter</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span> <span class="o">=</span> <span class="n">comfort_parameter</span>
+
+        <span class="c1"># check outdoor_temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span> <span class="o">=</span> <span class="n">outdoor_temperature</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="n">BaseCollection</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> \
+                <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">data_type</span><span class="p">,</span> <span class="n">PrevailingOutdoorTemperature</span><span class="p">):</span>
+            <span class="c1"># it is a data collection of actual recorded outdoor temperatures</span>
+            <span class="n">prev_obj</span> <span class="o">=</span> <span class="n">PrevailingTemperature</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">avg_month_or_running_mean</span><span class="p">)</span>
+            <span class="n">prevail_collection</span> <span class="o">=</span> <span class="n">prev_obj</span><span class="o">.</span><span class="n">get_aligned_prevailing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_collection</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_temp</span> <span class="o">=</span> <span class="n">prevail_collection</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># it is either a data collection or single value of prevailing temperature</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="n">PrevailingOutdoorTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;outdoor_temperature&#39;</span><span class="p">)</span>
+
+        <span class="c1"># calculate Adaptive comfort</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_adaptive</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Adaptive.from_air_and_rad_temp"><a class="viewcode-back" href="../../../ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.from_air_and_rad_temp">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_air_and_rad_temp</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">outdoor_temperature</span><span class="p">,</span> <span class="n">air_temperature</span><span class="p">,</span>
+                              <span class="n">rad_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">air_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                              <span class="n">comfort_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize an Adaptive Comfort object from air and radiant temperature.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rad_temperature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">to</span> <span class="o">=</span> <span class="n">air_temperature</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">to</span> <span class="o">=</span> <span class="n">BaseCollection</span><span class="o">.</span><span class="n">compute_function_aligned</span><span class="p">(</span>
+                <span class="n">t_operative</span><span class="p">,</span> <span class="p">[</span><span class="n">air_temperature</span><span class="p">,</span> <span class="n">rad_temperature</span><span class="p">],</span>
+                <span class="n">OperativeTemperature</span><span class="p">(),</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">outdoor_temperature</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">air_speed</span><span class="p">,</span> <span class="n">comfort_parameter</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_calculate_adaptive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute Adaptive comfort for each step of the Data Collection.&quot;&quot;&quot;</span>
+        <span class="c1"># empty properties to be calculated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_temperature</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_degrees_from_neutral</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_comfortable</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_effect</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># determine the comfort function to use</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">conditioning</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">comf_funct</span> <span class="o">=</span> <span class="n">adaptive_comfort_conditioned_function</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">conditioning</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">ashrae55_or_en15251</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">comf_funct</span> <span class="o">=</span> <span class="n">adaptive_comfort_ashrae55</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">comf_funct</span> <span class="o">=</span> <span class="n">adaptive_comfort_en15251</span>
+
+        <span class="c1"># determine the cooling effect function to use</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">discrete_or_continuous_air_speed</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">cooling_funct</span> <span class="o">=</span> <span class="n">cooling_effect_ashrae55</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cooling_funct</span> <span class="o">=</span> <span class="n">cooling_effect_en15251</span>
+
+        <span class="c1"># perform the Adaptive calculation</span>
+        <span class="k">for</span> <span class="n">tp</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">vel</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prevail_temp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_op_temp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">comf_funct</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+            <span class="n">ce</span> <span class="o">=</span> <span class="n">cooling_funct</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+            <span class="n">comf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">is_comfortable</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">ce</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">comf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">condit</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;deg_comf&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">condit</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_temperature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;t_comf&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_degrees_from_neutral</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;deg_comf&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_comfortable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comf</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condit</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_effect</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ce</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">prevailing_outdoor_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of prevailing outdoor temperature in degrees C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_prevail_temp_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_temp</span><span class="p">,</span>
+                              <span class="n">PrevailingOutdoorTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">operative_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of operative temperature in degrees C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_op_temp_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_op_temp</span><span class="p">,</span> <span class="n">OperativeTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">air_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of air speed in m/s.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_air_speed_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed</span><span class="p">,</span> <span class="n">AirSpeed</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">comfort_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adaptive comfort parameters that are assigned to this object.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">duplicate</span><span class="p">()</span>  <span class="c1"># duplicate since neutral_offset is setable</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">neutral_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of the desired neutral temperature in degrees C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_neutral_temperature_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_temperature</span><span class="p">,</span>
+                              <span class="n">OperativeTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">degrees_from_neutral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of the degrees from desired neutral temperature in C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_degrees_from_neutral_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degrees_from_neutral</span><span class="p">,</span>
+                              <span class="n">OperativeTemperatureDelta</span><span class="p">,</span> <span class="s1">&#39;dC&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_comfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting whether the input conditions are</span>
+<span class="sd">        acceptable according to the assigned comfort_parameter.</span>
+
+<span class="sd">        Values are one of the following:</span>
+<span class="sd">        * 0 = uncomfortable</span>
+<span class="sd">        * 1 = comfortable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_is_comfortable_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_comfortable</span><span class="p">,</span>
+                              <span class="n">ThermalComfort</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status of a subject</span>
+<span class="sd">        according to the assigned comfort_parameter.</span>
+
+<span class="sd">        Values are one of the following:</span>
+<span class="sd">        * -1 = cold</span>
+<span class="sd">        * 0 = netural</span>
+<span class="sd">        * +1 = hot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_thermal_condition_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span><span class="p">,</span>
+                              <span class="n">ThermalCondition</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cooling_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of the cooling effect of the air speed in degrees Celsius.</span>
+
+<span class="sd">        This is the difference between the air temperature and the</span>
+<span class="sd">        adjusted air temperature [C].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_cooling_effect_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_effect</span><span class="p">,</span>
+                              <span class="n">OperativeTemperatureDelta</span><span class="p">,</span> <span class="s1">&#39;dC&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_comfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time comfortabe given by the assigned comfort_parameter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_comfortable</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_uncomfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time uncomfortable given by the assigned comfort_parameter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">100</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">percent_comfortable</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_neutral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is neutral.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_cold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is cold.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_hot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is hot.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_condition</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span></div>
+
+
+<div class="viewcode-block" id="PrevailingTemperature"><a class="viewcode-back" href="../../../ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature">[docs]</a><span class="k">class</span> <span class="nc">PrevailingTemperature</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get prevailing temperature from annual DataCollections of outdoor temperature.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outdoor_temperature: A Data Collection of outdoor temperatures recorded</span>
+<span class="sd">            over an entire year. This Data Collection must be continuous and</span>
+<span class="sd">            must either be an Hourly Collection or Daily Collection. In the event</span>
+<span class="sd">            that the input avg_month is True (for average monthly</span>
+<span class="sd">            prevailing method), Monthly collections are also acceptable here.</span>
+<span class="sd">        avg_month: A boolean to note whether the prevailing outdoor</span>
+<span class="sd">            temperature is computed from the average monthly temperature (True) or</span>
+<span class="sd">            a weighted running mean of the last week (False).  The default is True.</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        * avg_month_or_running_mean</span>
+<span class="sd">        * hourly_prevailing_temperature</span>
+<span class="sd">        * daily_prevailing_temperature</span>
+<span class="sd">        * monthly_prevailing_temperature</span>
+<span class="sd">        * monthly_per_hour_prevailing_temperature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_t_out&#39;</span><span class="p">,</span> <span class="s1">&#39;_head&#39;</span><span class="p">,</span> <span class="s1">&#39;_avg_month&#39;</span><span class="p">,</span> <span class="s1">&#39;_hourly_prevail&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_daily_prevail&#39;</span><span class="p">,</span> <span class="s1">&#39;_monthly_prevail&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outdoor_temperature</span><span class="p">,</span> <span class="n">avg_month</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize an prevailing temperature object from DataCollections of inputs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># perform checks on the inputs</span>
+        <span class="n">acceptabe</span> <span class="o">=</span> <span class="p">(</span><span class="n">HourlyContinuousCollection</span><span class="p">,</span> <span class="n">DailyCollection</span><span class="p">,</span> <span class="n">MonthlyCollection</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outdoor_temperature</span><span class="p">,</span> <span class="n">acceptabe</span><span class="p">),</span> \
+            <span class="s1">&#39;outdoor_temperature must be one of the following: </span><span class="si">{}</span><span class="s1">.</span><span class="se">\n</span><span class="s1"> Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">acceptabe</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">outdoor_temperature</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span> <span class="o">=</span> <span class="n">outdoor_temperature</span><span class="o">.</span><span class="n">duplicate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">header</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span> <span class="o">=</span> <span class="n">avg_month</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">data_type</span><span class="p">,</span> <span class="n">Temperature</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;outdoor_temperature must be Temperature in C. Got </span><span class="si">{}</span><span class="s1"> in </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">data_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">is_continuous</span><span class="p">,</span> <span class="s1">&#39;outdoor_temperature must be continuous.&#39;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">is_annual</span><span class="p">,</span> <span class="s1">&#39;outdoor_temperature must be annual&#39;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span> <span class="s1">&#39;avg_month&#39;</span> \
+            <span class="s1">&#39; must be a boolean. Got </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span><span class="p">))</span>
+
+        <span class="c1"># defaults to be calculated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># calculate the base data of prevailing temperature</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="p">(</span><span class="n">HourlyContinuousCollection</span><span class="p">,</span> <span class="n">DailyCollection</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">average_monthly</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="n">MonthlyCollection</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="n">HourlyContinuousCollection</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span> <span class="o">=</span> <span class="n">weighted_running_mean_hourly</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="p">,</span> <span class="n">DailyCollection</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span> <span class="o">=</span> <span class="n">weighted_running_mean_daily</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t_out</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">val</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;outdoor_temperature must be hourly or daily when &#39;</span>
+                                <span class="s1">&#39;avg_month is False.&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The input avg_month.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hourly_prevailing_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;HourlyContinuousCollection of prevailing outdoor temperature in C.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail_from_monthly</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HourlyContinuousCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_header</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">daily_prevailing_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;DailyCollection of prevailing outdoor temperature in C.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_avg_month</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail_from_monthly</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail_from_hourly</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">DailyCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_header</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">doys_int</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">monthly_prevailing_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;MonthlyCollection of prevailing outdoor temperature in C.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_prevailing_temperature</span><span class="o">.</span><span class="n">average_monthly</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MonthlyCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_header</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">months_int</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">monthly_per_hour_prevailing_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;MonthlyPerHourCollection of prevailing outdoor temperature in C.&quot;&quot;&quot;</span>
+        <span class="n">mon_per_hr_vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monthly_prevailing_temperature</span><span class="p">:</span>
+            <span class="n">mon_per_hr_vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">val</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MonthlyPerHourCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_header</span><span class="p">(),</span> <span class="n">mon_per_hr_vals</span><span class="p">,</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">months_per_hour</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrevailingTemperature.hourly_prevailing_temperature_timestep"><a class="viewcode-back" href="../../../ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">hourly_prevailing_temperature_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;HourlyContinuousCollection of prevailing temperature at timestep.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timestep</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">hourly_coll</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_prevailing_temperature</span>
+            <span class="n">_new_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">hourly_coll</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+                <span class="n">_new_values</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">val</span><span class="p">]</span> <span class="o">*</span> <span class="n">timestep</span><span class="p">)</span>
+            <span class="n">a_per</span> <span class="o">=</span> <span class="n">hourly_coll</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">analysis_period</span>
+            <span class="n">_new_a_per</span> <span class="o">=</span> <span class="n">AnalysisPeriod</span><span class="p">(</span><span class="n">a_per</span><span class="o">.</span><span class="n">st_month</span><span class="p">,</span> <span class="n">a_per</span><span class="o">.</span><span class="n">st_day</span><span class="p">,</span> <span class="n">a_per</span><span class="o">.</span><span class="n">st_hour</span><span class="p">,</span>
+                                        <span class="n">a_per</span><span class="o">.</span><span class="n">end_month</span><span class="p">,</span> <span class="n">a_per</span><span class="o">.</span><span class="n">end_day</span><span class="p">,</span> <span class="n">a_per</span><span class="o">.</span><span class="n">end_hour</span><span class="p">,</span>
+                                        <span class="n">timestep</span><span class="p">,</span> <span class="n">a_per</span><span class="o">.</span><span class="n">is_leap_year</span><span class="p">)</span>
+            <span class="n">_new_header</span> <span class="o">=</span> <span class="n">hourly_coll</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">duplicate</span><span class="p">()</span>
+            <span class="n">_new_header</span><span class="o">.</span><span class="n">_analysis_period</span> <span class="o">=</span> <span class="n">_new_a_per</span>
+            <span class="k">return</span> <span class="n">HourlyContinuousCollection</span><span class="p">(</span><span class="n">_new_header</span><span class="p">,</span> <span class="n">_new_values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_prevailing_temperature</span></div>
+
+<div class="viewcode-block" id="PrevailingTemperature.get_aligned_prevailing"><a class="viewcode-back" href="../../../ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.get_aligned_prevailing">[docs]</a>    <span class="k">def</span> <span class="nf">get_aligned_prevailing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Get a Prevailing Temperature Collection aligned with input collection.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">HourlyContinuousCollection</span><span class="p">):</span>
+            <span class="n">new_coll</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_prevailing_temperature_timestep</span><span class="p">(</span>
+                <span class="n">collection</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">collection</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">is_annual</span><span class="p">:</span>
+                <span class="n">new_coll</span> <span class="o">=</span> <span class="n">new_coll</span><span class="o">.</span><span class="n">filter_by_analysis_period</span><span class="p">(</span>
+                    <span class="n">collection</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">analysis_period</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_coll</span>
+
+        <span class="n">new_coll</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_aligned_collection</span><span class="p">(</span>
+            <span class="n">data_type</span><span class="o">=</span><span class="n">PrevailingOutdoorTemperature</span><span class="p">(),</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">HourlyDiscontinuousCollection</span><span class="p">):</span>
+            <span class="n">prevail_val_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_prevailing_temperature_timestep</span><span class="p">(</span>
+                <span class="n">collection</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span><span class="o">.</span><span class="n">moys_dict</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">datetime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_coll</span><span class="o">.</span><span class="n">datetimes</span><span class="p">):</span>
+                <span class="n">new_coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prevail_val_dict</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">moy</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">DailyCollection</span><span class="p">):</span>
+            <span class="n">daily_temps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_prevailing_temperature</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">datetime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_coll</span><span class="o">.</span><span class="n">datetimes</span><span class="p">):</span>
+                <span class="n">new_coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">daily_temps</span><span class="p">[</span><span class="n">datetime</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">MonthlyCollection</span><span class="p">):</span>
+            <span class="n">monthly_temps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">monthly_prevailing_temperature</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">datetime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_coll</span><span class="o">.</span><span class="n">datetimes</span><span class="p">):</span>
+                <span class="n">new_coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">monthly_temps</span><span class="p">[</span><span class="n">datetime</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">MonthlyPerHourCollection</span><span class="p">):</span>
+            <span class="n">mon_per_hr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">monthly_per_hour_prevailing_temperature</span>
+            <span class="n">monthly_per_hour_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mon_per_hr</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mon_per_hr</span><span class="o">.</span><span class="n">datetimes</span><span class="p">):</span>
+                <span class="n">monthly_per_hour_dict</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">datetime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_coll</span><span class="o">.</span><span class="n">datetimes</span><span class="p">):</span>
+                <span class="n">new_coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">monthly_per_hour_dict</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">new_coll</span></div>
+
+    <span class="k">def</span> <span class="nf">_hourly_prevail_from_monthly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">_num_of_days_each_month</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">days</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_daily_prevail_from_monthly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">days</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">analysis_period</span><span class="o">.</span><span class="n">_num_of_days_each_month</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_monthly_prevail</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">days</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_daily_prevail_from_hourly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span><span class="p">),</span> <span class="mi">24</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_daily_prevail</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hourly_prevail</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head</span><span class="o">.</span><span class="n">duplicate</span><span class="p">()</span>
+        <span class="n">new_header</span><span class="o">.</span><span class="n">_data_type</span> <span class="o">=</span> <span class="n">PrevailingOutdoorTemperature</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new_header</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

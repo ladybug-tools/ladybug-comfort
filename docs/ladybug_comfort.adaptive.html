@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.adaptive module &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ladybug_comfort.asv module" href="ladybug_comfort.asv.html" />
+    <link rel="prev" title="ladybug_comfort.parameter.utci module" href="ladybug_comfort.parameter.utci.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ladybug_comfort.parameter.utci.html" title="Previous Chapter: ladybug_comfort.parameter.utci module"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ladybug_comfo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="ladybug_comfort.asv.html" title="Next Chapter: ladybug_comfort.asv module"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ladybug_comfo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/ladybug_comfort.adaptive.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <div class="section" id="module-ladybug_comfort.adaptive">
+<span id="ladybug-comfort-adaptive-module"></span><h1>ladybug_comfort.adaptive module<a class="headerlink" href="#module-ladybug_comfort.adaptive" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions for calculating Adaptive Thermal Comfort.</p>
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.adaptive_comfort_ashrae55">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">adaptive_comfort_ashrae55</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em>, <em class="sig-param"><span class="n">to</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#adaptive_comfort_ashrae55"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.adaptive_comfort_ashrae55" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get adaptive comfort criteria according to ASHRAE-55.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] ASHRAE Standard 55 (2017). Thermal Environmental Conditions
+for Human Occupancy. Atlanta Georgoa: American Society of Heating,
+Refrigerating and Air Conditioning Engineers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].  For the ASHRAE-55 adaptive
+comfort model, this is typically the average monthly outdoor temperature.</p></li>
+<li><p><strong>to</strong> – Operative temperature [C]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A dictionary containing results with the following keys</p>
+<ul class="simple">
+<li><p>to : Operative Temperature [C].</p></li>
+<li><p>t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].</p></li>
+<li><p>deg_comf: The difference between the operative temperature (to)
+and the adaptive comfort neutral temperature (t_comf) [C].
+Negative values indicate cool conditions and positive values
+indicate warm conditions.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.adaptive_comfort_conditioned">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">adaptive_comfort_conditioned</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em>, <em class="sig-param"><span class="n">to</span></em>, <em class="sig-param"><span class="n">conditioning</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#adaptive_comfort_conditioned"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.adaptive_comfort_conditioned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get adaptive comfort using SCATs neutral temp function for heated/cooled operation.</p>
+<p>Note that the use of adaptive comfort methods in conditioned buildings is not
+an official part of either ASHRAE-55 or EN-15251. For more information on how
+adaptive comfort methods can be applied to conditioned buildings, see the
+neutral_temperature_conditioned function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+comfort model, this is typically the exponentially weighted running mean
+of the outdoor temperature over the past week.  Use the weighted_running_mean
+functions to compute this value.</p></li>
+<li><p><strong>to</strong> – Operative temperature [C]</p></li>
+<li><p><strong>conditioning</strong> – <p>A number between 0 and 1 that represents how “conditioned” vs.
+“free-running” the building is.</p>
+<ul>
+<li><p>0 = free-running (completely passive with no air conditioning)</p></li>
+<li><p>1 = conditioned (no operable windows and fully air conditioned)</p></li>
+</ul>
+</p></li>
+<li><p><strong>model</strong> – The comfort standard, which will be used to represent the “free-running”
+function.  Chose from: ‘EN-15251’, ‘ASHRAE-55’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A dictionary containing results with the following keys</p>
+<ul class="simple">
+<li><p>to : Operative Temperature [C].</p></li>
+<li><p>t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].</p></li>
+<li><p>deg_comf: The difference between the operative temperature (to)
+and the adaptive comfort neutral temperature (t_comf) [C].
+Negative values indicate cool conditions and positive values
+indicate warm conditions.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.adaptive_comfort_conditioned_function">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">adaptive_comfort_conditioned_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conditioning</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#adaptive_comfort_conditioned_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.adaptive_comfort_conditioned_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an adaptive_comfort_conditioned function with pre-set conditioning/model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conditioning</strong> – <p>A number between 0 and 1 that represents how “conditioned” vs.
+“free-running” the building is.</p>
+<ul>
+<li><p>0 = free-running (completely passive with no air conditioning)</p></li>
+<li><p>1 = conditioned (no operable windows and fully air conditioned)</p></li>
+</ul>
+</p></li>
+<li><p><strong>model</strong> – The comfort standard, which will be used to represent the “free-running”
+function.  Chose from: ‘EN-15251’, ‘ASHRAE-55’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.adaptive_comfort_en15251">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">adaptive_comfort_en15251</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em>, <em class="sig-param"><span class="n">to</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#adaptive_comfort_en15251"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.adaptive_comfort_en15251" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get adaptive comfort criteria according to EN-15251.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] CEN (2007) Standard EN15251. Indoor Environmental Input Parameters for
+Design and Assessment of Energy Performance of Buildings: Addressing indoor
+air quality, thermal environment, lighting and acoustics, Brussels: Comite
+Europeen de Normalisation.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+comfort model, this is typically the exponentially weighted running mean
+of the outdoor temperature over the past week.  Use the weighted_running_mean
+functions to compute this value.</p></li>
+<li><p><strong>to</strong> – Operative temperature [C]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A dictionary containing results with the following keys</p>
+<ul class="simple">
+<li><p>to : Operative Temperature [C].</p></li>
+<li><p>t_comf : Adaptive comfort neutral temperature (desired by occupants) [C].</p></li>
+<li><p>deg_comf: The difference between the operative temperature (to)
+and the adaptive comfort neutral temperature (t_comf) [C].
+Negative values indicate cool conditions and positive values
+indicate warm conditions.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.ashrae55_neutral_offset_from_ppd">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">ashrae55_neutral_offset_from_ppd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ppd</span><span class="o">=</span><span class="default_value">90</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#ashrae55_neutral_offset_from_ppd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.ashrae55_neutral_offset_from_ppd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get acceptable offset from neutral temperature given the ASHRAE-55 PPD limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ppd</strong> – The acceptable limit of Percentage of People Dissatisfied (PPD).
+Usually, this is 90% but it can be 80% in some cases.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>offset – Acceptable temperature offset from neutral temperature [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.check_prevailing_temperatures_ashrae55">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">check_prevailing_temperatures_ashrae55</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#check_prevailing_temperatures_ashrae55"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.check_prevailing_temperatures_ashrae55" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether prevailing temperatures are outside permissable ranges for ASHRAE-55.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t_prevail</strong> – A list of prevailing outdoor temperature [C].</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A tuple with two elements</p>
+<ul class="simple">
+<li><p>all_in_range: A boolean to note whether all of the input t_prevail values
+are in acceptable ranges.</p></li>
+<li><p>message: Text indicating the number of values that are above and below
+acceptable ranges.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.check_prevailing_temperatures_en15251">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">check_prevailing_temperatures_en15251</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#check_prevailing_temperatures_en15251"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.check_prevailing_temperatures_en15251" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether prevailing temperatures are outside permissable ranges for EN-15251.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t_prevail</strong> – A list of prevailing outdoor temperature [C].</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A tuple with two elements</p>
+<ul class="simple">
+<li><p>all_in_range: A boolean to note whether all of the input t_prevail values
+are in acceptable ranges.</p></li>
+<li><p>message: Text indicating the number of values that are above and below
+acceptable ranges.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.check_prevailing_temperatures_range">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">check_prevailing_temperatures_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em>, <em class="sig-param"><span class="n">standard</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#check_prevailing_temperatures_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.check_prevailing_temperatures_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check prevailing temperatures to see how many are outside a certain range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_prevail</strong> – A list of prevailing outdoor temperature [C].</p></li>
+<li><p><strong>lower</strong> – A lower limit for the temperatures [C].</p></li>
+<li><p><strong>upper</strong> – An upper limit for the temperatures [C].</p></li>
+<li><p><strong>standard</strong> – Optional text for a standard name that will be used in the
+output message (eg. ASHRAE-55).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A tuple with two elements</p>
+<ul class="simple">
+<li><p>all_in_range: A boolean to note whether all of the input t_prevail values
+are in acceptable ranges.</p></li>
+<li><p>message: Text indicating the number of values that are above and below
+acceptable ranges.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.cooling_effect_ashrae55">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">cooling_effect_ashrae55</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vel</span></em>, <em class="sig-param"><span class="n">to</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#cooling_effect_ashrae55"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.cooling_effect_ashrae55" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get ASHRAE-55 cooling effect as a result of elevated air speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vel</strong> – Relative air velocity [m/s]</p></li>
+<li><p><strong>to</strong> – Operative Temperature [C]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ce – Cooling effect as a result of elevated air speed [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.cooling_effect_en15251">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">cooling_effect_en15251</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vel</span></em>, <em class="sig-param"><span class="n">to</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#cooling_effect_en15251"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.cooling_effect_en15251" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get EN-15251 cooling effect as a result of elevated air speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vel</strong> – Relative air velocity [m/s]</p></li>
+<li><p><strong>to</strong> – Operative Temperature [C]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ce – Cooling effect as a result of elevated air speed [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.en15251_neutral_offset_from_comfort_class">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">en15251_neutral_offset_from_comfort_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comf_class</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#en15251_neutral_offset_from_comfort_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.en15251_neutral_offset_from_comfort_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get acceptable offset from neutral temperature given the EN-15251 comfort class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comf_class</strong> – An integer representing the EN-15251 comfort class.
+Choose from: 1, 2, 3 (the higher the class, the greater the offset)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>offset – Acceptable temperature offset from neutral temperature [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.neutral_temperature_ashrae55">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">neutral_temperature_ashrae55</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#neutral_temperature_ashrae55"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.neutral_temperature_ashrae55" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the neutral temperature (desired by occupants) according to ASHRAE-55.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] de Dear, R.J. and Brager, G.S. (2002) Thermal comfort in naturally
+ventilated buildings: Revisions to ASHRAE Standard 55.
+Energy and Buildings 34(6), 549-61.</p>
+<p>[2] de Dear, R.J. (1998) A global database of thermal comfort experiments.
+ASHRAE Technical data bulletin 14(1), 15-26.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].  For the ASHRAE-55 adaptive
+comfort model, this is typically the average monthly outdoor temperature.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The desired neutral temperature for the input previaling outdoor temperature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.neutral_temperature_conditioned">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">neutral_temperature_conditioned</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em>, <em class="sig-param"><span class="n">conditioning</span></em>, <em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">'EN-15251'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#neutral_temperature_conditioned"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.neutral_temperature_conditioned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the neutral temperature for a conditioned or partly conditioned building.</p>
+<p>Note that the use of adaptive comfort methods in conditioned buildings is not an
+official part of any standard. Both the American ASHRAE-55 standard and the
+European EN-15251 standard state that the adaptive model should only be used
+when the following criteria are met:</p>
+<ol class="loweralpha simple">
+<li><p>There is no mechanical cooling or heating system in operation
+(in the case of ASHRAE-55, no mechanical cooling system is installed
+and no heating system is in operation)</p></li>
+<li><p>Metabolic rates of occupants range from 1.0 to 1.3 met</p></li>
+<li><p>Occupants are allowed to freely adapt their clothing insulation
+(in the case of ASHRAE-55, occupants must specifically be allowed
+to adapt clothing within a range at least as wide as 0.5 - 1.0 clo)</p></li>
+</ol>
+<p>However, the SCATs project[1], from which EN-15251 is derived, involved the survey
+of conditioned buildings and a neutral temperature function was obtained for
+heated and cooled modes of operation.  While the coefficient of determination (aka.
+R squared) of this function was not as strong as that for free-running buildings,
+it appears to be stronger than PMV calculated from the observed conditions in the
+SCATs data set[2].  Accordingly, it has been published in CIBSE guide[3] and has
+been included here along with methods to calculate netural temperature functions
+in between free-running and heated/cooled conditions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
+and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+Controls and Thermal Comfort project. Oxford: Oxford Brokes University.</p>
+<p>[2] Humphreys, M., Nicol, F. and Roaf, S. (2016) Adaptive Thermal Comfort:
+Foundations and Analysis. Routledge. Chapter 14: PMV and the results of
+field studies.</p>
+<p>[3] CIBSE (2006) Environmental Criteria for Design, Chapter 1: Environmental
+Design: CIBSE Guide A. London: Chartered Institution of Building
+Services Engineers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].</p></li>
+<li><p><strong>conditioning</strong> – <p>A number between 0 and 1 that represents how “conditioned” vs.
+“free-running” the building is.</p>
+<ul>
+<li><p>0 = free-running (completely passive with no air conditioning)</p></li>
+<li><p>1 = conditioned (no operable windows and fully air conditioned)</p></li>
+</ul>
+</p></li>
+<li><p><strong>model</strong> – The comfort standard, which will be used to represent the “free-running”
+function.  Chose from: ‘EN-15251’, ‘ASHRAE-55’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The desired neutral temperature for the input previaling outdoor temperature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.neutral_temperature_en15251">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">neutral_temperature_en15251</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_prevail</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#neutral_temperature_en15251"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.neutral_temperature_en15251" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the neutral temperature (desired by occupants) according to EN-15251.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] CIBSE (2006) Environmental Criteria for Design, Chapter 1: Environmental
+Design: CIBSE Guide A. London: Chartered Institution of Building
+Services Engineers.</p>
+<p>[2] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
+and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+Controls and Thermal Comfort project. Oxford: Oxford Brokes University.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t_prevail</strong> – The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+comfort model, this is typically the exponentially weighted running mean
+of the outdoor temperature over the past week.  Use the weighted_running_mean
+functions to compute this value.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The desired neutral temperature for the input previaling outdoor temperature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.t_operative">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">t_operative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ta</span></em>, <em class="sig-param"><span class="n">tr</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#t_operative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.t_operative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get operative temperature from air and radiant temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ta</strong> – Air temperature [C]</p></li>
+<li><p><strong>tr</strong> – Mean radiant temperature [C]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Operative temperature [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.weighted_running_mean_daily">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">weighted_running_mean_daily</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outdoor_temperatures</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.8</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#weighted_running_mean_daily"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.weighted_running_mean_daily" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get weighted running mean temperatures given average daily outdoor temperatures.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
+and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+Controls and Thermal Comfort project. Oxford: Oxford Brokes University.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outdoor_temperatures</strong> – A list of daily outdoor temperatures in Celsius for which
+running mean values will be computed.  The list should contain at least
+7 values in order to be meaningful.  Lists shorter than 1 are not acceptable.</p></li>
+<li><p><strong>alpha</strong> – A constant between 0 and 1 that governs how quickly the running mean
+responds to the outdoor temperature. Default is 0.8, which was found to
+be most suitable by Nicol and McCartney[1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>daily_run_means – A list of prevailing outdoor temperatures with a length that
+matches the input outdoor_temperatures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.adaptive.weighted_running_mean_hourly">
+<code class="sig-prename descclassname">ladybug_comfort.adaptive.</code><code class="sig-name descname">weighted_running_mean_hourly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outdoor_temperatures</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.8</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/adaptive.html#weighted_running_mean_hourly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.adaptive.weighted_running_mean_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get weighted running mean temperatures given hourly outdoor temperatures.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
+and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+Controls and Thermal Comfort project. Oxford: Oxford Brokes University.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outdoor_temperatures</strong> – A list of hourly outdoor temperatures in Celsius for which
+running mean values will be computed.  The list should contain at least
+168 values (1 week of data) in order to be meaningful.  Lists shorter
+than 24 are not acceptable.</p></li>
+<li><p><strong>alpha</strong> – A constant between 0 and 1 that governs how quickly the running mean
+responds to the outdoor temperature. Default is 0.8, which was found to
+be most suitable by Nicol and McCartney[1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>prevailing_temp – A list of prevailing outdoor temperatures with a length that
+matches the input outdoor_temperatures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

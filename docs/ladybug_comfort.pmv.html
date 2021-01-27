@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.pmv module &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ladybug_comfort.solarcal module" href="ladybug_comfort.solarcal.html" />
+    <link rel="prev" title="ladybug_comfort.humidex module" href="ladybug_comfort.humidex.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ladybug_comfort.humidex.html" title="Previous Chapter: ladybug_comfort.humidex module"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ladybug_comfo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="ladybug_comfort.solarcal.html" title="Next Chapter: ladybug_comfort.solarcal module"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ladybug_comfo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/ladybug_comfort.pmv.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <div class="section" id="module-ladybug_comfort.pmv">
+<span id="ladybug-comfort-pmv-module"></span><h1>ladybug_comfort.pmv module<a class="headerlink" href="#module-ladybug_comfort.pmv" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions for calculating PMV.</p>
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.calc_missing_pmv_input">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">calc_missing_pmv_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_pmv</span></em>, <em class="sig-param"><span class="n">pmv_inputs</span></em>, <em class="sig-param"><span class="n">low_bound</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">up_bound</span><span class="o">=</span><span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">still_air_threshold</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#calc_missing_pmv_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.calc_missing_pmv_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of a missing_pmv_input given a target_pmv and the 6 other inputs.</p>
+<p>This is particularly useful when trying to draw comfort polygons on charts
+using the PMV model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_pmv</strong> – The target PMV that you are trying to produce from the inputs to
+the PMV model.</p></li>
+<li><p><strong>pmv_inputs</strong> – <p>A dictionary of 7 pmv inputs with the following keys:
+‘ta’, ‘tr’, ‘vel’, ‘rh’, ‘met’, ‘clo’, ‘wme’.  Each key
+should correspond to a value that represents that pmv input
+but one of these inputs should have a value of None.
+The input corresponding to None will be solved for by this function.
+One can also input None for both ‘ta’ and ‘tr’ to solve for the operative
+temperature that meets the target_pmv. In this case, both ‘ta’ and ‘tr’
+in the output dictionary will be the same.
+Example (solving for relative humidity):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s1">&#39;ta&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+<span class="s1">&#39;tr&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+<span class="s1">&#39;vel&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+<span class="s1">&#39;rh&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="s1">&#39;met&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+<span class="s1">&#39;clo&#39;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>
+<span class="s1">&#39;wme&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>low_bound</strong> – The lowest possible value of the missing input you are tying to
+find. Putting in a good value here will help the model converge to a
+solution faster.</p></li>
+<li><p><strong>up_bound</strong> – The highest possible value of the missing input you are tying to
+find. Putting in a good value here will help the model converge to a
+solution faster.</p></li>
+<li><p><strong>tolerance</strong> – The acceptable error in the target_pmv. The default is set to 0.001</p></li>
+<li><p><strong>still_air_threshold</strong> – The air velocity in m/s at which the Pierce
+Standard Effective Temperature (SET) model will be used
+to correct values in the original Fanger PMV model.
+Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>complete_pmv_inputs – A copy of the pmv_inputs dictionary but with values
+for all inputs. The missing input to the PMV model will be filled by the value
+that returns the target_pmv.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.fanger_pmv">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">fanger_pmv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ta</span></em>, <em class="sig-param"><span class="n">tr</span></em>, <em class="sig-param"><span class="n">vel</span></em>, <em class="sig-param"><span class="n">rh</span></em>, <em class="sig-param"><span class="n">met</span></em>, <em class="sig-param"><span class="n">clo</span></em>, <em class="sig-param"><span class="n">wme</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#fanger_pmv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.fanger_pmv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate PMV using only Fanger’s original equation.</p>
+<p>Note that Fanger’s original experiments were conducted at
+low air speeds (&lt;0.1 m/s) and the 2015 ASHRAE-55 thermal comfort
+standard states that one should use standard effective temperature
+(SET) to correct for the cooling effect of air speed in cases
+where such speeds exceed 0.1 m/s.  The pmv() function in this module
+will apply this SET correction in cases where it is appropriate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] Fanger, P.O. (1970). Thermal Comfort: Analysis and applications
+in environmental engineering. Copenhagen: Danish Technical Press.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ta</strong> – Air temperature [C]</p></li>
+<li><p><strong>tr</strong> – Mean radiant temperature [C]</p></li>
+<li><p><strong>vel</strong> – Relative air velocity [m/s]</p></li>
+<li><p><strong>rh</strong> – Relative humidity [%]</p></li>
+<li><p><strong>met</strong> – Metabolic rate [met]</p></li>
+<li><p><strong>clo</strong> – Clothing [clo]</p></li>
+<li><p><strong>wme</strong> – External work [met], normally around 0 when seated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A tuple with three elements</p>
+<ul class="simple">
+<li><p>pmv: Predicted mean vote (PMV)</p></li>
+<li><p>ppd: Percentage of people dissatisfied (PPD) [%]</p></li>
+<li><p>heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
+The dictionary items are as follows:</p>
+<ul>
+<li><p>’cond’: heat loss by conduction [W]</p></li>
+<li><p>’sweat’: heat loss by sweating [W]</p></li>
+<li><p>’res_l’: heat loss by latent respiration [W]</p></li>
+<li><p>’res_s’ heat loss by dry respiration [W]</p></li>
+<li><p>’rad’: heat loss by radiation [W]</p></li>
+<li><p>’conv’ heat loss by convection [W]</p></li>
+</ul>
+</li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.pierce_set">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">pierce_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ta</span></em>, <em class="sig-param"><span class="n">tr</span></em>, <em class="sig-param"><span class="n">vel</span></em>, <em class="sig-param"><span class="n">rh</span></em>, <em class="sig-param"><span class="n">met</span></em>, <em class="sig-param"><span class="n">clo</span></em>, <em class="sig-param"><span class="n">wme</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#pierce_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.pierce_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Standard Effective Temperature (SET).</p>
+<p>This function uses the J.B. Pierce two-node model of human thermoregulation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] Nishi, Y; Gagge, A.P. (1977). “Effective temperature scale useful for
+hypo-and hyperbaric environments”. Aviation, Space, and Environmental Medicine.
+48 (2): 97–107.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ta</strong> – Air temperature [C]</p></li>
+<li><p><strong>tr</strong> – Mean radiant temperature [C]</p></li>
+<li><p><strong>vel</strong> – Relative air velocity [m/s]</p></li>
+<li><p><strong>rh</strong> – Relative humidity [%]</p></li>
+<li><p><strong>met</strong> – Metabolic rate [met]</p></li>
+<li><p><strong>clo</strong> – Clothing [clo]</p></li>
+<li><p><strong>wme</strong> – External work [met], normally around 0 when seated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>se_temp – Standard effective temperature [C]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.pmv_from_ppd">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">pmv_from_ppd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ppd</span></em>, <em class="sig-param"><span class="n">pmv_up_bound</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">ppd_tolerance</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#pmv_from_ppd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.pmv_from_ppd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the two possible Predicted Mean Vote (PMV) values for a PPD value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppd</strong> – The percentage of people dissatisfied (PPD) for which you want to know
+the possible PMV.</p></li>
+<li><p><strong>pmv_up_bound</strong> – The upper limit of PMV expected for the input PPD.  Putting
+in a good estimate here will help the model converge on a
+solution faster. Defaut = 3</p></li>
+<li><p><strong>ppd_tolerance</strong> – The acceptable error in meeting the target PPD.  Default = 0.001.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A tuple with two elements</p>
+<ul class="simple">
+<li><p>pmv_lower: The lower (cold) PMV value that will produce the input ppd.</p></li>
+<li><p>pmv_upper: The upper (hot) PMV value that will produce the input ppd.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.ppd_from_pmv">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">ppd_from_pmv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pmv</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#ppd_from_pmv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.ppd_from_pmv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Percentage of People Dissatisfied (PPD) from PMV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pmv</strong> – The predicted mean vote (PMV) for which you want to know the PPD.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ppd – The percentage of people dissatisfied (PPD) for the input PMV.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.ppd_threshold_from_comfort_class">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">ppd_threshold_from_comfort_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comf_class</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#ppd_threshold_from_comfort_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.ppd_threshold_from_comfort_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get acceptable PPD comfort threshold given the EN-15251 comfort class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comf_class</strong> – An integer representing the EN-15251 comfort class.
+Choose from: 1, 2, 3 (the higher the class, the greater the PPD threshold)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ppd_thresh – Acceptable PPD threshold.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.predicted_mean_vote">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">predicted_mean_vote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ta</span></em>, <em class="sig-param"><span class="n">tr</span></em>, <em class="sig-param"><span class="n">vel</span></em>, <em class="sig-param"><span class="n">rh</span></em>, <em class="sig-param"><span class="n">met</span></em>, <em class="sig-param"><span class="n">clo</span></em>, <em class="sig-param"><span class="n">wme</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">still_air_threshold</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#predicted_mean_vote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.predicted_mean_vote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate PMV using Fanger’s original equation and Pierce SET model when necessary.</p>
+<p>This method is the officially corrent way to calculate PMV comfort according to.
+the 2015 ASHRAE-55 Thermal Comfort Standard.  This function will return
+accurate values even if the air speed is above the sill air threshold of
+Fanger’s original equation (&gt; 0.1 m/s).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[1] ASHRAE Standard 55 (2017). “Thermal Environmental Conditions
+for Human Occupancy”.</p>
+<p>[2] Hoyt Tyler, Schiavon Stefano, Piccioli Alberto, Cheung Toby, Moon Dustin,
+and Steinfeld Kyle, 2017, CBE Thermal Comfort Tool. Center for the Built
+Environment, University of California Berkeley,
+<a class="reference external" href="http://comfort.cbe.berkeley.edu/">http://comfort.cbe.berkeley.edu/</a></p>
+<p>[3] Doherty, T.J., and E.A. Arens.  (1988).  Evaluation of the physiological
+bases of thermal comfort models. ASHRAE Transactions, Vol. 94, Part 1, 15 pp.
+<a class="reference external" href="https://escholarship.org/uc/item/6pq3r5pr">https://escholarship.org/uc/item/6pq3r5pr</a></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ta</strong> – Air temperature [C]</p></li>
+<li><p><strong>tr</strong> – Mean radiant temperature [C]</p></li>
+<li><p><strong>vel</strong> – Relative air velocity [m/s]</p></li>
+<li><p><strong>rh</strong> – Relative humidity [%]</p></li>
+<li><p><strong>met</strong> – Metabolic rate [met]</p></li>
+<li><p><strong>clo</strong> – Clothing [clo]</p></li>
+<li><p><strong>wme</strong> – External work [met], normally around 0 when seated</p></li>
+<li><p><strong>still_air_threshold</strong> – The air velocity in m/s at which the Pierce
+Standard Effective Temperature (SET) model will be used
+to correct values in the original Fanger PMV model.
+Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>A dictionary containing results of the PMV model with the following keys</p>
+<ul class="simple">
+<li><p>pmv : Predicted mean vote (PMV)</p></li>
+<li><p>ppd : Percent predicted dissatisfied (PPD) [%]</p></li>
+<li><p>se_temp: Standard effective temperature (SET) [C]</p></li>
+<li><p>ta_adj: Air temperature adjusted for air speed [C]</p></li>
+<li><p>ce : Cooling effect. The difference between the air temperature
+and the adjusted air temperature [C]</p></li>
+<li><p>heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
+The dictionary items are as follows:</p>
+<ul>
+<li><p>’cond’: heat loss by conduction [W]</p></li>
+<li><p>’sweat’: heat loss by sweating [W]</p></li>
+<li><p>’res_l’: heat loss by latent respiration [W]</p></li>
+<li><p>’res_s’ heat loss by dry respiration [W]</p></li>
+<li><p>’rad’: heat loss by radiation [W]</p></li>
+<li><p>’conv’ heat loss by convection [W]</p></li>
+</ul>
+</li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ladybug_comfort.pmv.saturated_vapor_pressure_torr">
+<code class="sig-prename descclassname">ladybug_comfort.pmv.</code><code class="sig-name descname">saturated_vapor_pressure_torr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">db_temp</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/pmv.html#saturated_vapor_pressure_torr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.pmv.saturated_vapor_pressure_torr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate saturated vapor pressure (Torr) at temperature (C)</p>
+<p>This is used to synchronize the results of the Standard Effective temperature (SET)
+model with the results of the original Fanger model.</p>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.pmv &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <h1>Source code for ladybug_comfort.pmv</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Utility functions for calculating PMV.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">ladybug.rootfinding</span> <span class="kn">import</span> <span class="n">secant</span>
+<span class="kn">from</span> <span class="nn">ladybug.rootfinding</span> <span class="kn">import</span> <span class="n">bisect</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<div class="viewcode-block" id="predicted_mean_vote"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.predicted_mean_vote">[docs]</a><span class="k">def</span> <span class="nf">predicted_mean_vote</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">still_air_threshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate PMV using Fanger&#39;s original equation and Pierce SET model when necessary.</span>
+
+<span class="sd">    This method is the officially corrent way to calculate PMV comfort according to.</span>
+<span class="sd">    the 2015 ASHRAE-55 Thermal Comfort Standard.  This function will return</span>
+<span class="sd">    accurate values even if the air speed is above the sill air threshold of</span>
+<span class="sd">    Fanger&#39;s original equation (&gt; 0.1 m/s).</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        [1] ASHRAE Standard 55 (2017). &quot;Thermal Environmental Conditions</span>
+<span class="sd">        for Human Occupancy&quot;.</span>
+
+<span class="sd">        [2] Hoyt Tyler, Schiavon Stefano, Piccioli Alberto, Cheung Toby, Moon Dustin,</span>
+<span class="sd">        and Steinfeld Kyle, 2017, CBE Thermal Comfort Tool. Center for the Built</span>
+<span class="sd">        Environment, University of California Berkeley,</span>
+<span class="sd">        http://comfort.cbe.berkeley.edu/</span>
+
+<span class="sd">        [3] Doherty, T.J., and E.A. Arens.  (1988).  Evaluation of the physiological</span>
+<span class="sd">        bases of thermal comfort models. ASHRAE Transactions, Vol. 94, Part 1, 15 pp.</span>
+<span class="sd">        https://escholarship.org/uc/item/6pq3r5pr</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ta: Air temperature [C]</span>
+<span class="sd">        tr: Mean radiant temperature [C]</span>
+<span class="sd">        vel: Relative air velocity [m/s]</span>
+<span class="sd">        rh: Relative humidity [%]</span>
+<span class="sd">        met: Metabolic rate [met]</span>
+<span class="sd">        clo: Clothing [clo]</span>
+<span class="sd">        wme: External work [met], normally around 0 when seated</span>
+<span class="sd">        still_air_threshold: The air velocity in m/s at which the Pierce</span>
+<span class="sd">            Standard Effective Temperature (SET) model will be used</span>
+<span class="sd">            to correct values in the original Fanger PMV model.</span>
+<span class="sd">            Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing results of the PMV model with the following keys</span>
+
+<span class="sd">        -   pmv : Predicted mean vote (PMV)</span>
+<span class="sd">        -   ppd : Percent predicted dissatisfied (PPD) [%]</span>
+<span class="sd">        -   se_temp: Standard effective temperature (SET) [C]</span>
+<span class="sd">        -   ta_adj: Air temperature adjusted for air speed [C]</span>
+<span class="sd">        -   ce : Cooling effect. The difference between the air temperature</span>
+<span class="sd">            and the adjusted air temperature [C]</span>
+<span class="sd">        -   heat_loss: A dictionary with the 6 heat loss terms of the PMV model.</span>
+<span class="sd">            The dictionary items are as follows:</span>
+
+<span class="sd">            -   &#39;cond&#39;: heat loss by conduction [W]</span>
+<span class="sd">            -   &#39;sweat&#39;: heat loss by sweating [W]</span>
+<span class="sd">            -   &#39;res_l&#39;: heat loss by latent respiration [W]</span>
+<span class="sd">            -   &#39;res_s&#39; heat loss by dry respiration [W]</span>
+<span class="sd">            -   &#39;rad&#39;: heat loss by radiation [W]</span>
+<span class="sd">            -   &#39;conv&#39; heat loss by convection [W]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">se_temp</span> <span class="o">=</span> <span class="n">pierce_set</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">vel</span> <span class="o">&lt;=</span> <span class="n">still_air_threshold</span><span class="p">:</span>
+        <span class="n">pmv</span><span class="p">,</span> <span class="n">ppd</span><span class="p">,</span> <span class="n">heat_loss</span> <span class="o">=</span> <span class="n">fanger_pmv</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="p">)</span>
+        <span class="n">ta_adj</span> <span class="o">=</span> <span class="n">ta</span>
+        <span class="n">ce</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ce_l</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">ce_r</span> <span class="o">=</span> <span class="mf">40.</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.001</span>  <span class="c1"># precision of ce</span>
+
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">ce</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">se_temp</span> <span class="o">-</span> <span class="n">pierce_set</span><span class="p">(</span><span class="n">ta</span> <span class="o">-</span> <span class="n">ce</span><span class="p">,</span> <span class="n">tr</span> <span class="o">-</span> <span class="n">ce</span><span class="p">,</span> <span class="n">still_air_threshold</span><span class="p">,</span>
+                                        <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ce</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">ce_l</span><span class="p">,</span> <span class="n">ce_r</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
+            <span class="n">ce</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">ce</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ce</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">ce_l</span><span class="p">,</span> <span class="n">ce_r</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">pmv</span><span class="p">,</span> <span class="n">ppd</span><span class="p">,</span> <span class="n">heat_loss</span> <span class="o">=</span> <span class="n">fanger_pmv</span><span class="p">(</span>
+            <span class="n">ta</span> <span class="o">-</span> <span class="n">ce</span><span class="p">,</span> <span class="n">tr</span> <span class="o">-</span> <span class="n">ce</span><span class="p">,</span> <span class="n">still_air_threshold</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="p">)</span>
+        <span class="n">ta_adj</span> <span class="o">=</span> <span class="n">ta</span> <span class="o">-</span> <span class="n">ce</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pmv</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;ppd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ppd</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;set&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">se_temp</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;ta_adj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta_adj</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;ce&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ce</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;heat_loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">heat_loss</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="fanger_pmv"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.fanger_pmv">[docs]</a><span class="k">def</span> <span class="nf">fanger_pmv</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate PMV using only Fanger&#39;s original equation.</span>
+
+<span class="sd">    Note that Fanger&#39;s original experiments were conducted at</span>
+<span class="sd">    low air speeds (&lt;0.1 m/s) and the 2015 ASHRAE-55 thermal comfort</span>
+<span class="sd">    standard states that one should use standard effective temperature</span>
+<span class="sd">    (SET) to correct for the cooling effect of air speed in cases</span>
+<span class="sd">    where such speeds exceed 0.1 m/s.  The pmv() function in this module</span>
+<span class="sd">    will apply this SET correction in cases where it is appropriate.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        [1] Fanger, P.O. (1970). Thermal Comfort: Analysis and applications</span>
+<span class="sd">        in environmental engineering. Copenhagen: Danish Technical Press.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ta: Air temperature [C]</span>
+<span class="sd">        tr: Mean radiant temperature [C]</span>
+<span class="sd">        vel: Relative air velocity [m/s]</span>
+<span class="sd">        rh: Relative humidity [%]</span>
+<span class="sd">        met: Metabolic rate [met]</span>
+<span class="sd">        clo: Clothing [clo]</span>
+<span class="sd">        wme: External work [met], normally around 0 when seated</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple with three elements</span>
+
+<span class="sd">        -   pmv: Predicted mean vote (PMV)</span>
+<span class="sd">        -   ppd: Percentage of people dissatisfied (PPD) [%]</span>
+<span class="sd">        -   heat_loss: A dictionary with the 6 heat loss terms of the PMV model.</span>
+<span class="sd">            The dictionary items are as follows:</span>
+
+<span class="sd">            -   &#39;cond&#39;: heat loss by conduction [W]</span>
+<span class="sd">            -   &#39;sweat&#39;: heat loss by sweating [W]</span>
+<span class="sd">            -   &#39;res_l&#39;: heat loss by latent respiration [W]</span>
+<span class="sd">            -   &#39;res_s&#39; heat loss by dry respiration [W]</span>
+<span class="sd">            -   &#39;rad&#39;: heat loss by radiation [W]</span>
+<span class="sd">            -   &#39;conv&#39; heat loss by convection [W]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pa</span> <span class="o">=</span> <span class="n">rh</span> <span class="o">*</span> <span class="mf">10.</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">16.6536</span> <span class="o">-</span> <span class="mf">4030.183</span> <span class="o">/</span> <span class="p">(</span><span class="n">ta</span> <span class="o">+</span> <span class="mf">235.</span><span class="p">))</span>
+
+    <span class="n">icl</span> <span class="o">=</span> <span class="mf">0.155</span> <span class="o">*</span> <span class="n">clo</span>  <span class="c1"># thermal insulation of the clothing in M2K/W</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">met</span> <span class="o">*</span> <span class="mf">58.15</span>  <span class="c1"># metabolic rate in W/M2</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">wme</span> <span class="o">*</span> <span class="mf">58.15</span>  <span class="c1"># external work in W/M2</span>
+    <span class="n">mw</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">w</span>  <span class="c1"># internal heat production in the human body</span>
+    <span class="k">if</span> <span class="n">icl</span> <span class="o">&lt;=</span> <span class="mf">0.078</span><span class="p">:</span>
+        <span class="n">fcl</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.29</span> <span class="o">*</span> <span class="n">icl</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fcl</span> <span class="o">=</span> <span class="mf">1.05</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.645</span> <span class="o">*</span> <span class="n">icl</span><span class="p">)</span>
+
+    <span class="c1"># heat transf. coeff. by forced convection</span>
+    <span class="n">hcf</span> <span class="o">=</span> <span class="mf">12.1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+    <span class="n">taa</span> <span class="o">=</span> <span class="n">ta</span> <span class="o">+</span> <span class="mf">273.</span>
+    <span class="n">tra</span> <span class="o">=</span> <span class="n">tr</span> <span class="o">+</span> <span class="mf">273.</span>
+    <span class="n">tcla</span> <span class="o">=</span> <span class="n">taa</span> <span class="o">+</span> <span class="p">(</span><span class="mf">35.5</span> <span class="o">-</span> <span class="n">ta</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.5</span> <span class="o">*</span> <span class="n">icl</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">icl</span> <span class="o">*</span> <span class="n">fcl</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">*</span> <span class="mf">3.96</span>
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">*</span> <span class="mf">100.</span>
+    <span class="n">p4</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">taa</span>
+    <span class="n">p5</span> <span class="o">=</span> <span class="mf">308.7</span> <span class="o">-</span> <span class="mf">0.028</span> <span class="o">*</span> <span class="n">mw</span> <span class="o">+</span> <span class="p">(</span><span class="n">p2</span> <span class="o">*</span> <span class="p">((</span><span class="n">tra</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">)</span> <span class="o">**</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">xn</span> <span class="o">=</span> <span class="n">tcla</span> <span class="o">/</span> <span class="mf">100.</span>
+    <span class="n">xf</span> <span class="o">=</span> <span class="n">tcla</span> <span class="o">/</span> <span class="mf">50.</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.00015</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xn</span> <span class="o">-</span> <span class="n">xf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="n">xf</span> <span class="o">=</span> <span class="p">(</span><span class="n">xf</span> <span class="o">+</span> <span class="n">xn</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">hcn</span> <span class="o">=</span> <span class="mf">2.38</span> <span class="o">*</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="mf">100.0</span> <span class="o">*</span> <span class="n">xf</span> <span class="o">-</span> <span class="n">taa</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.25</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hcf</span> <span class="o">&gt;</span> <span class="n">hcn</span><span class="p">:</span>
+            <span class="n">hc</span> <span class="o">=</span> <span class="n">hcf</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hc</span> <span class="o">=</span> <span class="n">hcn</span>
+        <span class="n">xn</span> <span class="o">=</span> <span class="p">(</span><span class="n">p5</span> <span class="o">+</span> <span class="n">p4</span> <span class="o">*</span> <span class="n">hc</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">*</span> <span class="p">(</span><span class="n">xf</span> <span class="o">**</span> <span class="mi">4</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">100.</span> <span class="o">+</span> <span class="n">p3</span> <span class="o">*</span> <span class="n">hc</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max iterations exceeded&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="n">tcl</span> <span class="o">=</span> <span class="mf">100.</span> <span class="o">*</span> <span class="n">xn</span> <span class="o">-</span> <span class="mf">273.</span>
+
+    <span class="c1"># heat loss conduction through skin</span>
+    <span class="n">hl1</span> <span class="o">=</span> <span class="mf">3.05</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="p">(</span><span class="mf">5733.</span> <span class="o">-</span> <span class="p">(</span><span class="mf">6.99</span> <span class="o">*</span> <span class="n">mw</span><span class="p">)</span> <span class="o">-</span> <span class="n">pa</span><span class="p">)</span>
+    <span class="c1"># heat loss by sweating</span>
+    <span class="k">if</span> <span class="n">mw</span> <span class="o">&gt;</span> <span class="mf">58.15</span><span class="p">:</span>
+        <span class="n">hl2</span> <span class="o">=</span> <span class="mf">0.42</span> <span class="o">*</span> <span class="p">(</span><span class="n">mw</span> <span class="o">-</span> <span class="mf">58.15</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hl2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># latent respiration heat loss</span>
+    <span class="n">hl3</span> <span class="o">=</span> <span class="mf">1.7</span> <span class="o">*</span> <span class="mf">0.00001</span> <span class="o">*</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="mf">5867.</span> <span class="o">-</span> <span class="n">pa</span><span class="p">)</span>
+    <span class="c1"># dry respiration heat loss</span>
+    <span class="n">hl4</span> <span class="o">=</span> <span class="mf">0.0014</span> <span class="o">*</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="mf">34.</span> <span class="o">-</span> <span class="n">ta</span><span class="p">)</span>
+    <span class="c1"># heat loss by radiation</span>
+    <span class="n">hl5</span> <span class="o">=</span> <span class="mf">3.96</span> <span class="o">*</span> <span class="n">fcl</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">tra</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="c1"># heat loss by convection</span>
+    <span class="n">hl6</span> <span class="o">=</span> <span class="n">fcl</span> <span class="o">*</span> <span class="n">hc</span> <span class="o">*</span> <span class="p">(</span><span class="n">tcl</span> <span class="o">-</span> <span class="n">ta</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="mf">0.303</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.036</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.028</span>
+    <span class="n">pmv</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">*</span> <span class="p">(</span><span class="n">mw</span> <span class="o">-</span> <span class="n">hl1</span> <span class="o">-</span> <span class="n">hl2</span> <span class="o">-</span> <span class="n">hl3</span> <span class="o">-</span> <span class="n">hl4</span> <span class="o">-</span> <span class="n">hl5</span> <span class="o">-</span> <span class="n">hl6</span><span class="p">)</span>
+    <span class="n">ppd</span> <span class="o">=</span> <span class="n">ppd_from_pmv</span><span class="p">(</span><span class="n">pmv</span><span class="p">)</span>
+
+    <span class="c1"># collect heat loss terms.</span>
+    <span class="n">heat_loss</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cond&#39;</span><span class="p">:</span> <span class="n">hl1</span><span class="p">,</span>
+        <span class="s1">&#39;sweat&#39;</span><span class="p">:</span> <span class="n">hl2</span><span class="p">,</span>
+        <span class="s1">&#39;res_l&#39;</span><span class="p">:</span> <span class="n">hl3</span><span class="p">,</span>
+        <span class="s1">&#39;res_s&#39;</span><span class="p">:</span> <span class="n">hl4</span><span class="p">,</span>
+        <span class="s1">&#39;rad&#39;</span><span class="p">:</span> <span class="n">hl5</span><span class="p">,</span>
+        <span class="s1">&#39;conv&#39;</span><span class="p">:</span> <span class="n">hl6</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">pmv</span><span class="p">,</span> <span class="n">ppd</span><span class="p">,</span> <span class="n">heat_loss</span></div>
+
+
+<div class="viewcode-block" id="pierce_set"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.pierce_set">[docs]</a><span class="k">def</span> <span class="nf">pierce_set</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">wme</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate Standard Effective Temperature (SET).</span>
+
+<span class="sd">    This function uses the J.B. Pierce two-node model of human thermoregulation.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        [1] Nishi, Y; Gagge, A.P. (1977). &quot;Effective temperature scale useful for</span>
+<span class="sd">        hypo-and hyperbaric environments&quot;. Aviation, Space, and Environmental Medicine.</span>
+<span class="sd">        48 (2): 97–107.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ta: Air temperature [C]</span>
+<span class="sd">        tr: Mean radiant temperature [C]</span>
+<span class="sd">        vel: Relative air velocity [m/s]</span>
+<span class="sd">        rh: Relative humidity [%]</span>
+<span class="sd">        met: Metabolic rate [met]</span>
+<span class="sd">        clo: Clothing [clo]</span>
+<span class="sd">        wme: External work [met], normally around 0 when seated</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        se_temp -- Standard effective temperature [C]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Key initial variables.</span>
+    <span class="n">vapor_pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">rh</span> <span class="o">*</span> <span class="n">saturated_vapor_pressure_torr</span><span class="p">(</span><span class="n">ta</span><span class="p">))</span> <span class="o">/</span> <span class="mf">100.</span>
+    <span class="n">air_velocity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">kclo</span> <span class="o">=</span> <span class="mf">0.25</span>
+    <span class="n">bodyweight</span> <span class="o">=</span> <span class="mf">69.9</span>
+    <span class="n">bodysurfacearea</span> <span class="o">=</span> <span class="mf">1.8258</span>
+    <span class="n">metfactor</span> <span class="o">=</span> <span class="mf">58.2</span>
+    <span class="n">sbc</span> <span class="o">=</span> <span class="mf">0.000000056697</span>  <span class="c1"># Stefan-Boltzmann constant (W/m2K4)</span>
+    <span class="n">csw</span> <span class="o">=</span> <span class="mf">170.</span>
+    <span class="n">cdil</span> <span class="o">=</span> <span class="mf">120.</span>
+    <span class="n">cstr</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+    <span class="n">temp_skin_neutral</span> <span class="o">=</span> <span class="mf">33.7</span>  <span class="c1"># setpoint (neutral) value for Tsk</span>
+    <span class="n">temp_core_neutral</span> <span class="o">=</span> <span class="mf">36.8</span>  <span class="c1"># setpoint value for Tcr</span>
+    <span class="n">temp_body_neutral</span> <span class="o">=</span> <span class="mf">36.49</span>  <span class="c1"># setpoint for Tb</span>
+    <span class="n">skin_blood_flow_neutral</span> <span class="o">=</span> <span class="mf">6.3</span>  <span class="c1"># neutral value for skin_blood_flow</span>
+
+    <span class="c1"># INITIAL VALUES - start of 1st experiment</span>
+    <span class="n">temp_skin</span> <span class="o">=</span> <span class="n">temp_skin_neutral</span>
+    <span class="n">temp_core</span> <span class="o">=</span> <span class="n">temp_core_neutral</span>
+    <span class="n">skin_blood_flow</span> <span class="o">=</span> <span class="n">skin_blood_flow_neutral</span>
+    <span class="n">mshiv</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">alfa</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">esk</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">met</span>
+
+    <span class="c1"># Start new experiment here (for graded experiments)</span>
+    <span class="c1"># UNIT CONVERSIONS (from input variables)</span>
+
+    <span class="c1"># This variable is the pressure of the atmosphere in kPa and was taken</span>
+    <span class="c1"># from the psychrometrics.js file of the CBE comfort tool.</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mf">101325.0</span> <span class="o">/</span> <span class="mf">1000.</span>
+
+    <span class="n">pressure_in_atmospheres</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="mf">0.009869</span>
+    <span class="n">ltime</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="n">rcl</span> <span class="o">=</span> <span class="mf">0.155</span> <span class="o">*</span> <span class="n">clo</span>
+    <span class="c1"># Adjusticl(rcl, Conditions);  TH: I don&#39;t think this is used in the software</span>
+
+    <span class="n">facl</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.15</span> <span class="o">*</span> <span class="n">clo</span>  <span class="c1"># % INCreaSE IN BODY SURFACE Area DUE TO CLOTHING</span>
+    <span class="n">LR</span> <span class="o">=</span> <span class="mf">2.2</span> <span class="o">/</span> <span class="n">pressure_in_atmospheres</span>  <span class="c1"># Lewis Relation is 2.2 at sea level</span>
+    <span class="n">RM</span> <span class="o">=</span> <span class="n">met</span> <span class="o">*</span> <span class="n">metfactor</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">met</span> <span class="o">*</span> <span class="n">metfactor</span>
+
+    <span class="k">if</span> <span class="n">clo</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">wcrit</span> <span class="o">=</span> <span class="mf">0.38</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">air_velocity</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.29</span><span class="p">)</span>
+        <span class="n">icl</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wcrit</span> <span class="o">=</span> <span class="mf">0.59</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">air_velocity</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">)</span>
+        <span class="n">icl</span> <span class="o">=</span> <span class="mf">0.45</span>
+
+    <span class="n">chc</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">pressure_in_atmospheres</span><span class="p">,</span> <span class="mf">0.53</span><span class="p">)</span>
+    <span class="n">chcV</span> <span class="o">=</span> <span class="mf">8.600001</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">((</span><span class="n">air_velocity</span> <span class="o">*</span> <span class="n">pressure_in_atmospheres</span><span class="p">),</span> <span class="mf">0.53</span><span class="p">)</span>
+    <span class="n">chc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">chc</span><span class="p">,</span> <span class="n">chcV</span><span class="p">)</span>
+
+    <span class="c1"># initial estimate of Tcl</span>
+    <span class="nb">chr</span> <span class="o">=</span> <span class="mf">4.7</span>
+    <span class="n">ctc</span> <span class="o">=</span> <span class="nb">chr</span> <span class="o">+</span> <span class="n">chc</span>
+    <span class="n">ra</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">facl</span> <span class="o">*</span> <span class="n">ctc</span><span class="p">)</span>  <span class="c1"># resistance of air layer to dry heat transfer</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="nb">chr</span> <span class="o">*</span> <span class="n">tr</span> <span class="o">+</span> <span class="n">chc</span> <span class="o">*</span> <span class="n">ta</span><span class="p">)</span> <span class="o">/</span> <span class="n">ctc</span>
+    <span class="n">tcl</span> <span class="o">=</span> <span class="n">top</span> <span class="o">+</span> <span class="p">(</span><span class="n">temp_skin</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ctc</span> <span class="o">*</span> <span class="p">(</span><span class="n">ra</span> <span class="o">+</span> <span class="n">rcl</span><span class="p">))</span>
+
+    <span class="c1"># ========================  BEGIN ITERATION</span>
+    <span class="c1">#</span>
+    <span class="c1"># Tcl and chr are solved iteratively using: H(Tsk - To) = ctc(Tcl - To),</span>
+    <span class="c1"># where H = 1/(ra + Rcl) and ra = 1/Facl*ctc</span>
+
+    <span class="n">tcl_old</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ltime</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tcl</span> <span class="o">-</span> <span class="n">tcl_old</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+                <span class="n">tcl_old</span> <span class="o">=</span> <span class="n">tcl</span>
+                <span class="nb">chr</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">sbc</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(((</span><span class="n">tcl</span> <span class="o">+</span> <span class="n">tr</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">),</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.72</span>
+                <span class="n">ctc</span> <span class="o">=</span> <span class="nb">chr</span> <span class="o">+</span> <span class="n">chc</span>
+                <span class="n">ra</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">facl</span> <span class="o">*</span> <span class="n">ctc</span><span class="p">)</span>  <span class="c1"># resistance of air layer to dry heat transfer</span>
+                <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="nb">chr</span> <span class="o">*</span> <span class="n">tr</span> <span class="o">+</span> <span class="n">chc</span> <span class="o">*</span> <span class="n">ta</span><span class="p">)</span> <span class="o">/</span> <span class="n">ctc</span>
+            <span class="n">tcl</span> <span class="o">=</span> <span class="p">(</span><span class="n">ra</span> <span class="o">*</span> <span class="n">temp_skin</span> <span class="o">+</span> <span class="n">rcl</span> <span class="o">*</span> <span class="n">top</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ra</span> <span class="o">+</span> <span class="n">rcl</span><span class="p">)</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">dry</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp_skin</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ra</span> <span class="o">+</span> <span class="n">rcl</span><span class="p">)</span>
+        <span class="n">hfcs</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp_core</span> <span class="o">-</span> <span class="n">temp_skin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">5.28</span> <span class="o">+</span> <span class="mf">1.163</span> <span class="o">*</span> <span class="n">skin_blood_flow</span><span class="p">)</span>
+        <span class="n">eres</span> <span class="o">=</span> <span class="mf">0.0023</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="mf">44.0</span> <span class="o">-</span> <span class="n">vapor_pressure</span><span class="p">)</span>
+        <span class="n">cres</span> <span class="o">=</span> <span class="mf">0.0014</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="mf">34.0</span> <span class="o">-</span> <span class="n">ta</span><span class="p">)</span>
+        <span class="n">scr</span> <span class="o">=</span> <span class="n">M</span> <span class="o">-</span> <span class="n">hfcs</span> <span class="o">-</span> <span class="n">eres</span> <span class="o">-</span> <span class="n">cres</span> <span class="o">-</span> <span class="n">wme</span>
+        <span class="n">ssk</span> <span class="o">=</span> <span class="n">hfcs</span> <span class="o">-</span> <span class="n">dry</span> <span class="o">-</span> <span class="n">esk</span>
+        <span class="n">tcsk</span> <span class="o">=</span> <span class="mf">0.97</span> <span class="o">*</span> <span class="n">alfa</span> <span class="o">*</span> <span class="n">bodyweight</span>
+        <span class="n">tccr</span> <span class="o">=</span> <span class="mf">0.97</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfa</span><span class="p">)</span> <span class="o">*</span> <span class="n">bodyweight</span>
+        <span class="n">dtsk</span> <span class="o">=</span> <span class="p">(</span><span class="n">ssk</span> <span class="o">*</span> <span class="n">bodysurfacearea</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">tcsk</span> <span class="o">*</span> <span class="mf">60.0</span><span class="p">)</span>  <span class="c1"># deg C per minute</span>
+        <span class="n">dtcr</span> <span class="o">=</span> <span class="n">scr</span> <span class="o">*</span> <span class="n">bodysurfacearea</span> <span class="o">/</span> <span class="p">(</span><span class="n">tccr</span> <span class="o">*</span> <span class="mf">60.0</span><span class="p">)</span>  <span class="c1"># deg C per minute</span>
+        <span class="n">temp_skin</span> <span class="o">=</span> <span class="n">temp_skin</span> <span class="o">+</span> <span class="n">dtsk</span>
+        <span class="n">temp_core</span> <span class="o">=</span> <span class="n">temp_core</span> <span class="o">+</span> <span class="n">dtcr</span>
+        <span class="n">TB</span> <span class="o">=</span> <span class="n">alfa</span> <span class="o">*</span> <span class="n">temp_skin</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfa</span><span class="p">)</span> <span class="o">*</span> <span class="n">temp_core</span>
+        <span class="n">sksig</span> <span class="o">=</span> <span class="n">temp_skin</span> <span class="o">-</span> <span class="n">temp_skin_neutral</span>
+        <span class="n">warms</span> <span class="o">=</span> <span class="p">(</span><span class="n">sksig</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">sksig</span>
+        <span class="n">colds</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">sksig</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">sksig</span><span class="p">)</span>
+        <span class="n">crsig</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp_core</span> <span class="o">-</span> <span class="n">temp_core_neutral</span><span class="p">)</span>
+        <span class="n">warmc</span> <span class="o">=</span> <span class="p">(</span><span class="n">crsig</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">crsig</span>
+        <span class="n">coldc</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">crsig</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">crsig</span><span class="p">)</span>
+        <span class="n">bdsig</span> <span class="o">=</span> <span class="n">TB</span> <span class="o">-</span> <span class="n">temp_body_neutral</span>
+        <span class="n">warmb</span> <span class="o">=</span> <span class="p">(</span><span class="n">bdsig</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">bdsig</span>
+        <span class="n">skin_blood_flow</span> <span class="o">=</span> <span class="p">(</span><span class="n">skin_blood_flow_neutral</span> <span class="o">+</span> <span class="n">cdil</span> <span class="o">*</span>
+                           <span class="n">warmc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cstr</span> <span class="o">*</span> <span class="n">colds</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">skin_blood_flow</span> <span class="o">&gt;</span> <span class="mf">90.0</span><span class="p">:</span>
+            <span class="n">skin_blood_flow</span> <span class="o">=</span> <span class="mf">90.0</span>
+        <span class="k">if</span> <span class="n">skin_blood_flow</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">skin_blood_flow</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">regsw</span> <span class="o">=</span> <span class="n">csw</span> <span class="o">*</span> <span class="n">warmb</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">warms</span> <span class="o">/</span> <span class="mf">10.7</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regsw</span> <span class="o">&gt;</span> <span class="mf">500.0</span><span class="p">:</span>
+            <span class="n">regsw</span> <span class="o">=</span> <span class="mf">500.0</span>
+        <span class="n">ersw</span> <span class="o">=</span> <span class="mf">0.68</span> <span class="o">*</span> <span class="n">regsw</span>
+        <span class="n">rea</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">LR</span> <span class="o">*</span> <span class="n">facl</span> <span class="o">*</span> <span class="n">chc</span><span class="p">)</span>  <span class="c1"># evaporative resistance of air layer</span>
+        <span class="n">recl</span> <span class="o">=</span> <span class="n">rcl</span> <span class="o">/</span> <span class="p">(</span><span class="n">LR</span> <span class="o">*</span> <span class="n">icl</span><span class="p">)</span>  <span class="c1"># evaporative resistance of clothing (icl=.45)</span>
+        <span class="n">emax</span> <span class="o">=</span> <span class="p">(</span><span class="n">saturated_vapor_pressure_torr</span><span class="p">(</span>
+            <span class="n">temp_skin</span><span class="p">)</span> <span class="o">-</span> <span class="n">vapor_pressure</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rea</span> <span class="o">+</span> <span class="n">recl</span><span class="p">)</span>
+        <span class="n">prsw</span> <span class="o">=</span> <span class="n">ersw</span> <span class="o">/</span> <span class="n">emax</span>
+        <span class="n">pwet</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="o">+</span> <span class="mf">0.94</span> <span class="o">*</span> <span class="n">prsw</span>
+        <span class="n">edif</span> <span class="o">=</span> <span class="n">pwet</span> <span class="o">*</span> <span class="n">emax</span> <span class="o">-</span> <span class="n">ersw</span>
+        <span class="n">esk</span> <span class="o">=</span> <span class="n">ersw</span> <span class="o">+</span> <span class="n">edif</span>
+        <span class="k">if</span> <span class="n">pwet</span> <span class="o">&gt;</span> <span class="n">wcrit</span><span class="p">:</span>
+            <span class="n">pwet</span> <span class="o">=</span> <span class="n">wcrit</span>
+            <span class="n">prsw</span> <span class="o">=</span> <span class="n">wcrit</span> <span class="o">/</span> <span class="mf">0.94</span>
+            <span class="n">ersw</span> <span class="o">=</span> <span class="n">prsw</span> <span class="o">*</span> <span class="n">emax</span>
+            <span class="n">edif</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">prsw</span><span class="p">)</span> <span class="o">*</span> <span class="n">emax</span>
+            <span class="n">esk</span> <span class="o">=</span> <span class="n">ersw</span> <span class="o">+</span> <span class="n">edif</span>
+        <span class="k">if</span> <span class="n">emax</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">edif</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">ersw</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pwet</span> <span class="o">=</span> <span class="n">wcrit</span>
+            <span class="n">prsw</span> <span class="o">=</span> <span class="n">wcrit</span>
+            <span class="n">esk</span> <span class="o">=</span> <span class="n">emax</span>
+        <span class="n">esk</span> <span class="o">=</span> <span class="n">ersw</span> <span class="o">+</span> <span class="n">edif</span>
+        <span class="n">mshiv</span> <span class="o">=</span> <span class="mf">19.4</span> <span class="o">*</span> <span class="n">colds</span> <span class="o">*</span> <span class="n">coldc</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">RM</span> <span class="o">+</span> <span class="n">mshiv</span>
+        <span class="n">alfa</span> <span class="o">=</span> <span class="mf">0.0417737</span> <span class="o">+</span> <span class="mf">0.7451833</span> <span class="o">/</span> <span class="p">(</span><span class="n">skin_blood_flow</span> <span class="o">+</span> <span class="o">.</span><span class="mi">585417</span><span class="p">)</span>
+
+    <span class="c1"># Define new heat flow terms, coeffs, and abbreviations</span>
+    <span class="n">hsk</span> <span class="o">=</span> <span class="n">dry</span> <span class="o">+</span> <span class="n">esk</span>  <span class="c1"># total heat loss from skin</span>
+    <span class="n">RN</span> <span class="o">=</span> <span class="n">M</span> <span class="o">-</span> <span class="n">wme</span>  <span class="c1"># net metabolic heat production</span>
+    <span class="n">ecomf</span> <span class="o">=</span> <span class="mf">0.42</span> <span class="o">*</span> <span class="p">(</span><span class="n">RN</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">metfactor</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">ecomf</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">ecomf</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># from Fanger</span>
+    <span class="n">emax</span> <span class="o">=</span> <span class="n">emax</span> <span class="o">*</span> <span class="n">wcrit</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">pwet</span>
+    <span class="n">pssk</span> <span class="o">=</span> <span class="n">saturated_vapor_pressure_torr</span><span class="p">(</span><span class="n">temp_skin</span><span class="p">)</span>
+    <span class="c1"># Definition of ASHRAE standard environment... denoted &quot;S&quot;</span>
+    <span class="n">chrS</span> <span class="o">=</span> <span class="nb">chr</span>
+    <span class="k">if</span> <span class="n">met</span> <span class="o">&lt;</span> <span class="mf">0.85</span><span class="p">:</span>
+        <span class="n">chcS</span> <span class="o">=</span> <span class="mf">3.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">chcS</span> <span class="o">=</span> <span class="mf">5.66</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">((</span><span class="n">met</span> <span class="o">-</span> <span class="mf">0.85</span><span class="p">),</span> <span class="mf">0.39</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">chcS</span> <span class="o">&lt;</span> <span class="mf">3.0</span><span class="p">:</span>
+            <span class="n">chcS</span> <span class="o">=</span> <span class="mf">3.0</span>
+
+    <span class="n">ctcs</span> <span class="o">=</span> <span class="n">chcS</span> <span class="o">+</span> <span class="n">chrS</span>
+    <span class="n">rclos</span> <span class="o">=</span> <span class="mf">1.52</span> <span class="o">/</span> <span class="p">((</span><span class="n">met</span> <span class="o">-</span> <span class="n">wme</span> <span class="o">/</span> <span class="n">metfactor</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.6944</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.1835</span>
+    <span class="n">rcls</span> <span class="o">=</span> <span class="mf">0.155</span> <span class="o">*</span> <span class="n">rclos</span>
+    <span class="n">facls</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">kclo</span> <span class="o">*</span> <span class="n">rclos</span>
+    <span class="n">fcls</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.155</span> <span class="o">*</span> <span class="n">facls</span> <span class="o">*</span> <span class="n">ctcs</span> <span class="o">*</span> <span class="n">rclos</span><span class="p">)</span>
+    <span class="n">ims</span> <span class="o">=</span> <span class="mf">0.45</span>
+    <span class="n">icls</span> <span class="o">=</span> <span class="n">ims</span> <span class="o">*</span> <span class="n">chcS</span> <span class="o">/</span> <span class="n">ctcs</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">fcls</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">chcS</span> <span class="o">/</span> <span class="n">ctcs</span> <span class="o">-</span> <span class="n">fcls</span> <span class="o">*</span> <span class="n">ims</span><span class="p">)</span>
+    <span class="n">ras</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">facls</span> <span class="o">*</span> <span class="n">ctcs</span><span class="p">)</span>
+    <span class="n">reaS</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">LR</span> <span class="o">*</span> <span class="n">facls</span> <span class="o">*</span> <span class="n">chcS</span><span class="p">)</span>
+    <span class="n">reclS</span> <span class="o">=</span> <span class="n">rcls</span> <span class="o">/</span> <span class="p">(</span><span class="n">LR</span> <span class="o">*</span> <span class="n">icls</span><span class="p">)</span>
+    <span class="n">hd_s</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">ras</span> <span class="o">+</span> <span class="n">rcls</span><span class="p">)</span>
+    <span class="n">he_s</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">reaS</span> <span class="o">+</span> <span class="n">reclS</span><span class="p">)</span>
+
+    <span class="c1"># SET* (standardized humidity, clo, Pb, and chc)</span>
+    <span class="c1"># determined using Newton&#39;s iterative solution</span>
+    <span class="c1"># FNERRS is defined in the GENERAL SETUP section above</span>
+
+    <span class="n">delta</span> <span class="o">=</span> <span class="o">.</span><span class="mi">0001</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">100.0</span>
+    <span class="n">x_old</span> <span class="o">=</span> <span class="n">temp_skin</span> <span class="o">-</span> <span class="n">hsk</span> <span class="o">/</span> <span class="n">hd_s</span>  <span class="c1"># lower bound for SET</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">.</span><span class="mi">01</span><span class="p">:</span>
+        <span class="n">err1</span> <span class="o">=</span> <span class="p">(</span><span class="n">hsk</span> <span class="o">-</span> <span class="n">hd_s</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp_skin</span> <span class="o">-</span> <span class="n">x_old</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span> <span class="o">*</span> <span class="n">he_s</span> <span class="o">*</span>
+                <span class="p">(</span><span class="n">pssk</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">saturated_vapor_pressure_torr</span><span class="p">(</span><span class="n">x_old</span><span class="p">)))</span>
+        <span class="n">err2</span> <span class="o">=</span> <span class="p">(</span><span class="n">hsk</span> <span class="o">-</span> <span class="n">hd_s</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp_skin</span> <span class="o">-</span> <span class="p">(</span><span class="n">x_old</span> <span class="o">+</span> <span class="n">delta</span><span class="p">))</span> <span class="o">-</span> <span class="n">W</span> <span class="o">*</span> <span class="n">he_s</span> <span class="o">*</span>
+                <span class="p">(</span><span class="n">pssk</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">saturated_vapor_pressure_torr</span><span class="p">((</span><span class="n">x_old</span> <span class="o">+</span> <span class="n">delta</span><span class="p">))))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">err1</span> <span class="o">/</span> <span class="p">(</span><span class="n">err2</span> <span class="o">-</span> <span class="n">err1</span><span class="p">)</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x_old</span>
+        <span class="n">x_old</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">se_temp</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">return</span> <span class="n">se_temp</span></div>
+
+
+<div class="viewcode-block" id="saturated_vapor_pressure_torr"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.saturated_vapor_pressure_torr">[docs]</a><span class="k">def</span> <span class="nf">saturated_vapor_pressure_torr</span><span class="p">(</span><span class="n">db_temp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate saturated vapor pressure (Torr) at temperature (C)</span>
+
+<span class="sd">    This is used to synchronize the results of the Standard Effective temperature (SET)</span>
+<span class="sd">    model with the results of the original Fanger model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">18.6686</span> <span class="o">-</span> <span class="mf">4030.183</span> <span class="o">/</span> <span class="p">(</span><span class="n">db_temp</span> <span class="o">+</span> <span class="mf">235.0</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ppd_from_pmv"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.ppd_from_pmv">[docs]</a><span class="k">def</span> <span class="nf">ppd_from_pmv</span><span class="p">(</span><span class="n">pmv</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the Percentage of People Dissatisfied (PPD) from PMV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pmv: The predicted mean vote (PMV) for which you want to know the PPD.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ppd -- The percentage of people dissatisfied (PPD) for the input PMV.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">100.0</span> <span class="o">-</span> <span class="mf">95.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.03353</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">pmv</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.2179</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">pmv</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="pmv_from_ppd"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.pmv_from_ppd">[docs]</a><span class="k">def</span> <span class="nf">pmv_from_ppd</span><span class="p">(</span><span class="n">ppd</span><span class="p">,</span> <span class="n">pmv_up_bound</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ppd_tolerance</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the two possible Predicted Mean Vote (PMV) values for a PPD value.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ppd: The percentage of people dissatisfied (PPD) for which you want to know</span>
+<span class="sd">            the possible PMV.</span>
+<span class="sd">        pmv_up_bound: The upper limit of PMV expected for the input PPD.  Putting</span>
+<span class="sd">            in a good estimate here will help the model converge on a</span>
+<span class="sd">            solution faster. Defaut = 3</span>
+<span class="sd">        ppd_tolerance: The acceptable error in meeting the target PPD.  Default = 0.001.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple with two elements</span>
+
+<span class="sd">        -   pmv_lower: The lower (cold) PMV value that will produce the input ppd.</span>
+<span class="sd">        -   pmv_upper: The upper (hot) PMV value that will produce the input ppd.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">ppd</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">ppd</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">,</span> \
+        <span class="s1">&#39;PPD value </span><span class="si">{}% i</span><span class="s1">s outside acceptable limits of the PMV model.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ppd</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">pmv</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">100.0</span> <span class="o">-</span> <span class="mf">95.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+            <span class="o">-</span><span class="mf">0.03353</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">pmv</span><span class="p">,</span> <span class="mf">4.</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.2179</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">pmv</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)))</span> <span class="o">-</span> <span class="n">ppd</span>
+
+    <span class="c1"># Solve for the missing higher PMV value.</span>
+    <span class="n">pmv_upper</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pmv_up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">ppd_tolerance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pmv_upper</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pmv_upper</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pmv_up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">ppd_tolerance</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">pmv_lower</span> <span class="o">=</span> <span class="n">pmv_upper</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">pmv_lower</span><span class="p">,</span> <span class="n">pmv_upper</span></div>
+
+
+<div class="viewcode-block" id="ppd_threshold_from_comfort_class"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.ppd_threshold_from_comfort_class">[docs]</a><span class="k">def</span> <span class="nf">ppd_threshold_from_comfort_class</span><span class="p">(</span><span class="n">comf_class</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get acceptable PPD comfort threshold given the EN-15251 comfort class.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        comf_class: An integer representing the EN-15251 comfort class.</span>
+<span class="sd">            Choose from: 1, 2, 3 (the higher the class, the greater the PPD threshold)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ppd_thresh -- Acceptable PPD threshold.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">comf_class</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ppd_thresh</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="k">elif</span> <span class="n">comf_class</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ppd_thresh</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">comf_class</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ppd_thresh</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Comfort class </span><span class="si">{}</span><span class="s1"> is not an acceptable value. &#39;</span>
+                         <span class="s1">&#39;Choose from: 1, 2, 3&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">comf_class</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ppd_thresh</span></div>
+
+
+<div class="viewcode-block" id="calc_missing_pmv_input"><a class="viewcode-back" href="../../ladybug_comfort.pmv.html#ladybug_comfort.pmv.calc_missing_pmv_input">[docs]</a><span class="k">def</span> <span class="nf">calc_missing_pmv_input</span><span class="p">(</span><span class="n">target_pmv</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">,</span> <span class="n">low_bound</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">up_bound</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
+                           <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">still_air_threshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the value of a missing_pmv_input given a target_pmv and the 6 other inputs.</span>
+
+<span class="sd">    This is particularly useful when trying to draw comfort polygons on charts</span>
+<span class="sd">    using the PMV model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_pmv: The target PMV that you are trying to produce from the inputs to</span>
+<span class="sd">            the PMV model.</span>
+<span class="sd">        pmv_inputs: A dictionary of 7 pmv inputs with the following keys:</span>
+<span class="sd">            &#39;ta&#39;, &#39;tr&#39;, &#39;vel&#39;, &#39;rh&#39;, &#39;met&#39;, &#39;clo&#39;, &#39;wme&#39;.  Each key</span>
+<span class="sd">            should correspond to a value that represents that pmv input</span>
+<span class="sd">            but one of these inputs should have a value of None.</span>
+<span class="sd">            The input corresponding to None will be solved for by this function.</span>
+<span class="sd">            One can also input None for both &#39;ta&#39; and &#39;tr&#39; to solve for the operative</span>
+<span class="sd">            temperature that meets the target_pmv. In this case, both &#39;ta&#39; and &#39;tr&#39;</span>
+<span class="sd">            in the output dictionary will be the same.</span>
+<span class="sd">            Example (solving for relative humidity):</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &#39;ta&#39;: 20,</span>
+<span class="sd">                &#39;tr&#39;: 20,</span>
+<span class="sd">                &#39;vel&#39;: 0.05,</span>
+<span class="sd">                &#39;rh&#39;: None,</span>
+<span class="sd">                &#39;met&#39;: 1.2,</span>
+<span class="sd">                &#39;clo&#39;: 0.75,</span>
+<span class="sd">                &#39;wme&#39;: 0</span>
+<span class="sd">                }</span>
+
+<span class="sd">        low_bound: The lowest possible value of the missing input you are tying to</span>
+<span class="sd">            find. Putting in a good value here will help the model converge to a</span>
+<span class="sd">            solution faster.</span>
+<span class="sd">        up_bound: The highest possible value of the missing input you are tying to</span>
+<span class="sd">            find. Putting in a good value here will help the model converge to a</span>
+<span class="sd">            solution faster.</span>
+<span class="sd">        tolerance: The acceptable error in the target_pmv. The default is set to 0.001</span>
+<span class="sd">        still_air_threshold: The air velocity in m/s at which the Pierce</span>
+<span class="sd">            Standard Effective Temperature (SET) model will be used</span>
+<span class="sd">            to correct values in the original Fanger PMV model.</span>
+<span class="sd">            Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        complete_pmv_inputs -- A copy of the pmv_inputs dictionary but with values</span>
+<span class="sd">        for all inputs. The missing input to the PMV model will be filled by the value</span>
+<span class="sd">        that returns the target_pmv.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pmv_inputs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">7</span><span class="p">,</span> \
+        <span class="s1">&#39;pmv_inputs must have 7 keys. Got </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pmv_inputs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+    <span class="c1"># Determine the function that should be used given the missing input.</span>
+    <span class="k">if</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ta&#39;</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;ta&#39;</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span>  <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;tr&#39;</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">target_pmv</span> <span class="o">-</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;vel&#39;</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;rh&#39;</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;met&#39;</span>
+    <span class="k">elif</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;wme&#39;</span><span class="p">],</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;clo&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">predicted_mean_vote</span><span class="p">(</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;ta&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;tr&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;vel&#39;</span><span class="p">],</span>
+                <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;rh&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;met&#39;</span><span class="p">],</span> <span class="n">pmv_inputs</span><span class="p">[</span><span class="s1">&#39;clo&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span>
+                <span class="n">still_air_threshold</span><span class="p">)[</span><span class="s1">&#39;pmv&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_pmv</span>
+        <span class="n">missing_key</span> <span class="o">=</span> <span class="s1">&#39;wme&#39;</span>
+
+    <span class="c1"># Solve for the missing input using the function.</span>
+    <span class="n">missing_val</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">missing_key</span> <span class="o">!=</span> <span class="s1">&#39;clo&#39;</span><span class="p">:</span>  <span class="c1"># bisect is much better at finding reasonable clo values</span>
+        <span class="n">missing_val</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">low_bound</span><span class="p">,</span> <span class="n">up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing_val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">missing_val</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">low_bound</span><span class="p">,</span> <span class="n">up_bound</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># copy and complete the input dictionary</span>
+    <span class="n">pmv_inputs</span> <span class="o">=</span> <span class="n">pmv_inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">missing_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">pmv_inputs</span><span class="p">[</span><span class="n">missing_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing_val</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">missing_key</span><span class="p">:</span>
+            <span class="n">pmv_inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing_val</span>
+    <span class="k">return</span> <span class="n">pmv_inputs</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

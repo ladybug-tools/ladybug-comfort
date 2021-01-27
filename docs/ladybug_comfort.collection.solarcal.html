@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.collection.solarcal module &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ladybug_comfort.collection.utci module" href="ladybug_comfort.collection.utci.html" />
+    <link rel="prev" title="ladybug_comfort.collection.pmv module" href="ladybug_comfort.collection.pmv.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ladybug_comfort.collection.pmv.html" title="Previous Chapter: ladybug_comfort.collection.pmv module"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ladybug_comfo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="ladybug_comfort.collection.utci.html" title="Next Chapter: ladybug_comfort.collection.utci module"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ladybug_comfo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/ladybug_comfort.collection.solarcal.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <div class="section" id="module-ladybug_comfort.collection.solarcal">
+<span id="ladybug-comfort-collection-solarcal-module"></span><h1>ladybug_comfort.collection.solarcal module<a class="headerlink" href="#module-ladybug_comfort.collection.solarcal" title="Permalink to this headline">¶</a></h1>
+<p>Objects for calculating solar-adjusted MRT from DataCollections.</p>
+<dl class="py class">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal">
+<em class="property">class </em><code class="sig-prename descclassname">ladybug_comfort.collection.solarcal.</code><code class="sig-name descname">HorizontalSolarCal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">direct_horizontal_solar</span></em>, <em class="sig-param"><span class="n">diffuse_horizontal_solar</span></em>, <em class="sig-param"><span class="n">longwave_mrt</span></em>, <em class="sig-param"><span class="n">fraction_body_exposed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">floor_reflectance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solarcal_body_parameter</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/solarcal.html#HorizontalSolarCal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ladybug_comfort.collection.solarcal._SolarCalBase</span></code></p>
+<p>SolarCal Collection object from horizontal solar components.</p>
+<p>This is particularly useful when trying to estimate solar MRT deltas from
+Radiance radiation simulation result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> – A Ladybug Location object.</p></li>
+<li><p><strong>direct_horizontal_solar</strong> – Hourly Data Collection with the direct horizontal
+solar irradiance in W/m2.</p></li>
+<li><p><strong>diffuse_horizontal_solar</strong> – Hourly Data Collection with the diffuse
+horizontal solar irradiance in W/m2.</p></li>
+<li><p><strong>longwave_mrt</strong> – Hourly Data Collection or individual value with the longwave
+mean radiant temperature (MRT) expereinced as a result of indoor
+surface temperatures in C.</p></li>
+<li><p><strong>fraction_body_exposed</strong> – A Data Collection or number between 0 and 1
+representing the fraction of the body exposed to direct sunlight.
+Note that this does not include the body’s self-shading; only the
+shading from surroundings.
+Default is 1 for a person standing in an open area.</p></li>
+<li><p><strong>floor_reflectance</strong> – A Data Collection or number between 0 and 1 that
+represents the reflectance of the floor. Default is for 0.25 which
+is characteristic of outdoor grass or dry bare soil.</p></li>
+<li><p><strong>solarcal_body_parameter</strong> – Optional SolarCalParameter object to account for
+properties of the human geometry.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>location</p></li>
+<li><p>direct_horizontal_solar</p></li>
+<li><p>diffuse_horizontal_solar</p></li>
+<li><p>longwave_mrt</p></li>
+<li><p>fraction_body_exposed</p></li>
+<li><p>floor_reflectance</p></li>
+<li><p>solarcal_body_parameter</p></li>
+<li><p>effective_radiant_field</p></li>
+<li><p>mrt_delta</p></li>
+<li><p>mean_radiant_temperature</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.ToString">
+<code class="sig-name descname">ToString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.ToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite .NET ToString.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.calc_length">
+<em class="property">property </em><code class="sig-name descname">calc_length</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.calc_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of values in the Data Collections of this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.comfort_model">
+<em class="property">property </em><code class="sig-name descname">comfort_model</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.comfort_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the model to which the comfort datacollection belongs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.diffuse_horizontal_solar">
+<em class="property">property </em><code class="sig-name descname">diffuse_horizontal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.diffuse_horizontal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.direct_horizontal_solar">
+<em class="property">property </em><code class="sig-name descname">direct_horizontal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.direct_horizontal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of direct horizontal irradiance in Wh/m2 or W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.effective_radiant_field">
+<em class="property">property </em><code class="sig-name descname">effective_radiant_field</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.effective_radiant_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave effective radiant field in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.floor_reflectance">
+<em class="property">property </em><code class="sig-name descname">floor_reflectance</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.floor_reflectance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of floor reflectance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.fraction_body_exposed">
+<em class="property">property </em><code class="sig-name descname">fraction_body_exposed</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.fraction_body_exposed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of body fraction exposed to direct sun.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.location">
+<em class="property">property </em><code class="sig-name descname">location</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ladybug Location object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.longwave_mrt">
+<em class="property">property </em><code class="sig-name descname">longwave_mrt</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.longwave_mrt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of surface temperature values in degrees C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.mean_radiant_temperature">
+<em class="property">property </em><code class="sig-name descname">mean_radiant_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.mean_radiant_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of total mean radiant temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.mrt_delta">
+<em class="property">property </em><code class="sig-name descname">mrt_delta</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.mrt_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave MRT delta in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_cold">
+<em class="property">property </em><code class="sig-name descname">percent_cold</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is cold.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_hot">
+<em class="property">property </em><code class="sig-name descname">percent_hot</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is hot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_neutral">
+<em class="property">property </em><code class="sig-name descname">percent_neutral</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_neutral" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is neutral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.HorizontalSolarCal.solarcal_body_parameter">
+<em class="property">property </em><code class="sig-name descname">solarcal_body_parameter</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.HorizontalSolarCal.solarcal_body_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>SolarCal body parameters that are assigned to this object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal">
+<em class="property">class </em><code class="sig-prename descclassname">ladybug_comfort.collection.solarcal.</code><code class="sig-name descname">IndoorSolarCal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">direct_normal_solar</span></em>, <em class="sig-param"><span class="n">diffuse_horizontal_solar</span></em>, <em class="sig-param"><span class="n">longwave_mrt</span></em>, <em class="sig-param"><span class="n">fraction_body_exposed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sky_exposure</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">floor_reflectance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">window_transmittance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solarcal_body_parameter</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/solarcal.html#IndoorSolarCal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ladybug_comfort.collection.solarcal._SolarCalBase</span></code></p>
+<p>Indoor SolarCal Collection object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> – A Ladybug Location object.</p></li>
+<li><p><strong>direct_normal_solar</strong> – Hourly Data Collection with the direct normal solar
+irradiance in W/m2.</p></li>
+<li><p><strong>diffuse_horizontal_solar</strong> – Hourly Data Collection with the diffuse
+horizontal solar irradiance in W/m2.</p></li>
+<li><p><strong>longwave_mrt</strong> – Hourly Data Collection or individual value with the longwave
+mean radiant temperature (MRT) expereinced as a result of indoor
+surface temperatures in C.</p></li>
+<li><p><strong>fraction_body_exposed</strong> – A Data Collection or number between 0 and 1
+representing the fraction of the body exposed to direct sunlight.
+Note that this does not include the body’s self-shading; only the
+shading from surroundings.
+Default is 1 for a person standing in an open area.</p></li>
+<li><p><strong>sky_exposure</strong> – A Data Collection or number between 0 and 1 representing the
+fraction of the sky vault in occupant’s view. Default is 1 for a person
+standing in an open area.</p></li>
+<li><p><strong>floor_reflectance</strong> – A Data Collection or number between 0 and 1 that
+represents the reflectance of the floor. Default is for 0.25 which
+is characteristic of outdoor grass or dry bare soil.</p></li>
+<li><p><strong>window_transmittance</strong> – A Data Collection or number between 0 and 1 that
+represents the broadband solar transmittance of the window through which
+the sun is coming. Such values tend to be slightly less than the
+SHGC. Values might be as low as 0.2 and could be as high as 0.85
+for a single pane of glass. Default is 0.4 assuming a double pane
+window with a relatively mild low-e coating.</p></li>
+<li><p><strong>solarcal_body_parameter</strong> – Optional SolarCalParameter object to account for
+properties of the human geometry.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>location</p></li>
+<li><p>direct_normal_solar</p></li>
+<li><p>diffuse_horizontal_solar</p></li>
+<li><p>longwave_mrt</p></li>
+<li><p>fraction_body_exposed</p></li>
+<li><p>sky_exposure</p></li>
+<li><p>floor_reflectance</p></li>
+<li><p>window_transmittance</p></li>
+<li><p>solarcal_body_parameter</p></li>
+<li><p>effective_radiant_field</p></li>
+<li><p>mrt_delta</p></li>
+<li><p>mean_radiant_temperature</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.ToString">
+<code class="sig-name descname">ToString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.ToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite .NET ToString.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.calc_length">
+<em class="property">property </em><code class="sig-name descname">calc_length</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.calc_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of values in the Data Collections of this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.comfort_model">
+<em class="property">property </em><code class="sig-name descname">comfort_model</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.comfort_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the model to which the comfort datacollection belongs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.diffuse_horizontal_solar">
+<em class="property">property </em><code class="sig-name descname">diffuse_horizontal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.diffuse_horizontal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.direct_normal_solar">
+<em class="property">property </em><code class="sig-name descname">direct_normal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.direct_normal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of direct normal irradiance in Wh/m2 or W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.effective_radiant_field">
+<em class="property">property </em><code class="sig-name descname">effective_radiant_field</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.effective_radiant_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave effective radiant field in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.floor_reflectance">
+<em class="property">property </em><code class="sig-name descname">floor_reflectance</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.floor_reflectance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of floor reflectance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.fraction_body_exposed">
+<em class="property">property </em><code class="sig-name descname">fraction_body_exposed</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.fraction_body_exposed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of body fraction exposed to direct sun.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.location">
+<em class="property">property </em><code class="sig-name descname">location</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ladybug Location object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.longwave_mrt">
+<em class="property">property </em><code class="sig-name descname">longwave_mrt</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.longwave_mrt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of surface temperature values in degrees C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.mean_radiant_temperature">
+<em class="property">property </em><code class="sig-name descname">mean_radiant_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.mean_radiant_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of total mean radiant temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.mrt_delta">
+<em class="property">property </em><code class="sig-name descname">mrt_delta</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.mrt_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave MRT delta in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_cold">
+<em class="property">property </em><code class="sig-name descname">percent_cold</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is cold.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_hot">
+<em class="property">property </em><code class="sig-name descname">percent_hot</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is hot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_neutral">
+<em class="property">property </em><code class="sig-name descname">percent_neutral</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_neutral" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is neutral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.sky_exposure">
+<em class="property">property </em><code class="sig-name descname">sky_exposure</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.sky_exposure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of sky view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.solarcal_body_parameter">
+<em class="property">property </em><code class="sig-name descname">solarcal_body_parameter</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.solarcal_body_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>SolarCal body parameters that are assigned to this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.IndoorSolarCal.window_transmittance">
+<em class="property">property </em><code class="sig-name descname">window_transmittance</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.IndoorSolarCal.window_transmittance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of window transmittance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal">
+<em class="property">class </em><code class="sig-prename descclassname">ladybug_comfort.collection.solarcal.</code><code class="sig-name descname">OutdoorSolarCal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">direct_normal_solar</span></em>, <em class="sig-param"><span class="n">diffuse_horizontal_solar</span></em>, <em class="sig-param"><span class="n">horizontal_infrared</span></em>, <em class="sig-param"><span class="n">surface_temperatures</span></em>, <em class="sig-param"><span class="n">fraction_body_exposed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sky_exposure</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">floor_reflectance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solarcal_body_parameter</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/solarcal.html#OutdoorSolarCal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ladybug_comfort.collection.solarcal._SolarCalBase</span></code></p>
+<p>Outdoor SolarCal Collection object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> – A Ladybug Location object.</p></li>
+<li><p><strong>direct_normal_solar</strong> – Hourly Data Collection with the direct normal solar
+irradiance in W/m2.</p></li>
+<li><p><strong>diffuse_horizontal_solar</strong> – Hourly Data Collection with the diffuse
+horizontal solar irradiance in W/m2.</p></li>
+<li><p><strong>surface_temperatures</strong> – Hourly Data Collection with the temperature of surfaces
+around the person in degrees Celsius. This includes the ground and
+any other surfaces blocking the view to the sky. When the temperature
+of these individual surfaces are known, the input here should be the
+average temperature of the surfaces weighted by view-factor to the human.
+When such individual surface temperatures are unknown, the outdoor
+dry bulb temperature is typically used as a proxy.</p></li>
+<li><p><strong>horizontal_infrared</strong> – Hourly Data Collection with the horizontal infrared
+radiation intensity from the sky in W/m2.</p></li>
+<li><p><strong>fraction_body_exposed</strong> – A Data Collection or number between 0 and 1
+representing the fraction of the body exposed to direct sunlight.
+Note that this does not include the body’s self-shading; only the
+shading from surroundings.
+Default is 1 for a person standing in an open area.</p></li>
+<li><p><strong>sky_exposure</strong> – A Data Collection or number between 0 and 1 representing the
+fraction of the sky vault in occupant’s view. Default is 1 for a person
+standing in an open area.</p></li>
+<li><p><strong>floor_reflectance</strong> – A Data Collection or number between 0 and 1 that
+represents the reflectance of the floor. Default is for 0.25 which
+is characteristic of outdoor grass or dry bare soil.</p></li>
+<li><p><strong>solarcal_body_parameter</strong> – Optional SolarCalParameter object to account for
+properties of the human geometry.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>location</p></li>
+<li><p>direct_normal_solar</p></li>
+<li><p>diffuse_horizontal_solar</p></li>
+<li><p>horizontal_infrared</p></li>
+<li><p>surface_temperatures</p></li>
+<li><p>fraction_body_exposed</p></li>
+<li><p>sky_exposure</p></li>
+<li><p>floor_reflectance</p></li>
+<li><p>solarcal_body_parameter</p></li>
+<li><p>shortwave_effective_radiant_field</p></li>
+<li><p>longwave_effective_radiant_field</p></li>
+<li><p>shortwave_mrt_delta</p></li>
+<li><p>longwave_mrt_delta</p></li>
+<li><p>mrt_delta</p></li>
+<li><p>mean_radiant_temperature</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.ToString">
+<code class="sig-name descname">ToString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.ToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite .NET ToString.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.calc_length">
+<em class="property">property </em><code class="sig-name descname">calc_length</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.calc_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of values in the Data Collections of this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.comfort_model">
+<em class="property">property </em><code class="sig-name descname">comfort_model</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.comfort_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the model to which the comfort datacollection belongs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.diffuse_horizontal_solar">
+<em class="property">property </em><code class="sig-name descname">diffuse_horizontal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.diffuse_horizontal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of diffuse horizontal irradiance in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.direct_normal_solar">
+<em class="property">property </em><code class="sig-name descname">direct_normal_solar</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.direct_normal_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of direct normal irradiance in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.floor_reflectance">
+<em class="property">property </em><code class="sig-name descname">floor_reflectance</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.floor_reflectance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of floor reflectance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.fraction_body_exposed">
+<em class="property">property </em><code class="sig-name descname">fraction_body_exposed</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.fraction_body_exposed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of body fraction exposed to direct sun.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.horizontal_infrared">
+<em class="property">property </em><code class="sig-name descname">horizontal_infrared</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.horizontal_infrared" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of horizontal infrared radiation intensity in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.location">
+<em class="property">property </em><code class="sig-name descname">location</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ladybug Location object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_effective_radiant_field">
+<em class="property">property </em><code class="sig-name descname">longwave_effective_radiant_field</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_effective_radiant_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of longwave effective radiant field in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_mrt_delta">
+<em class="property">property </em><code class="sig-name descname">longwave_mrt_delta</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_mrt_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of longwave MRT delta in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.mean_radiant_temperature">
+<em class="property">property </em><code class="sig-name descname">mean_radiant_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.mean_radiant_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of total mean radiant temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.mrt_delta">
+<em class="property">property </em><code class="sig-name descname">mrt_delta</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.mrt_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of total MRT delta in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_cold">
+<em class="property">property </em><code class="sig-name descname">percent_cold</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is cold.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_hot">
+<em class="property">property </em><code class="sig-name descname">percent_hot</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is hot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_neutral">
+<em class="property">property </em><code class="sig-name descname">percent_neutral</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_neutral" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is neutral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_effective_radiant_field">
+<em class="property">property </em><code class="sig-name descname">shortwave_effective_radiant_field</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_effective_radiant_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave effective radiant field in W/m2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_mrt_delta">
+<em class="property">property </em><code class="sig-name descname">shortwave_mrt_delta</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_mrt_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of shortwave MRT delta in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.sky_exposure">
+<em class="property">property </em><code class="sig-name descname">sky_exposure</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.sky_exposure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of sky view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.solarcal_body_parameter">
+<em class="property">property </em><code class="sig-name descname">solarcal_body_parameter</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.solarcal_body_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>SolarCal body parameters that are assigned to this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.solarcal.OutdoorSolarCal.surface_temperatures">
+<em class="property">property </em><code class="sig-name descname">surface_temperatures</code><a class="headerlink" href="#ladybug_comfort.collection.solarcal.OutdoorSolarCal.surface_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of surface temperature values in degrees C.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

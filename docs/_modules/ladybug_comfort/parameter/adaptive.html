@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.parameter.adaptive &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <h1>Source code for ladybug_comfort.parameter.adaptive</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Parameters for specifying acceptable thermal conditions using the Adaptive model.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">ComfortParameter</span>
+<span class="kn">from</span> <span class="nn">..adaptive</span> <span class="kn">import</span> <span class="n">neutral_temperature_conditioned</span><span class="p">,</span> \
+    <span class="n">ashrae55_neutral_offset_from_ppd</span><span class="p">,</span> <span class="n">en15251_neutral_offset_from_comfort_class</span>
+
+
+<div class="viewcode-block" id="AdaptiveParameter"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter">[docs]</a><span class="k">class</span> <span class="nc">AdaptiveParameter</span><span class="p">(</span><span class="n">ComfortParameter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parameters of Adaptive comfort.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ashrae55_or_en15251: A boolean to note whether to use the ASHRAE-55 neutral</span>
+<span class="sd">            temperature function (True) or the EN-15251 function (False).</span>
+<span class="sd">            Note that this input will also determine default values for many of</span>
+<span class="sd">            the other properties of this object.</span>
+<span class="sd">        neutral_offset:  The number of degrees Celcius from the neutral temperature</span>
+<span class="sd">            where the input operative temperature is considered acceptable.</span>
+<span class="sd">            The default is 2.5C when the neutral temperature function is ASHRAE-55</span>
+<span class="sd">            and 3C when the neutral temperature function is EN-15251.</span>
+<span class="sd">            You may want to use the set_neutral_offset_from_ppd() or the</span>
+<span class="sd">            set_neutral_offset_from_comfort_class() methods on this object to set</span>
+<span class="sd">            this value using ppd from the ASHRAE-55 standard or comfort classes</span>
+<span class="sd">            from the EN-15251 standard respectively.</span>
+<span class="sd">        avg_month_or_running_mean: A boolean to note whether the prevailing outdoor</span>
+<span class="sd">            temperature is computed from the average monthly temperature (True) or</span>
+<span class="sd">            a weighted running mean of the last week (False).  The default is True</span>
+<span class="sd">            when the neutral temperature function is ASHRAE-55 and False when the</span>
+<span class="sd">            neutral temperature function is EN-15251.</span>
+<span class="sd">        discrete_or_continuous_air_speed: A boolean to note whether discrete</span>
+<span class="sd">            categories should be used to assess the effect of elevated air speed</span>
+<span class="sd">            (True) or whether a continuous function should be used (False).</span>
+<span class="sd">            The default is True when the neutral temperature function is ASHRAE-55</span>
+<span class="sd">            and False when the neutral temperature function is EN-15251.</span>
+<span class="sd">        cold_prevail_temp_limit: A number indicating the prevailing outdoor</span>
+<span class="sd">            temperature below which acceptable indoor operative temperatures</span>
+<span class="sd">            flatline. The default is 10C when the neutral temperature function is</span>
+<span class="sd">            ASHRAE-55 and 15C when the neutral temperature function is EN-15251.</span>
+<span class="sd">            This number cannot be greater than 22C and cannot be less than 10C.</span>
+<span class="sd">        conditioning: A number between 0 and 1 that represents how &quot;conditioned&quot; vs.</span>
+<span class="sd">            &quot;free-running&quot; the building is.</span>
+
+<span class="sd">            * 0 = free-running (completely passive with no air conditioning)</span>
+<span class="sd">            * 1 = conditioned (no operable windows and fully air conditioned)</span>
+
+<span class="sd">            The default is 0 since both the ASHRAE-55 and EN-15251 standards forbid</span>
+<span class="sd">            the use of adaptive comfort methods when a cooling system is active.</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        * ashrae55_or_en15251</span>
+<span class="sd">        * neutral_offset</span>
+<span class="sd">        * avg_month_or_running_mean</span>
+<span class="sd">        * discrete_or_continuous_air_speed</span>
+<span class="sd">        * cold_prevail_temp_limit</span>
+<span class="sd">        * conditioning</span>
+<span class="sd">        * standard</span>
+<span class="sd">        * prevailing_temperature_method</span>
+<span class="sd">        * minimum_operative</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_model</span> <span class="o">=</span> <span class="s1">&#39;Adaptive&#39;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_standard&#39;</span><span class="p">,</span> <span class="s1">&#39;_neutral_offset&#39;</span><span class="p">,</span> <span class="s1">&#39;_prevail_method&#39;</span><span class="p">,</span> <span class="s1">&#39;_air_speed_method&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_cold_prevail_temp_limit&#39;</span><span class="p">,</span> <span class="s1">&#39;_conditioning&#39;</span><span class="p">,</span> <span class="s1">&#39;_min_operative&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ashrae55_or_en15251</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">neutral_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">avg_month_or_running_mean</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">discrete_or_continuous_air_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">cold_prevail_temp_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conditioning</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initalize Adaptive Parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># get the standard</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_standard</span> <span class="o">=</span> <span class="n">ashrae55_or_en15251</span> <span class="k">if</span> <span class="n">ashrae55_or_en15251</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_standard</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span> <span class="s1">&#39;ashrae55_or_en15251 must be &#39;</span>\
+            <span class="s1">&#39;a boolean. Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_standard</span><span class="p">))</span>
+
+        <span class="c1"># set defaults based on the standard</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standard</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">default_neutral_offset</span> <span class="o">=</span> <span class="mf">2.5</span>
+            <span class="n">default_prevail_method</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">default_air_speed_method</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">default_cold_prevail_temp_limit</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">default_neutral_offset</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="n">default_prevail_method</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">default_air_speed_method</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">default_cold_prevail_temp_limit</span> <span class="o">=</span> <span class="mi">15</span>
+
+        <span class="c1"># assign properties based on defaults and input</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_method</span> <span class="o">=</span> <span class="n">avg_month_or_running_mean</span> <span class="k">if</span> \
+            <span class="n">avg_month_or_running_mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_prevail_method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed_method</span> <span class="o">=</span> <span class="n">discrete_or_continuous_air_speed</span> <span class="k">if</span> \
+            <span class="n">discrete_or_continuous_air_speed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_air_speed_method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cold_prevail_temp_limit</span> <span class="o">=</span> <span class="n">cold_prevail_temp_limit</span> <span class="k">if</span> \
+            <span class="n">cold_prevail_temp_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_cold_prevail_temp_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conditioning</span> <span class="o">=</span> <span class="n">conditioning</span> <span class="k">if</span> <span class="n">conditioning</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="c1"># perform range checks on the inputs</span>
+        <span class="k">assert</span> <span class="mi">10</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cold_prevail_temp_limit</span> <span class="o">&lt;=</span> <span class="mi">22</span><span class="p">,</span> \
+            <span class="s1">&#39;cold_prevail_temp_limit must be between 10 and 22. Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cold_prevail_temp_limit</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conditioning</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span> \
+            <span class="s1">&#39;conditioning must be between 0 and 1. Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conditioning</span><span class="p">)</span>
+
+        <span class="c1"># assign the neutral tempreature offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span> <span class="o">=</span> <span class="n">neutral_offset</span> <span class="k">if</span> \
+            <span class="n">neutral_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_neutral_offset</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ashrae55_or_en15251</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A boolean to note whether to use the ASHRAE-55 neutral temperature</span>
+<span class="sd">        function (True) or the EN-15251 function (False).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standard</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">neutral_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The degrees Celcius from the neutral temperature where the operative</span>
+<span class="sd">        temperature is considered acceptable.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_offset</span>
+
+    <span class="nd">@neutral_offset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">neutral_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">offset</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> \
+            <span class="s1">&#39;neutral_offset must be between 0 and 10 C. Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_offset</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_min_operative_temperature</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_month_or_running_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Boolean noting whether prevailing outdoor temperature is computed from the</span>
+<span class="sd">        average monthly temperature (True) or a weighted running mean (False).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_method</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">discrete_or_continuous_air_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Boolean noting whether discrete categories are used to assess elevated</span>
+<span class="sd">        air speed (True) or whether a continuous function is used (False).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed_method</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cold_prevail_temp_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The prevailing outdoor temperature below which acceptable indoor</span>
+<span class="sd">        operative temperatures flatline. [C]&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cold_prevail_temp_limit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">conditioning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A decimal noting how conditioned(1) vs. free-running(0) the building is.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conditioning</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Text denoting the standard.</span>
+
+<span class="sd">        Either &#39;ASHRAE-55&#39; or &#39;EN-15251&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standard</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;ASHRAE-55&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;EN-15251&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">prevailing_temperature_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Text denoting previaling temperature method.</span>
+
+<span class="sd">        Either &#39;Averaged Monthly&#39; or &#39;Running Mean&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prevail_method</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Averaged Monthly&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Running Mean&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">air_speed_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Text denoting the type of function used for the cooling effect of air speed.</span>
+
+<span class="sd">        Either &#39;Discrete&#39; or &#39;Continuous&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_speed_method</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Discrete&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Continuous&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minimum_operative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Operative Temperature in C below which conditions cannot be comfortable.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_operative</span>
+
+<div class="viewcode-block" id="AdaptiveParameter.set_neutral_offset_from_ppd"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_ppd">[docs]</a>    <span class="k">def</span> <span class="nf">set_neutral_offset_from_ppd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ppd</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the offset from neutral temperature given the ASHRAE-55 PPD limit.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span> <span class="o">=</span> <span class="n">ashrae55_neutral_offset_from_ppd</span><span class="p">(</span><span class="n">ppd</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AdaptiveParameter.set_neutral_offset_from_comfort_class"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_comfort_class">[docs]</a>    <span class="k">def</span> <span class="nf">set_neutral_offset_from_comfort_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comfort_class</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the offset from neutral temperature given the EN-15251 comfort class.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span> <span class="o">=</span> <span class="n">en15251_neutral_offset_from_comfort_class</span><span class="p">(</span><span class="n">comfort_class</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AdaptiveParameter.is_comfortable"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.is_comfortable">[docs]</a>    <span class="k">def</span> <span class="nf">is_comfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comfort_result</span><span class="p">,</span> <span class="n">cooling_effect</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine if conditions are comfortable or not.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * 0 = uncomfortable</span>
+<span class="sd">        * 1 = comfortable</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            comfort_result: An adaptive comfort result dictionary from the</span>
+<span class="sd">                adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.</span>
+<span class="sd">            cooling_effect: Cooling effect from elevated air speed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">comfort_result</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_operative</span> <span class="ow">and</span>
+                    <span class="n">comfort_result</span><span class="p">[</span><span class="s1">&#39;deg_comf&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span> <span class="ow">and</span>
+                    <span class="n">comfort_result</span><span class="p">[</span><span class="s1">&#39;deg_comf&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span> <span class="o">+</span>
+                    <span class="n">cooling_effect</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="AdaptiveParameter.thermal_condition"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.thermal_condition">[docs]</a>    <span class="k">def</span> <span class="nf">thermal_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comfort_result</span><span class="p">,</span> <span class="n">cooling_effect</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine whether conditions are cold, neutral or hot.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -1 = cold</span>
+<span class="sd">        * 0 = netural</span>
+<span class="sd">        * +1 = hot</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            comfort_result: An adaptive comfort result dictionary from the</span>
+<span class="sd">                adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.</span>
+<span class="sd">            cooling_effect: Cooling effect from elevated air speed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_comfortable</span><span class="p">(</span><span class="n">comfort_result</span><span class="p">,</span> <span class="n">cooling_effect</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">comfort_result</span><span class="p">[</span><span class="s1">&#39;deg_comf&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="AdaptiveParameter.duplicate"><a class="viewcode-back" href="../../../ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.duplicate">[docs]</a>    <span class="k">def</span> <span class="nf">duplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Duplicate comfort parameters.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AdaptiveParameter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ashrae55_or_en15251</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">avg_month_or_running_mean</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">discrete_or_continuous_air_speed</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">cold_prevail_temp_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditioning</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_calc_min_operative_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set operative temperature below which conditions cannot be comfortable.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_min_operative</span> <span class="o">=</span> <span class="n">neutral_temperature_conditioned</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cold_prevail_temp_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conditioning</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span> \
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neutral_offset</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adaptive comfort parameters representation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Adaptive Comfort Parameters</span><span class="se">\n</span><span class="s2"> Standard: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> Neutral Offset: </span><span class="si">{}</span><span class="s2">&quot;</span>\
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Prevailing Temperture Method: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> Air Speed Method: </span><span class="si">{}</span><span class="s2">&quot;</span>\
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Cold Prevailing Temperature Limit: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> Conditioning Level: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">standard</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">neutral_offset</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prevailing_temperature_method</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">air_speed_method</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cold_prevail_temp_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditioning</span><span class="p">)</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

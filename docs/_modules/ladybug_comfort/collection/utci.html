@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.collection.utci &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ladybug_comfort.html">ladybug_comfort package</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <h1>Source code for ladybug_comfort.collection.utci</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Object for calculating UTCI comfort from DataCollections.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..utci</span> <span class="kn">import</span> <span class="n">universal_thermal_climate_index</span>
+<span class="kn">from</span> <span class="nn">..parameter.utci</span> <span class="kn">import</span> <span class="n">UTCIParameter</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">ComfortCollection</span>
+<span class="kn">from</span> <span class="nn">.solarcal</span> <span class="kn">import</span> <span class="n">OutdoorSolarCal</span>
+
+<span class="kn">from</span> <span class="nn">ladybug._datacollectionbase</span> <span class="kn">import</span> <span class="n">BaseCollection</span>
+
+<span class="kn">from</span> <span class="nn">ladybug.datatype.temperature</span> <span class="kn">import</span> <span class="n">Temperature</span><span class="p">,</span> <span class="n">MeanRadiantTemperature</span><span class="p">,</span> \
+    <span class="n">AirTemperature</span><span class="p">,</span> <span class="n">UniversalThermalClimateIndex</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.fraction</span> <span class="kn">import</span> <span class="n">Fraction</span><span class="p">,</span> <span class="n">RelativeHumidity</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.speed</span> <span class="kn">import</span> <span class="n">Speed</span><span class="p">,</span> <span class="n">WindSpeed</span>
+<span class="kn">from</span> <span class="nn">ladybug.datatype.thermalcondition</span> <span class="kn">import</span> <span class="n">ThermalComfort</span><span class="p">,</span> <span class="n">ThermalCondition</span><span class="p">,</span> \
+    <span class="n">ThermalConditionFivePoint</span><span class="p">,</span> <span class="n">ThermalConditionSevenPoint</span><span class="p">,</span> \
+    <span class="n">ThermalConditionNinePoint</span><span class="p">,</span> <span class="n">ThermalConditionElevenPoint</span><span class="p">,</span> <span class="n">UTCICategory</span>
+
+
+<div class="viewcode-block" id="UTCI"><a class="viewcode-back" href="../../../ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI">[docs]</a><span class="k">class</span> <span class="nc">UTCI</span><span class="p">(</span><span class="n">ComfortCollection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;UTCI comfort DataCollection object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        air_temperature: Data Collection of air temperature values in Celsius.</span>
+<span class="sd">        rel_humidity: Data Collection of relative humidity values in % or a</span>
+<span class="sd">            single relative humidity value to be used for the whole analysis.</span>
+<span class="sd">        rad_temperature: Data Collection of mean radiant temperature (MRT)</span>
+<span class="sd">            values in degrees Celsius or a single MRT value to be used for the whole</span>
+<span class="sd">            analysis. If None, this will be the same as the air_temperature.</span>
+<span class="sd">        wind_speed: Data Collection of meteorological wind speed values in m/s</span>
+<span class="sd">            (measured 10 m above the ground) or a single wind speed value to be</span>
+<span class="sd">            used for the whole analysis. If None, this will default to a low</span>
+<span class="sd">            wind speed of 0.5 m/s, which is the lowest input speed that is</span>
+<span class="sd">            recommended for the UTCI model.</span>
+<span class="sd">        comfort_parameter: Optional UTCIParameter object to specify parameters under</span>
+<span class="sd">            which conditions are considered acceptable. If None, default will</span>
+<span class="sd">            assume comfort thresholds consistent with those used by meterologists</span>
+<span class="sd">            to categorize outdoor conditions.</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        * air_temperature</span>
+<span class="sd">        * rad_temperature</span>
+<span class="sd">        * air_speed</span>
+<span class="sd">        * rel_humidity</span>
+<span class="sd">        * comfort_parameter</span>
+<span class="sd">        * universal_thermal_climate_index</span>
+<span class="sd">        * is_comfortable</span>
+<span class="sd">        * thermal_condition</span>
+<span class="sd">        * thermal_condition_five_point</span>
+<span class="sd">        * thermal_condition_seven_point</span>
+<span class="sd">        * thermal_condition_nine_point</span>
+<span class="sd">        * thermal_condition_eleven_point</span>
+<span class="sd">        * original_utci_category</span>
+<span class="sd">        * percent_comfortable</span>
+<span class="sd">        * percent_uncomfortable</span>
+<span class="sd">        * percent_neutral</span>
+<span class="sd">        * percent_hot</span>
+<span class="sd">        * percent_cold</span>
+<span class="sd">        * percent_extreme_cold_stress</span>
+<span class="sd">        * percent_very_strong_cold_stress</span>
+<span class="sd">        * percent_strong_cold_stress</span>
+<span class="sd">        * percent_moderate_cold_stress</span>
+<span class="sd">        * percent_slight_cold_stress</span>
+<span class="sd">        * percent_slight_heat_stress</span>
+<span class="sd">        * percent_moderate_heat_stress</span>
+<span class="sd">        * percent_strong_heat_stress</span>
+<span class="sd">        * percent_very_strong_heat_stress</span>
+<span class="sd">        * percent_extreme_heat_stress</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_model</span> <span class="o">=</span> <span class="s1">&#39;Universal Thermal Climate Index&#39;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_air_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;_rel_humidity&#39;</span><span class="p">,</span> <span class="s1">&#39;_rad_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;_wind_speed&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_comfort_par&#39;</span><span class="p">,</span> <span class="s1">&#39;_utci&#39;</span><span class="p">,</span> <span class="s1">&#39;_thermal_category&#39;</span><span class="p">,</span> <span class="s1">&#39;_air_temperature_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_rel_humidity_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_rad_temperature_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_wind_speed_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_utci_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_is_comfortable_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_thermal_condition_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_five_point_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_seven_point_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_nine_point_coll&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_eleven_point_coll&#39;</span><span class="p">,</span> <span class="s1">&#39;_original_category_coll&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">air_temperature</span><span class="p">,</span> <span class="n">rel_humidity</span><span class="p">,</span> <span class="n">rad_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">wind_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">comfort_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a UTCI comfort object from DataCollections of UTCI inputs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># set up the object using air temperature as a base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_datacoll</span><span class="p">(</span><span class="n">air_temperature</span><span class="p">,</span> <span class="n">Temperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;air_temperature&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_collections</span> <span class="o">=</span> <span class="p">[</span><span class="n">air_temperature</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">air_temperature</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_collection</span> <span class="o">=</span> <span class="n">air_temperature</span>
+
+        <span class="c1"># check required inputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_air_temperature</span> <span class="o">=</span> <span class="n">air_temperature</span><span class="o">.</span><span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rel_humidity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span>
+            <span class="n">rel_humidity</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="s1">&#39;rel_humidity&#39;</span><span class="p">)</span>
+
+        <span class="c1"># check inputs with defaults</span>
+        <span class="k">if</span> <span class="n">rad_temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rad_temperature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span>
+                <span class="n">rad_temperature</span><span class="p">,</span> <span class="n">Temperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;rad_temperature&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rad_temperature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_temperature</span>
+
+        <span class="k">if</span> <span class="n">wind_speed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wind_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span>
+                <span class="n">wind_speed</span><span class="p">,</span> <span class="n">Speed</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span><span class="p">,</span> <span class="s1">&#39;air_speed&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wind_speed</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_length</span>
+
+        <span class="c1"># check that all input data collections are aligned.</span>
+        <span class="n">BaseCollection</span><span class="o">.</span><span class="n">are_collections_aligned</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_collections</span><span class="p">)</span>
+
+        <span class="c1"># check comfort parameters</span>
+        <span class="k">if</span> <span class="n">comfort_parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span> <span class="o">=</span> <span class="n">UTCIParameter</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comfort_parameter</span><span class="p">,</span> <span class="n">UTCIParameter</span><span class="p">),</span> <span class="s1">&#39;comfort_parameter &#39;</span>\
+                <span class="s1">&#39;must be a UTCIParameter object. Got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">comfort_parameter</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span> <span class="o">=</span> <span class="n">comfort_parameter</span>
+
+        <span class="c1"># compute UTCI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_utci</span><span class="p">()</span>
+
+<div class="viewcode-block" id="UTCI.from_epw"><a class="viewcode-back" href="../../../ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.from_epw">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_epw</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">epw</span><span class="p">,</span> <span class="n">include_wind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_sun</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">utci_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a UTCI comfort object from the conditions within an EPW file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epw: A ladybug EPW object from which the UTCI object will be created.</span>
+<span class="sd">            include_wind: Set to True to include the EPW wind speed in the calculation.</span>
+<span class="sd">                Setting to False will assume a condition that is shielded from</span>
+<span class="sd">                wind where the human subject experiences a low wind speed of 0.5 m/s,</span>
+<span class="sd">                which is the lowest input speed that is recommended for the UTCI</span>
+<span class="sd">                model. Default: True to include wind.</span>
+<span class="sd">            include_sun: Set to True to include the mean radiant temperature (MRT) delta</span>
+<span class="sd">                from both shortwave solar falling directly on people and long wave</span>
+<span class="sd">                radiant exchange with the sky. Setting to False will assume a shaded</span>
+<span class="sd">                condition with MRT being equal to the EPW dry bulb temperature. When</span>
+<span class="sd">                set to True, this calculation will assume no surrounding shade context,</span>
+<span class="sd">                standing human geometry, and a solar horizontal angle relative to</span>
+<span class="sd">                front of person (SHARP) of 135 degrees. A SHARP of 135 essentially</span>
+<span class="sd">                assumes that a person typically faces their side or back to the sun</span>
+<span class="sd">                to avoid glare. Default: True to include sun.</span>
+<span class="sd">            utci_parameter: Optional UTCIParameter object to specify parameters under</span>
+<span class="sd">                which conditions are considered acceptable. If None, default will</span>
+<span class="sd">                assume comfort thresholds consistent with those used by meterologists</span>
+<span class="sd">                to categorize outdoor conditions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A UTCI object with data collections of the results as properties.</span>
+
+<span class="sd">        Usage:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from ladybug.epw import EPW</span>
+<span class="sd">            from ladybug_comfort.collection.utci import UTCI</span>
+
+<span class="sd">            epw_file_path = &#39;./tests/epw/chicago.epw&#39;</span>
+<span class="sd">            epw = EPW(epw_file_path)</span>
+<span class="sd">            utci_exposed = UTCI.from_epw(epw, include_wind=True, include_sun=True)</span>
+<span class="sd">            utci_protected = UTCI.from_epw(epw, include_wind=False, include_sun=False)</span>
+
+<span class="sd">            print(utci_exposed.percent_neutral)  # comfortable % with sun + wind</span>
+<span class="sd">            print(utci_protected.percent_neutral)  # comfortable % without sun + wind</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get wind and mrt inputs</span>
+        <span class="n">wind_speed</span> <span class="o">=</span> <span class="n">epw</span><span class="o">.</span><span class="n">wind_speed</span> <span class="k">if</span> <span class="n">include_wind</span> <span class="ow">is</span> <span class="kc">True</span> <span class="k">else</span> <span class="mf">0.5</span>
+        <span class="k">if</span> <span class="n">include_sun</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">solarcal_obj</span> <span class="o">=</span> <span class="n">OutdoorSolarCal</span><span class="p">(</span><span class="n">epw</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="n">epw</span><span class="o">.</span><span class="n">direct_normal_radiation</span><span class="p">,</span>
+                                           <span class="n">epw</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation</span><span class="p">,</span>
+                                           <span class="n">epw</span><span class="o">.</span><span class="n">horizontal_infrared_radiation_intensity</span><span class="p">,</span>
+                                           <span class="n">epw</span><span class="o">.</span><span class="n">dry_bulb_temperature</span><span class="p">)</span>
+            <span class="n">mrt</span> <span class="o">=</span> <span class="n">solarcal_obj</span><span class="o">.</span><span class="n">mean_radiant_temperature</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mrt</span> <span class="o">=</span> <span class="n">epw</span><span class="o">.</span><span class="n">dry_bulb_temperature</span>
+
+        <span class="c1"># return the comfort object</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">epw</span><span class="o">.</span><span class="n">dry_bulb_temperature</span><span class="p">,</span> <span class="n">epw</span><span class="o">.</span><span class="n">relative_humidity</span><span class="p">,</span> <span class="n">mrt</span><span class="p">,</span> <span class="n">wind_speed</span><span class="p">,</span>
+                   <span class="n">utci_parameter</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_calculate_utci</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute UTCI for each step of the Data Collection.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span> <span class="ow">in</span> \
+            <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_air_temperature</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rad_temperature</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_wind_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rel_humidity</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">universal_thermal_climate_index</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">rh</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">thermal_condition_eleven_point</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">air_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of air temperature values in degrees C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_air_temperature_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_temperature</span><span class="p">,</span>
+                              <span class="n">AirTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rad_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of mean radiant temperature (MRT) values in degrees C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_rad_temperature_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rad_temperature</span><span class="p">,</span>
+                              <span class="n">MeanRadiantTemperature</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">wind_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of air speed values in m/s.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_wind_speed_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wind_speed</span><span class="p">,</span>
+                              <span class="n">WindSpeed</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rel_humidity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of relative humidity values in %.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_rel_humidity_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rel_humidity</span><span class="p">,</span>
+                              <span class="n">RelativeHumidity</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">comfort_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;UTCI comfort parameters that are assigned to this object.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">universal_thermal_climate_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A Data Collection of Universal Thermal Climate Index (UTCI) in C.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_utci_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">,</span>
+                              <span class="n">UniversalThermalClimateIndex</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_comfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting whether the input conditions are</span>
+<span class="sd">        acceptable according to the assigned comfort_parameter.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * 0 = uncomfortable</span>
+<span class="sd">        * 1 = comfortable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_is_comfortable_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comf_val_funct</span><span class="p">,</span>
+                              <span class="n">ThermalComfort</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status of a subject</span>
+<span class="sd">        according to the assigned comfort_parameter.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -1 = cold</span>
+<span class="sd">        * 0 = netural</span>
+<span class="sd">        * +1 = hot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_thermal_condition_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condit_val_funct</span><span class="p">,</span>
+                              <span class="n">ThermalCondition</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition_five_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status on a five-point scale.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -2 = strong/extreme cold stress</span>
+<span class="sd">        * -1 = moderate cold stress</span>
+<span class="sd">        * 0 = no thermal stress</span>
+<span class="sd">        * +1 = moderate heat stress</span>
+<span class="sd">        * +2 = strong/extreme heat stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_five_point_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_five_pt_funct</span><span class="p">,</span>
+                              <span class="n">ThermalConditionFivePoint</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition_seven_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status on a seven-point scale.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -3 = very strong/extreme cold stress</span>
+<span class="sd">        * -2 = strong cold stress</span>
+<span class="sd">        * -1 = moderate cold stress</span>
+<span class="sd">        * 0 = no thermal stress</span>
+<span class="sd">        * +1 = moderate heat stress</span>
+<span class="sd">        * +2 = strong heat stress</span>
+<span class="sd">        * +3 = very strong/extreme heat stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_seven_point_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seven_pt_funct</span><span class="p">,</span>
+                              <span class="n">ThermalConditionSevenPoint</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition_nine_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status on a nine-point scale.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -4 = very strong/extreme cold stress</span>
+<span class="sd">        * -3 = strong cold stress</span>
+<span class="sd">        * -2 = moderate cold stress</span>
+<span class="sd">        * -1 = slight cold stress</span>
+<span class="sd">        * 0 = no thermal stress</span>
+<span class="sd">        * +1 = slight heat stress</span>
+<span class="sd">        * +2 = moderate heat stress</span>
+<span class="sd">        * +3 = strong heat stress</span>
+<span class="sd">        * +4 = very strong/extreme heat stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_nine_point_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nine_pt_funct</span><span class="p">,</span>
+                              <span class="n">ThermalConditionNinePoint</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thermal_condition_eleven_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the thermal status on an eleven-point scale.</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * -5 = extreme cold stress</span>
+<span class="sd">        * -4 = very strong cold stress</span>
+<span class="sd">        * -3 = strong cold stress</span>
+<span class="sd">        * -2 = moderate cold stress</span>
+<span class="sd">        * -1 = slight cold stress</span>
+<span class="sd">        * 0 = no thermal stress</span>
+<span class="sd">        * +1 = slight heat stress</span>
+<span class="sd">        * +2 = moderate heat stress</span>
+<span class="sd">        * +3 = strong heat stress</span>
+<span class="sd">        * +4 = very strong heat stress</span>
+<span class="sd">        * +5 = extreme heat stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_eleven_point_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span><span class="p">,</span>
+                              <span class="n">ThermalConditionElevenPoint</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">original_utci_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Data Collection of integers noting the original UTCI assessment scale.</span>
+
+<span class="sd">        Glossary of Terms for Thermal Physiology (2003).</span>
+<span class="sd">        Journal of Thermal Biology 28, 75-106</span>
+
+<span class="sd">        Values are one of the following:</span>
+
+<span class="sd">        * 0 = extreme cold stress</span>
+<span class="sd">        * 1 = very strong cold stress</span>
+<span class="sd">        * 2 = strong cold stress</span>
+<span class="sd">        * 3 = moderate cold stress</span>
+<span class="sd">        * 4 = slight cold stress</span>
+<span class="sd">        * 5 = no thermal stress</span>
+<span class="sd">        * 6 = moderate heat stress</span>
+<span class="sd">        * 7 = strong heat stress</span>
+<span class="sd">        * 8 = strong heat stress</span>
+<span class="sd">        * 9 = extreme heat stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coll</span><span class="p">(</span><span class="s1">&#39;_original_category_coll&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_category_funct</span><span class="p">,</span>
+                              <span class="n">UTCICategory</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_comfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time comfortabe given by the assigned comfort_parameter.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_uncomfortable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time uncomfortable given by the assigned comfort_parameter.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">100</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">percent_comfortable</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_neutral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is neutral.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">percent_comfortable</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_cold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is cold.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_hot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that the thermal_condition is hot.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_slight_cold_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have slight cold stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_moderate_cold_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have moderate cold stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_strong_cold_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have strong cold stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_very_strong_cold_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have very strong cold stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_extreme_cold_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have very strong cold stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_slight_heat_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have slight heat stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_moderate_heat_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have moderate heat stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_strong_heat_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have strong heat stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_very_strong_heat_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have very strong heat stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">percent_extreme_heat_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The percent of time that conditions have very strong heat stress.&quot;&quot;&quot;</span>
+        <span class="n">_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_category</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">5</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_vals</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_length</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="k">def</span> <span class="nf">_comf_val_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">is_comfortable</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_condit_val_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">thermal_condition</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_five_pt_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">thermal_condition_five_point</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_seven_pt_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">thermal_condition_seven_point</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_nine_pt_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">thermal_condition_nine_point</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_original_category_funct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_comfort_par</span><span class="o">.</span><span class="n">original_utci_category</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_utci</span><span class="p">]</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

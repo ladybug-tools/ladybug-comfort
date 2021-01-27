@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ladybug_comfort.collection.adaptive module &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ladybug_comfort.collection.base module" href="ladybug_comfort.collection.base.html" />
+    <link rel="prev" title="ladybug_comfort.collection package" href="ladybug_comfort.collection.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.parameter.html#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ladybug_comfort.collection.html" title="Previous Chapter: ladybug_comfort.collection package"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ladybug_comfo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="ladybug_comfort.collection.base.html" title="Next Chapter: ladybug_comfort.collection.base module"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ladybug_comfo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/ladybug_comfort.collection.adaptive.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">ladybug_comfort.collection.adaptive module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.html">ladybug_comfort.parameter package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <div class="section" id="module-ladybug_comfort.collection.adaptive">
+<span id="ladybug-comfort-collection-adaptive-module"></span><h1>ladybug_comfort.collection.adaptive module<a class="headerlink" href="#module-ladybug_comfort.collection.adaptive" title="Permalink to this headline">¶</a></h1>
+<p>Object for calculating Adaptive comfort from DataCollections.</p>
+<dl class="py class">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive">
+<em class="property">class </em><code class="sig-prename descclassname">ladybug_comfort.collection.adaptive.</code><code class="sig-name descname">Adaptive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outdoor_temperature</span></em>, <em class="sig-param"><span class="n">operative_temperature</span></em>, <em class="sig-param"><span class="n">air_speed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comfort_parameter</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/adaptive.html#Adaptive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection" title="ladybug_comfort.collection.base.ComfortCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ladybug_comfort.collection.base.ComfortCollection</span></code></a></p>
+<p>Adaptive comfort DataCollection object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outdoor_temperature</strong> – <p>Either one of the following inputs are acceptable:</p>
+<ul>
+<li><p>A Data Collection of prevailing outdoor temperature values in C.
+Such a Data Collection must align with the operative_temperature
+input and bear the PrevailingOutdoorTemperature data type in
+its header.</p></li>
+<li><p>A single prevailing outdoor temperature value in C to be used
+for all of the operative_temperature inputs below.</p></li>
+<li><p>A Data Collection of actual outdoor temperatures recorded over
+the entire year. This Data Collection must be continuous and
+must either be an Hourly Collection or Daily Collection. In the event
+that the input comfort_parameter has a prevailing_temperature_method
+of ‘Monthly’, Monthly collections are also acceptable here. Note
+that, because an annual input is required, this input collection
+does not have to align with the operative_temperature input.</p></li>
+</ul>
+</p></li>
+<li><p><strong>operative_temperature</strong> – Data Collection of operative temperature (To)
+values in degrees Celsius.</p></li>
+<li><p><strong>air_speed</strong> – Data Collection of air speed values in m/s or a single
+air_speed value to be used for the whole analysis. If None, this
+will default to 0.1 m/s.</p></li>
+<li><p><strong>comfort_parameter</strong> – Optional AdaptiveParameter object to specify parameters
+under which conditions are considered acceptable. If None, default will
+assume ASHRAE-55 criteria.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>prevailing_outdoor_temperature</p></li>
+<li><p>operative_temperature</p></li>
+<li><p>air_speed</p></li>
+<li><p>comfort_parameter</p></li>
+<li><p>neutral_temperature</p></li>
+<li><p>degrees_from_neutral</p></li>
+<li><p>is_comfortable</p></li>
+<li><p>thermal_condition</p></li>
+<li><p>cooling_effect</p></li>
+<li><p>percent_comfortable</p></li>
+<li><p>percent_uncomfortable</p></li>
+<li><p>percent_neutral</p></li>
+<li><p>percent_hot</p></li>
+<li><p>percent_cold</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.ToString">
+<code class="sig-name descname">ToString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.ToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite .NET ToString.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.from_air_and_rad_temp">
+<em class="property">classmethod </em><code class="sig-name descname">from_air_and_rad_temp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outdoor_temperature</span></em>, <em class="sig-param"><span class="n">air_temperature</span></em>, <em class="sig-param"><span class="n">rad_temperature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">air_speed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comfort_parameter</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/adaptive.html#Adaptive.from_air_and_rad_temp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.from_air_and_rad_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize an Adaptive Comfort object from air and radiant temperature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.air_speed">
+<em class="property">property </em><code class="sig-name descname">air_speed</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.air_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of air speed in m/s.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.calc_length">
+<em class="property">property </em><code class="sig-name descname">calc_length</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.calc_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of values in the Data Collections of this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.comfort_model">
+<em class="property">property </em><code class="sig-name descname">comfort_model</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.comfort_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the model to which the comfort datacollection belongs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.comfort_parameter">
+<em class="property">property </em><code class="sig-name descname">comfort_parameter</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.comfort_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive comfort parameters that are assigned to this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.cooling_effect">
+<em class="property">property </em><code class="sig-name descname">cooling_effect</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.cooling_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of the cooling effect of the air speed in degrees Celsius.</p>
+<p>This is the difference between the air temperature and the
+adjusted air temperature [C].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.degrees_from_neutral">
+<em class="property">property </em><code class="sig-name descname">degrees_from_neutral</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.degrees_from_neutral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of the degrees from desired neutral temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.is_comfortable">
+<em class="property">property </em><code class="sig-name descname">is_comfortable</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.is_comfortable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of integers noting whether the input conditions are
+acceptable according to the assigned comfort_parameter.</p>
+<p>Values are one of the following:
+* 0 = uncomfortable
+* 1 = comfortable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.neutral_temperature">
+<em class="property">property </em><code class="sig-name descname">neutral_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.neutral_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of the desired neutral temperature in degrees C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.operative_temperature">
+<em class="property">property </em><code class="sig-name descname">operative_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.operative_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of operative temperature in degrees C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.percent_cold">
+<em class="property">property </em><code class="sig-name descname">percent_cold</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.percent_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is cold.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.percent_comfortable">
+<em class="property">property </em><code class="sig-name descname">percent_comfortable</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.percent_comfortable" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time comfortabe given by the assigned comfort_parameter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.percent_hot">
+<em class="property">property </em><code class="sig-name descname">percent_hot</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.percent_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is hot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.percent_neutral">
+<em class="property">property </em><code class="sig-name descname">percent_neutral</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.percent_neutral" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time that the thermal_condition is neutral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.percent_uncomfortable">
+<em class="property">property </em><code class="sig-name descname">percent_uncomfortable</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.percent_uncomfortable" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percent of time uncomfortable given by the assigned comfort_parameter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.prevailing_outdoor_temperature">
+<em class="property">property </em><code class="sig-name descname">prevailing_outdoor_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.prevailing_outdoor_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of prevailing outdoor temperature in degrees C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.Adaptive.thermal_condition">
+<em class="property">property </em><code class="sig-name descname">thermal_condition</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.Adaptive.thermal_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Collection of integers noting the thermal status of a subject
+according to the assigned comfort_parameter.</p>
+<p>Values are one of the following:
+* -1 = cold
+* 0 = netural
+* +1 = hot</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature">
+<em class="property">class </em><code class="sig-prename descclassname">ladybug_comfort.collection.adaptive.</code><code class="sig-name descname">PrevailingTemperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">outdoor_temperature</span></em>, <em class="sig-param"><span class="n">avg_month</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/adaptive.html#PrevailingTemperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Get prevailing temperature from annual DataCollections of outdoor temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outdoor_temperature</strong> – A Data Collection of outdoor temperatures recorded
+over an entire year. This Data Collection must be continuous and
+must either be an Hourly Collection or Daily Collection. In the event
+that the input avg_month is True (for average monthly
+prevailing method), Monthly collections are also acceptable here.</p></li>
+<li><p><strong>avg_month</strong> – A boolean to note whether the prevailing outdoor
+temperature is computed from the average monthly temperature (True) or
+a weighted running mean of the last week (False).  The default is True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>avg_month_or_running_mean</p></li>
+<li><p>hourly_prevailing_temperature</p></li>
+<li><p>daily_prevailing_temperature</p></li>
+<li><p>monthly_prevailing_temperature</p></li>
+<li><p>monthly_per_hour_prevailing_temperature</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.get_aligned_prevailing">
+<code class="sig-name descname">get_aligned_prevailing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">collection</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/adaptive.html#PrevailingTemperature.get_aligned_prevailing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.get_aligned_prevailing" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Get a Prevailing Temperature Collection aligned with input collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature_timestep">
+<code class="sig-name descname">hourly_prevailing_temperature_timestep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ladybug_comfort/collection/adaptive.html#PrevailingTemperature.hourly_prevailing_temperature_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>HourlyContinuousCollection of prevailing temperature at timestep.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.avg_month">
+<em class="property">property </em><code class="sig-name descname">avg_month</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.avg_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>The input avg_month.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.daily_prevailing_temperature">
+<em class="property">property </em><code class="sig-name descname">daily_prevailing_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.daily_prevailing_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>DailyCollection of prevailing outdoor temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature">
+<em class="property">property </em><code class="sig-name descname">hourly_prevailing_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>HourlyContinuousCollection of prevailing outdoor temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_per_hour_prevailing_temperature">
+<em class="property">property </em><code class="sig-name descname">monthly_per_hour_prevailing_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_per_hour_prevailing_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>MonthlyPerHourCollection of prevailing outdoor temperature in C.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_prevailing_temperature">
+<em class="property">property </em><code class="sig-name descname">monthly_prevailing_temperature</code><a class="headerlink" href="#ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_prevailing_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>MonthlyCollection of prevailing outdoor temperature in C.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

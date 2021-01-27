@@ -1,0 +1,22 @@
+ladybug\_comfort.collection package
+===================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ladybug_comfort.collection.adaptive
+   ladybug_comfort.collection.base
+   ladybug_comfort.collection.pmv
+   ladybug_comfort.collection.solarcal
+   ladybug_comfort.collection.utci
+
+Module contents
+---------------
+
+.. automodule:: ladybug_comfort.collection
+   :members:
+   :undoc-members:
+   :show-inheritance:
