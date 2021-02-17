@@ -210,7 +210,7 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
                                fract_exposed=1, floor_reflectance=0.25,
                                posture='standing', sharp=135,
                                body_absorptivity=0.7, body_emissivity=0.95):
-    """Perform a shortwave radiant heat exchange using horizontal solar components.
+    """Perform shortwave radiant heat exchange using horizontal solar components.
 
     This is useful when building a map of MRT using the direct and diffuse
     results of a Radiance study instead of the solar components directly from
@@ -220,7 +220,6 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
     Args:
         longwave_mrt: The longwave mean radiant temperature (MRT) expereinced
             as a result of indoor surface temperatures in C.
-        horiz_ir: The horizontal infrared radiation intensity from the sky in W/m2.
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
         alt: The altitude of the sun in degrees [0-90].
@@ -260,9 +259,79 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
 
     # calculate the influence of shortwave irradiance
     if alt >= 0:
-        s_flux = body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar,
+        s_flux = body_solar_flux_from_horiz_solar(diff_horiz_solar, dir_horiz_solar,
                                                   alt, sharp, fract_exposed,
                                                   floor_reflectance, posture)
+        short_erf = erf_from_body_solar_flux(s_flux, body_absorptivity, body_emissivity)
+        short_mrt_delta = mrt_delta_from_erf(short_erf, fract_efficiency)
+    else:
+        short_erf = 0
+        short_mrt_delta = 0
+
+    # calculate final MRT as a result of both longwave and shortwave heat exchange
+    sky_adjusted_mrt = longwave_mrt + short_mrt_delta
+    heat_exch_result = {
+        'erf': short_erf,
+        'dmrt': short_mrt_delta,
+        'mrt': sky_adjusted_mrt
+    }
+    return heat_exch_result
+
+
+def shortwave_from_horiz_components(
+        longwave_mrt, diff_horiz_solar, dir_horiz_solar, ref_horiz_solar, alt,
+        fract_exposed=1, posture='standing', sharp=135, body_absorptivity=0.7,
+        body_emissivity=0.95):
+    """Perform shortwave radiant heat exchange using horizontal components.
+
+    This is useful when building a map of MRT using the direct, diffuse, and ground
+    reflected results of a Radiance study instead of the solar components directly from
+    an EPW or Wea file.  Note that all input radiation components should already
+    account for the amount of sky seen and solar heat reflections off of surfaces.
+
+    Args:
+        longwave_mrt: The longwave mean radiant temperature (MRT) expereinced
+            as a result of indoor surface temperatures in C.
+        diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
+        dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
+        ref_horiz_solar: Ground-reflected horizontal irradiance in W/m2.
+        alt: The altitude of the sun in degrees [0-90].
+        fract_exposed: A number between 0 and 1 representing the fraction of
+            the body exposed to direct sunlight. Note that this does not include the
+            body’s self-shading; only the shading from surroundings.
+            Default is 1 for a person standing in an open area.
+        posture: A text string indicating the posture of the body. Letters must
+            be lowercase.  Choose from the following: "standing", "seated", "supine".
+            Default is "standing".
+        sharp: A number between 0 and 180 representing the solar horizontal
+            angle relative to front of person (SHARP). 0 signifies sun that is
+            shining directly into the person's face and 180 signifies sun that
+            is shining at the person's back. Default is 135, assuming that a person
+            typically faces their side or back to the sun to avoid glare.
+        body_absorptivity: A number between 0 and 1 representing the average
+            shortwave absorptivity of the body (including clothing and skin color).
+            Typical clothing values - white: 0.2, khaki: 0.57, black: 0.88
+            Typical skin values - white: 0.57, brown: 0.65, black: 0.84
+            Default is 0.7 for average (brown) skin and medium clothing.
+        body_emissivity: A number between 0 and 1 representing the average
+            longwave emissivity of the body.  Default is 0.95, which is almost
+            always the case except in rare situations of wearing metallic clothing.
+
+    Returns:
+        A dictionary containing results with the following keys
+
+        -    erf : The shortwave effective radiant field (ERF) in W/m2.
+        -    dmrt : The MRT delta as a result of shortwave irradiance in C.
+        -    mrt: The final MRT expereinced as a result of sky heat exchange in C.
+    """
+    # set defaults using the input parameters
+    fract_efficiency = 0.696 if posture == 'seated' else 0.725
+
+    # calculate the influence of shortwave irradiance
+    if alt >= 0:
+        s_flux = body_solar_flux_from_horiz_components(
+            diff_horiz_solar, dir_horiz_solar, ref_horiz_solar, alt,
+            sharp, fract_exposed, posture)
         short_erf = erf_from_body_solar_flux(s_flux, body_absorptivity, body_emissivity)
         short_mrt_delta = mrt_delta_from_erf(short_erf, fract_efficiency)
     else:
@@ -407,7 +476,7 @@ def body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar, altitude,
     return dir_solar + diff_solar + ref_solar
 
 
-def body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar, altitude,
+def body_solar_flux_from_horiz_solar(diff_horiz_solar, dir_horiz_solar, altitude,
                                      sharp=135, fract_exposed=1,
                                      floor_reflectance=0.25, posture='standing'):
     """Estimate total solar flux on human geometry from horizontal solar components.
@@ -446,6 +515,43 @@ def body_solar_flux_from_horiz_parts(diff_horiz_solar, dir_horiz_solar, altitude
     return dir_solar + diff_solar + ref_solar
 
 
+def body_solar_flux_from_horiz_components(
+        diff_horiz_solar, dir_horiz_solar, ref_horiz_solar, altitude,
+        sharp=135, fract_exposed=1, posture='standing'):
+    """Estimate total solar flux on human geometry from horizontal components.
+
+    This method is useful for cases when one wants to take the hourly results
+    of a spatial radiation study with Radiance and use them to build a map
+    of ERF or MRT delta on a person.
+
+    Args:
+        diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
+        dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
+        ref_horiz_solar: Ground-reflected horizontal solar irradiance in W/m2.
+        alt: The altitude of the sun in degrees [0-90].
+        sharp: A number between 0 and 180 representing the solar horizontal
+            angle relative to front of person (SHARP). 0 signifies sun that is
+            shining directly into the person's face and 180 signifies sun that
+            is shining at the person's back. Default is 135, assuming that a person
+            typically faces their side or back to the sun to avoid glare.
+        fract_exposed: A number between 0 and 1 representing the fraction of
+            the body exposed to direct sunlight. Note that this does not include the
+            body’s self-shading; only the shading from surroundings.
+            Default is 1 for a person standing in an open area.
+        posture: A text string indicating the posture of the body. Letters must
+            be lowercase.  Choose from the following: "standing", "seated", "supine".
+            Default is "standing".
+    """
+    fract_eff = 0.696 if posture == 'seated' else 0.725
+    glob_horiz = diff_horiz_solar + dir_horiz_solar
+
+    dir_solar = body_dir_from_dir_horiz(dir_horiz_solar, altitude, sharp,
+                                        posture, fract_exposed)
+    diff_solar = body_diff_from_diff_horiz(diff_horiz_solar, 1, fract_eff)
+    ref_solar = body_ref_from_ref_horiz(ref_horiz_solar, 1, fract_eff)
+    return dir_solar + diff_solar + ref_solar
+
+
 def body_diff_from_diff_horiz(diff_horiz_solar, sky_exposure=1, fract_efficiency=0.725):
     """Estimate the diffuse solar flux on human geometry from diffuse horizontal solar.
 
@@ -480,6 +586,22 @@ def body_ref_from_glob_horiz(glob_horiz_solar, floor_reflectance=0.25,
             person. Default is 0.725 for a standing person.
     """
     return 0.5 * sky_exposure * fract_efficiency * glob_horiz_solar * floor_reflectance
+
+
+def body_ref_from_ref_horiz(ref_horiz_solar, sky_exposure=1, fract_efficiency=0.725):
+    """Estimate floor-reflected flux on human geometry from reflected horizontal solar.
+
+    Args:
+        ref_horiz_solar: Ground-reflected horizontal solar irradiance in W/m2.
+        sky_exposure: A number between 0 and 1 representing the fraction of the
+            sky vault in occupant’s view. Default is 1 for outdoors in an
+            open field.
+        fract_efficiency: A number representing the fraction of the body
+            surface exposed to radiation from the environment. This is typically
+            either 0.725 for a standing or supine person or 0.696 for a seated
+            person. Default is 0.725 for a standing person.
+    """
+    return 0.5 * sky_exposure * fract_efficiency * ref_horiz_solar
 
 
 def body_dir_from_dir_horiz(dir_horiz_solar, altitude, sharp=135,

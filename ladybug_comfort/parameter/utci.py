@@ -54,7 +54,7 @@ class UTCIParameter(ComfortParameter):
                  moderate_cold_thresh=None, moderate_heat_thresh=None,
                  strong_heat_thresh=None,
                  very_strong_heat_thresh=None, extreme_heat_thresh=None):
-        """Initalize UTCI Parameters.
+        """Initialize UTCI Parameters.
         """
 
         self._cold_thresh = cold_thresh if cold_thresh is not None else 9
@@ -97,6 +97,49 @@ class UTCIParameter(ComfortParameter):
             'strong_heat_thresh must be <= very_strong_heat_thresh'
         assert self._very_strong_heat_thresh <= self._extreme_heat_thresh, \
             'very_strong_heat_thresh must be <= extreme_heat_thresh'
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create a UTCIParameter object from a dictionary.
+
+        Args:
+            data: A UTCIParameter dictionary in following the format below.
+
+        .. code-block:: python
+
+            {
+            'type': 'UTCIParameter',
+            'cold_thresh': 9,
+            'heat_thresh': 26,
+            'extreme_cold_thresh': -40,
+            'very_strong_cold_thresh': -27,
+            'strong_cold_thresh': -13,
+            'moderate_cold_thresh': 0,
+            'moderate_heat_thresh': 28,
+            'strong_heat_thresh': 32,
+            'very_strong_heat_thresh': 38,
+            'extreme_heat_thresh': 46
+            }
+        """
+        assert data['type'] == 'UTCIParameter', \
+            'Expected UTCIParameter dictionary. Got {}.'.format(data['type'])
+        def _default_value(data, key):
+            return data[key] if key in data else None
+
+        cold_thresh = _default_value(data, 'cold_thresh')
+        heat_thresh = _default_value(data, 'heat_thresh')
+        extreme_cold_thresh = _default_value(data, 'extreme_cold_thresh')
+        very_strong_cold_thresh = _default_value(data, 'very_strong_cold_thresh')
+        strong_cold_thresh = _default_value(data, 'strong_cold_thresh')
+        moderate_cold_thresh = _default_value(data, 'moderate_cold_thresh')
+        moderate_heat_thresh = _default_value(data, 'moderate_heat_thresh')
+        strong_heat_thresh = _default_value(data, 'strong_heat_thresh')
+        very_strong_heat_thresh = _default_value(data, 'very_strong_heat_thresh')
+        extreme_heat_thresh = _default_value(data, 'extreme_heat_thresh')
+        return cls(
+            cold_thresh, heat_thresh, extreme_cold_thresh, very_strong_cold_thresh,
+            strong_cold_thresh, moderate_cold_thresh, moderate_heat_thresh,
+            strong_heat_thresh, very_strong_heat_thresh, extreme_heat_thresh)
 
     @property
     def cold_thresh(self):
@@ -367,8 +410,23 @@ class UTCIParameter(ComfortParameter):
         else:
             return 5
 
-    def duplicate(self):
-        """Duplicate these comfort parameters."""
+    def to_dict(self):
+        """UTCIParameter dictionary representation."""
+        return {
+            'type': 'UTCIParameter',
+            'cold_thresh': self.cold_thresh,
+            'heat_thresh': self.heat_thresh,
+            'extreme_cold_thresh': self.extreme_cold_thresh,
+            'very_strong_cold_thresh': self.very_strong_cold_thresh,
+            'strong_cold_thresh': self.strong_cold_thresh,
+            'moderate_cold_thresh': self.moderate_cold_thresh,
+            'moderate_heat_thresh': self.moderate_heat_thresh,
+            'strong_heat_thresh': self.strong_heat_thresh,
+            'very_strong_heat_thresh': self.very_strong_heat_thresh,
+            'extreme_heat_thresh': self.extreme_heat_thresh
+        }
+
+    def __copy__(self):
         return UTCIParameter(self.cold_thresh, self.heat_thresh,
                              self.extreme_cold_thresh, self.very_strong_cold_thresh,
                              self.strong_cold_thresh,

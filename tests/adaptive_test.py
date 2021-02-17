@@ -295,6 +295,16 @@ def test_adaptive_parameter_incorrect():
         AdaptiveParameter(conditioning=50)
 
 
+def test_adaptive_parameter_to_from_dict():
+    """Test the default AdaptiveParameter properties."""
+    adaptive_par = AdaptiveParameter(False)
+    adaptive_par.set_neutral_offset_from_comfort_class(1)
+
+    ad_comf_dict = adaptive_par.to_dict()
+    new_ad_comf = AdaptiveParameter.from_dict(ad_comf_dict)
+    assert new_ad_comf.to_dict() == ad_comf_dict
+
+
 def test_comfort_check():
     """Test comfort check on AdaptiveParameter."""
     comf_result = adaptive_comfort_ashrae55(24, 28)

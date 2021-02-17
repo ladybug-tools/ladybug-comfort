@@ -180,7 +180,7 @@ class PMV(ComfortCollection):
         """Get a PMV comfort object from the conditions within an EPW file.
 
         Args:
-            epw: A ladybug EPW object from which the UTCI object will be created.
+            epw: A ladybug EPW object from which the PMV object will be created.
             include_wind: Set to True to include the EPW wind speed in the calculation.
                 Setting to False will assume a condition that is shielded from wind
                 where the human experiences a very low wind speed of 0.1 m/s. If

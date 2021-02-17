@@ -15,7 +15,7 @@ class AdaptiveParameter(ComfortParameter):
             temperature function (True) or the EN-15251 function (False).
             Note that this input will also determine default values for many of
             the other properties of this object.
-        neutral_offset:  The number of degrees Celcius from the neutral temperature
+        neutral_offset:  The number of degrees Celsius from the neutral temperature
             where the input operative temperature is considered acceptable.
             The default is 2.5C when the neutral temperature function is ASHRAE-55
             and 3C when the neutral temperature function is EN-15251.
@@ -65,7 +65,7 @@ class AdaptiveParameter(ComfortParameter):
     def __init__(self, ashrae55_or_en15251=None, neutral_offset=None,
                  avg_month_or_running_mean=None, discrete_or_continuous_air_speed=None,
                  cold_prevail_temp_limit=None, conditioning=None):
-        """Initalize Adaptive Parameters.
+        """Initialize Adaptive Parameters.
         """
         # get the standard
         self._standard = ashrae55_or_en15251 if ashrae55_or_en15251 is not None else True
@@ -100,9 +100,46 @@ class AdaptiveParameter(ComfortParameter):
         assert 0 <= self._conditioning <= 1, \
             'conditioning must be between 0 and 1. Got {}'.format(self._conditioning)
 
-        # assign the neutral tempreature offset
+        # assign the neutral temperature offset
         self.neutral_offset = neutral_offset if \
             neutral_offset is not None else default_neutral_offset
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create a AdaptiveParameter object from a dictionary.
+
+        Args:
+            data: A AdaptiveParameter dictionary in following the format below.
+
+        .. code-block:: python
+
+            {
+            'type': 'AdaptiveParameter',
+            'ashrae55_or_en15251': True,
+            'neutral_offset': 2.5,
+            'avg_month_or_running_mean': False,
+            'discrete_or_continuous_air_speed': True,
+            'cold_prevail_temp_limit': 10,
+            'conditioning': 0
+            }
+        """
+        assert data['type'] == 'AdaptiveParameter', \
+            'Expected AdaptiveParameter dictionary. Got {}.'.format(data['type'])
+        ashrae55_or_en15251 = data['ashrae55_or_en15251'] if \
+            'ashrae55_or_en15251' in data else None
+        neutral_offset = data['neutral_offset'] if \
+            'neutral_offset' in data else None
+        avg_month_or_running_mean = data['avg_month_or_running_mean'] if \
+            'avg_month_or_running_mean' in data else None
+        discrete_or_continuous_air_speed = data['discrete_or_continuous_air_speed'] if \
+            'discrete_or_continuous_air_speed' in data else None
+        cold_prevail_temp_limit = data['cold_prevail_temp_limit'] if \
+            'cold_prevail_temp_limit' in data else None
+        conditioning = data['conditioning'] if \
+            'conditioning' in data else None
+        return cls(ashrae55_or_en15251, neutral_offset, avg_month_or_running_mean,
+                   discrete_or_continuous_air_speed, cold_prevail_temp_limit,
+                   conditioning)
 
     @property
     def ashrae55_or_en15251(self):
@@ -112,7 +149,7 @@ class AdaptiveParameter(ComfortParameter):
 
     @property
     def neutral_offset(self):
-        """The degrees Celcius from the neutral temperature where the operative
+        """The degrees Celsius from the neutral temperature where the operative
         temperature is considered acceptable."""
         return self._neutral_offset
 
@@ -229,8 +266,19 @@ class AdaptiveParameter(ComfortParameter):
         else:
             return 0
 
-    def duplicate(self):
-        """Duplicate comfort parameters."""
+    def to_dict(self):
+        """AdaptiveParameter dictionary representation."""
+        return {
+            'type': 'AdaptiveParameter',
+            'ashrae55_or_en15251': self.ashrae55_or_en15251,
+            'neutral_offset': self.neutral_offset,
+            'avg_month_or_running_mean': self.avg_month_or_running_mean,
+            'discrete_or_continuous_air_speed': self.discrete_or_continuous_air_speed,
+            'cold_prevail_temp_limit': self.cold_prevail_temp_limit,
+            'conditioning': self.conditioning
+        }
+
+    def __copy__(self):
         return AdaptiveParameter(self.ashrae55_or_en15251, self.neutral_offset,
                                  self.avg_month_or_running_mean,
                                  self.discrete_or_continuous_air_speed,
@@ -245,7 +293,7 @@ class AdaptiveParameter(ComfortParameter):
     def __repr__(self):
         """Adaptive comfort parameters representation."""
         return "Adaptive Comfort Parameters\n Standard: {}\n Neutral Offset: {}"\
-            "\n Prevailing Temperture Method: {}\n Air Speed Method: {}"\
+            "\n Prevailing Temperature Method: {}\n Air Speed Method: {}"\
             "\n Cold Prevailing Temperature Limit: {}\n Conditioning Level: {}".format(
                 self.standard, self.neutral_offset, self.prevailing_temperature_method,
                 self.air_speed_method, self.cold_prevail_temp_limit, self.conditioning)

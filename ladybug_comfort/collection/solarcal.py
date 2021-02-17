@@ -3,7 +3,8 @@
 from __future__ import division
 
 from ..solarcal import outdoor_sky_heat_exch, indoor_sky_heat_exch, \
-    shortwave_from_horiz_solar, sharp_from_solar_and_body_azimuth
+    shortwave_from_horiz_solar, shortwave_from_horiz_components, \
+    sharp_from_solar_and_body_azimuth
 from ..parameter.solarcal import SolarCalParameter
 from .base import ComfortCollection
 
@@ -28,9 +29,7 @@ class _SolarCalBase(ComfortCollection):
     def __init__(self, location, fraction_body_exposed=None, floor_reflectance=None,
                  solarcal_body_parameter=None):
         # set required inputs
-        assert isinstance(location, Location), 'location must be a Ladybug Location' \
-            ' object. Got {}.'.format(type(location))
-        self._location = location.duplicate()
+        self._location_check(location)
 
         # check optional inputs
         self._fract_exp = self._fraction_input_check(
@@ -76,6 +75,11 @@ class _SolarCalBase(ComfortCollection):
     def mean_radiant_temperature(self):
         """Data Collection of total mean radiant temperature in C."""
         return self._get_coll('_mrt_coll', self._mrt, MeanRadiantTemperature, 'C')
+
+    def _location_check(self, location):
+        assert isinstance(location, Location), 'location must be a Ladybug Location' \
+            ' object. Got {}.'.format(type(location))
+        self._location = location.duplicate()
 
     def _radiation_check(self, data_coll, name):
         assert isinstance(data_coll, HourlyDiscontinuousCollection), \
@@ -188,7 +192,7 @@ class OutdoorSolarCal(_SolarCalBase):
         self._radiation_check(direct_normal_solar, 'direct_normal_solar')
         self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
         self._input_collections = [direct_normal_solar, diffuse_horizontal_solar]
-        self._calc_length = len(direct_normal_solar.values)
+        self._calc_length = len(direct_normal_solar)
         self._base_collection = direct_normal_solar
 
         # check required inputs
@@ -354,7 +358,7 @@ class IndoorSolarCal(_SolarCalBase):
         self._radiation_check(direct_normal_solar, 'direct_normal_solar')
         self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
         self._input_collections = [direct_normal_solar, diffuse_horizontal_solar]
-        self._calc_length = len(direct_normal_solar.values)
+        self._calc_length = len(direct_normal_solar)
         self._base_collection = direct_normal_solar
 
         # check required inputs
@@ -490,7 +494,7 @@ class HorizontalSolarCal(_SolarCalBase):
         self._radiation_check(direct_horizontal_solar, 'direct_horizontal_solar')
         self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
         self._input_collections = [direct_horizontal_solar, diffuse_horizontal_solar]
-        self._calc_length = len(direct_horizontal_solar.values)
+        self._calc_length = len(direct_horizontal_solar)
         self._base_collection = direct_horizontal_solar
 
         # check required inputs
@@ -553,3 +557,176 @@ class HorizontalSolarCal(_SolarCalBase):
     def mrt_delta(self):
         """Data Collection of shortwave MRT delta in C."""
         return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'dC')
+
+
+class HorizontalRefSolarCal(_SolarCalBase):
+    """SolarCal Collection object from all horizontal components (including reflection).
+
+    This is particularly useful when trying to estimate solar MRT deltas from
+    Radiance radiation simulation result.
+
+    Args:
+        location: A Ladybug Location object.
+        direct_horizontal_solar: Hourly Data Collection with the direct horizontal
+            solar irradiance in W/m2.
+        diffuse_horizontal_solar: Hourly Data Collection with the diffuse
+            horizontal solar irradiance in W/m2.
+        reflected_horizontal_solar: Hourly Data Collection with the ground-reflected
+            horizontal solar irradiance in W/m2.
+        longwave_mrt: Hourly Data Collection or individual value with the longwave
+            mean radiant temperature (MRT) expereinced as a result of indoor
+            surface temperatures in C.
+        fraction_body_exposed: A Data Collection or number between 0 and 1
+            representing the fraction of the body exposed to direct sunlight.
+            Note that this does not include the body’s self-shading; only the
+            shading from surroundings.
+            Default is 1 for a person standing in an open area.
+        solarcal_body_parameter: Optional SolarCalParameter object to account for
+            properties of the human geometry.
+
+    Properties:
+        * location
+        * direct_horizontal_solar
+        * diffuse_horizontal_solar
+        * reflected_horizontal_solar
+        * longwave_mrt
+        * fraction_body_exposed
+        * solarcal_body_parameter
+        * effective_radiant_field
+        * mrt_delta
+        * mean_radiant_temperature
+    """
+    _model = 'Horizontal Reflected SolarCal'
+    __slots__ = ('_dir_horiz', '_diff_horiz', '_ref_horiz', '_l_mrt', '_erf', '_dmrt',
+                 '_dir_horiz_coll', '_diff_horiz_coll', '_ref_horiz_coll', '_l_mrt_coll',
+                 '_erf_coll', '_dmrt_coll')
+
+    def __init__(self, location, direct_horizontal_solar, diffuse_horizontal_solar,
+                 reflected_horizontal_solar, longwave_mrt, fraction_body_exposed=None,
+                 solarcal_body_parameter=None):
+        """Initialize Horizontal SolarCal object.
+        """
+        # set up the object using radiation as a base
+        self._radiation_check(direct_horizontal_solar, 'direct_horizontal_solar')
+        self._radiation_check(diffuse_horizontal_solar, 'diffuse_horizontal_solar')
+        self._radiation_check(reflected_horizontal_solar, 'reflected_horizontal_solar')
+        self._input_collections = [direct_horizontal_solar, diffuse_horizontal_solar,
+                                   reflected_horizontal_solar]
+        self._calc_length = len(direct_horizontal_solar)
+        self._base_collection = direct_horizontal_solar
+
+        # check required inputs
+        _SolarCalBase.__init__(self, location, fraction_body_exposed, None,
+                               solarcal_body_parameter)
+        self._dir_horiz = direct_horizontal_solar.values
+        self._diff_horiz = diffuse_horizontal_solar.values
+        self._ref_horiz = reflected_horizontal_solar.values
+        self._l_mrt = self._check_input(longwave_mrt, Temperature, 'C', 'longwave_mrt')
+
+        # check that all input data collections are aligned.
+        HourlyDiscontinuousCollection.are_collections_aligned(self._input_collections)
+
+        # compute SolarCal
+        self._calculate_solarcal()
+
+    def _calculate_solarcal(self):
+        """Compute SolarCal for each step of the Data Collection."""
+        # empty lists to be filled
+        self._erf = []
+
+        # get altitudes and sharps from solar position
+        _altitudes, _sharps = self._get_altitudes_and_sharps()
+
+        # calculate final erfs and mrt deltas
+        for l_mrt, diff, dir, ref, alt, sharp, fract_e, in \
+                zip(self._l_mrt, self._diff_horiz, self._dir_horiz, self._ref_horiz,
+                    _altitudes, _sharps, self._fract_exp):
+
+            result = shortwave_from_horiz_components(
+                l_mrt, diff, dir, ref, alt, fract_e, self._body_par.posture,
+                sharp, self._body_par.body_absorptivity, self._body_par.body_emissivity)
+            self._erf.append(result['erf'])
+            self._dmrt.append(result['dmrt'])
+            self._mrt.append(result['mrt'])
+
+    @property
+    def diffuse_horizontal_solar(self):
+        """Data Collection of diffuse horizontal irradiance in Wh/m2 or W/m2."""
+        return self._get_coll('_diff_horiz_coll', self._diff_horiz,
+                              DiffuseHorizontalIrradiance, 'W/m2')
+
+    @property
+    def direct_horizontal_solar(self):
+        """Data Collection of direct horizontal irradiance in Wh/m2 or W/m2."""
+        return self._get_coll('_dir_horiz_coll', self._dir_horiz,
+                              DirectHorizontalIrradiance, 'W/m2')
+
+    @property
+    def reflected_horizontal_solar(self):
+        """Data Collection of direct horizontal irradiance in Wh/m2 or W/m2."""
+        return self._get_coll('_ref_horiz_coll', self._ref_horiz, Irradiance, 'W/m2')
+
+    @property
+    def longwave_mrt(self):
+        """Data Collection of surface temperature values in degrees C."""
+        return self._get_coll('_l_mrt_coll', self._l_mrt, MeanRadiantTemperature, 'C')
+
+    @property
+    def effective_radiant_field(self):
+        """Data Collection of shortwave effective radiant field in W/m2."""
+        return self._get_coll('_erf_coll', self._erf, EffectiveRadiantField, 'W/m2')
+
+    @property
+    def mrt_delta(self):
+        """Data Collection of shortwave MRT delta in C."""
+        return self._get_coll('_dmrt_coll', self._dmrt, RadiantTemperatureDelta, 'dC')
+
+
+class _HorizontalSolarCalMap(HorizontalSolarCal):
+    """Special version of HorizontalSolarCal used in thermal mapping.
+
+    This class exists purely for performance reasons so that solar positions do not
+    need to be recalculated for every point within a thermal map.
+    """
+    __slots__ = ('_altitudes', '_sharps')
+
+    def __init__(self, altitudes, sharps, direct_horizontal_solar,
+                 diffuse_horizontal_solar, longwave_mrt, fraction_body_exposed=None,
+                 floor_reflectance=None, solarcal_body_parameter=None):
+        self._altitudes = altitudes
+        self._sharps = sharps
+        HorizontalSolarCal.__init__(
+            self, None, direct_horizontal_solar, diffuse_horizontal_solar, longwave_mrt,
+            fraction_body_exposed, floor_reflectance, solarcal_body_parameter)
+
+    def _location_check(self, location):
+        self._location = None
+
+    def _get_altitudes_and_sharps(self):
+        return self._altitudes, self._sharps
+
+
+
+class _HorizontalRefSolarCalMap(HorizontalRefSolarCal):
+    """Special version of HorizontalRefSolarCal used in thermal mapping.
+
+    This class exists purely for performance reasons so that solar positions do not
+    need to be recalculated for every point within a thermal map.
+    """
+    __slots__ = ('_altitudes', '_sharps')
+
+    def __init__(self, altitudes, sharps, direct_horizontal_solar,
+                 diffuse_horizontal_solar, reflected_horizontal_solar, longwave_mrt,
+                 fraction_body_exposed=None, solarcal_body_parameter=None):
+        self._altitudes = altitudes
+        self._sharps = sharps
+        HorizontalRefSolarCal.__init__(
+            self, None, direct_horizontal_solar, diffuse_horizontal_solar,
+            reflected_horizontal_solar, longwave_mrt, fraction_body_exposed,
+            solarcal_body_parameter)
+
+    def _location_check(self, location):
+        self._location = None
+
+    def _get_altitudes_and_sharps(self):
+        return self._altitudes, self._sharps

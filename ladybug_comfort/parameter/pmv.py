@@ -50,10 +50,39 @@ class PMVParameter(ComfortParameter):
         assert 0 <= self._hr_lower <= 0.005, \
             'humid_ratio_lower must be between 0 and 0.005. Got {}'.format(
                 self._hr_lower)
-
         assert 0 <= self._still_thresh, \
             'still_air_threshold must be greater than 0. Got {}'.format(
                 self._still_thresh)
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create a PMVParameter object from a dictionary.
+
+        Args:
+            data: A PMVParameter dictionary in following the format below.
+
+        .. code-block:: python
+
+            {
+            'type': 'PMVParameter',
+            'ppd_comfort_thresh': 20,
+            'humid_ratio_upper': 0.12,
+            'humid_ratio_lower': 0,
+            'still_air_threshold': 0.2
+            }
+        """
+        assert data['type'] == 'PMVParameter', \
+            'Expected PMVParameter dictionary. Got {}.'.format(data['type'])
+        ppd_comfort_thresh = data['ppd_comfort_thresh'] if \
+            'ppd_comfort_thresh' in data else 10
+        humid_ratio_upper = data['humid_ratio_upper'] if \
+            'humid_ratio_upper' in data else 1
+        humid_ratio_lower = data['humid_ratio_lower'] if \
+            'humid_ratio_lower' in data else 0
+        still_air_threshold = data['still_air_threshold'] if \
+            'still_air_threshold' in data else 0.1
+        return cls(ppd_comfort_thresh, humid_ratio_upper, humid_ratio_lower,
+                   still_air_threshold)
 
     @property
     def ppd_comfort_thresh(self):
@@ -141,8 +170,17 @@ class PMVParameter(ComfortParameter):
         else:
             return 0
 
-    def duplicate(self):
-        """Duplicate these comfort parameters."""
+    def to_dict(self):
+        """PMVParameter dictionary representation."""
+        return {
+            'type': 'PMVParameter',
+            'ppd_comfort_thresh': self.ppd_comfort_thresh,
+            'humid_ratio_upper': self.humid_ratio_upper,
+            'humid_ratio_lower': self.humid_ratio_lower,
+            'still_air_threshold': self.still_air_threshold
+        }
+
+    def __copy__(self):
         return PMVParameter(self.ppd_comfort_thresh, self.humid_ratio_upper,
                             self.humid_ratio_lower, self.still_air_threshold)
 
