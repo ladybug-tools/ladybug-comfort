@@ -43,7 +43,7 @@ def test_pmv_validation():
             values = [float(val) for val in row.split(',')]
             pmv, ppd, hl = fanger_pmv(*values[:-2])
             assert pmv == pytest.approx(values[-2], rel=1e-1)
-            assert (ppd - values[-1]) < 1  # acurate to within 1 %
+            assert (ppd - values[-1]) < 1  # acuate to within 1 %
 
 
 def test_pierce_set_validation():
@@ -151,6 +151,25 @@ def test_pmv_parameter_invalid():
         PMVParameter(humid_ratio_lower=humid_ratio_low)
     with pytest.raises(AssertionError):
         PMVParameter(still_air_threshold=still_air_thresh)
+
+
+def test_pmv_parameter_to_from_dict():
+    """Test PMVParameter."""
+    ppd_comfort_thresh = 20
+    humid_ratio_up = 0.012
+    humid_ratio_low = 0.004
+    still_air_thresh = 0.2
+
+    pmv_comf = PMVParameter(
+        ppd_comfort_thresh, humid_ratio_up, humid_ratio_low, still_air_thresh)
+    pmv_comf_dict = pmv_comf.to_dict()
+    new_pmv_comf = PMVParameter.from_dict(pmv_comf_dict)
+
+    assert new_pmv_comf.to_dict() == pmv_comf_dict
+    assert new_pmv_comf.ppd_comfort_thresh == ppd_comfort_thresh
+    assert new_pmv_comf.humid_ratio_upper == humid_ratio_up
+    assert new_pmv_comf.humid_ratio_lower == humid_ratio_low
+    assert new_pmv_comf.still_air_threshold == still_air_thresh
 
 
 def test_comfort_check():

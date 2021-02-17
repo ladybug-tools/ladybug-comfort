@@ -15,3 +15,7 @@ class ComfortParameter(object):
     def ToString(self):
         """Overwrite .NET ToString."""
         return self.__repr__()
+
+    def duplicate(self):
+        """Get a copy of this object."""
+        return self.__copy__()

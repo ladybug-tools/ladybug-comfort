@@ -1,0 +1,26 @@
+[
+  {
+    "name": "TestRoom_1",
+    "identifier": "TestRoom_1",
+    "count": 4,
+    "group": ""
+  },
+  {
+    "name": "TestRoom_2",
+    "identifier": "TestRoom_2",
+    "count": 117,
+    "group": ""
+  },
+  {
+    "name": "TestRoom_1_ref",
+    "identifier": "TestRoom_1_ref",
+    "count": 4,
+    "group": ""
+  },
+  {
+    "name": "TestRoom_2_ref",
+    "identifier": "TestRoom_2_ref",
+    "count": 117,
+    "group": ""
+  }
+]

@@ -16,7 +16,7 @@ class SolarCalParameter(ComfortParameter):
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
-            is shining at the person's back. Default is 135, asuming that a person
+            is shining at the person's back. Default is 135, assuming that a person
             typically faces their side or back to the sun to avoid glare.
         body_azimuth: A number (between 0 and 360) representing the direction that
             the human is facing in degrees (0=North, 90=East, 180=South, 270=West).
@@ -31,7 +31,7 @@ class SolarCalParameter(ComfortParameter):
             Default is 0.7 for average (brown) skin and medium clothing.
         body_emissivity: A number between 0 and 1 representing the average
             longwave emissivity of the body.  Default is 0.95, which is almost
-            always the case except in rare situations of wearing metalic clothing.
+            always the case except in rare situations of wearing metallic clothing.
 
     Properties:
         * posture
@@ -47,7 +47,7 @@ class SolarCalParameter(ComfortParameter):
 
     def __init__(self, posture=None, sharp=None, body_azimuth=None,
                  body_absorptivity=None, body_emissivity=None):
-        """Initalize SolarCal Body Parameters.
+        """Initialize SolarCal Body Parameters.
         """
         if posture is not None:
             assert isinstance(posture, str), 'posture must be a string.'\
@@ -94,6 +94,35 @@ class SolarCalParameter(ComfortParameter):
         else:
             self._body_emissivity = 0.95
 
+    @classmethod
+    def from_dict(cls, data):
+        """Create a SolarCalParameter object from a dictionary.
+
+        Args:
+            data: A SolarCalParameter dictionary in following the format below.
+
+        .. code-block:: python
+
+            {
+            'type': 'SolarCalParameter',
+            'posture': 'standing',
+            'sharp': 90,
+            'body_azimuth': None,
+            'body_absorptivity': 0.65,
+            'body_emissivity': 0.9
+            }
+        """
+        assert data['type'] == 'SolarCalParameter', \
+            'Expected SolarCalParameter dictionary. Got {}.'.format(data['type'])
+        posture = data['posture'] if 'posture' in data else None
+        sharp = data['sharp'] if 'sharp' in data else None
+        body_azimuth = data['body_azimuth'] if 'body_azimuth' in data else None
+        body_absorptivity = data['body_absorptivity'] if \
+            'body_absorptivity' in data else None
+        body_emissivity = data['body_emissivity'] if \
+            'body_emissivity' in data else None
+        return cls(posture, sharp, body_azimuth, body_absorptivity, body_emissivity)
+
     @property
     def posture(self):
         """A text string indicating the posture of the body."""
@@ -133,8 +162,18 @@ class SolarCalParameter(ComfortParameter):
             return self.sharp
         return sharp_from_solar_and_body_azimuth(solar_azimuth, self.body_azimuth)
 
-    def duplicate(self):
-        """Duplicate SolarCal Parameters."""
+    def to_dict(self):
+        """SolarCalParameter dictionary representation."""
+        return {
+            'type': 'SolarCalParameter',
+            'posture': self.posture,
+            'sharp': self.sharp,
+            'body_azimuth': self.body_azimuth,
+            'body_absorptivity': self.body_absorptivity,
+            'body_emissivity': self.body_emissivity
+        }
+
+    def __copy__(self):
         return SolarCalParameter(self.posture, self.sharp, self.body_azimuth,
                                  self.body_absorptivity, self.body_emissivity)
 
@@ -142,11 +181,11 @@ class SolarCalParameter(ComfortParameter):
         """SolarCal body parameters representation."""
         if self.sharp is not None:
             return "SolarCal Body Parameters\n Posture: {}\n SHARP: {}"\
-                "\n Body Absortivity: {}\n Body Emissivity: {}".format(
+                "\n Body Absorptivity: {}\n Body Emissivity: {}".format(
                     self.posture, self.sharp, self.body_absorptivity,
                     self.body_emissivity)
         else:
             return "SolarCal Body Parameters\n Posture: {}\n Body Azimuth: {}"\
-                "\n Body Absortivity: {}\n Body Emissivity: {}".format(
+                "\n Body Absorptivity: {}\n Body Emissivity: {}".format(
                     self.posture, self.body_azimuth, self.body_absorptivity,
                     self.body_emissivity)

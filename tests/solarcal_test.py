@@ -2,14 +2,14 @@
 import pytest
 
 from ladybug_comfort.collection.solarcal import OutdoorSolarCal, IndoorSolarCal, \
-    HorizontalSolarCal
+    HorizontalSolarCal, HorizontalRefSolarCal
 from ladybug_comfort.parameter.solarcal import SolarCalParameter
 
 from ladybug_comfort.solarcal import outdoor_sky_heat_exch, indoor_sky_heat_exch, \
     shortwave_from_horiz_solar, mrt_delta_from_erf, erf_from_mrt_delta, \
     get_projection_factor, get_projection_factor_simple, \
     sharp_from_solar_and_body_azimuth, body_solar_flux_from_parts, \
-    body_solar_flux_from_horiz_parts
+    body_solar_flux_from_horiz_solar
 
 from ladybug.location import Location
 from ladybug.analysisperiod import AnalysisPeriod
@@ -125,7 +125,7 @@ def test_body_dir_from_dir_normal():
         alt, az = sun.altitude, sun.azimuth
         sharp = sharp_from_solar_and_body_azimuth(az, 180)
         sflux1 = body_solar_flux_from_parts(diff_hr[i], dir_nr[i], alt, sharp)
-        sflux2 = body_solar_flux_from_horiz_parts(diff_hr[i], dir_hr[i], alt, sharp)
+        sflux2 = body_solar_flux_from_horiz_solar(diff_hr[i], dir_hr[i], alt, sharp)
         assert sflux1 == pytest.approx(sflux2, rel=1e-2)
 
 
@@ -229,6 +229,27 @@ def test_solarcal_parameter_incorrect():
         SolarCalParameter(body_absorptivity=60)  # incorrect body_absorptivity
     with pytest.raises(Exception):
         SolarCalParameter(body_emissivity=97)  # incorrect body_emissivity
+
+
+def test_solarcal_parameter_to_from_dict():
+    """Test the to/from dict methods of the SolarCalParameter object."""
+    posture = 'seated'
+    sharp = 180
+    absorptivity = 0.8
+    emissivity = 0.97
+
+    solarcal_par = SolarCalParameter(posture=posture,
+                                     sharp=sharp,
+                                     body_absorptivity=absorptivity,
+                                     body_emissivity=emissivity)
+    solarcal_par_dict = solarcal_par.to_dict()
+    new_solarcal_par = SolarCalParameter.from_dict(solarcal_par_dict)
+
+    assert new_solarcal_par.posture == posture
+    assert new_solarcal_par.sharp == sharp
+    assert new_solarcal_par.body_azimuth is None
+    assert new_solarcal_par.body_absorptivity == absorptivity
+    assert new_solarcal_par.body_emissivity == emissivity
 
 
 def test_init_outdoor_solarcal_collection():
@@ -476,7 +497,7 @@ def test_init_horizontal_solarcal_collection():
 
     assert solarcal_obj.comfort_model == 'Horizontal SolarCal'
     assert solarcal_obj.calc_length == calc_length
-    str(solarcal_obj)  # test that the string representaiton is ok
+    str(solarcal_obj)  # test that the string representation is ok
 
     assert isinstance(solarcal_obj.direct_horizontal_solar, HourlyContinuousCollection)
     assert len(solarcal_obj.direct_horizontal_solar.values) == calc_length
@@ -564,3 +585,37 @@ def test_init_horizontal_solarcal_collection_epw():
     assert isinstance(solarcal_obj.mean_radiant_temperature, HourlyContinuousCollection)
     assert len(solarcal_obj.mean_radiant_temperature.values) == calc_length
     assert solarcal_obj.mean_radiant_temperature[12] == pytest.approx(42.997806, rel=1e-3)
+
+
+def test_init_horizontal_ref_solarcal_collection():
+    """Test the initialization of the HorizontalRefSolarCal collection."""
+    calc_length = 24
+    irr_header = Header(Irradiance(), 'W/m2', AnalysisPeriod(end_month=1, end_day=1))
+    dir_norm = HourlyContinuousCollection(irr_header, [300] * calc_length)
+    diff_horiz = HourlyContinuousCollection(irr_header, [100] * calc_length)
+    ref_horiz = HourlyContinuousCollection(irr_header, [100] * calc_length)
+    solarcal_obj = HorizontalRefSolarCal(Location(), dir_norm, diff_horiz, ref_horiz, 24)
+
+    assert solarcal_obj.comfort_model == 'Horizontal Reflected SolarCal'
+    assert solarcal_obj.calc_length == calc_length
+    str(solarcal_obj)  # test that the string representation is ok
+
+    assert isinstance(solarcal_obj.direct_horizontal_solar, HourlyContinuousCollection)
+    assert len(solarcal_obj.direct_horizontal_solar.values) == calc_length
+    assert solarcal_obj.direct_horizontal_solar[12] == 300
+    assert isinstance(solarcal_obj.diffuse_horizontal_solar, HourlyContinuousCollection)
+    assert len(solarcal_obj.diffuse_horizontal_solar.values) == calc_length
+    assert solarcal_obj.diffuse_horizontal_solar[12] == 100
+    assert isinstance(solarcal_obj.reflected_horizontal_solar, HourlyContinuousCollection)
+    assert len(solarcal_obj.reflected_horizontal_solar.values) == calc_length
+    assert solarcal_obj.reflected_horizontal_solar[12] == 100
+
+    assert isinstance(solarcal_obj.effective_radiant_field, HourlyContinuousCollection)
+    assert len(solarcal_obj.effective_radiant_field.values) == calc_length
+    assert solarcal_obj.effective_radiant_field[12] == pytest.approx(79.35027, rel=1e-3)
+    assert isinstance(solarcal_obj.mrt_delta, HourlyContinuousCollection)
+    assert len(solarcal_obj.mrt_delta.values) == calc_length
+    assert solarcal_obj.mrt_delta[12] == pytest.approx(18.20503, rel=1e-3)
+    assert isinstance(solarcal_obj.mean_radiant_temperature, HourlyContinuousCollection)
+    assert len(solarcal_obj.mean_radiant_temperature.values) == calc_length
+    assert solarcal_obj.mean_radiant_temperature[12] == pytest.approx(42.20503, rel=1e-3)

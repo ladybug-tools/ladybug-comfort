@@ -1,0 +1,11 @@
+{
+    "st_month": 1,
+    "st_day": 2,
+    "st_hour": 0,
+    "end_month": 1,
+    "end_day": 2,
+    "end_hour": 23,
+    "timestep": 1,
+    "is_leap_year": false,
+    "type": "AnalysisPeriod"
+}
