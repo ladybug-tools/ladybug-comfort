@@ -11,6 +11,7 @@ from ladybug.futil import preparedir
 
 from ladybug_comfort.parameter.pmv import PMVParameter
 from ladybug_comfort.parameter.adaptive import AdaptiveParameter
+from ladybug_comfort.parameter.utci import UTCIParameter
 from ladybug_comfort.parameter.solarcal import SolarCalParameter
 
 
@@ -82,6 +83,18 @@ def _load_adaptive_par_json(comfort_par_json):
         with open(comfort_par_json) as json_file:
             comfort_par_data = json.load(json_file)
         return AdaptiveParameter.from_dict(comfort_par_data)
+
+
+def _load_utci_par_json(comfort_par_json):
+    """Load a UTCIParameter from a JSON file.
+    
+    Args:
+        comfort_par_json: A JSON file of a UTCIParameter to be loaded.
+    """
+    if comfort_par_json is not None and comfort_par_json != 'None':
+        with open(comfort_par_json) as json_file:
+            comfort_par_data = json.load(json_file)
+        return UTCIParameter.from_dict(comfort_par_data)
 
 
 def _load_solarcal_par_json(solarcal_par_json):

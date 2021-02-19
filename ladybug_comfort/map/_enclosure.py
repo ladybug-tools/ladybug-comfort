@@ -9,7 +9,8 @@ from ladybug.sql import SQLiteResult
 
 
 def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
-                          default_air_speed=0.1, include_humidity=False):
+                          default_air_speed=0.1, include_humidity=False,
+                          use_10m_wind_speed=False):
     """Get lists of comfort-related data collections from an enclosure_info JSON.
 
     Args:
@@ -27,6 +28,9 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
             indoor air speed.
         include_humidity: Boolean to note whether data collections of humidity should
             be returned or not.
+        use_10m_wind_speed: Boolean to note whether the meteorological wind speed
+            should be used as-is for any outdoor sensors or whether it should be
+            converted to ground-level speed (multiplying by 2/3).
     
     Returns:
         A tuple of three lists with each list containing data collections for each
@@ -80,8 +84,8 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
 
     # if the enclosure info includes outdoor sensors, ensure epw data is added
     if enclosure_dict['has_outdoor']:
-        _add_epw_data(epw, rel_air_temps, rel_rad_temps,
-                      rel_humids, rel_speeds, base_a_per)
+        _add_epw_data(epw, rel_air_temps, rel_rad_temps, rel_humids, rel_speeds,
+                      base_a_per, use_10m_wind_speed)
 
     # apply the analysis periods if it is specified
     if analysis_period is not None:
@@ -108,13 +112,17 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
     return pt_air_temps, pt_rad_temps, pt_humids, pt_speeds
 
 
-def _add_epw_data(epw, rel_air_temps, rel_rad_temps, rel_humids, rel_speeds, base_a_per):
+def _add_epw_data(epw, rel_air_temps, rel_rad_temps, rel_humids, rel_speeds,
+                  base_a_per, use_10m_wind_speed):
     """Add EPW data to zone data collections and align it with these collections."""
     rel_air_temps.append(epw.dry_bulb_temperature)
     out_l_mrt = (epw.dry_bulb_temperature + epw.sky_temperature) / 2
     rel_rad_temps.append(out_l_mrt)
     rel_humids.append(epw.relative_humidity)
-    rel_speeds.append(epw.wind_speed  * (2 / 3))  # (2 / 3) is conversion used by UTCI
+    if use_10m_wind_speed:
+        rel_speeds.append(epw.wind_speed)
+    else:
+        rel_speeds.append(epw.wind_speed  * (2 / 3))  # conversion used by UTCI
     if not base_a_per.is_annual:  # apply sim analysis period to the annual EPW data
         rel_air_temps[-1] = rel_air_temps[-1].filter_by_analysis_period(base_a_per)
         rel_rad_temps[-1] = rel_rad_temps[-1].filter_by_analysis_period(base_a_per)
