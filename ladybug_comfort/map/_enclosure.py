@@ -4,8 +4,10 @@ from __future__ import division
 
 import json
 
-from ladybug.datacollection import HourlyContinuousCollection
 from ladybug.sql import SQLiteResult
+from ladybug.datacollection import HourlyContinuousCollection
+from ladybug.header import Header
+from ladybug.datatype.speed import AirSpeed
 
 
 def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
@@ -31,10 +33,9 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
         use_10m_wind_speed: Boolean to note whether the meteorological wind speed
             should be used as-is for any outdoor sensors or whether it should be
             converted to ground-level speed (multiplying by 2/3).
-    
+
     Returns:
-        A tuple of three lists with each list containing data collections for each
-        sensor in the enclosure_info.
+        A tuple of 5 values.
 
         * pt_air_temps -- Data collections of air temperatures.
 
@@ -43,6 +44,8 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
         * pt_humids - Data collections of relative humidity if include_humidity is True.
 
         * pt_speeds - Data collections of air speed values.
+
+        * base_a_per - The AnalysisPeriod of the data in the result_sql.
     """
     # load all comfort-related outputs from the result_sql
     sql_obj = SQLiteResult(result_sql)
@@ -50,7 +53,7 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
     rad_temps = sql_obj.data_collections_by_output_name('Zone Mean Radiant Temperature')
     if include_humidity:
         humids = sql_obj.data_collections_by_output_name('Zone Air Relative Humidity')
-    
+
     # check that EnergyPlus sql data is correct and note the analysis period
     assert len(air_temps) != 0, \
         'Input result-sql does not contain thermal comfort outputs.'
@@ -59,10 +62,13 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
         'Not {}'.format(air_temps[0])
     base_a_per = air_temps[0].header.analysis_period
 
+    # convert default air speed into a data collection if it's a list
+    default_air_speed = _values_to_data(default_air_speed, base_a_per, AirSpeed, 'm/s')
+
     # parse the enclosure_info
     with open(enclosure_info) as json_file:
         enclosure_dict = json.load(json_file)
-    
+
     # order the sql data based on the relevant zones from the enclosure_info
     rel_air_temps, rel_rad_temps, rel_humids, rel_speeds = [], [], [], []
     for zone_id in enclosure_dict['mapper']:
@@ -109,7 +115,22 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
         if include_humidity:
             pt_humids.append(rel_humids[pt_i])
         pt_speeds.append(rel_speeds[pt_i])
-    return pt_air_temps, pt_rad_temps, pt_humids, pt_speeds
+    return pt_air_temps, pt_rad_temps, pt_humids, pt_speeds, base_a_per
+
+
+def _values_to_data(values, base_period, data_type, data_units):
+    """Load an array of values to a data collection.
+
+    Args:
+        values: An array of numbers.
+        base_period: An AnalysisPeriod to be used for data collection.
+        data_type: The class of the data type for the values.
+        data_units: The units of the values.
+    """
+    if isinstance(values, list):
+        header = Header(data_type(), data_units, base_period)
+        return HourlyContinuousCollection(header, values)
+    return values
 
 
 def _add_epw_data(epw, rel_air_temps, rel_rad_temps, rel_humids, rel_speeds,
@@ -122,7 +143,7 @@ def _add_epw_data(epw, rel_air_temps, rel_rad_temps, rel_humids, rel_speeds,
     if use_10m_wind_speed:
         rel_speeds.append(epw.wind_speed)
     else:
-        rel_speeds.append(epw.wind_speed  * (2 / 3))  # conversion used by UTCI
+        rel_speeds.append(epw.wind_speed * (2 / 3))  # conversion used by UTCI
     if not base_a_per.is_annual:  # apply sim analysis period to the annual EPW data
         rel_air_temps[-1] = rel_air_temps[-1].filter_by_analysis_period(base_a_per)
         rel_rad_temps[-1] = rel_rad_temps[-1].filter_by_analysis_period(base_a_per)

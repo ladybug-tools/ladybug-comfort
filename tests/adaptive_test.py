@@ -254,7 +254,7 @@ def test_adaptive_parameter_default_ahsrae55():
     assert adaptive_par.cold_prevail_temp_limit == 10
     assert adaptive_par.conditioning == 0
     assert adaptive_par.standard == 'ASHRAE-55'
-    assert adaptive_par.prevailing_temperature_method == 'Averaged Monthly'
+    assert adaptive_par.prevailing_temperature_method == 'AveragedMonthly'
     assert adaptive_par.air_speed_method == 'Discrete'
     assert adaptive_par.minimum_operative == pytest.approx(18.4, rel=1e-2)
 
@@ -273,7 +273,7 @@ def test_adaptive_parameter_default_en15251():
     assert adaptive_par.cold_prevail_temp_limit == 15
     assert adaptive_par.conditioning == 0
     assert adaptive_par.standard == 'EN-15251'
-    assert adaptive_par.prevailing_temperature_method == 'Running Mean'
+    assert adaptive_par.prevailing_temperature_method == 'RunningMean'
     assert adaptive_par.air_speed_method == 'Continuous'
     assert adaptive_par.minimum_operative == pytest.approx(20.75, rel=1e-2)
 
@@ -296,13 +296,22 @@ def test_adaptive_parameter_incorrect():
 
 
 def test_adaptive_parameter_to_from_dict():
-    """Test the default AdaptiveParameter properties."""
+    """Test the AdaptiveParameter to/from dict methods."""
     adaptive_par = AdaptiveParameter(False)
     adaptive_par.set_neutral_offset_from_comfort_class(1)
 
     ad_comf_dict = adaptive_par.to_dict()
     new_ad_comf = AdaptiveParameter.from_dict(ad_comf_dict)
     assert new_ad_comf.to_dict() == ad_comf_dict
+
+
+def test_adaptive_parameter_to_from_str():
+    """Test the AdaptiveParameter to/from str methods."""
+    adaptive_par = AdaptiveParameter(False)
+    adaptive_par.set_neutral_offset_from_comfort_class(1)
+
+    new_ad_comf = AdaptiveParameter.from_string(str(adaptive_par))
+    assert new_ad_comf.to_dict() == adaptive_par.to_dict()
 
 
 def test_comfort_check():

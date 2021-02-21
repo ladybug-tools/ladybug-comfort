@@ -1,6 +1,7 @@
 # coding=utf-8
 """Parameters for specifying acceptable thermal conditions using the PMV model."""
 from __future__ import division
+import re
 
 from ._base import ComfortParameter
 from ..pmv import ppd_threshold_from_comfort_class
@@ -83,6 +84,22 @@ class PMVParameter(ComfortParameter):
             'still_air_threshold' in data else 0.1
         return cls(ppd_comfort_thresh, humid_ratio_upper, humid_ratio_lower,
                    still_air_threshold)
+
+    @classmethod
+    def from_string(cls, pmv_parameter_string):
+        """Create an PMVParameter object from an PMVParameter string."""
+        str_pattern = re.compile(r"\[(\S*)\]")
+        matches = str_pattern.findall(pmv_parameter_string)
+        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        ppd_threshold = float(par_dict['ppd_threshold']) \
+            if 'ppd_threshold' in par_dict else None
+        hr_upper = float(par_dict['hr_upper']) \
+            if 'hr_upper' in par_dict else None
+        hr_lower = float(par_dict['hr_lower']) \
+            if 'hr_lower' in par_dict else None
+        still_air_threshold = float(par_dict['still_air_threshold']) \
+            if 'still_air_threshold' in par_dict else None
+        return cls(ppd_threshold, hr_upper, hr_lower, still_air_threshold)
 
     @property
     def ppd_comfort_thresh(self):
@@ -186,6 +203,6 @@ class PMVParameter(ComfortParameter):
 
     def __repr__(self):
         """PMV comfort parameters representation."""
-        return "PMV Comfort Parameters\n PPD Threshold: {}\n HR Upper: {}"\
-            "\n HR Lower: {}\n Still Air Threshold: {}".format(
+        return 'PMVParameter: [ppd_threshold:{}] [hr_upper:{}] ' \
+            '[hr_lower:{}] [still_air_threshold:{}]'.format(
                 self._ppd_thresh, self._hr_upper, self._hr_lower, self._still_thresh)

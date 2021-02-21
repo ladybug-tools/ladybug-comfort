@@ -105,16 +105,47 @@ def test_utci_parameters_to_from_dict():
     utci_comf_dict = utci_comf.to_dict()
     new_utci_comf = UTCIParameter.from_dict(utci_comf_dict)
 
-    assert utci_comf.cold_thresh == cold_thresh
-    assert utci_comf.heat_thresh == heat_thresh
-    assert utci_comf.extreme_cold_thresh == extreme_cold_thresh
-    assert utci_comf.very_strong_cold_thresh == very_strong_cold_thresh
-    assert utci_comf.strong_cold_thresh == strong_cold_thresh
-    assert utci_comf.moderate_cold_thresh == moderate_cold_thresh
-    assert utci_comf.moderate_heat_thresh == moderate_heat_thresh
-    assert utci_comf.strong_heat_thresh == strong_heat_thresh
-    assert utci_comf.very_strong_heat_thresh == very_strong_heat_thresh
-    assert utci_comf.extreme_heat_thresh == extreme_heat_thresh
+    assert new_utci_comf.cold_thresh == cold_thresh
+    assert new_utci_comf.heat_thresh == heat_thresh
+    assert new_utci_comf.extreme_cold_thresh == extreme_cold_thresh
+    assert new_utci_comf.very_strong_cold_thresh == very_strong_cold_thresh
+    assert new_utci_comf.strong_cold_thresh == strong_cold_thresh
+    assert new_utci_comf.moderate_cold_thresh == moderate_cold_thresh
+    assert new_utci_comf.moderate_heat_thresh == moderate_heat_thresh
+    assert new_utci_comf.strong_heat_thresh == strong_heat_thresh
+    assert new_utci_comf.very_strong_heat_thresh == very_strong_heat_thresh
+    assert new_utci_comf.extreme_heat_thresh == extreme_heat_thresh
+
+
+def test_utci_parameters_to_from_str():
+    """Test UTCI Parameters to/from string methods."""
+    cold_thresh = 8
+    heat_thresh = 27
+    extreme_cold_thresh = -41
+    very_strong_cold_thresh = -28
+    strong_cold_thresh = -14
+    moderate_cold_thresh = -1
+    moderate_heat_thresh = 29
+    strong_heat_thresh = 33
+    very_strong_heat_thresh = 39
+    extreme_heat_thresh = 47
+
+    utci_comf = UTCIParameter(
+        cold_thresh, heat_thresh, extreme_cold_thresh, very_strong_cold_thresh,
+        strong_cold_thresh, moderate_cold_thresh, moderate_heat_thresh,
+        strong_heat_thresh, very_strong_heat_thresh, extreme_heat_thresh)
+    new_utci_comf = UTCIParameter.from_string(str(utci_comf))
+
+    assert new_utci_comf.cold_thresh == cold_thresh
+    assert new_utci_comf.heat_thresh == heat_thresh
+    assert new_utci_comf.extreme_cold_thresh == extreme_cold_thresh
+    assert new_utci_comf.very_strong_cold_thresh == very_strong_cold_thresh
+    assert new_utci_comf.strong_cold_thresh == strong_cold_thresh
+    assert new_utci_comf.moderate_cold_thresh == moderate_cold_thresh
+    assert new_utci_comf.moderate_heat_thresh == moderate_heat_thresh
+    assert new_utci_comf.strong_heat_thresh == strong_heat_thresh
+    assert new_utci_comf.very_strong_heat_thresh == very_strong_heat_thresh
+    assert new_utci_comf.extreme_heat_thresh == extreme_heat_thresh
 
 
 def test_comfort_check():

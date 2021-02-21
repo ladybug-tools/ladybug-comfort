@@ -252,6 +252,26 @@ def test_solarcal_parameter_to_from_dict():
     assert new_solarcal_par.body_emissivity == emissivity
 
 
+def test_solarcal_parameter_to_from_str():
+    """Test the to/from string methods of the SolarCalParameter object."""
+    posture = 'seated'
+    sharp = 180
+    absorptivity = 0.8
+    emissivity = 0.97
+
+    solarcal_par = SolarCalParameter(posture=posture,
+                                     sharp=sharp,
+                                     body_absorptivity=absorptivity,
+                                     body_emissivity=emissivity)
+    new_solarcal_par = SolarCalParameter.from_string(str(solarcal_par))
+
+    assert new_solarcal_par.posture == posture
+    assert new_solarcal_par.sharp == sharp
+    assert new_solarcal_par.body_azimuth is None
+    assert new_solarcal_par.body_absorptivity == absorptivity
+    assert new_solarcal_par.body_emissivity == emissivity
+
+
 def test_init_outdoor_solarcal_collection():
     """Test the initialization of the OutdoorSolarCal collection."""
     calc_length = 24

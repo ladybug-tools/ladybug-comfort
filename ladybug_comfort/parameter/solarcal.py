@@ -1,6 +1,7 @@
 # coding=utf-8
 """Parameters for specifying body characteristics for the SolarCal model."""
 from __future__ import division
+import re
 
 from ._base import ComfortParameter
 from ..solarcal import sharp_from_solar_and_body_azimuth
@@ -123,6 +124,22 @@ class SolarCalParameter(ComfortParameter):
             'body_emissivity' in data else None
         return cls(posture, sharp, body_azimuth, body_absorptivity, body_emissivity)
 
+    @classmethod
+    def from_string(cls, solarcal_parameter_string):
+        """Create an SolarCalParameter object from an SolarCalParameter string."""
+        str_pattern = re.compile(r"\[(\S*)\]")
+        matches = str_pattern.findall(solarcal_parameter_string)
+        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        posture = par_dict['posture'] if 'posture' in par_dict else None
+        sharp = float(par_dict['sharp']) if 'sharp' in par_dict else None
+        body_azimuth = float(par_dict['body_azimuth']) \
+            if 'body_azimuth' in par_dict else None
+        absorptivity = float(par_dict['absorptivity']) \
+            if 'absorptivity' in par_dict else None
+        emissivity = float(par_dict['emissivity']) \
+            if 'emissivity' in par_dict else None
+        return cls(posture, sharp, body_azimuth, absorptivity, emissivity)
+
     @property
     def posture(self):
         """A text string indicating the posture of the body."""
@@ -180,12 +197,12 @@ class SolarCalParameter(ComfortParameter):
     def __repr__(self):
         """SolarCal body parameters representation."""
         if self.sharp is not None:
-            return "SolarCal Body Parameters\n Posture: {}\n SHARP: {}"\
-                "\n Body Absorptivity: {}\n Body Emissivity: {}".format(
-                    self.posture, self.sharp, self.body_absorptivity,
-                    self.body_emissivity)
+            return 'SolarCalParameter: [posture:{}] [sharp:{}] ' \
+                '[absorptivity:{}] [emissivity:{}]'.format(
+                    self.posture, self.sharp,
+                    self.body_absorptivity, self.body_emissivity)
         else:
-            return "SolarCal Body Parameters\n Posture: {}\n Body Azimuth: {}"\
-                "\n Body Absorptivity: {}\n Body Emissivity: {}".format(
-                    self.posture, self.body_azimuth, self.body_absorptivity,
-                    self.body_emissivity)
+            return 'SolarCalParameter: [posture:{}] [body_azimuth:{}] ' \
+                '[absorptivity:{}] [emissivity:{}]'.format(
+                    self.posture, self.body_azimuth,
+                    self.body_absorptivity, self.body_emissivity)
