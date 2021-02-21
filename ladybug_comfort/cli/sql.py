@@ -2,17 +2,19 @@
 
 import click
 import sys
-import os
 import logging
 import json
 
 from ladybug.epw import EPW
 from ladybug.sql import SQLiteResult
+from ladybug.datatype.speed import AirSpeed
+from ladybug.datatype.energyflux import MetabolicRate
+from ladybug.datatype.rvalue import ClothingInsulation
 
 from ladybug_comfort.collection.pmv import PMV
 from ladybug_comfort.collection.adaptive import Adaptive
 
-from ._helper import _load_data_json, _load_pmv_par_json, _load_adaptive_par_json
+from ._helper import _load_data, _load_pmv_par_str, _load_adaptive_par_str
 
 _logger = logging.getLogger(__name__)
 
@@ -25,21 +27,20 @@ def sql():
 @sql.command('pmv-by-room')
 @click.argument('result-sql', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
-@click.option('--air-speed', '-v', help='A single number for air speed in m/s or the '
-              'path to a data collection JSON that aligns with the result-sql reporting'
-              'period. If unspecified, 0.1 m/s will be used.', default=None, type=str)
+@click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
+              'string of a JSON array with numbers that align with the result-sql '
+              'reporting period. If unspecified, 0.1 m/s will be used.',
+              default=None, type=str)
 @click.option('--met-rate', '-m', help='A single number for metabolic rate in met '
-              'or the path to a data collection JSON of that aligns with the '
+              'or a string of a JSON array with numbers that align with the '
               'result-sql reporting period. If unspecified, 1.1 met will be used.',
               default=None, type=str)
-@click.option('--clo-value', '-c', help='A single number for clothing level in clo ' 
-              'or the path to a data collection JSON of that aligns with the '
+@click.option('--clo-value', '-c', help='A single number for clothing level in clo '
+              'or a string of a JSON array with numbers that align with the '
               'result-sql reporting period. If unspecified, 0.7 clo will be used.',
               default=None, type=str)
-@click.option('--comfort-par', '-cp', help='A PMVParameter JSON to customize the '
-              'assumptions of the PMV model.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+@click.option('--comfort-par', '-cp', help='A PMVParameter string to customize the '
+              'assumptions of the PMV model.', default=None, type=str)
 @click.option('--result-type', '-t', help='Text to indicate which PMV result data '
               'should be output. Choose from: PMV, PPD, SET, Comfort, Condition.',
               type=str, default='Condition', show_default=True)
@@ -68,9 +69,10 @@ def pmv_by_room(result_sql, air_speed, met_rate, clo_value, comfort_par,
         # load any of the other data collections if specified
         assert len(air_temps) != 0, \
             'Input result-sql does not contain thermal comfort outputs.'
-        air_speed = _load_data_json(air_speed, air_temps[0])
-        met_rate = _load_data_json(met_rate, air_temps[0])
-        clo_value = _load_data_json(clo_value, air_temps[0])
+        base_data = air_temps[0]
+        air_speed = _load_data(air_speed, base_data, AirSpeed, 'm/s')
+        met_rate = _load_data(met_rate, base_data, MetabolicRate, 'met')
+        clo_value = _load_data(clo_value, base_data, ClothingInsulation, 'clo')
 
         # get aligned data for each room
         align_dict = {a_dat.header.metadata['Zone']: [a_dat] for a_dat in air_temps}
@@ -80,7 +82,7 @@ def pmv_by_room(result_sql, air_speed, met_rate, clo_value, comfort_par,
             align_dict[r_dat.header.metadata['Zone']].append(r_dat)
 
         # run the collections through the PMV model and output results
-        param = _load_pmv_par_json(comfort_par)
+        param = _load_pmv_par_str(comfort_par)
         pmv_colls = []
         for res in align_dict.values():
             pmv_obj = PMV(res[0], res[1], res[2], air_speed, met_rate, clo_value,
@@ -108,13 +110,12 @@ def pmv_by_room(result_sql, air_speed, met_rate, clo_value, comfort_par,
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('epw-file', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
-@click.option('--air-speed', '-v', help='A single number for air speed in m/s or the '
-              'path to a data collection JSON that aligns with the result-sql reporting'
-              'period. If unspecified, 0.1 m/s will be used.', default=None, type=str)
-@click.option('--comfort-par', '-cp', help='An AdaptiveParameter JSON to customize the '
-              'assumptions of the Adaptive comfort model.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+@click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
+              'string of a JSON array with numbers that align with the result-sql '
+              'reporting period. If unspecified, 0.1 m/s will be used.',
+              default=None, type=str)
+@click.option('--comfort-par', '-cp', help='An AdaptiveParameter string to customize '
+              'the assumptions of the Adaptive comfort model.', default=None, type=str)
 @click.option('--result-type', '-t', help='Text to indicate which PMV result data '
               'should be output. Choose from: DegreesFromNeutral, Comfort, Condition.',
               type=str, default='Condition', show_default=True)
@@ -142,10 +143,10 @@ def adaptive_by_room(result_sql, epw_file, air_speed, comfort_par,
         # load the air speed data collection if specified
         assert len(op_temps) != 0, \
             'Input result-sql does not contain "Zone Operative Temperature" output.'
-        air_speed = _load_data_json(air_speed, op_temps[0])
+        air_speed = _load_data(air_speed, op_temps[0], AirSpeed, 'm/s')
 
         # run the collections through the Adaptive model and output results
-        param = _load_adaptive_par_json(comfort_par)
+        param = _load_adaptive_par_str(comfort_par)
         ad_colls = []
         for op_temp in op_temps:
             ad_obj = Adaptive(out_temp, op_temp, air_speed, comfort_parameter=param)

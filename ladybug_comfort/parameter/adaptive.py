@@ -1,6 +1,7 @@
 # coding=utf-8
 """Parameters for specifying acceptable thermal conditions using the Adaptive model."""
 from __future__ import division
+import re
 
 from ._base import ComfortParameter
 from ..adaptive import neutral_temperature_conditioned, \
@@ -44,7 +45,7 @@ class AdaptiveParameter(ComfortParameter):
             * 0 = free-running (completely passive with no air conditioning)
             * 1 = conditioned (no operable windows and fully air conditioned)
 
-            The default is 0 since both the ASHRAE-55 and EN-15251 standards forbid
+            The default is 0 since both the ASHRAE-55 and EN-15251 standards prohibit
             the use of adaptive comfort methods when a cooling system is active.
 
     Properties:
@@ -141,6 +142,29 @@ class AdaptiveParameter(ComfortParameter):
                    discrete_or_continuous_air_speed, cold_prevail_temp_limit,
                    conditioning)
 
+    @classmethod
+    def from_string(cls, adaptive_parameter_string):
+        """Create an AdaptiveParameter object from an AdaptiveParameter string."""
+        str_pattern = re.compile(r"\[(\S*)\]")
+        matches = str_pattern.findall(adaptive_parameter_string)
+        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        ashrae55 = True if 'standard' not in par_dict \
+            or par_dict['standard'] == 'ASHRAE-55' else False
+        offset = float(par_dict['neutral_offset']) \
+            if 'neutral_offset' in par_dict else None
+        avg_month = None
+        if 'prevail_method' in par_dict:
+            avg_month = True if par_dict['prevail_method'] == 'AveragedMonthly' \
+                else False
+        spd_method = None
+        if 'air_speed_method' in par_dict:
+            spd_method = True if par_dict['air_speed_method'] == 'Discrete' else False
+        cold_limit = float(par_dict['cold_limit']) \
+            if 'cold_limit' in par_dict else None
+        conditioning = float(par_dict['conditioning']) \
+            if 'conditioning' in par_dict else None
+        return cls(ashrae55, offset, avg_month, spd_method, cold_limit, conditioning)
+
     @property
     def ashrae55_or_en15251(self):
         """A boolean to note whether to use the ASHRAE-55 neutral temperature
@@ -201,9 +225,9 @@ class AdaptiveParameter(ComfortParameter):
         Either 'Averaged Monthly' or 'Running Mean'.
         """
         if self._prevail_method is True:
-            return 'Averaged Monthly'
+            return 'AveragedMonthly'
         else:
-            return 'Running Mean'
+            return 'RunningMean'
 
     @property
     def air_speed_method(self):
@@ -292,8 +316,8 @@ class AdaptiveParameter(ComfortParameter):
 
     def __repr__(self):
         """Adaptive comfort parameters representation."""
-        return "Adaptive Comfort Parameters\n Standard: {}\n Neutral Offset: {}"\
-            "\n Prevailing Temperature Method: {}\n Air Speed Method: {}"\
-            "\n Cold Prevailing Temperature Limit: {}\n Conditioning Level: {}".format(
+        return 'AdaptiveParameter: [standard:{}] [neutral_offset:{}] ' \
+            '[prevail_method:{}] [air_speed_method:{}] ' \
+            '[cold_limit:{}] [conditioning:{}]'.format(
                 self.standard, self.neutral_offset, self.prevailing_temperature_method,
                 self.air_speed_method, self.cold_prevail_temp_limit, self.conditioning)

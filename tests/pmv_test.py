@@ -172,6 +172,23 @@ def test_pmv_parameter_to_from_dict():
     assert new_pmv_comf.still_air_threshold == still_air_thresh
 
 
+def test_pmv_parameter_to_from_str():
+    """Test PMVParameter."""
+    ppd_comfort_thresh = 20
+    humid_ratio_up = 0.012
+    humid_ratio_low = 0.004
+    still_air_thresh = 0.2
+
+    pmv_comf = PMVParameter(
+        ppd_comfort_thresh, humid_ratio_up, humid_ratio_low, still_air_thresh)
+    new_pmv_comf = PMVParameter.from_string(str(pmv_comf))
+
+    assert new_pmv_comf.ppd_comfort_thresh == ppd_comfort_thresh
+    assert new_pmv_comf.humid_ratio_upper == humid_ratio_up
+    assert new_pmv_comf.humid_ratio_lower == humid_ratio_low
+    assert new_pmv_comf.still_air_threshold == still_air_thresh
+
+
 def test_comfort_check():
     """Test comfort check on PMVParameter."""
     pmv_comf = PMVParameter()

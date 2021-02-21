@@ -36,7 +36,7 @@ def test_shortwave_mrt_map():
 
 def test_parse_enclosure_info():
     """Test the _parse_enclosure_info method."""
-    pt_air_temps, pt_rad_temps, pt_humids, pt_speeds = _parse_enclosure_info(
+    pt_air_temps, pt_rad_temps, pt_humids, pt_speeds, a_period = _parse_enclosure_info(
         enclosure_path, sql_path, epw, include_humidity=True)
 
     assert len(pt_air_temps) == 4

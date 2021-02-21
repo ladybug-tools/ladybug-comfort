@@ -3,7 +3,7 @@ from click.testing import CliRunner
 import json
 import os
 
-from ladybug.datacollection import HourlyContinuousCollection
+from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.futil import nukedir
 
 from ladybug_comfort.cli.map import pmv, adaptive, utci
@@ -17,20 +17,21 @@ total_ill_path = './tests/map/results/total/TestRoom_1.ill'
 direct_ill_path = './tests/map/results/direct/TestRoom_1.ill'
 ref_ill_path = './tests/map/results/total/TestRoom_1_ref.ill'
 enclosure_path = './tests/map/TestRoom_1_enclosure.json'
-run_period_path = './tests/map/run_period.json'
 
 
 def test_pmv_map():
     runner = CliRunner()
     res_folder = './tests/map/pmv_map_results'
+    run_period = AnalysisPeriod(1, 2, 0, 1, 2, 23)
 
     base_cmd = [sql_path, enclosure_path, epw_path]
     base_cmd.extend(['-tr', total_ill_path, '-dr', direct_ill_path, '-rr', ref_ill_path])
     base_cmd.extend(['-sh', sun_up_path])
-    base_cmd.extend(['-rp', run_period_path])
+    base_cmd.extend(['-rp', str(run_period)])
     base_cmd.extend(['--folder', res_folder])
 
     result = runner.invoke(pmv, base_cmd)
+    print(result.output)
 
     assert result.exit_code == 0
     out_files = json.loads(result.output)

@@ -6,6 +6,7 @@ import os
 import json
 
 from ladybug.analysisperiod import AnalysisPeriod
+from ladybug.header import Header
 from ladybug.datacollection import HourlyContinuousCollection
 from ladybug.futil import preparedir
 
@@ -15,98 +16,89 @@ from ladybug_comfort.parameter.utci import UTCIParameter
 from ladybug_comfort.parameter.solarcal import SolarCalParameter
 
 
-def _load_data_json(data_json, base_collection):
-    """Load a data collection from a JSON file.
-    
+def _load_data(values, base_data, data_type, data_units):
+    """Load a JSON array string of values to a data collection.
+
     Args:
-        data_json: A JSON file of a data collection to be loaded.
-        base_collection: A DataCollection object that serves as the base template
-            for re-serialization. The class of this object is used to re-serialize
-            the data_json from dict.
+        values: A number or JSON array string of numbers.
+        base_data: A DataCollection object that serves as the base template
+            for re-serialization.
+        data_type: The class of the data type for the values.
+        data_units: The units of the values.
     """
-    if data_json is not None and data_json != 'None':
-        if os.path.isfile(data_json):
-            with open(data_json) as json_file:
-                data = json.load(json_file)
-            return base_collection.__class__.from_dict(data)
-        else:  # assume the user has passed a single number instead of a file
-            return float(data_json)
+    if values is not None and values != 'None':
+        if values.startswith('['):  # it's an array of values
+            value_list = json.loads(values)
+            header = Header(data_type(), data_units, base_data.header.analysis_period)
+            if isinstance(base_data, HourlyContinuousCollection):
+                return HourlyContinuousCollection(header, value_list)
+            else:
+                return base_data.__class__(header, value_list, base_data.datetimes)
+        else:  # assume the user has passed a single number
+            return float(values)
 
 
-def _load_hourly_data_json(data_json):
-    """Load an hourly continuous data collection from a JSON file.
-    
+def _load_values(values):
+    """Load a JSON array string of values to a data collection.
+
     Args:
-        data_json: A JSON file of an hourly continuous data collection to be loaded.
-            This can also be a single number.
+        values: A number or JSON array string of numbers.
     """
-    if data_json is not None and data_json != 'None':
-        if os.path.isfile(data_json):
-            with open(data_json) as json_file:
-                data = json.load(json_file)
-            return HourlyContinuousCollection.from_dict(data)
-        else:  # assume the user has passed a single number instead of a file
-            return float(data_json)
+    if values is not None and values != 'None':
+        if values.startswith('['):  # it's an array of values
+            return json.loads(values)
+        else:  # assume the user has passed a single number
+            return float(values)
 
 
-def _load_analysis_period_json(analysis_period_json):
-    """Load an AnalysisPeriod from a JSON file.
-    
+def _load_analysis_period_str(analysis_period_str):
+    """Load an AnalysisPeriod from a string.
+
     Args:
-        analysis_period_json: A JSON file of an AnalysisPeriod to be loaded.
+        analysis_period_str: A string of an AnalysisPeriod to be loaded.
     """
-    if analysis_period_json is not None and analysis_period_json != 'None':
-        with open(analysis_period_json) as json_file:
-            data = json.load(json_file)
-        return AnalysisPeriod.from_dict(data)
+    if analysis_period_str is not None and analysis_period_str != 'None':
+        return AnalysisPeriod.from_string(analysis_period_str)
 
 
-def _load_pmv_par_json(comfort_par_json):
-    """Load a PMVParameter from a JSON file.
-    
+def _load_pmv_par_str(comfort_par_str):
+    """Load a PMVParameter from a string.
+
     Args:
-        comfort_par_json: A JSON file of a PMVParameter to be loaded.
+        comfort_par_str: A string of a PMVParameter to be loaded.
     """
-    if comfort_par_json is not None and comfort_par_json != 'None':
-        with open(comfort_par_json) as json_file:
-            comfort_par_data = json.load(json_file)
-        return PMVParameter.from_dict(comfort_par_data)
+    if comfort_par_str is not None and comfort_par_str != 'None':
+        return PMVParameter.from_string(comfort_par_str)
 
 
-def _load_adaptive_par_json(comfort_par_json):
-    """Load a AdaptiveParameter from a JSON file.
-    
+def _load_adaptive_par_str(comfort_par_str):
+    """Load a AdaptiveParameter from a string.
+
     Args:
-        comfort_par_json: A JSON file of a AdaptiveParameter to be loaded.
+        comfort_par_str: A string of a AdaptiveParameter to be loaded.
     """
-    if comfort_par_json is not None and comfort_par_json != 'None':
-        with open(comfort_par_json) as json_file:
-            comfort_par_data = json.load(json_file)
-        return AdaptiveParameter.from_dict(comfort_par_data)
+    if comfort_par_str is not None and comfort_par_str != 'None':
+        return AdaptiveParameter.from_string(comfort_par_str)
 
 
-def _load_utci_par_json(comfort_par_json):
-    """Load a UTCIParameter from a JSON file.
-    
+def _load_utci_par_str(comfort_par_str):
+    """Load a UTCIParameter from a string.
+
     Args:
-        comfort_par_json: A JSON file of a UTCIParameter to be loaded.
+        comfort_par_str: A string of a UTCIParameter to be loaded.
     """
-    if comfort_par_json is not None and comfort_par_json != 'None':
-        with open(comfort_par_json) as json_file:
-            comfort_par_data = json.load(json_file)
-        return UTCIParameter.from_dict(comfort_par_data)
+    if comfort_par_str is not None and comfort_par_str != 'None':
+        return UTCIParameter.from_string(comfort_par_str)
 
 
-def _load_solarcal_par_json(solarcal_par_json):
-    """Load a SolarCalParameter from a JSON file.
-    
+def _load_solarcal_par_str(solarcal_par_str):
+    """Load a SolarCalParameter from a string.
+
     Args:
-        solarcal_par_json: A JSON file of a SolarCalParameter to be loaded.
+        solarcal_par_str: A string of a SolarCalParameter to be loaded.
     """
-    if solarcal_par_json is not None and solarcal_par_json != 'None':
-        with open(solarcal_par_json) as json_file:
-            solarcal_par_data = json.load(json_file)
-        return SolarCalParameter.from_dict(solarcal_par_data)
+    if solarcal_par_str is not None and solarcal_par_str != 'None':
+        return SolarCalParameter.from_string(solarcal_par_str)
 
 
 def _data_to_csv(data, csv_path):
@@ -117,7 +109,7 @@ def _data_to_csv(data, csv_path):
             csv_file.write(','.join(str_data) + '\n')
 
 
-def _thermal_map_csv(folder, temperature, condition, condition_intensity):
+def _thermal_map_csv(folder, result_sql, temperature, condition, condition_intensity):
     """Write out the thermal mapping CSV files associated with every comfort map."""
     if folder is None:
         folder = os.path.join(os.path.dirname(result_sql), 'thermal_map')
