@@ -227,7 +227,7 @@ def test_init_pmv_collection():
     assert pmv_obj.calc_length == calc_length
     assert pmv_obj._hr_calculated is False
     assert pmv_obj._hr_comfort_required is False
-    str(pmv_obj)  # test that the string representaiton is ok
+    str(pmv_obj)  # test that the string representation is ok
 
     assert isinstance(pmv_obj.air_temperature, HourlyContinuousCollection)
     assert len(pmv_obj.air_temperature.values) == calc_length
@@ -245,6 +245,10 @@ def test_init_pmv_collection():
     assert isinstance(pmv_obj.standard_effective_temperature, HourlyContinuousCollection)
     assert len(pmv_obj.standard_effective_temperature.values) == calc_length
     assert pmv_obj.standard_effective_temperature[0] == pytest.approx(25.0694, rel=1e-2)
+    assert isinstance(pmv_obj.operative_temperature, HourlyContinuousCollection)
+    assert len(pmv_obj.operative_temperature.values) == calc_length
+    assert pmv_obj.operative_temperature[0] == pytest.approx(
+        (pmv_obj.air_temperature[0] + pmv_obj.rad_temperature[0]) / 2, rel=1e-3)
 
 
 def test_pmv_collection_defaults():

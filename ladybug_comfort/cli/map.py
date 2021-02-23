@@ -12,7 +12,7 @@ from ladybug.datatype.rvalue import ClothingInsulation
 
 from ladybug_comfort.map.mrt import shortwave_mrt_map
 from ladybug_comfort.map._enclosure import _parse_enclosure_info, _values_to_data
-from ladybug_comfort.collection.pmv import PMV
+from ladybug_comfort.collection.pmv import PMV, _PMVnoSET
 from ladybug_comfort.collection.adaptive import Adaptive, PrevailingTemperature
 from ladybug_comfort.collection.utci import UTCI
 
@@ -73,6 +73,13 @@ def map():
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be generated for the entire run period of '
               'the result-sql.', default=None, type=str)
+@click.option('--write-op-map/--write-set-map', ' /-set', help='Flag to note whether '
+              'the output temperature CSV should record Operative Temperature '
+              'or Standard Effective Temperature (SET). SET is relatively intense '
+              'to compute and so only recording Operative Temperature can greatly '
+              'reduce run time, particularly when air speeds are low. However, SET '
+              'accounts for all 6 PMV model inputs and so is a more representative '
+              '"feels-like" temperature for the PMV model.', default=True)
 @click.option('--solarcal-par', '-sp', help='A SolarCalParameter string to customize '
               'the assumptions of the SolarCal model.', default=None, type=str)
 @click.option('--comfort-par', '-cp', help='A PMVParameter string to customize the '
@@ -86,7 +93,7 @@ def map():
               type=click.File('w'), default='-', show_default=True)
 def pmv(result_sql, enclosure_info, epw_file,
         total_irradiance, direct_irradiance, ref_irradiance, sun_up_hours,
-        air_speed, met_rate, clo_value,
+        air_speed, met_rate, clo_value, write_op_map,
         run_period, comfort_par, solarcal_par, folder, log_file):
     """Get CSV files with maps of PMV comfort from EnergyPlus and Radiance results.
 
@@ -123,20 +130,24 @@ def pmv(result_sql, enclosure_info, epw_file,
         # convert any input lists of clothing or met to data collections
         met_rate = _values_to_data(met_rate, a_per, MetabolicRate, 'met')
         clo_value = _values_to_data(clo_value, a_per, ClothingInsulation, 'clo')
-        if run_period is not None:
+        if run_period is not None and a_per != run_period:
             met_rate = met_rate.filter_by_analysis_period(run_period) \
                 if isinstance(met_rate, HourlyContinuousCollection) else met_rate
             clo_value = clo_value.filter_by_analysis_period(run_period) \
                 if isinstance(clo_value, HourlyContinuousCollection) else clo_value
 
         # run the collections through the PMV model and output results
+        comf_class = _PMVnoSET if write_op_map else PMV
         temperature, condition, condition_intensity = [], [], []
         for t_a, rh, t_r, vel in zip(pt_air_temps, pt_humids, pt_rad_temps, pt_speeds):
-            pmv_obj = PMV(
+            pmv_obj = comf_class(
                 t_a, rh, t_r, vel, met_rate, clo_value, comfort_parameter=comfort_par)
-            temperature.append(pmv_obj.standard_effective_temperature)
             condition.append(pmv_obj.thermal_condition)
             condition_intensity.append(pmv_obj.predicted_mean_vote)
+            if write_op_map:
+                temperature.append(pmv_obj.operative_temperature)
+            else:
+                temperature.append(pmv_obj.standard_effective_temperature)
 
         # write out the final results to CSV files
         result_file_dict = _thermal_map_csv(
