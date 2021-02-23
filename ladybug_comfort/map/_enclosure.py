@@ -94,7 +94,7 @@ def _parse_enclosure_info(enclosure_info, result_sql, epw, analysis_period=None,
                       base_a_per, use_10m_wind_speed)
 
     # apply the analysis periods if it is specified
-    if analysis_period is not None:
+    if analysis_period is not None and base_a_per != analysis_period:
         a_per = analysis_period
         rel_air_temps = [data.filter_by_analysis_period(a_per) for data in rel_air_temps]
         rel_rad_temps = [data.filter_by_analysis_period(a_per) for data in rel_rad_temps]

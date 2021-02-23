@@ -31,7 +31,6 @@ def test_pmv_map():
     base_cmd.extend(['--folder', res_folder])
 
     result = runner.invoke(pmv, base_cmd)
-    print(result.output)
 
     assert result.exit_code == 0
     out_files = json.loads(result.output)

@@ -9,12 +9,17 @@ import math
 
 
 def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
-    """Calculate PMV using Fanger's original equation and Pierce SET model when necessary.
+    """Calculate PMV using Fanger's original model and Pierce SET.
 
-    This method is the officially corrent way to calculate PMV comfort according to.
-    the 2015 ASHRAE-55 Thermal Comfort Standard.  This function will return
-    accurate values even if the air speed is above the sill air threshold of
-    Fanger's original equation (> 0.1 m/s).
+    This method uses the officially correct way to calculate PMV comfort according to
+    the 2015 ASHRAE-55 Thermal Comfort Standard. This function will return
+    correct values even if the air speed is above the sill air threshold of
+    Fanger's original model (> 0.1 m/s).
+
+    However, because this function always returns the Standard Effective Temperature
+    (SET), it will run much more slowly for cases that are below the still air threshold
+    (roughly 10 times as long). For cases where a SET output is not required, it
+    is recommended that the predicted_mean_vote_no_set method be used.
 
     Note:
         [1] ASHRAE Standard 55 (2017). "Thermal Environmental Conditions
@@ -45,29 +50,28 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
     Returns:
         A dictionary containing results of the PMV model with the following keys
 
-        -   pmv : Predicted mean vote (PMV)
-        -   ppd : Percent predicted dissatisfied (PPD) [%]
-        -   se_temp: Standard effective temperature (SET) [C]
-        -   ta_adj: Air temperature adjusted for air speed [C]
-        -   ce : Cooling effect. The difference between the air temperature
+        -   pmv -- Predicted mean vote (PMV)
+        -   ppd -- Percent predicted dissatisfied (PPD) [%]
+        -   set -- Standard effective temperature (SET) [C]
+        -   ta_adj -- Air temperature adjusted for air speed [C]
+        -   ce -- Cooling effect. The difference between the air temperature
             and the adjusted air temperature [C]
-        -   heat_loss: A dictionary with the 6 heat loss terms of the PMV model.
-            The dictionary items are as follows:
+        -   heat_loss -- A dictionary with the 6 heat loss terms of the PMV model.
+            The dictionary keys are as follows:
 
-            -   'cond': heat loss by conduction [W]
-            -   'sweat': heat loss by sweating [W]
-            -   'res_l': heat loss by latent respiration [W]
-            -   'res_s' heat loss by dry respiration [W]
-            -   'rad': heat loss by radiation [W]
-            -   'conv' heat loss by convection [W]
+            -   cond -- heat loss by conduction [W]
+            -   sweat -- heat loss by sweating [W]
+            -   res_l -- heat loss by latent respiration [W]
+            -   res_s -- heat loss by dry respiration [W]
+            -   rad -- heat loss by radiation [W]
+            -   conv -- heat loss by convection [W]
     """
     se_temp = pierce_set(ta, tr, vel, rh, met, clo, wme)
 
-    if vel <= still_air_threshold:
+    if vel <= still_air_threshold:  # use the original Fanger model
         pmv, ppd, heat_loss = fanger_pmv(ta, tr, vel, rh, met, clo, wme)
-        ta_adj = ta
-        ce = 0.
-    else:
+        ta_adj, ce = ta, 0.
+    else:  # use the SET model to correct the cooling effect in Fanger model
         ce_l = 0.
         ce_r = 40.
         eps = 0.001  # precision of ce
@@ -80,7 +84,7 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
             ce = secant(ce_l, ce_r, fn, eps)
         except OverflowError:
             ce = None
-        if ce is None:
+        if ce is None:  # ce can be None because OverflowError or max secant iterations 
             ce = bisect(ce_l, ce_r, fn, eps, 0)
 
         pmv, ppd, heat_loss = fanger_pmv(
@@ -91,6 +95,83 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
     result['pmv'] = pmv
     result['ppd'] = ppd
     result['set'] = se_temp
+    result['ta_adj'] = ta_adj
+    result['ce'] = ce
+    result['heat_loss'] = heat_loss
+
+    return result
+
+
+def predicted_mean_vote_no_set(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
+    """Calculate PMV using Fanger's model and Pierce SET model ONLY WHEN NECESSARY.
+
+    This method uses the officially correct way to calculate PMV comfort according to
+    the 2015 ASHRAE-55 Thermal Comfort Standard. This function will return
+    correct values even if the air speed is above the sill air threshold of
+    Fanger's original equation (> 0.1 m/s).
+
+    However, because this function does not return the Standard Effective Temperature
+    (SET), it will run much faster for cases that are below the still air threshold
+    (roughly 1/10th the time).
+
+    Args:
+        ta: Air temperature [C]
+        tr: Mean radiant temperature [C]
+        vel: Relative air velocity [m/s]
+        rh: Relative humidity [%]
+        met: Metabolic rate [met]
+        clo: Clothing [clo]
+        wme: External work [met], normally around 0 when seated
+        still_air_threshold: The air velocity in m/s at which the Pierce
+            Standard Effective Temperature (SET) model will be used
+            to correct values in the original Fanger PMV model.
+            Default is 0.1 m/s per the 2015 release of ASHRAE Standard-55.
+
+    Returns:
+        A dictionary containing results of the PMV model with the following keys
+
+        -   pmv -- Predicted mean vote (PMV)
+        -   ppd -- Percent predicted dissatisfied (PPD) [%]
+        -   ta_adj -- Air temperature adjusted for air speed [C]
+        -   ce -- Cooling effect. The difference between the air temperature
+            and the adjusted air temperature [C]
+        -   heat_loss -- A dictionary with the 6 heat loss terms of the PMV model.
+            The dictionary keys are as follows:
+
+            -   cond -- heat loss by conduction [W]
+            -   sweat -- heat loss by sweating [W]
+            -   res_l -- heat loss by latent respiration [W]
+            -   res_s -- heat loss by dry respiration [W]
+            -   rad -- heat loss by radiation [W]
+            -   conv -- heat loss by convection [W]
+    """
+    if vel <= still_air_threshold:  # use the original Fanger model
+        pmv, ppd, heat_loss = fanger_pmv(ta, tr, vel, rh, met, clo, wme)
+        ta_adj, ce = ta, 0.
+    else:  # use the SET model to correct the cooling effect in Fanger model
+        ce_l = 0.
+        ce_r = 40.
+        eps = 0.001  # precision of ce
+        se_temp = pierce_set(ta, tr, vel, rh, met, clo, wme)
+
+        def fn(ce):
+            return se_temp - pierce_set(ta - ce, tr - ce, still_air_threshold,
+                                        rh, met, clo, wme)
+
+        try:
+            ce = secant(ce_l, ce_r, fn, eps)
+        except OverflowError:
+            ce = None
+        if ce is None:  # ce can be None because OverflowError or max secant iterations 
+            ce = bisect(ce_l, ce_r, fn, eps, 0)
+
+        pmv, ppd, heat_loss = fanger_pmv(
+            ta - ce, tr - ce, still_air_threshold, rh, met, clo, wme)
+        ta_adj = ta - ce
+
+    result = {}
+    result['pmv'] = pmv
+    result['ppd'] = ppd
     result['ta_adj'] = ta_adj
     result['ce'] = ce
     result['heat_loss'] = heat_loss
@@ -148,7 +229,7 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
     else:
         fcl = 1.05 + (0.645 * icl)
 
-    # heat transf. coeff. by forced convection
+    # heat transfer coefficient by forced convection
     hcf = 12.1 * math.sqrt(vel)
     taa = ta + 273.
     tra = tr + 273.
@@ -206,7 +287,8 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
         'res_l': hl3,
         'res_s': hl4,
         'rad': hl5,
-        'conv': hl6}
+        'conv': hl6
+    }
 
     return pmv, ppd, heat_loss
 
@@ -234,14 +316,14 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
         se_temp -- Standard effective temperature [C]
     """
 
-    # Key initial variables.
+    # key initial variables
     vapor_pressure = (rh * saturated_vapor_pressure_torr(ta)) / 100.
     air_velocity = max(vel, 0.1)
     kclo = 0.25
     bodyweight = 69.9
     bodysurfacearea = 1.8258
     metfactor = 58.2
-    sbc = 0.000000056697  # Stefan-Boltzmann constant (W/m2K4)
+    sbc = 0.000000056697  # Stefan-Boltzmann constant (W/m2-K4)
     csw = 170.
     cdil = 120.
     cstr = 0.5
@@ -261,15 +343,10 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
 
     # Start new experiment here (for graded experiments)
     # UNIT CONVERSIONS (from input variables)
-
-    # This variable is the pressure of the atmosphere in kPa and was taken
-    # from the psychrometrics.js file of the CBE comfort tool.
-    p = 101325.0 / 1000.
-
+    p = 101.325  # pressure of the atmosphere in kPa
     pressure_in_atmospheres = p * 0.009869
     ltime = 60
     rcl = 0.155 * clo
-    # Adjusticl(rcl, Conditions);  TH: I don't think this is used in the software
 
     facl = 1.0 + 0.15 * clo  # % INCreaSE IN BODY SURFACE Area DUE TO CLOTHING
     LR = 2.2 / pressure_in_atmospheres  # Lewis Relation is 2.2 at sea level
@@ -297,7 +374,7 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
     # ========================  BEGIN ITERATION
     #
     # Tcl and chr are solved iteratively using: H(Tsk - To) = ctc(Tcl - To),
-    # where H = 1/(ra + Rcl) and ra = 1/Facl*ctc
+    # where H = 1 / (ra + Rcl) and ra = 1 / Facl * ctc
 
     tcl_old = False
     flag = True
@@ -368,7 +445,7 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
         M = RM + mshiv
         alfa = 0.0417737 + 0.7451833 / (skin_blood_flow + .585417)
 
-    # Define new heat flow terms, coeffs, and abbreviations
+    # Define new heat flow terms, coefficients, and abbreviations
     hsk = dry + esk  # total heat loss from skin
     RN = M - wme  # net metabolic heat production
     ecomf = 0.42 * (RN - (1 * metfactor))
@@ -550,56 +627,56 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs, low_bound=0., up_bound=100.,
     # Determine the function that should be used given the missing input.
     if pmv_inputs['ta'] is None and pmv_inputs['tr'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 x, x, pmv_inputs['vel'], pmv_inputs['rh'],
                 pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = ('ta', 'tr')
     elif pmv_inputs['ta'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 x, pmv_inputs['tr'], pmv_inputs['vel'], pmv_inputs['rh'],
                 pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'ta'
     elif pmv_inputs['tr'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], x, pmv_inputs['vel'], pmv_inputs['rh'],
                 pmv_inputs['met'], pmv_inputs['clo'],  pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'tr'
     elif pmv_inputs['vel'] is None:
         def fn(x):
-            return target_pmv - predicted_mean_vote(
+            return target_pmv - predicted_mean_vote_no_set(
                 pmv_inputs['ta'], pmv_inputs['tr'], x, pmv_inputs['rh'],
                 pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv']
         missing_key = 'vel'
     elif pmv_inputs['rh'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'], x,
                 pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'rh'
     elif pmv_inputs['met'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
                 pmv_inputs['rh'], x, pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'met'
     elif pmv_inputs['clo'] is None:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
                 pmv_inputs['rh'], pmv_inputs['met'], x, pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'clo'
     else:
         def fn(x):
-            return predicted_mean_vote(
+            return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], pmv_inputs['tr'], pmv_inputs['vel'],
                 pmv_inputs['rh'], pmv_inputs['met'], pmv_inputs['clo'], x,
                 still_air_threshold)['pmv'] - target_pmv
