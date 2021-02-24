@@ -127,13 +127,13 @@ class SolarCalParameter(ComfortParameter):
     @classmethod
     def from_string(cls, solarcal_parameter_string):
         """Create an SolarCalParameter object from an SolarCalParameter string."""
-        str_pattern = re.compile(r"\[(\S*)\]")
+        str_pattern = re.compile(r"\-\-(\S*\s\S*)")
         matches = str_pattern.findall(solarcal_parameter_string)
-        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        par_dict = {item.split(' ')[0]: item.split(' ')[1] for item in matches}
         posture = par_dict['posture'] if 'posture' in par_dict else None
         sharp = float(par_dict['sharp']) if 'sharp' in par_dict else None
-        body_azimuth = float(par_dict['body_azimuth']) \
-            if 'body_azimuth' in par_dict else None
+        body_azimuth = float(par_dict['body-azimuth']) \
+            if 'body-azimuth' in par_dict else None
         absorptivity = float(par_dict['absorptivity']) \
             if 'absorptivity' in par_dict else None
         emissivity = float(par_dict['emissivity']) \
@@ -197,12 +197,10 @@ class SolarCalParameter(ComfortParameter):
     def __repr__(self):
         """SolarCal body parameters representation."""
         if self.sharp is not None:
-            return 'SolarCalParameter: [posture:{}] [sharp:{}] ' \
-                '[absorptivity:{}] [emissivity:{}]'.format(
-                    self.posture, self.sharp,
-                    self.body_absorptivity, self.body_emissivity)
+            return '--posture {} --sharp {} --absorptivity {} --emissivity {}'.format(
+                self.posture, self.sharp, self.body_absorptivity, self.body_emissivity)
         else:
-            return 'SolarCalParameter: [posture:{}] [body_azimuth:{}] ' \
-                '[absorptivity:{}] [emissivity:{}]'.format(
+            return '--posture {} --body-azimuth {} ' \
+                '--absorptivity {} --emissivity {}'.format(
                     self.posture, self.body_azimuth,
                     self.body_absorptivity, self.body_emissivity)

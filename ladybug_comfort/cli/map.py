@@ -7,8 +7,15 @@ import json
 
 from ladybug.epw import EPW
 from ladybug.datacollection import HourlyContinuousCollection
+from ladybug.header import Header
+from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.datatype.energyflux import MetabolicRate
 from ladybug.datatype.rvalue import ClothingInsulation
+from ladybug.datatype.temperature import OperativeTemperature, \
+    StandardEffectiveTemperature, UniversalThermalClimateIndex
+from ladybug.datatype.thermalcondition import PredictedMeanVote, \
+    ThermalCondition, ThermalConditionElevenPoint
+from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
 from ladybug_comfort.map.mrt import shortwave_mrt_map
 from ladybug_comfort.map._enclosure import _parse_enclosure_info, _values_to_data
@@ -363,6 +370,72 @@ def utci(result_sql, enclosure_info, epw_file,
         log_file.write(json.dumps(result_file_dict))
     except Exception as e:
         _logger.exception('Failed to run Adaptive model comfort map.\n{}'.format(e))
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+
+@map.command('map-result-info')
+@click.argument('comfort-model', type=str)
+@click.option('--run-period', '-rp', help='The AnalysisPeriod string that dictates the '
+              'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
+              'If unspecified, it will be assumed results are for a full year.',
+              default=None, type=str)
+@click.option('--qualifier', '-q', help='Text for any options used on the comfort '
+              'map simulation that change the output data type of results. For example, '
+              'the write-set-map text of the pmv map can be passed here to ensure '
+              'the output of this command is for SET instead of operative temperature.',
+              default=None, type=str, multiple=True)
+@click.option('--output-file', '-f', help='Optional file to output the JSON '
+              'string of the result info. By default, it will be printed to stdout',
+              type=click.File('w'), default='-', show_default=True)
+def map_result_info(comfort_model, run_period, qualifier, output_file):
+    """Get a JSON that specifies the data type and units for comfort map outputs.
+
+    This JSON is needed by interfaces to correctly parse comfort map results.
+
+    \b
+    Args:
+        comfort_model: Text for the comfort model of the thermal mapping simulation.
+            Choose from: pmv, adaptive, utci.
+    """
+    try:
+        # parse the run period
+        run_period = _load_analysis_period_str(run_period)
+        run_period = run_period if run_period is not None else AnalysisPeriod()
+
+        # get the data type and units from the comfort model
+        comfort_model = comfort_model.lower()
+        cond, cond_units = ThermalCondition(), 'condition'
+        if comfort_model == 'pmv':
+            temp, temp_units = OperativeTemperature(), 'C'
+            if 'write-set-map' in qualifier:
+                temp = StandardEffectiveTemperature()
+            cond_i, cond_i_units = PredictedMeanVote(), 'PMV'
+        elif comfort_model == 'adaptive':
+            temp, temp_units = OperativeTemperature(), 'C'
+            cond_i, cond_i_units = OperativeTemperatureDelta(), 'dC'
+        elif comfort_model == 'utci':
+            temp, temp_units = UniversalThermalClimateIndex(), 'C'
+            cond_i, cond_i_units = ThermalConditionElevenPoint(), 'condition'
+        else:
+            raise ValueError(
+                'Comfort model "{}" not recognized. Choose from: {}.'.format(
+                    comfort_model, ('pmv', 'adaptive', 'utci')))
+
+        # build up the dictionary of data headers
+        temp_header = Header(temp, temp_units, run_period)
+        cond_header = Header(cond, cond_units, run_period)
+        cond_i_header = Header(cond_i, cond_i_units, run_period)
+        result_info_dict = {
+            'temperature': temp_header.to_dict(),
+            'condition': cond_header.to_dict(),
+            'condition_intensity': cond_i_header.to_dict()
+        }
+
+        output_file.write(json.dumps(result_info_dict))
+    except Exception as e:
+        _logger.exception('Failed to write thermal map info.\n{}'.format(e))
         sys.exit(1)
     else:
         sys.exit(0)

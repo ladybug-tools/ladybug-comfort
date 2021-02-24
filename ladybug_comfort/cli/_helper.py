@@ -26,7 +26,7 @@ def _load_data(values, base_data, data_type, data_units):
         data_type: The class of the data type for the values.
         data_units: The units of the values.
     """
-    if values is not None and values != 'None':
+    if values is not None and values != '' and values != 'None':
         if values.startswith('['):  # it's an array of values
             value_list = json.loads(values)
             header = Header(data_type(), data_units, base_data.header.analysis_period)
@@ -44,7 +44,7 @@ def _load_values(values):
     Args:
         values: A number or JSON array string of numbers.
     """
-    if values is not None and values != 'None':
+    if values is not None and values != '' and values != 'None':
         if values.startswith('['):  # it's an array of values
             return json.loads(values)
         else:  # assume the user has passed a single number
@@ -57,7 +57,8 @@ def _load_analysis_period_str(analysis_period_str):
     Args:
         analysis_period_str: A string of an AnalysisPeriod to be loaded.
     """
-    if analysis_period_str is not None and analysis_period_str != 'None':
+    if analysis_period_str is not None and analysis_period_str != '' \
+            and analysis_period_str != 'None':
         return AnalysisPeriod.from_string(analysis_period_str)
 
 
@@ -67,7 +68,8 @@ def _load_pmv_par_str(comfort_par_str):
     Args:
         comfort_par_str: A string of a PMVParameter to be loaded.
     """
-    if comfort_par_str is not None and comfort_par_str != 'None':
+    if comfort_par_str is not None and comfort_par_str != '' \
+            and comfort_par_str != 'None':
         return PMVParameter.from_string(comfort_par_str)
 
 
@@ -77,7 +79,8 @@ def _load_adaptive_par_str(comfort_par_str):
     Args:
         comfort_par_str: A string of a AdaptiveParameter to be loaded.
     """
-    if comfort_par_str is not None and comfort_par_str != 'None':
+    if comfort_par_str is not None and comfort_par_str != '' \
+            and comfort_par_str != 'None':
         return AdaptiveParameter.from_string(comfort_par_str)
 
 
@@ -87,7 +90,8 @@ def _load_utci_par_str(comfort_par_str):
     Args:
         comfort_par_str: A string of a UTCIParameter to be loaded.
     """
-    if comfort_par_str is not None and comfort_par_str != 'None':
+    if comfort_par_str is not None and comfort_par_str != '' \
+            and comfort_par_str != 'None':
         return UTCIParameter.from_string(comfort_par_str)
 
 
@@ -97,7 +101,8 @@ def _load_solarcal_par_str(solarcal_par_str):
     Args:
         solarcal_par_str: A string of a SolarCalParameter to be loaded.
     """
-    if solarcal_par_str is not None and solarcal_par_str != 'None':
+    if solarcal_par_str is not None and solarcal_par_str != '' \
+            and solarcal_par_str != 'None':
         return SolarCalParameter.from_string(solarcal_par_str)
 
 

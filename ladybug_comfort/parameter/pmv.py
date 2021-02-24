@@ -88,17 +88,17 @@ class PMVParameter(ComfortParameter):
     @classmethod
     def from_string(cls, pmv_parameter_string):
         """Create an PMVParameter object from an PMVParameter string."""
-        str_pattern = re.compile(r"\[(\S*)\]")
+        str_pattern = re.compile(r"\-\-(\S*\s\S*)")
         matches = str_pattern.findall(pmv_parameter_string)
-        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
-        ppd_threshold = float(par_dict['ppd_threshold']) \
-            if 'ppd_threshold' in par_dict else None
-        hr_upper = float(par_dict['hr_upper']) \
-            if 'hr_upper' in par_dict else None
-        hr_lower = float(par_dict['hr_lower']) \
-            if 'hr_lower' in par_dict else None
-        still_air_threshold = float(par_dict['still_air_threshold']) \
-            if 'still_air_threshold' in par_dict else None
+        par_dict = {item.split(' ')[0]: item.split(' ')[1] for item in matches}
+        ppd_threshold = float(par_dict['ppd-threshold']) \
+            if 'ppd-threshold' in par_dict else None
+        hr_upper = float(par_dict['hr-upper']) \
+            if 'hr-upper' in par_dict else None
+        hr_lower = float(par_dict['hr-lower']) \
+            if 'hr-lower' in par_dict else None
+        still_air_threshold = float(par_dict['still-air-threshold']) \
+            if 'still-air-threshold' in par_dict else None
         return cls(ppd_threshold, hr_upper, hr_lower, still_air_threshold)
 
     @property
@@ -203,6 +203,6 @@ class PMVParameter(ComfortParameter):
 
     def __repr__(self):
         """PMV comfort parameters representation."""
-        return 'PMVParameter: [ppd_threshold:{}] [hr_upper:{}] ' \
-            '[hr_lower:{}] [still_air_threshold:{}]'.format(
+        return '--ppd-threshold {} --hr-upper {} ' \
+            '--hr-lower {} --still-air-threshold {}'.format(
                 self._ppd_thresh, self._hr_upper, self._hr_lower, self._still_thresh)

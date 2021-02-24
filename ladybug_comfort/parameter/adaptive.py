@@ -145,22 +145,23 @@ class AdaptiveParameter(ComfortParameter):
     @classmethod
     def from_string(cls, adaptive_parameter_string):
         """Create an AdaptiveParameter object from an AdaptiveParameter string."""
-        str_pattern = re.compile(r"\[(\S*)\]")
+        str_pattern = re.compile(r"\-\-(\S*\s\S*)")
         matches = str_pattern.findall(adaptive_parameter_string)
-        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        par_dict = {item.split(' ')[0]: item.split(' ')[1] for item in matches}
         ashrae55 = True if 'standard' not in par_dict \
-            or par_dict['standard'] == 'ASHRAE-55' else False
-        offset = float(par_dict['neutral_offset']) \
-            if 'neutral_offset' in par_dict else None
+            or par_dict['standard'].upper() == 'ASHRAE-55' else False
+        offset = float(par_dict['neutral-offset']) \
+            if 'neutral-offset' in par_dict else None
         avg_month = None
-        if 'prevail_method' in par_dict:
-            avg_month = True if par_dict['prevail_method'] == 'AveragedMonthly' \
+        if 'prevail-method' in par_dict:
+            avg_month = True if par_dict['prevail-method'].lower() == 'averagedmonthly' \
                 else False
         spd_method = None
-        if 'air_speed_method' in par_dict:
-            spd_method = True if par_dict['air_speed_method'] == 'Discrete' else False
-        cold_limit = float(par_dict['cold_limit']) \
-            if 'cold_limit' in par_dict else None
+        if 'air-speed-method' in par_dict:
+            spd_method = True if par_dict['air-speed-method'].lower() == 'discrete' \
+                else False
+        cold_limit = float(par_dict['cold-limit']) \
+            if 'cold-limit' in par_dict else None
         conditioning = float(par_dict['conditioning']) \
             if 'conditioning' in par_dict else None
         return cls(ashrae55, offset, avg_month, spd_method, cold_limit, conditioning)
@@ -316,8 +317,8 @@ class AdaptiveParameter(ComfortParameter):
 
     def __repr__(self):
         """Adaptive comfort parameters representation."""
-        return 'AdaptiveParameter: [standard:{}] [neutral_offset:{}] ' \
-            '[prevail_method:{}] [air_speed_method:{}] ' \
-            '[cold_limit:{}] [conditioning:{}]'.format(
+        return '--standard {} --neutral-offset {} ' \
+            '--prevail_method {} --air-speed-method {} ' \
+            '--cold-limit {} --conditioning {}'.format(
                 self.standard, self.neutral_offset, self.prevailing_temperature_method,
                 self.air_speed_method, self.cold_prevail_temp_limit, self.conditioning)
