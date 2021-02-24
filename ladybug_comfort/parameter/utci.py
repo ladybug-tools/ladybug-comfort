@@ -146,27 +146,27 @@ class UTCIParameter(ComfortParameter):
     @classmethod
     def from_string(cls, utci_parameter_string):
         """Create an UTCIParameter object from an PMVParameter string."""
-        str_pattern = re.compile(r"\[(\S*)\]")
+        str_pattern = re.compile(r"\-\-(\S*\s\S*)")
         matches = str_pattern.findall(utci_parameter_string)
-        par_dict = {item.split(':')[0]: item.split(':')[1] for item in matches}
+        par_dict = {item.split(' ')[0]: item.split(' ')[1] for item in matches}
         cold = float(par_dict['cold']) if 'cold' in par_dict else None
         heat = float(par_dict['heat']) if 'heat' in par_dict else None
-        extreme_cold = float(par_dict['extreme_cold']) \
-            if 'extreme_cold' in par_dict else None
-        very_strong_cold = float(par_dict['very_strong_cold']) \
-            if 'very_strong_cold' in par_dict else None
-        strong_cold = float(par_dict['strong_cold']) \
-            if 'strong_cold' in par_dict else None
-        moderate_cold = float(par_dict['moderate_cold']) \
-            if 'moderate_cold' in par_dict else None
-        moderate_heat = float(par_dict['moderate_heat']) \
-            if 'moderate_heat' in par_dict else None
-        strong_heat = float(par_dict['strong_heat']) \
-            if 'strong_heat' in par_dict else None
-        very_strong_heat = float(par_dict['very_strong_heat']) \
-            if 'very_strong_heat' in par_dict else None
-        extreme_heat = float(par_dict['extreme_heat']) \
-            if 'extreme_heat' in par_dict else None
+        extreme_cold = float(par_dict['extreme-cold']) \
+            if 'extreme-cold' in par_dict else None
+        very_strong_cold = float(par_dict['very-strong-cold']) \
+            if 'very-strong-cold' in par_dict else None
+        strong_cold = float(par_dict['strong-cold']) \
+            if 'strong-cold' in par_dict else None
+        moderate_cold = float(par_dict['moderate-cold']) \
+            if 'moderate-cold' in par_dict else None
+        moderate_heat = float(par_dict['moderate-heat']) \
+            if 'moderate-heat' in par_dict else None
+        strong_heat = float(par_dict['strong-heat']) \
+            if 'strong-heat' in par_dict else None
+        very_strong_heat = float(par_dict['very-strong-heat']) \
+            if 'very-strong-heat' in par_dict else None
+        extreme_heat = float(par_dict['extreme-heat']) \
+            if 'extreme-heat' in par_dict else None
         return cls(
             cold, heat, extreme_cold, very_strong_cold, strong_cold, moderate_cold,
             moderate_heat, strong_heat, very_strong_heat, extreme_heat)
@@ -466,10 +466,10 @@ class UTCIParameter(ComfortParameter):
 
     def __repr__(self):
         """UTCI comfort parameters representation."""
-        return 'UTCIParameter: [cold:{}] [heat:{}] [extreme_cold:{}] ' \
-            '[very_strong_cold:{}] [strong_cold:{}] [moderate_cold:{}] ' \
-            '[moderate_heat:{}] [strong_heat:{}] [very_strong_heat:{}] ' \
-            '[extreme_heat:{}]'.format(
+        return '--cold {} --heat {} --extreme-cold {} ' \
+            '--very-strong-cold {} --strong-cold {} --moderate-cold {} ' \
+            '--moderate-heat {} --strong-heat {} --very-strong-heat {} ' \
+            '--extreme-heat {}'.format(
                 self.cold_thresh, self.heat_thresh, self.extreme_cold_thresh,
                 self.very_strong_cold_thresh, self.strong_cold_thresh,
                 self.moderate_cold_thresh, self.moderate_heat_thresh,

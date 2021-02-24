@@ -3,10 +3,16 @@ from click.testing import CliRunner
 import json
 import os
 
-from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.futil import nukedir
+from ladybug.header import Header
+from ladybug.analysisperiod import AnalysisPeriod
+from ladybug.datatype.temperature import OperativeTemperature, \
+    StandardEffectiveTemperature, UniversalThermalClimateIndex
+from ladybug.datatype.thermalcondition import PredictedMeanVote, \
+    ThermalCondition, ThermalConditionElevenPoint
+from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
-from ladybug_comfort.cli.map import pmv, adaptive, utci
+from ladybug_comfort.cli.map import pmv, adaptive, utci, map_result_info
 
 # global files object used by all of the tests
 sql_path = './tests/sql/eplusout.sql'
@@ -79,3 +85,45 @@ def test_utci_map():
     assert os.path.isfile(out_files['condition_intensity'])
 
     nukedir(res_folder, True)
+
+
+def test_map_result_info():
+    runner = CliRunner()
+    a_per = AnalysisPeriod()
+    a_per_sub = AnalysisPeriod(6, 21, 0, 9, 21, 23)
+
+    cmd = ['pmv', '--run-period', '', '--qualifier', 'write-op-map']
+    result = runner.invoke(map_result_info, cmd)
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    assert out_files['temperature'] == \
+        Header(OperativeTemperature(), 'C', a_per).to_dict()
+    assert out_files['condition'] == \
+        Header(ThermalCondition(), 'condition', a_per).to_dict()
+    assert out_files['condition_intensity'] == \
+        Header(PredictedMeanVote(), 'PMV', a_per).to_dict()
+
+    cmd = ['pmv', '--run-period', str(a_per_sub), '--qualifier', 'write-set-map']
+    result = runner.invoke(map_result_info, cmd)
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    assert out_files['temperature'] == \
+        Header(StandardEffectiveTemperature(), 'C', a_per_sub).to_dict()
+
+    cmd = ['adaptive', '--run-period', '', '--qualifier', '']
+    result = runner.invoke(map_result_info, cmd)
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    assert out_files['temperature'] == \
+        Header(OperativeTemperature(), 'C', a_per).to_dict()
+    assert out_files['condition_intensity'] == \
+        Header(OperativeTemperatureDelta(), 'dC', a_per).to_dict()
+
+    cmd = ['utci']
+    result = runner.invoke(map_result_info, cmd)
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    assert out_files['temperature'] == \
+        Header(UniversalThermalClimateIndex(), 'C', a_per).to_dict()
+    assert out_files['condition_intensity'] == \
+        Header(ThermalConditionElevenPoint(), 'condition', a_per).to_dict()
