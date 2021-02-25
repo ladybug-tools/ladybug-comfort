@@ -7,6 +7,9 @@ from ladybug.rootfinding import bisect
 
 import math
 
+FAILURE_MESSAGE = 'The following conditions caused a failure of PMV model ' \
+    'convergence: Ta = {}; Tr = {}; Vel = {}; RH = {}; Met = {}; Clo= {}'
+
 
 def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
     """Calculate PMV using Fanger's original model and Pierce SET.
@@ -255,8 +258,9 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
         xn = (p5 + p4 * hc - p2 * (xf ** 4)) / (100. + p3 * hc)
         n += 1
         if n > 150:
-            print('Max iterations exceeded')
-            return 1
+            print(FAILURE_MESSAGE.format(ta, tr, vel, rh, met, clo))
+            return 0.0, 5.0, \
+                {'cond': 0, 'sweat': 0, 'res_l': 0, 'res_s': 0, 'rad': 0, 'conv': 0}
 
     tcl = 100. * xn - 273.
 
