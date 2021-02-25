@@ -110,6 +110,10 @@ def test_map_result_info():
     assert out_files['temperature'] == \
         Header(StandardEffectiveTemperature(), 'C', a_per_sub).to_dict()
 
+    cmd = ['pmv']
+    result = runner.invoke(map_result_info, cmd)
+    assert result.exit_code == 0
+
     cmd = ['adaptive', '--run-period', '', '--qualifier', '']
     result = runner.invoke(map_result_info, cmd)
     assert result.exit_code == 0

@@ -103,7 +103,7 @@ def outdoor_sky_heat_exch(srfs_temp, horiz_ir, diff_horiz_solar, dir_normal_sola
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shortwave irradiance
-    if alt >= 0:
+    if alt >= 0.1:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
                                             fract_exposed, floor_reflectance, posture)
@@ -185,7 +185,7 @@ def indoor_sky_heat_exch(longwave_mrt, diff_horiz_solar, dir_normal_solar, alt,
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shortwave irradiance
-    if alt >= 0:
+    if alt >= 0.1:
         s_flux = body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar,
                                             alt, sharp, sky_exposure,
                                             fract_exposed, floor_reflectance, posture)
@@ -258,7 +258,7 @@ def shortwave_from_horiz_solar(longwave_mrt, diff_horiz_solar, dir_horiz_solar, 
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shortwave irradiance
-    if alt >= 0:
+    if alt >= 0.1:
         s_flux = body_solar_flux_from_horiz_solar(diff_horiz_solar, dir_horiz_solar,
                                                   alt, sharp, fract_exposed,
                                                   floor_reflectance, posture)
@@ -328,7 +328,7 @@ def shortwave_from_horiz_components(
     fract_efficiency = 0.696 if posture == 'seated' else 0.725
 
     # calculate the influence of shortwave irradiance
-    if alt >= 0:
+    if alt >= 0.1:
         s_flux = body_solar_flux_from_horiz_components(
             diff_horiz_solar, dir_horiz_solar, ref_horiz_solar, alt,
             sharp, fract_exposed, posture)
@@ -445,7 +445,7 @@ def body_solar_flux_from_parts(diff_horiz_solar, dir_normal_solar, altitude,
     Args:
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_normal_solar: Direct normal solar irradiance in W/m2.
-        alt: The altitude of the sun in degrees [0-90].
+        altitude: The altitude of the sun in degrees [0-90].
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
@@ -488,7 +488,7 @@ def body_solar_flux_from_horiz_solar(diff_horiz_solar, dir_horiz_solar, altitude
     Args:
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
-        alt: The altitude of the sun in degrees [0-90].
+        altitude: The altitude of the sun in degrees [0-90].
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
@@ -528,7 +528,7 @@ def body_solar_flux_from_horiz_components(
         diff_horiz_solar: Diffuse horizontal solar irradiance in W/m2.
         dir_horiz_solar: Direct horizontal solar irradiance in W/m2.
         ref_horiz_solar: Ground-reflected horizontal solar irradiance in W/m2.
-        alt: The altitude of the sun in degrees [0-90].
+        altitude: The altitude of the sun in degrees [0-90].
         sharp: A number between 0 and 180 representing the solar horizontal
             angle relative to front of person (SHARP). 0 signifies sun that is
             shining directly into the person's face and 180 signifies sun that
