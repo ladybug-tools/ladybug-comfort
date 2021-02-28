@@ -1,9 +1,9 @@
-"""Create spatial thermal maps using EnergyPlus and Radiance annual results."""
-
+"""Create spatial thermal maps using EnergyPlus and Radiance results."""
 import click
 import sys
 import logging
 import json
+import os
 
 from ladybug.epw import EPW
 from ladybug.datacollection import HourlyContinuousCollection
@@ -18,6 +18,7 @@ from ladybug.datatype.thermalcondition import PredictedMeanVote, \
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
 from ladybug_comfort.map.mrt import shortwave_mrt_map
+from ladybug_comfort.map.tcp import tcp_model_schedules, tcp_total
 from ladybug_comfort.map._enclosure import _parse_enclosure_info, _values_to_data
 from ladybug_comfort.collection.pmv import PMV, _PMVnoSET
 from ladybug_comfort.collection.adaptive import Adaptive, PrevailingTemperature
@@ -386,10 +387,14 @@ def utci(result_sql, enclosure_info, epw_file,
               'the write-set-map text of the pmv map can be passed here to ensure '
               'the output of this command is for SET instead of operative temperature.',
               default=None, type=str, multiple=True)
-@click.option('--output-file', '-f', help='Optional file to output the JSON '
+@click.option('--folder', '-f', help='Result folder into which JSON info files will be '
+              'written. If None, the info will only be output to the output-file and '
+              'not written into result sub folders.', default=None, show_default=True,
+              type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
+@click.option('--output-file', '-log', help='Optional file to output the JSON '
               'string of the result info. By default, it will be printed to stdout',
               type=click.File('w'), default='-', show_default=True)
-def map_result_info(comfort_model, run_period, qualifier, output_file):
+def map_result_info(comfort_model, run_period, qualifier, folder, output_file):
     """Get a JSON that specifies the data type and units for comfort map outputs.
 
     This JSON is needed by interfaces to correctly parse comfort map results.
@@ -433,9 +438,78 @@ def map_result_info(comfort_model, run_period, qualifier, output_file):
             'condition_intensity': cond_i_header.to_dict()
         }
 
+        # write the JSON into result sub-folders
+        if folder is not None:
+            for metric in ('temperature', 'condition', 'condition_intensity'):
+                res_folder = os.path.join(folder, metric)
+                if not os.path.isdir(res_folder):
+                    os.makedirs(res_folder)
+                file_path = os.path.join(res_folder, 'result_info.json')
+                with open(file_path, 'w') as fp:
+                    json.dump(result_info_dict[metric], fp, indent=4)
+
         output_file.write(json.dumps(result_info_dict))
     except Exception as e:
         _logger.exception('Failed to write thermal map info.\n{}'.format(e))
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+
+@map.command('tcp')
+@click.argument('condition-csv', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('enclosure-info', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.option('--occ-schedule-json', '-occ', help='Path to an occupancy schedule '
+              'JSON output by the honeybee-energy model-occ-schedules command. If '
+              'unspecified, all times of the study will be considered occupied.',
+              default=None, type=click.Path(exists=True, file_okay=True, dir_okay=False,
+                                            resolve_path=True))
+@click.option('--folder', '-f', help='Result folder into which the result CSV files '
+              'will be written. If None, they will be output into the same folder as '
+              'the condition-csv.', default=None, show_default=True,
+              type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
+@click.option('--log-file', '-log', help='Optional log file to output the paths to the '
+              'CSV files. By default, it will be printed to stdout',
+              type=click.File('w'), default='-', show_default=True)
+def tcp(condition_csv, enclosure_info, occ_schedule_json, folder, log_file):
+    """Compute Thermal Comfort Petcent (TCP) from thermal mapping results.
+
+    \b
+    Args:
+        condition_csv: Path to a CSV file of thermal conditions output by a
+            thermal mapping command.
+        enclosure_info: Path to a JSON file containing information about the radiant
+            enclosure that sensor points belong to.
+    """
+    try:
+        # set the default folder if not specified
+        if folder is None:
+            folder = os.path.dirname(condition_csv)
+        if not os.path.isdir(folder):
+            os.makedirs(folder)
+
+        # compute thermal comfort percent
+        if occ_schedule_json is None:
+            tcp_list, hsp_list, csp_list = tcp_total(condition_csv)
+        else:
+            tcp_list, hsp_list, csp_list = tcp_model_schedules(
+                condition_csv, enclosure_info, occ_schedule_json)
+
+        # write the lists into CSV files
+        tcp_file = os.path.join(folder, 'tcp.csv')
+        hsp_file = os.path.join(folder, 'hsp.csv')
+        csp_file = os.path.join(folder, 'csp.csv')
+        with open(tcp_file, 'w') as fp:
+            fp.write('\n'.join([str(v) for v in tcp_list]))
+        with open(hsp_file, 'w') as fp:
+            fp.write('\n'.join([str(v) for v in hsp_list]))
+        with open(csp_file, 'w') as fp:
+            fp.write('\n'.join([str(v) for v in csp_list]))
+        log_file.write(json.dumps([tcp_file, hsp_file, csp_file]))
+    except Exception as e:
+        _logger.exception('Failed to compute TCP.\n{}'.format(e))
         sys.exit(1)
     else:
         sys.exit(0)

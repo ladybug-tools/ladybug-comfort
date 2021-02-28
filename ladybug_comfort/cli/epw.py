@@ -1,8 +1,6 @@
 """Run EPW weather data through comfort models."""
-
 import click
 import sys
-import os
 import logging
 import json
 
