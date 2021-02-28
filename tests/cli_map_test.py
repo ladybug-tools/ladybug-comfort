@@ -12,7 +12,7 @@ from ladybug.datatype.thermalcondition import PredictedMeanVote, \
     ThermalCondition, ThermalConditionElevenPoint
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
-from ladybug_comfort.cli.map import pmv, adaptive, utci, map_result_info
+from ladybug_comfort.cli.map import pmv, adaptive, utci, map_result_info, tcp
 
 # global files object used by all of the tests
 sql_path = './tests/sql/eplusout.sql'
@@ -131,3 +131,29 @@ def test_map_result_info():
         Header(UniversalThermalClimateIndex(), 'C', a_per).to_dict()
     assert out_files['condition_intensity'] == \
         Header(ThermalConditionElevenPoint(), 'condition', a_per).to_dict()
+
+
+def test_tcp():
+    runner = CliRunner()
+    condition_path = './tests/map/map_results/condition.csv'
+    occ_sch_path = './tests/map/occ_schedules.json'
+    res_folder = './tests/map/metrics'
+
+    base_cmd = [condition_path, enclosure_path, '--occ-schedule-json', occ_sch_path]
+    base_cmd.extend(['--folder', res_folder])
+    result = runner.invoke(tcp, base_cmd)
+
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    for fp in out_files:
+        assert os.path.isfile(fp)
+    nukedir(res_folder, True)
+
+    cmds = [condition_path, enclosure_path, '--folder', res_folder]
+    result = runner.invoke(tcp, cmds)
+
+    assert result.exit_code == 0
+    out_files = json.loads(result.output)
+    for fp in out_files:
+        assert os.path.isfile(fp)
+    nukedir(res_folder, True)
