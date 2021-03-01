@@ -391,10 +391,10 @@ def utci(result_sql, enclosure_info, epw_file,
               'written. If None, the info will only be output to the output-file and '
               'not written into result sub folders.', default=None, show_default=True,
               type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
-@click.option('--output-file', '-log', help='Optional file to output the JSON '
+@click.option('--log-file', '-log', help='Optional file to output the JSON '
               'string of the result info. By default, it will be printed to stdout',
               type=click.File('w'), default='-', show_default=True)
-def map_result_info(comfort_model, run_period, qualifier, folder, output_file):
+def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
     """Get a JSON that specifies the data type and units for comfort map outputs.
 
     This JSON is needed by interfaces to correctly parse comfort map results.
@@ -440,15 +440,14 @@ def map_result_info(comfort_model, run_period, qualifier, folder, output_file):
 
         # write the JSON into result sub-folders
         if folder is not None:
+            if not os.path.isdir(folder):
+                os.makedirs(folder)
             for metric in ('temperature', 'condition', 'condition_intensity'):
-                res_folder = os.path.join(folder, metric)
-                if not os.path.isdir(res_folder):
-                    os.makedirs(res_folder)
-                file_path = os.path.join(res_folder, 'result_info.json')
+                file_path = os.path.join(folder, '{}.json'.format(metric))
                 with open(file_path, 'w') as fp:
                     json.dump(result_info_dict[metric], fp, indent=4)
 
-        output_file.write(json.dumps(result_info_dict))
+        log_file.write(json.dumps(result_info_dict))
     except Exception as e:
         _logger.exception('Failed to write thermal map info.\n{}'.format(e))
         sys.exit(1)
