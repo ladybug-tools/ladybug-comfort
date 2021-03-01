@@ -65,11 +65,11 @@ def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
                         hsp += 1
                     else:
                         csp += 1
-            tcp_list.append(tcp / total_occ)
-            hsp_list.append(hsp / total_occ)
-            csp_list.append(csp / total_occ)
+            tcp_list.append((tcp / total_occ) * 100)
+            hsp_list.append((hsp / total_occ) * 100)
+            csp_list.append((csp / total_occ) * 100)
         else:  # the space is unoccupied; treat it as all comfortable
-            tcp_list.append(1)
+            tcp_list.append(100)
             hsp_list.append(0)
             csp_list.append(0)
     return tcp_list, hsp_list, csp_list
@@ -108,7 +108,7 @@ def tcp_total(condition_csv):
                 hsp += 1
             else:
                 csp += 1
-        tcp_list.append(tcp / total_occ)
-        hsp_list.append(hsp / total_occ)
-        csp_list.append(csp / total_occ)
+        tcp_list.append((tcp / total_occ) * 100)
+        hsp_list.append((hsp / total_occ) * 100)
+        csp_list.append((csp / total_occ) * 100)
     return tcp_list, hsp_list, csp_list
