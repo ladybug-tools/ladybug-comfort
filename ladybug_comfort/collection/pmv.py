@@ -15,8 +15,8 @@ from ladybug.datatype.temperature import Temperature, MeanRadiantTemperature, \
 from ladybug.datatype.fraction import Fraction, RelativeHumidity, HumidityRatio, \
     PercentagePeopleDissatisfied
 from ladybug.datatype.speed import Speed, AirSpeed
-from ladybug.datatype.energyflux import MetabolicRate
-from ladybug.datatype.rvalue import ClothingInsulation
+from ladybug.datatype.energyflux import MetabolicRate, EnergyFlux
+from ladybug.datatype.rvalue import ClothingInsulation, RValue
 from ladybug.datatype.thermalcondition import PredictedMeanVote, \
     ThermalComfort, ThermalCondition, DiscomfortReason
 from ladybug.datatype.temperaturedelta import AirTemperatureDelta
@@ -142,19 +142,19 @@ class _PMVnoSET(ComfortCollection):
 
         if met_rate is not None:
             self._met_rate = self._check_input(
-                met_rate, MetabolicRate, 'met', 'met_rate')
+                met_rate, EnergyFlux, 'met', 'met_rate')
         else:
             self._met_rate = [1.1] * self.calc_length
 
         if clo_value is not None:
             self._clo_value = self._check_input(
-                clo_value, ClothingInsulation, 'clo', 'clo_value')
+                clo_value, RValue, 'clo', 'clo_value')
         else:
             self._clo_value = [0.7] * self.calc_length
 
         if external_work is not None:
             self._external_work = self._check_input(
-                external_work, MetabolicRate, 'met', 'external_work')
+                external_work, EnergyFlux, 'met', 'external_work')
         else:
             self._external_work = [0.] * self.calc_length
 
