@@ -1,1 +1,1 @@
-ladybug-core==0.39.11
+ladybug-core==0.39.12
