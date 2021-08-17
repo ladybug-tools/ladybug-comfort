@@ -55,7 +55,7 @@ def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
     tcp_list, hsp_list, csp_list = [], [], []
     for pt_i, conditions in zip(enclosure_dict['sensor_indices'], cond_mtx):
         occ_sch, total_occ = occ_values[pt_i], total_occs[pt_i]
-        if occ_sch is not None:
+        if occ_sch is not None and total_occ != 0:
             tcp, hsp, csp = 0, 0, 0
             for occ, cond in zip(occ_sch, conditions):
                 if occ == 1:
