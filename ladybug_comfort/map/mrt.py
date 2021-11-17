@@ -103,9 +103,12 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     irr_data = []
     with open(ill_file) as results:
         for pt_res in results:
-            ill_values = [float(v) for v in pt_res.split()]
-            pt_irr_data = _ill_values_to_data(ill_values, sun_indices, timestep, leap_yr)
-            irr_data.append(pt_irr_data)
+            try:
+                ill_values = [float(v) for v in pt_res.split()]
+                pt_irr_data = _ill_values_to_data(ill_values, sun_indices, timestep, leap_yr)
+                irr_data.append(pt_irr_data)
+            except ValueError:  # part of the file header
+                pass
     return irr_data
 
 
