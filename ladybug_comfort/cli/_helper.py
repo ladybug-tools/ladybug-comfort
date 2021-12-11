@@ -16,7 +16,7 @@ from ladybug_comfort.parameter.utci import UTCIParameter
 from ladybug_comfort.parameter.solarcal import SolarCalParameter
 
 
-def _load_data(values, base_data, data_type, data_units):
+def load_data(values, base_data, data_type, data_units):
     """Load a JSON array string of values to a data collection.
 
     Args:
@@ -38,8 +38,8 @@ def _load_data(values, base_data, data_type, data_units):
             return float(values)
 
 
-def _load_values(values):
-    """Load a JSON array string of values to a data collection.
+def load_values(values):
+    """Load a single value or JSON array string of values.
 
     Args:
         values: A number or JSON array string of numbers.
@@ -51,7 +51,23 @@ def _load_values(values):
             return float(values)
 
 
-def _load_analysis_period_str(analysis_period_str):
+def load_value_list(values, calc_len, default=None):
+    """Load a single value or JSON array string of values to a list of values
+
+    Args:
+        values: A number or JSON array string of numbers.
+        calc_len: Integer for the length of the list to be returned.
+        default: Default value to be used when the values are None.
+    """
+    if values is not None and values != '' and values != 'None':
+        if values.startswith('['):  # it's an array of values
+            return json.loads(values)
+        else:  # assume the user has passed a single number
+            return [float(values)] * calc_len
+    return [default] * calc_len
+
+
+def load_analysis_period_str(analysis_period_str):
     """Load an AnalysisPeriod from a string.
 
     Args:
@@ -62,7 +78,7 @@ def _load_analysis_period_str(analysis_period_str):
         return AnalysisPeriod.from_string(analysis_period_str)
 
 
-def _load_pmv_par_str(comfort_par_str):
+def load_pmv_par_str(comfort_par_str):
     """Load a PMVParameter from a string.
 
     Args:
@@ -71,9 +87,10 @@ def _load_pmv_par_str(comfort_par_str):
     if comfort_par_str is not None and comfort_par_str != '' \
             and comfort_par_str != 'None':
         return PMVParameter.from_string(comfort_par_str)
+    return PMVParameter()
 
 
-def _load_adaptive_par_str(comfort_par_str):
+def load_adaptive_par_str(comfort_par_str):
     """Load a AdaptiveParameter from a string.
 
     Args:
@@ -82,9 +99,10 @@ def _load_adaptive_par_str(comfort_par_str):
     if comfort_par_str is not None and comfort_par_str != '' \
             and comfort_par_str != 'None':
         return AdaptiveParameter.from_string(comfort_par_str)
+    return AdaptiveParameter()
 
 
-def _load_utci_par_str(comfort_par_str):
+def load_utci_par_str(comfort_par_str):
     """Load a UTCIParameter from a string.
 
     Args:
@@ -93,9 +111,10 @@ def _load_utci_par_str(comfort_par_str):
     if comfort_par_str is not None and comfort_par_str != '' \
             and comfort_par_str != 'None':
         return UTCIParameter.from_string(comfort_par_str)
+    return UTCIParameter()
 
 
-def _load_solarcal_par_str(solarcal_par_str):
+def load_solarcal_par_str(solarcal_par_str):
     """Load a SolarCalParameter from a string.
 
     Args:
@@ -106,6 +125,18 @@ def _load_solarcal_par_str(solarcal_par_str):
         return SolarCalParameter.from_string(solarcal_par_str)
 
 
+def csv_to_num_matrix(csv_file_path):
+    """Load a CSV file consisting only of numbers into a Python matrix of floats.
+
+    Args:
+        csv_file_path: Full path to a valid CSV file (e.g. c:/ladybug/test.csv)
+    """
+    with open(csv_file_path) as csv_data_file:
+        return tuple(
+            tuple(float(val) for val in row.split(',')) for row in csv_data_file
+        )
+
+
 def _data_to_csv(data, csv_path):
     """Write a list of data collections into a CSV file."""
     with open(csv_path, 'w') as csv_file:
@@ -114,10 +145,8 @@ def _data_to_csv(data, csv_path):
             csv_file.write(','.join(str_data) + '\n')
 
 
-def _thermal_map_csv(folder, result_sql, temperature, condition, condition_intensity):
+def thermal_map_csv(folder, temperature, condition, condition_intensity):
     """Write out the thermal mapping CSV files associated with every comfort map."""
-    if folder is None:
-        folder = os.path.join(os.path.dirname(result_sql), 'thermal_map')
     preparedir(folder, remove_content=False)
     result_file_dict = {
         'temperature': os.path.join(folder, 'temperature.csv'),

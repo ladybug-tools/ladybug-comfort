@@ -14,7 +14,7 @@ from ladybug.datatype.rvalue import ClothingInsulation
 from ladybug_comfort.collection.pmv import PMV
 from ladybug_comfort.collection.adaptive import Adaptive
 
-from ._helper import _load_data, _load_pmv_par_str, _load_adaptive_par_str
+from ._helper import load_data, load_pmv_par_str, load_adaptive_par_str
 
 _logger = logging.getLogger(__name__)
 
@@ -70,9 +70,9 @@ def pmv_by_room(result_sql, air_speed, met_rate, clo_value, comfort_par,
         assert len(air_temps) != 0, \
             'Input result-sql does not contain thermal comfort outputs.'
         base_data = air_temps[0]
-        air_speed = _load_data(air_speed, base_data, AirSpeed, 'm/s')
-        met_rate = _load_data(met_rate, base_data, MetabolicRate, 'met')
-        clo_value = _load_data(clo_value, base_data, ClothingInsulation, 'clo')
+        air_speed = load_data(air_speed, base_data, AirSpeed, 'm/s')
+        met_rate = load_data(met_rate, base_data, MetabolicRate, 'met')
+        clo_value = load_data(clo_value, base_data, ClothingInsulation, 'clo')
 
         # get aligned data for each room
         align_dict = {a_dat.header.metadata['Zone']: [a_dat] for a_dat in air_temps}
@@ -82,7 +82,7 @@ def pmv_by_room(result_sql, air_speed, met_rate, clo_value, comfort_par,
             align_dict[r_dat.header.metadata['Zone']].append(r_dat)
 
         # run the collections through the PMV model and output results
-        param = _load_pmv_par_str(comfort_par)
+        param = load_pmv_par_str(comfort_par)
         pmv_colls = []
         for res in align_dict.values():
             pmv_obj = PMV(res[0], res[1], res[2], air_speed, met_rate, clo_value,
@@ -143,10 +143,10 @@ def adaptive_by_room(result_sql, epw_file, air_speed, comfort_par,
         # load the air speed data collection if specified
         assert len(op_temps) != 0, \
             'Input result-sql does not contain "Zone Operative Temperature" output.'
-        air_speed = _load_data(air_speed, op_temps[0], AirSpeed, 'm/s')
+        air_speed = load_data(air_speed, op_temps[0], AirSpeed, 'm/s')
 
         # run the collections through the Adaptive model and output results
-        param = _load_adaptive_par_str(comfort_par)
+        param = load_adaptive_par_str(comfort_par)
         ad_colls = []
         for op_temp in op_temps:
             ad_obj = Adaptive(out_temp, op_temp, air_speed, comfort_parameter=param)
