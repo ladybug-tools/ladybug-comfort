@@ -1,1 +1,1 @@
-{"has_outdoor": false, "mapper": ["TestRoom_2_322a7fe3"], "sensor_indices": [0, 0, 0, 0]}
+{"has_indoor": true, "has_outdoor": false, "mapper": ["TestRoom_2_322a7fe3"], "sensor_indices": [0, 0, 0, 0]}

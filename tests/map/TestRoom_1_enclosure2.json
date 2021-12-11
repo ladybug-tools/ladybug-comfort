@@ -1,0 +1,1 @@
+{"has_indoor": true, "has_outdoor": false, "mapper": ["TestRoom_1_4832D153", "TestRoom_2_0A86EA19"], "sensor_indices": [0, 0, 0, 0], "air_bound_proximity": {"3": [{"0": 0.75, "1": 0.25}]}}

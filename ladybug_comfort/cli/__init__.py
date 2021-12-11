@@ -5,6 +5,7 @@ from ladybug.cli import main
 from .epw import epw
 from .sql import sql
 from .map import map
+from .mtx import mtx
 
 
 # command group for all comfort extension commands.
@@ -18,6 +19,7 @@ def comfort():
 comfort.add_command(epw)
 comfort.add_command(sql)
 comfort.add_command(map)
+comfort.add_command(mtx)
 
 
 # add comfort sub-group to ladybug CLI

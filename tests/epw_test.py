@@ -103,9 +103,9 @@ def test_get_standard_effective_temperature_with_sun():
     """Test the get_standard_effective_temperature method with sun."""
     set_obj = PMV.from_epw(epw, False, True, met_rate=2.4, clo_value=1.0)
 
-    assert set_obj.percent_neutral == pytest.approx(17.043378, rel=1e-3)
-    assert set_obj.percent_hot == pytest.approx(44.56621, rel=1e-3)
-    assert set_obj.percent_cold == pytest.approx(38.39041, rel=1e-3)
+    assert set_obj.percent_neutral == pytest.approx(17.1004566, rel=1e-3)
+    assert set_obj.percent_hot == pytest.approx(44.56621, rel=1e-2)
+    assert set_obj.percent_cold == pytest.approx(38.39041, rel=1e-2)
 
 
 def test_get_standard_effective_temperature_with_sun_and_wind():

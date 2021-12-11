@@ -1,4 +1,4 @@
-"""Test cli sql module."""
+"""Test cli map module."""
 from click.testing import CliRunner
 import json
 import os
@@ -12,17 +12,21 @@ from ladybug.datatype.thermalcondition import PredictedMeanVote, \
     ThermalCondition, ThermalConditionElevenPoint
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
-from ladybug_comfort.cli.map import pmv, adaptive, utci, map_result_info, tcp
+from ladybug_comfort.cli.map import pmv, adaptive, utci, map_result_info, tcp, \
+    shortwave_mrt, longwave_mrt, air_temperature
 
 # global files object used by all of the tests
 sql_path = './tests/sql/eplusout.sql'
+sql_path2 = './tests/sql/eplusout2.sql'
 enclosure_path = './tests/map/TestRoom_1_enclosure.json'
+enclosure_path2 = './tests/map/TestRoom_1_enclosure2.json'
+modifiers_path = './tests/map/scene.mod'
+view_factors_path = './tests/map/view_factor.csv'
 epw_path = './tests/epw/boston.epw'
 sun_up_path = './tests/map/results/total/sun-up-hours.txt'
 total_ill_path = './tests/map/results/total/TestRoom_1.ill'
 direct_ill_path = './tests/map/results/direct/TestRoom_1.ill'
 ref_ill_path = './tests/map/results/total/TestRoom_1_ref.ill'
-enclosure_path = './tests/map/TestRoom_1_enclosure.json'
 
 
 def test_pmv_map():
@@ -85,6 +89,50 @@ def test_utci_map():
     assert os.path.isfile(out_files['condition_intensity'])
 
     nukedir(res_folder, True)
+
+
+def test_shortwave_mrt_map():
+    runner = CliRunner()
+    res_file = './tests/map/shortwave.csv'
+
+    base_cmd = [epw_path, total_ill_path, direct_ill_path, ref_ill_path, sun_up_path]
+    base_cmd.extend(['--output-file', res_file])
+
+    result = runner.invoke(shortwave_mrt, base_cmd)
+
+    assert result.exit_code == 0
+    assert os.path.isfile(res_file)
+    os.remove(res_file)
+
+
+def test_longwave_mrt_map():
+    runner = CliRunner()
+    res_file = './tests/map/longwave.csv'
+
+    base_cmd = [sql_path2, view_factors_path, modifiers_path, enclosure_path2, epw_path]
+    base_cmd.extend(['--run-period', '7/6 to 7/12 between 0 and 23 @1'])
+    base_cmd.extend(['--output-file', res_file])
+
+    result = runner.invoke(longwave_mrt, base_cmd)
+
+    assert result.exit_code == 0
+    assert os.path.isfile(res_file)
+    os.remove(res_file)
+
+
+def test_air_map():
+    runner = CliRunner()
+    res_file = './tests/map/air.csv'
+
+    base_cmd = [sql_path2, enclosure_path2, epw_path]
+    base_cmd.extend(['--run-period', '7/6 to 7/12 between 0 and 23 @1'])
+    base_cmd.extend(['--output-file', res_file])
+
+    result = runner.invoke(air_temperature, base_cmd)
+
+    assert result.exit_code == 0
+    assert os.path.isfile(res_file)
+    os.remove(res_file)
 
 
 def test_map_result_info():
