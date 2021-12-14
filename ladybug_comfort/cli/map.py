@@ -467,8 +467,7 @@ def shortwave_mrt(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--run-period', '-rp', help='An AnalysisPeriod string to dictate the '
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
-              'If unspecified, results will be generated for the entire run period of '
-              'the result-sql.', default=None, type=str)
+              'If unspecified, results will be annual.', default=None, type=str)
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of longwave MRT. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)

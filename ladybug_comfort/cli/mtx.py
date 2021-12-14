@@ -203,7 +203,7 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
         temperature_mtx: Path to a CSV file with with a matrix of temperature
             values in Celsius.
         prevail_temp: Path to a CSV file with with a list of prevailing outdoor
-            temperatures (one temperautre per row).
+            temperatures in a single row (one temperautre per column).
     """
     try:
         # load up the matrices of values
