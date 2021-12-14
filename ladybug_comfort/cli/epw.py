@@ -35,8 +35,8 @@ def epw():
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be generated for the entire year of '
               'the EPW.', default=None, type=str)
-@click.option('--csv/--json', ' /-j', help='Flag to note whether output data '
-              'collection should be in JSON format.', default=True, show_default=True)
+@click.option('--csv/--json', ' /-j', help='Flag to note whether the output data '
+              'should be in CSV or JSON format.', default=True, show_default=True)
 @click.option('--rows/--columns', ' /-c', help='Flag to note whether the CSV should '
               'be written with rows or columns.', default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the CSV or JSON '
@@ -79,8 +79,8 @@ def utci(epw_file, include_wind, include_sun, run_period, csv, rows, output_file
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be generated for the entire year of '
               'the EPW.', default=None, type=str)
-@click.option('--csv/--json', help='Flag to note whether output data collection should '
-              'be in JSON format.', default=True, show_default=True)
+@click.option('--csv/--json', ' /-j', help='Flag to note whether the output data '
+              'should be in CSV or JSON format.', default=True, show_default=True)
 @click.option('--rows/--columns', ' /-c', help='Flag to note whether the CSV should '
               'be written with rows or columns.', default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the JSON string of '
@@ -115,8 +115,8 @@ def set_(epw_file, include_wind, include_sun, met_rate, clo_value, run_period,
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be generated for the entire year of '
               'the EPW.', default=None, type=str)
-@click.option('--csv/--json', ' /-j', help='Flag to note whether output data '
-              'collection should be in JSON format.', default=True, show_default=True)
+@click.option('--csv/--json', ' /-j', help='Flag to note whether the output data '
+              'should be in CSV or JSON format.', default=True, show_default=True)
 @click.option('--rows/--columns', ' /-c', help='Flag to note whether the CSV should '
               'be written with rows or columns.', default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the CSV or JSON '
