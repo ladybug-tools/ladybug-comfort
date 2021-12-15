@@ -6,7 +6,8 @@ import json
 import os
 
 from ladybug.epw import EPW
-from ladybug.datacollection import HourlyContinuousCollection
+from ladybug.datacollection import HourlyContinuousCollection, \
+    HourlyDiscontinuousCollection
 from ladybug.header import Header
 from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.datatype.energyflux import MetabolicRate
@@ -435,7 +436,9 @@ def shortwave_mrt(
         # create a dummy longwave MRT matrix to pass to the shortwave calculator
         header =Header(Temperature(), 'C', run_period)
         lt_values = [0] * len(run_period)
-        pt_rad_temps = [HourlyContinuousCollection(header, lt_values)]
+        pt_rad_temps = [HourlyContinuousCollection(header, lt_values)] \
+            if run_period.st_hour == 0 and run_period.end_hour == 23 else \
+            [HourlyDiscontinuousCollection(header, lt_values, run_period.datetimes)]
 
         # adjust the radiant temperature for shortwave solar
         d_mrt_temps = shortwave_mrt_map(
@@ -684,10 +687,13 @@ def tcp(condition_csv, enclosure_info, occ_schedule_json, folder, log_file):
         csp_file = os.path.join(folder, 'csp.csv')
         with open(tcp_file, 'w') as fp:
             fp.write('\n'.join([str(v) for v in tcp_list]))
+            fp.write('\n')
         with open(hsp_file, 'w') as fp:
             fp.write('\n'.join([str(v) for v in hsp_list]))
+            fp.write('\n')
         with open(csp_file, 'w') as fp:
             fp.write('\n'.join([str(v) for v in csp_list]))
+            fp.write('\n')
         log_file.write(json.dumps([tcp_file, hsp_file, csp_file]))
     except Exception as e:
         _logger.exception('Failed to compute TCP.\n{}'.format(e))
