@@ -36,9 +36,11 @@ def air_map(enclosure_info, sql, epw, analysis_period=None, humidity=False):
     air_data = []
     if enclosure_dict['has_indoor']:
         sql_obj = SQLiteResult(sql)
-        in_avg_outp = 'Zone Air Relative Humidity' if humidity \
-            else 'Zone Mean Air Temperature'
-        in_avg_dict = {d.header.metadata['Zone']: d for d in
+        if humidity:
+            in_avg_outp, id_key = 'Zone Air Relative Humidity', 'System'
+        else:
+            in_avg_outp, id_key = 'Zone Mean Air Temperature', 'Zone'
+        in_avg_dict = {d.header.metadata[id_key]: d for d in
                        sql_obj.data_collections_by_output_name(in_avg_outp)}
         air_data = [in_avg_dict[z] for z in zone_order]
         if air_data[0].header.analysis_period != a_per:
