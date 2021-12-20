@@ -68,7 +68,7 @@ def air_map(enclosure_info, sql, epw, analysis_period=None, humidity=False):
         dat_2 = (v * z_fac2 for v in air_data[int(zon_i2)])
         dat_comb = tuple(v1 + v2 for v1, v2  in zip(dat_1, dat_2))
         if len(int_facs) > 1:
-            for fac in int_facs:
+            for fac in int_facs[1:]:
                 zon_i1, zon_i2 = tuple(fac.keys())
                 z_fac1, z_fac2 = tuple(fac.values())
                 dat_1 = (v * z_fac1 for v in air_data[int(zon_i1)])
