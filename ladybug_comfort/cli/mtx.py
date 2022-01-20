@@ -40,12 +40,12 @@ def mtx():
 @click.option('--air-speed-mtx', '-vm', help='Path to a CSV file with with a matrix '
               'of air speed values in m/s. If specified, this overrides both the '
               '--air-speed-json and the --air-speed inputs.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--air-speed-json', '-vm', help='Path to a JSON file conaining a '
               'simplified set of air speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --air-speed input.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
               'string of a JSON array with numbers that align with width of the matrix. '
@@ -100,9 +100,10 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
 
         # process any of the other inputs for air speed
         a_speed = None
-        if air_speed_mtx is not None:
+        if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
             a_speed = csv_to_num_matrix(air_speed_mtx)
-        if a_speed is None and air_speed_json is not None:
+        if a_speed is None and air_speed_json is not None \
+                and os.path.isfile(air_speed_json):
             with open(air_speed_json) as json_file:
                 a_speed_dict = json.load(json_file)
             speeds = a_speed_dict['air_speeds']
@@ -175,12 +176,12 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
 @click.option('--air-speed-mtx', '-vm', help='Path to a CSV file with with a matrix '
               'of air speed values in m/s. If specified, this overrides both the '
               '--air-speed-json and the --air-speed inputs.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--air-speed-json', '-vm', help='Path to a JSON file conaining a '
               'simplified set of air speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --air-speed input.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
               'string of a JSON array with numbers that align with width of the matrix. '
@@ -219,9 +220,10 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
 
         # process any of the other inputs for air speed
         a_speed = None
-        if air_speed_mtx is not None:
+        if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
             a_speed = csv_to_num_matrix(air_speed_mtx)
-        if a_speed is None and air_speed_json is not None:
+        if a_speed is None and air_speed_json is not None \
+                and os.path.isfile(air_speed_json):
             with open(air_speed_json) as json_file:
                 a_speed_dict = json.load(json_file)
             speeds = a_speed_dict['air_speeds']
@@ -293,12 +295,12 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
               'meteorological and should be AT OCCUPANT LEVEL. If specified, this '
               'overrides both the --wind-speed-json and the --wind-speed inputs.',
               default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--wind-speed-json', '-vm', help='Path to a JSON file conaining a set of '
               'meteorological wind speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --wind-speed input.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--wind-speed', '-v', help='A single number for meteorological wind '
               'speed in m/s or a string of a JSON array with numbers that align with '
@@ -338,10 +340,11 @@ def utci_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_m
 
         # process any of the other inputs for air speed
         w_speed = None
-        if air_speed_mtx is not None:
+        if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
             a_speed = csv_to_num_matrix(air_speed_mtx)
             w_speed = tuple(tuple(v * 2 for v in row) for row in a_speed)
-        if w_speed is None and wind_speed_json is not None:
+        if w_speed is None and wind_speed_json is not None \
+                and os.path.isfile(wind_speed_json):
             with open(wind_speed_json) as json_file:
                 w_speed_dict = json.load(json_file)
             speeds = w_speed_dict['air_speeds']
