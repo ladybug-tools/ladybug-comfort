@@ -152,9 +152,13 @@ def prevailing(epw_file, comfort_par, run_period, csv, rows, output_file):
 @click.option('--multiply-by', '-m', help='A number to denote a factor that EPW wind '
               'speeds should be multipled by in order to represent air speeds at '
               'ground level.', type=float, default=0.5, show_default=True)
-@click.option('--indoor-air-speed', '-i', help='A single number for air speed in m/s or a '
-              'string of a JSON array with numbers that align with the --run-period. '
+@click.option('--indoor-air-speed', '-i', help='A single number for air speed in m/s or '
+              'a string of a JSON array with numbers that align with the --run-period. '
               'If unspecified, 0.1 m/s will be used.', default=None, type=str)
+@click.option('--outdoor-air-speed', '-o', help='A single number for air speed in m/s or '
+              'a string of a JSON array with numbers that align with the --run-period. '
+              'If unspecified, the EPW wind speed times the --multiply-by will be used.',
+              default=None, type=str)
 @click.option('--run-period', '-rp', help='An AnalysisPeriod string to dictate the '
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be generated for the entire year of '
@@ -163,7 +167,7 @@ def prevailing(epw_file, comfort_par, run_period, csv, rows, output_file):
               'string. By default, it will be printed to stdout',
               type=click.File('w'), default='-', show_default=True)
 def air_speed_json(epw_file, enclosure_info, multiply_by, indoor_air_speed,
-                   run_period, output_file):
+                   outdoor_air_speed, run_period, output_file):
     """Get a JSON of air speeds that can be used as input for the mtx commands.
 
     \b
@@ -181,6 +185,11 @@ def air_speed_json(epw_file, enclosure_info, multiply_by, indoor_air_speed,
         if multiply_by != 1:
             wind_speeds = tuple(v * multiply_by for v in wind_speeds)
         
+        # process the outdoor air speeds
+        if outdoor_air_speed is not None and outdoor_air_speed != '' \
+                and outdoor_air_speed != 'None':
+            wind_speeds = load_value_list(outdoor_air_speed, len(wind_speeds), None)
+
         # process the indoor_air_speed
         in_air_speeds = load_value_list(indoor_air_speed, len(wind_speeds), 0.1)
 
