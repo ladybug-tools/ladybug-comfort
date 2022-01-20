@@ -4,7 +4,8 @@ from __future__ import division
 import json
 
 
-def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
+def tcp_model_schedules(
+        condition_csv, enclosure_info_json, occ_schedule_json, outdoor_occ_csv=None):
     """Compute Thermal Comfort Petcent (TCP) using model-exported occupancy schedules.
 
     Args:
@@ -15,6 +16,9 @@ def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
             enclosure JSON should be for the same grid as the condition_csv.
         occ_schedule_json: Path to an occupancy schedule JSON output by the
             honeybee-energy model-occ-schedules command.
+        outdoor_occ_csv: An optional path to a CSV file to specify the hours during
+            which the outdoors is occupied. If None, it will be assumed that
+            all hours on the outdoors are occupied. (Default: None).
 
     Returns:
         A tuple fo three values
@@ -47,9 +51,18 @@ def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
             occ_values.append(None)
             total_occs.append(None)
     if enclosure_dict['has_outdoor']:
-        sch_vals = [1] * time_count  # assume the outdoors is always occupied
-        occ_values.append(sch_vals)
-        total_occs.append(time_count)
+        if outdoor_occ_csv is None:  # assume the outdoors is always occupied
+            sch_vals = [1] * time_count
+            occ_values.append(sch_vals)
+            total_occs.append(time_count)
+        else:
+            with open(outdoor_occ_csv) as hourly_schedule:
+                sch_vals = [int(float(v)) for v in hourly_schedule]
+            assert len(sch_vals) == time_count, 'The number of values in the ' \
+                'outdoor occupancy schedule does not match the number of hours ' \
+                'for which the thermal map was run.'
+            occ_values.append(sch_vals)
+            total_occs.append(sum(sch_vals))
 
     # loop through the sensors and compute tcp, hsp, and csp
     tcp_list, hsp_list, csp_list = [], [], []
@@ -68,19 +81,30 @@ def tcp_model_schedules(condition_csv, enclosure_info_json, occ_schedule_json):
             tcp_list.append((tcp / total_occ) * 100)
             hsp_list.append((hsp / total_occ) * 100)
             csp_list.append((csp / total_occ) * 100)
-        else:  # the space is unoccupied; treat it as all comfortable
-            tcp_list.append(100)
-            hsp_list.append(0)
-            csp_list.append(0)
+        else:  # the space is unoccupied; treat all hours as relevant
+            tcp, hsp, csp = 0, 0, 0
+            for cond in conditions:
+                if cond == 0:
+                    tcp += 1
+                elif cond == 1:
+                    hsp += 1
+                else:
+                    csp += 1
+            tcp_list.append((tcp / time_count) * 100)
+            hsp_list.append((hsp / time_count) * 100)
+            csp_list.append((csp / time_count) * 100)
     return tcp_list, hsp_list, csp_list
 
 
-def tcp_total(condition_csv):
+def tcp_total(condition_csv, schedule=None):
     """Compute Thermal Comfort Petcent (TCP) assuming all times are occupied.
 
     Args:
         condition_csv: Path to a CSV file of thermal conditions output by a
             thermal mapping command.
+        schedule: An optional path to a CSV file to specify the relevant times
+            during which comfort should be evaluated. If None, it will be assumed that
+            all hours are relevant. (Default: None).
 
     Returns:
         A tuple fo three values.
@@ -97,17 +121,32 @@ def tcp_total(condition_csv):
         for row in csv_data_file:
             cond_mtx.append([int(val) for val in row.split(',')])
 
+    # create the occupancy schedule
+    time_count = len(cond_mtx[0])
+    if schedule is None:
+        sch_vals = [1] * time_count
+        total_occ = time_count
+    else:
+        with open(schedule) as hourly_schedule:
+            sch_vals = [int(float(v)) for v in hourly_schedule]
+        assert len(sch_vals) == time_count, 'The number of values in the ' \
+            'outdoor occupancy schedule does not match the number of hours ' \
+            'for which the thermal map was run.'
+        total_occ = sum(sch_vals)
+        assert total_occ != 0, 'No hours of the occupancy schedule are occupied.'
+
     # loop through the sensors and compute tcp, hsp, and csp
-    tcp_list, hsp_list, csp_list, total_occ = [], [], [], len(cond_mtx[0])
+    tcp_list, hsp_list, csp_list = [], [], []
     for conditions in cond_mtx:
         tcp, hsp, csp = 0, 0, 0
-        for cond in conditions:
-            if cond == 0:
-                tcp += 1
-            elif cond == 1:
-                hsp += 1
-            else:
-                csp += 1
+        for occ, cond in zip(sch_vals, conditions):
+            if occ == 1:
+                if cond == 0:
+                    tcp += 1
+                elif cond == 1:
+                    hsp += 1
+                else:
+                    csp += 1
         tcp_list.append((tcp / total_occ) * 100)
         hsp_list.append((hsp / total_occ) * 100)
         csp_list.append((csp / total_occ) * 100)
