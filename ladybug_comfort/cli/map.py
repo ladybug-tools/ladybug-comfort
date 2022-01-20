@@ -645,10 +645,21 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('enclosure-info', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.option('--schedule', '-s', help='An optional path to a CSV file to specify '
+              'the relevant times during which comfort should be evaluated. If '
+              'specified, this will override the --occ-schedule-json for both '
+              'indoor and outdoor conditions. If both this option and the '
+              '--occ-schedule-json are unspecified, it will be assumed that all '
+              'times are relevant.',
+              default=None, type=click.Path(exists=False, file_okay=True, dir_okay=False,
+                                            resolve_path=True))
 @click.option('--occ-schedule-json', '-occ', help='Path to an occupancy schedule '
-              'JSON output by the honeybee-energy model-occ-schedules command. If '
-              'unspecified, all times of the study will be considered occupied.',
-              default=None, type=click.Path(exists=True, file_okay=True, dir_okay=False,
+              'JSON output by the honeybee-energy model-occ-schedules command. This '
+              'JSON derives the relevant times based on the occupancy schedules of the '
+              'energy model and assumes that all outdoor times are relevant. '
+              'If both this option and the --schedule are unspecified, all '
+              'times of the study will be considered occupied.',
+              default=None, type=click.Path(exists=False, file_okay=True, dir_okay=False,
                                             resolve_path=True))
 @click.option('--folder', '-f', help='Result folder into which the result CSV files '
               'will be written. If None, they will be output into the same folder as '
@@ -657,7 +668,7 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'CSV files. By default, it will be printed to stdout',
               type=click.File('w'), default='-', show_default=True)
-def tcp(condition_csv, enclosure_info, occ_schedule_json, folder, log_file):
+def tcp(condition_csv, enclosure_info, schedule, occ_schedule_json, folder, log_file):
     """Compute Thermal Comfort Petcent (TCP) from thermal mapping results.
 
     \b
@@ -675,8 +686,9 @@ def tcp(condition_csv, enclosure_info, occ_schedule_json, folder, log_file):
             os.makedirs(folder)
 
         # compute thermal comfort percent
-        if occ_schedule_json is None:
-            tcp_list, hsp_list, csp_list = tcp_total(condition_csv)
+        schedule = schedule if schedule and os.path.isfile(schedule) else None
+        if schedule is not None or occ_schedule_json is None:
+            tcp_list, hsp_list, csp_list = tcp_total(condition_csv, schedule)
         else:
             tcp_list, hsp_list, csp_list = tcp_model_schedules(
                 condition_csv, enclosure_info, occ_schedule_json)
