@@ -447,9 +447,12 @@ def shortwave_mrt(
             solarcal_par, is_indirect)
 
         # write out the final results to CSV files
-        for mrt_d in d_mrt_temps:
-            output_file.write(','.join(str(v) for v in mrt_d))
-            output_file.write('\n')
+        if len(d_mrt_temps) == 0:  # no sun-up hours; just create a blank file
+            output_file.write('')
+        else:
+            for mrt_d in d_mrt_temps:
+                output_file.write(','.join(str(v) for v in mrt_d))
+                output_file.write('\n')
     except Exception as e:
         _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))
         sys.exit(1)
