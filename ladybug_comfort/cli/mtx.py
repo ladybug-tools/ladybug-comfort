@@ -144,7 +144,10 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
                     s_cond_intensity.append(result['pmv'])
                     s_cond.append(
                         comfort_par.thermal_condition(result['pmv'], result['ppd']))
-                    temper.append(result['set'])
+                    s_temper.append(result['set'])
+                temper.append(s_temper)
+                cond.append(s_cond)
+                cond_intensity.append(s_cond_intensity)
 
         # write out the final results to CSV files
         if folder is None:
