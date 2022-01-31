@@ -92,7 +92,7 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
         rel_h = csv_to_num_matrix(rel_humidity_mtx)
         rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
             if rad_temperature_mtx is not None else air_temp
-        if rad_delta_mtx is not None:
+        if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
             d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
@@ -212,7 +212,7 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
         prevail_temp = csv_to_num_matrix(prevail_temp)[0]
         rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
             if rad_temperature_mtx is not None else air_temp
-        if rad_delta_mtx is not None:
+        if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
             d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
@@ -332,7 +332,7 @@ def utci_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_m
         rel_h = csv_to_num_matrix(rel_humidity_mtx)
         rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
             if rad_temperature_mtx is not None else air_temp
-        if rad_delta_mtx is not None:
+        if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
             d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
