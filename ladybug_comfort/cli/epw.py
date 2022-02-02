@@ -194,7 +194,9 @@ def air_speed_json(epw_file, enclosure_info, multiply_by, indoor_air_speed,
         # process the outdoor air speeds
         if outdoor_air_speed is not None and outdoor_air_speed != '' \
                 and outdoor_air_speed != 'None':
-            wind_speeds = load_value_list(outdoor_air_speed, len(wind_speeds), None)
+            wind_speeds_init = load_value_list(outdoor_air_speed, len(wind_speeds), None)
+            if wind_speeds_init[0] is not None:
+                wind_speeds = wind_speeds_init
 
         # process the indoor_air_speed
         in_air_speeds = load_value_list(indoor_air_speed, len(wind_speeds), 0.1)
