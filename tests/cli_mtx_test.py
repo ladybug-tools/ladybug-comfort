@@ -15,13 +15,16 @@ long_mrt_path = './tests/mtx/long_mrt.csv'
 short_mrt_path = './tests/mtx/short_dmrt.csv'
 prevailing_path = './tests/mtx/prevailing.csv'
 air_speed_path = './tests/mtx/air_speed.json'
+clo_path = './tests/mtx/clo.csv'
+met_path = './tests/mtx/met.csv'
 
 
 def test_pmv_mtx():
     runner = CliRunner()
     res_folder = './tests/mtx/pmv_mtx'
 
-    base_cmd = [air_path, rh_path, '--air-speed-json', air_speed_path]
+    base_cmd = [air_path, rh_path, '--air-speed-json', air_speed_path,
+                '--clo-value', clo_path, '--met-rate', met_path]
     base_cmd.extend(['-rm', long_mrt_path, '-dm', short_mrt_path])
     base_cmd.extend(['--folder', res_folder])
 

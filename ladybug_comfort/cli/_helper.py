@@ -62,6 +62,12 @@ def load_value_list(values, calc_len, default=None):
     if values is not None and values != '' and values != 'None':
         if values.startswith('['):  # it's an array of values
             return json.loads(values)
+        elif os.path.isfile(values):  # it's a CSV with the values in it
+            with open(values) as hourly_schedule:
+                vals = [float(v) for v in hourly_schedule]
+            if len(vals) == 1:
+                return vals * calc_len
+            return vals
         else:  # assume the user has passed a single number
             return [float(values)] * calc_len
     return [default] * calc_len
