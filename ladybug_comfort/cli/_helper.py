@@ -69,7 +69,10 @@ def load_value_list(values, calc_len, default=None):
                 return vals * calc_len
             return vals
         else:  # assume the user has passed a single number
-            return [float(values)] * calc_len
+            try:
+                return [float(values)] * calc_len
+            except ValueError:  # none of the above; just revert to the default
+                pass
     return [default] * calc_len
 
 
