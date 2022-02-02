@@ -47,16 +47,25 @@ def mtx():
               'If specified, this overrides the the --air-speed input.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
-@click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
-              'string of a JSON array with numbers that align with width of the matrix. '
-              'If unspecified, 0.1 m/s will be used.', default='0.1', type=str)
-@click.option('--met-rate', '-m', help='A single number for metabolic rate in met '
-              'or a string of a JSON array with numbers that align with the '
-              'width of the matrix. If unspecified, 1.1 met will be used.',
+@click.option('--air-speed', '-v', help='A single number for air speed in m/s or '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the width of the matrix. This can also '
+              'be a string of a JSON array with that aligns with the matrix width, '
+              'though this is only recommended for narrow matrices. '
+              'If unspecified or "None", 0.1 m/s will be used.', default='0.1', type=str)
+@click.option('--met-rate', '-m', help='A single number for metabolic rate in met or '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the width of the matrix. This can also '
+              'be a string of a JSON array with that aligns with the matrix width, '
+              'though this is only recommended for narrow matrices. '
+              'If unspecified or "None", 1.1 met will be used.',
               default='1.1', type=str)
-@click.option('--clo-value', '-c', help='A single number for clothing level in clo '
-              'or a string of a JSON array with numbers that align with the '
-              'width of the matrix. If unspecified, 0.7 clo will be used.',
+@click.option('--clo-value', '-c', help='A single number for clothing level in clo or '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the width of the matrix. This can also '
+              'be a string of a JSON array with that aligns with the matrix width, '
+              'though this is only recommended for narrow matrices. '
+              'If unspecified or "None", 0.7 clo will be used.',
               default='0.7', type=str)
 @click.option('--write-op-map/--write-set-map', ' /-set', help='Flag to note whether '
               'the output temperature CSV should record Operative Temperature '
@@ -186,9 +195,12 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
               'If specified, this overrides the the --air-speed input.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
-@click.option('--air-speed', '-v', help='A single number for air speed in m/s or a '
-              'string of a JSON array with numbers that align with width of the matrix. '
-              'If unspecified, 0.1 m/s will be used.', default='0.1', type=str)
+@click.option('--air-speed', '-v', help='A single number for air speed in m/s or '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the width of the matrix. This can also '
+              'be a string of a JSON array with that aligns with the matrix width, '
+              'though this is only recommended for narrow matrices. '
+              'If unspecified or "None", 0.1 m/s will be used.', default='0.1', type=str)
 @click.option('--comfort-par', '-cp', help='A AdaptiveParameter string to customize the '
               'assumptions of the Adaptive model.', default=None, type=str)
 @click.option('--folder', '-f', help='Folder into which the result CSV files will be '
@@ -306,8 +318,11 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
 @click.option('--wind-speed', '-v', help='A single number for meteorological wind '
-              'speed in m/s or a string of a JSON array with numbers that align with '
-              'the result-sql reporting period. If unspecified, 0.5 m/s will be used.',
+              'speed in m/s or the path to a CSV file containing a single number per '
+              'row and a number of rows that aligns with the width of the matrix. This '
+              'can also be a string of a JSON array with that aligns with the matrix '
+              'width, though this is only recommended for narrow matrices. '
+              'If unspecified or "None", 0.5 m/s will be used.',
               default=None, type=str)
 @click.option('--comfort-par', '-cp', help='A UTCIParameter string to customize the '
               'assumptions of the UTCI model.', default=None, type=str)

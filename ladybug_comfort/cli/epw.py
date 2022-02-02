@@ -153,10 +153,16 @@ def prevailing(epw_file, comfort_par, run_period, csv, rows, output_file):
               'speeds should be multipled by in order to represent air speeds at '
               'ground level.', type=float, default=0.5, show_default=True)
 @click.option('--indoor-air-speed', '-i', help='A single number for air speed in m/s or '
-              'a string of a JSON array with numbers that align with the --run-period. '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the length of the --run-period. This can also '
+              'be a string of a JSON array with that aligns with the --run-period, '
+              'though this is only recommended for cases of short run periods. '
               'If unspecified, 0.1 m/s will be used.', default=None, type=str)
 @click.option('--outdoor-air-speed', '-o', help='A single number for air speed in m/s or '
-              'a string of a JSON array with numbers that align with the --run-period. '
+              'the path to a CSV file containing a single number per row and a number '
+              'of rows that aligns with the length of the --run-period. This can also '
+              'be a string of a JSON array with that aligns with the --run-period, '
+              'though this is only recommended for cases of short run periods. '
               'If unspecified, the EPW wind speed times the --multiply-by will be used.',
               default=None, type=str)
 @click.option('--run-period', '-rp', help='An AnalysisPeriod string to dictate the '
