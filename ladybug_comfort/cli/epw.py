@@ -158,8 +158,8 @@ def prevailing(epw_file, comfort_par, run_period, csv, rows, output_file):
               'be a string of a JSON array with that aligns with the --run-period, '
               'though this is only recommended for cases of short run periods. '
               'If unspecified, 0.1 m/s will be used.', default=None, type=str)
-@click.option('--outdoor-air-speed', '-o', help='A single number for air speed in m/s or '
-              'the path to a CSV file containing a single number per row and a number '
+@click.option('--outdoor-air-speed', '-o', help='A single number for air speed in m/s or'
+              ' the path to a CSV file containing a single number per row and a number '
               'of rows that aligns with the length of the --run-period. This can also '
               'be a string of a JSON array with that aligns with the --run-period, '
               'though this is only recommended for cases of short run periods. '
@@ -190,7 +190,7 @@ def air_speed_json(epw_file, enclosure_info, multiply_by, indoor_air_speed,
             epw_obj.wind_speed.filter_by_analysis_period(run_period).values
         if multiply_by != 1:
             wind_speeds = tuple(v * multiply_by for v in wind_speeds)
-        
+
         # process the outdoor air speeds
         if outdoor_air_speed is not None and outdoor_air_speed != '' \
                 and outdoor_air_speed != 'None':
