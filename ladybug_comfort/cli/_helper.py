@@ -154,6 +154,14 @@ def _data_to_csv(data, csv_path):
             csv_file.write(','.join(str_data) + '\n')
 
 
+def _data_to_ill(data, ill_path):
+    """Write a list of data collections into an ill file."""
+    with open(ill_path, 'w') as ill_file:
+        for dat in data:
+            str_data = ('{:.7e}'.format(v) for v in dat)
+            ill_file.write(' '.join(str_data) + '\n')
+
+
 def thermal_map_csv(folder, temperature, condition, condition_intensity):
     """Write out the thermal mapping CSV files associated with every comfort map."""
     preparedir(folder, remove_content=False)

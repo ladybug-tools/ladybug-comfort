@@ -18,6 +18,7 @@ from ladybug.datatype.thermalcondition import PredictedMeanVote, \
     ThermalCondition, ThermalConditionElevenPoint
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
 
+from ladybug_comfort.map.irr import irradiance_contrib_map
 from ladybug_comfort.map.mrt import shortwave_mrt_map, longwave_mrt_map
 from ladybug_comfort.map.air import air_map
 from ladybug_comfort.map.tcp import tcp_model_schedules, tcp_total
@@ -28,7 +29,7 @@ from ladybug_comfort.collection.utci import UTCI
 
 from ._helper import load_values, load_analysis_period_str, \
     load_pmv_par_str, load_adaptive_par_str, load_utci_par_str, \
-    load_solarcal_par_str, thermal_map_csv
+    load_solarcal_par_str, thermal_map_csv, _data_to_ill
 
 _logger = logging.getLogger(__name__)
 
@@ -53,16 +54,14 @@ def map():
                               resolve_path=True))
 @click.option('--direct-irradiance', '-dr', help='Path to an .ill file output by '
               'Radiance containing direct irradiance for each sensor in the '
-              'enclosure-info. If unspecified, no shortwave solar will be '
-              'assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              'enclosure-info. If unspecified, all shortwave will be assumed '
+              'to be indirect.', default=None,
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--ref-irradiance', '-rr', help='Path to an .ill file output by Radiance '
               'containing total ground-reflected irradiance for each sensor in the '
               'enclosure-info. If unspecified, a default ground reflectance of 0.25 '
               'will be assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--sun-up-hours', '-sh', help='Path to a sun-up-hours.txt file output by '
               'Radiance. Required if any irradiance options are provided.', default=None,
               type=click.Path(exists=True, file_okay=True, dir_okay=False,
@@ -133,9 +132,13 @@ def pmv(result_sql, enclosure_info, epw_file,
             include_humidity=True)
 
         # adjust the radiant temperature for shortwave solar
-        pt_rad_temps = shortwave_mrt_map(
-            epw_obj.location, pt_rad_temps, sun_up_hours,
-            total_irradiance, direct_irradiance, ref_irradiance, solarcal_par)
+        if total_irradiance is not None and os.path.isfile(total_irradiance):
+            assert sun_up_hours is not None and os.path.isfile(sun_up_hours), \
+                'Sun up hours must be specified when total irradiance is specified.'
+            pt_rad_temps = shortwave_mrt_map(
+                epw_obj.location, pt_rad_temps, sun_up_hours,
+                total_irradiance, direct_irradiance, ref_irradiance,
+                solarcal_par=solarcal_par, indirect_is_total=True)
 
         # convert any input lists of clothing or met to data collections
         met_rate = _values_to_data(met_rate, a_per, MetabolicRate, 'met')
@@ -187,16 +190,14 @@ def pmv(result_sql, enclosure_info, epw_file,
                               resolve_path=True))
 @click.option('--direct-irradiance', '-dr', help='Path to an .ill file output by '
               'Radiance containing direct irradiance for each sensor in the '
-              'enclosure-info. If unspecified, no shortwave solar will be '
-              'assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              'enclosure-info. If unspecified, all shortwave will be assumed '
+              'to be indirect.', default=None,
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--ref-irradiance', '-rr', help='Path to an .ill file output by Radiance '
               'containing total ground-reflected irradiance for each sensor in the '
               'enclosure-info. If unspecified, a default ground reflectance of 0.25 '
               'will be assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--sun-up-hours', '-sh', help='Path to a sun-up-hours.txt file output by '
               'Radiance. Required if any irradiance options are provided.', default=None,
               type=click.Path(exists=True, file_okay=True, dir_okay=False,
@@ -249,9 +250,13 @@ def adaptive(result_sql, enclosure_info, epw_file,
             enclosure_info, result_sql, epw_obj, run_period, air_speed)
 
         # adjust the radiant temperature for shortwave solar
-        pt_rad_temps = shortwave_mrt_map(
-            epw_obj.location, pt_rad_temps, sun_up_hours,
-            total_irradiance, direct_irradiance, ref_irradiance, solarcal_par)
+        if total_irradiance is not None and os.path.isfile(total_irradiance):
+            assert sun_up_hours is not None and os.path.isfile(sun_up_hours), \
+                'Sun up hours must be specified when total irradiance is specified.'
+            pt_rad_temps = shortwave_mrt_map(
+                epw_obj.location, pt_rad_temps, sun_up_hours,
+                total_irradiance, direct_irradiance, ref_irradiance,
+                solarcal_par=solarcal_par, indirect_is_total=True)
 
         # compute previaling outdoor temperature so it's not recomputed for each sensor
         avg_month = comfort_par.avg_month_or_running_mean \
@@ -296,16 +301,14 @@ def adaptive(result_sql, enclosure_info, epw_file,
                               resolve_path=True))
 @click.option('--direct-irradiance', '-dr', help='Path to an .ill file output by '
               'Radiance containing direct irradiance for each sensor in the '
-              'enclosure-info. If unspecified, no shortwave solar will be '
-              'assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              'enclosure-info. If unspecified, all shortwave will be assumed '
+              'to be indirect.', default=None,
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--ref-irradiance', '-rr', help='Path to an .ill file output by Radiance '
               'containing total ground-reflected irradiance for each sensor in the '
               'enclosure-info. If unspecified, a default ground reflectance of 0.25 '
               'will be assumed for the study.', default=None,
-              type=click.Path(exists=True, file_okay=True, dir_okay=False,
-                              resolve_path=True))
+              type=click.Path(file_okay=True, dir_okay=False, resolve_path=True))
 @click.option('--sun-up-hours', '-sh', help='Path to a sun-up-hours.txt file output by '
               'Radiance. Required if any irradiance options are provided.', default=None,
               type=click.Path(exists=True, file_okay=True, dir_okay=False,
@@ -359,9 +362,13 @@ def utci(result_sql, enclosure_info, epw_file,
             include_humidity=True, use_10m_wind_speed=True)
 
         # adjust the radiant temperature for shortwave solar
-        pt_rad_temps = shortwave_mrt_map(
-            epw_obj.location, pt_rad_temps, sun_up_hours,
-            total_irradiance, direct_irradiance, ref_irradiance, solarcal_par)
+        if total_irradiance is not None and os.path.isfile(total_irradiance):
+            assert sun_up_hours is not None and os.path.isfile(sun_up_hours), \
+                'Sun up hours must be specified when total irradiance is specified.'
+            pt_rad_temps = shortwave_mrt_map(
+                epw_obj.location, pt_rad_temps, sun_up_hours,
+                total_irradiance, direct_irradiance, ref_irradiance,
+                solarcal_par=solarcal_par, indirect_is_total=True)
 
         # run the collections through the UTCI model and output results
         temperature, condition, condition_intensity = [], [], []
@@ -384,6 +391,82 @@ def utci(result_sql, enclosure_info, epw_file,
         sys.exit(0)
 
 
+@map.command('irradiance-contrib')
+@click.argument('result-sql', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('direct-specular', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('indirect-specular', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('ref-specular', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('indirect-diffuse', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('ref-diffuse', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument('sun-up-hours', type=click.Path(
+    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.option('--aperture-id', '-id', help='Text string for the identifier of the '
+              'aperture associated with the irradiance. If unspecified, it will the '
+              'first aperture found in the result-sql, essentially assuming there is '
+              'only one dynamic group in the file.', default=None, type=str)
+@click.option('--folder', '-f', help='Folder into which the result CSV files will be '
+              'written. If None, files will be written to a "contrib" sub-folder in'
+              'same directory as the result-sql.', default=None, show_default=True,
+              type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
+@click.option('--log-file', '-log', help='Optional log file to output the paths to the '
+              'generated CSV files. By default this will be printed out to stdout',
+              type=click.File('w'), default='-', show_default=True)
+def irradiance_contrib(
+    result_sql, direct_specular, indirect_specular, ref_specular,
+    indirect_diffuse, ref_diffuse, sun_up_hours, aperture_id, folder, log_file
+):
+    """Get CSV files with irradiance contributions from dynamic windows.
+
+    \b
+    Args:
+        result_sql: Path to an SQLite file that was generated by EnergyPlus.
+            This file must contain results for window transmittance.
+        direct_specular: Path to an .ill file output by Radiance containing direct
+            irradiance for the specular version of the aperture group.
+        indirect_specular: Path to an .ill file output by Radiance containing
+            the indirect irradiance for the specular version of the aperture group.
+        ref_specular: Path to an .ill file output by Radiance containing ground-reflected
+            irradiance for the specular version of the aperture group.
+        indirect_diffuse: Path to an .ill file output by Radiance containing
+            the indirect irradiance for the diffuse version of the aperture group.
+        ref_diffuse: Path to an .ill file output by Radiance containing ground-reflected
+            irradiance for the diffuse version of the aperture group.
+        sun_up_hours: Path to a sun-up-hours.txt file output by an annual
+            irradiance simulation.
+    """
+    try:
+        # compute the irradiance contribution values from the input
+        direct_mtx, indirect_mtx, ref_mtx = irradiance_contrib_map(
+            result_sql, direct_specular, indirect_specular, ref_specular,
+            indirect_diffuse, ref_diffuse, sun_up_hours, aperture_id)
+
+        # prepare the files and directory where the results will be written
+        out_folder = folder if folder is not None else \
+            os.path.join(os.path.dirname(result_sql), 'contrib')
+        if not os.path.isdir(out_folder):
+            os.mkdir(out_folder)
+        direct_file = os.path.join(out_folder, 'direct.ill')
+        indirect_file = os.path.join(out_folder, 'indirect.ill')
+        ref_file = os.path.join(out_folder, 'reflected.ill')
+
+        # write the irradiance matrices into CSV files
+        _data_to_ill(direct_mtx, direct_file)
+        _data_to_ill(indirect_mtx, indirect_file)
+        _data_to_ill(ref_mtx, ref_file)
+        log_file.write(json.dumps([direct_file, indirect_file, ref_file]))
+    except Exception as e:
+        _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+
 @map.command('shortwave-mrt')
 @click.argument('epw-file', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
@@ -395,20 +478,29 @@ def utci(result_sql, enclosure_info, epw_file,
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('sun-up-hours', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+@click.option('--contributions', '-c', help='An optional folder containing '
+              'sub-folders of irradiance contributions from dynamic aperture groups. '
+              'There should be one sub-folder per window groups and each one should '
+              'contain three .ill files named direct.ill, indirect.ill and '
+              'reflected.ill. If specified, these will be added to the irradiance '
+              'inputs before computing shortwave MRT deltas.',
+              default=None, show_default=True,
+              type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
 @click.option('--run-period', '-rp', help='An AnalysisPeriod string to dictate the '
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be annual.', default=None, type=str)
 @click.option('--solarcal-par', '-sp', help='A SolarCalParameter string to customize '
               'the assumptions of the SolarCal model.', default=None, type=str)
-@click.option('--is-indirect/--indirect-is-total', ' /-tot', help='Flag to '
+@click.option('--is-indirect/--indirect-is-total', ' /-t', help='Flag to '
               'note whether the indirect-irradiance argument is actually the total '
-              'irradiance.', default=True, show_default=True)
+              'irradiance, in which case the direct irradiance should be subtracted '
+              'from it to get indirect irradiance.', default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of MRT deltas. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
 def shortwave_mrt(
         epw_file, indirect_irradiance, direct_irradiance, ref_irradiance,
-        sun_up_hours, run_period, solarcal_par, is_indirect, output_file):
+        sun_up_hours, contributions, run_period, solarcal_par, is_indirect, output_file):
     """Get CSV files with maps of shortwave MRT Deltas from Radiance results.
 
     \b
@@ -434,17 +526,18 @@ def shortwave_mrt(
         solarcal_par = load_solarcal_par_str(solarcal_par)
 
         # create a dummy longwave MRT matrix to pass to the shortwave calculator
-        header =Header(Temperature(), 'C', run_period)
+        header = Header(Temperature(), 'C', run_period)
         lt_values = [0] * len(run_period)
         pt_rad_temps = [HourlyContinuousCollection(header, lt_values)] \
             if run_period.st_hour == 0 and run_period.end_hour == 23 else \
             [HourlyDiscontinuousCollection(header, lt_values, run_period.datetimes)]
 
         # adjust the radiant temperature for shortwave solar
+        is_total = not is_indirect
         d_mrt_temps = shortwave_mrt_map(
             epw_obj.location, pt_rad_temps, sun_up_hours,
-            indirect_irradiance, direct_irradiance, ref_irradiance,
-            solarcal_par, is_indirect)
+            indirect_irradiance, direct_irradiance, ref_irradiance, contributions,
+            solarcal_par=solarcal_par, indirect_is_total=is_total)
 
         # write out the final results to CSV files
         if len(d_mrt_temps) == 0:  # no sun-up hours; just create a blank file
@@ -526,7 +619,8 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
               'the result-sql.', default=None, type=str)
 @click.option('--air-temperature/--relative-humidity', ' /-rh', help='Flag to '
               'note whether the the output matrix should be with relative humidity '
-              'values instead of air temperature values.', default=True, show_default=True)
+              'values instead of air temperature values.',
+              default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of values. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)

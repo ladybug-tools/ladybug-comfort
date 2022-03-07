@@ -2,6 +2,7 @@
 """Methods for resolving MRT from Radiance and EnergyPlus output files."""
 from __future__ import division
 
+import os
 import json
 
 from ladybug.epw import EPW
@@ -17,8 +18,10 @@ from ..collection.solarcal import _HorizontalSolarCalMap, _HorizontalRefSolarCal
 from ..parameter.solarcal import SolarCalParameter
 
 
-def shortwave_mrt_map(location, longwave_data, sun_up_hours, total_ill, direct_ill,
-                      ref_ill=None, solarcal_par=None, total_is_indirect=False):
+def shortwave_mrt_map(
+    location, longwave_data, sun_up_hours, indirect_ill, direct_ill=None, ref_ill=None,
+    contributions=None, solarcal_par=None, indirect_is_total=False
+):
     """Get MRT data collections adjusted for shortwave using Radiance .ill files.
 
     Args:
@@ -28,18 +31,28 @@ def shortwave_mrt_map(location, longwave_data, sun_up_hours, total_ill, direct_i
             map. All collections must be aligned with one another. The analysis
             period on the collections does not have to be annual.
         sun_up_hours: File path to a sun-up-hours.txt file output by Radiance.
-        total_ill: Path to an .ill file output by Radiance containing total
-            irradiance for each longwave_data collection.
+        indirect_ill: Path to an .ill file output by Radiance containing indirect
+            irradiance for each longwave_data collection. Alternatively, if
+            indirect_is_total is set to True, this can be an .ill file with
+            the total irradiance, which will have the direct_ill subtracted
+            from it to yield the indirect illuminance.
         direct_ill: Path to an .ill file output by Radiance containing direct
-            irradiance for each longwave_data collection.
+            irradiance for each longwave_data collection. If None, all shortwave
+            will be assumed to be indirect. (Default: None).
         ref_ill: Path to an .ill file output by Radiance containing total ground-
             reflected irradiance for each longwave_data collection. If None, a
-            default ground reflectance of 0.25 will be assumed.
+            default ground reflectance of 0.25 will be assumed. (Default: None).
+        contributions: An optional folder containing sub-folders of irradiance
+            contributions from dynamic aperture groups. There should be one
+            sub-folder per window groups and each one should contain three .ill
+            files named direct.ill, indirect.ill and reflected.ill. If specified,
+            these will be added to the irradiance inputs before computing
+            shortwave MRT deltas. (Default: None).
         solarcal_par: Optional SolarCalParameter object to account for
-            properties of the human geometry.
-        total_is_indirect: A boolean to note whether the total_ill is actually the
-            indirect illuminance, in which case the direct illuminance does not
-            need to be subtracted from it.
+            properties of the human geometry. (Default: None).
+        indirect_is_total: A boolean to note whether the indirect_ill is actually the
+            total irradiance, in which case the direct irradiance should be subtracted
+            from it to get indirect irradiance. (Default: False).
     """
     # determine the analysis period and open the sun_up_hours file
     a_per = longwave_data[0].header.analysis_period
@@ -48,23 +61,40 @@ def shortwave_mrt_map(location, longwave_data, sun_up_hours, total_ill, direct_i
         sun_indices = [int(float(h) * t_step) for h in soh_f]
 
     # parse each of the .ill files into annual irradiance data collections
-    total = _ill_file_to_data(total_ill, sun_indices, t_step, lp_yr)
-    direct = _ill_file_to_data(direct_ill, sun_indices, t_step, lp_yr)
+    indirect = _ill_file_to_data(indirect_ill, sun_indices, t_step, lp_yr)
+    direct = _ill_file_to_data(direct_ill, sun_indices, t_step, lp_yr) \
+        if direct_ill is not None and os.path.isfile(direct_ill) else \
+        [_blank_ill_data(t_step, lp_yr)] * len(indirect)
     ref = _ill_file_to_data(ref_ill, sun_indices, t_step, lp_yr) \
-        if ref_ill is not None else None
+        if ref_ill is not None and os.path.isfile(ref_ill) else None
+
+    # if there are dynamic contributions, then add them to the data collections
+    if contributions is not None and os.path.isdir(contributions):
+        for dyn_group in os.listdir(contributions):
+            # get the file paths to the contributions
+            group_path = os.path.join(contributions, dyn_group)
+            indirect_con_f = os.path.join(group_path, 'indirect.ill')
+            direct_con_f = os.path.join(group_path, 'direct.ill')
+            ref_con_f = os.path.join(group_path, 'reflected.ill')
+            # add the contributions to the irradiance terms
+            indirect_con = _ill_file_to_data(indirect_con_f, sun_indices, t_step, lp_yr)
+            indirect = [rad + c_rad for rad, c_rad in zip(indirect, indirect_con)]
+            direct_con = _ill_file_to_data(direct_con_f, sun_indices, t_step, lp_yr)
+            direct = [rad + c_rad for rad, c_rad in zip(direct, direct_con)]
+            if ref is not None and os.path.isfile(ref_con_f):
+                ref_con = _ill_file_to_data(ref_con_f, sun_indices, t_step, lp_yr)
+                ref = [rad + c_rad for rad, c_rad in zip(ref, ref_con)]
 
     # if the analysis is not annual, apply analysis periods
     if not is_annual:
-        total = [data.filter_by_analysis_period(a_per) for data in total]
+        indirect = [data.filter_by_analysis_period(a_per) for data in indirect]
         direct = [data.filter_by_analysis_period(a_per) for data in direct]
         if ref is not None:
             ref = [data.filter_by_analysis_period(a_per) for data in ref]
 
-    # convert total irradiance into indirect irradiance
-    if total_is_indirect:
-        indirect = total
-    else:
-        indirect = [t_rad - d_rad for t_rad, d_rad in zip(total, direct)]
+    # if need be, convert total irradiance into indirect irradiance
+    if indirect_is_total:
+        indirect = [t_rad - d_rad for t_rad, d_rad in zip(indirect, direct)]
 
     # compute solar altitudes and sharps
     body_par = SolarCalParameter() if solarcal_par is None else solarcal_par
@@ -186,11 +216,11 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     """Convert a list of sun-up irradiance from an .ill file into annual irradiance data.
 
     Args:
-        ill_values: A list of raw irradiance values from an .ill file.
+        ill_file: Path to an .ill file.
         sun_indices: A list of integers for where in the total_count sun-up hours occur.
         timestep: The timestep to make the data collection.
         leap_yr: Boolean to note if data is for a leap year.
-    
+
     Return:
         A list of annual HourlyContinuousCollection with irradiance data.
     """
@@ -215,11 +245,27 @@ def _ill_values_to_data(ill_values, sun_indices, header, timestep=1, leap_yr=Fal
         header: A Header object for the for the data collection.
         timestep: The timestep to make the data collection.
         leap_yr: Boolean to note if data is for a leap year.
-    
+
     Return:
         An annual HourlyContinuousCollection of irradiance data.
     """
     values = [0] * (8760 * timestep) if not leap_yr else [0] * (8784 * timestep)
     for i, irr in zip(sun_indices, ill_values):
         values[i] = irr
+    return HourlyContinuousCollection(header, values)
+
+
+def _blank_ill_data(timestep=1, leap_yr=False):
+    """Get a list of blank annual irradiance data composed of zero values.
+
+    Args:
+        timestep: The timestep to make the data collection.
+        leap_yr: Boolean to note if data is for a leap year.
+
+    Return:
+        A list of annual HourlyContinuousCollection with zero irradiance data.
+    """
+    a_period = AnalysisPeriod(timestep=timestep, is_leap_year=leap_yr)
+    header = Header(Irradiance(), 'W/m2', a_period)
+    values = [0] * (8760 * timestep) if not leap_yr else [0] * (8784 * timestep)
     return HourlyContinuousCollection(header, values)
