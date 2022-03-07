@@ -83,9 +83,11 @@ def mtx():
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
-def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
-            air_speed_mtx, air_speed_json, air_speed,
-            met_rate, clo_value, write_op_map, comfort_par, folder, log_file):
+def pmv_mtx(
+    temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
+    air_speed_mtx, air_speed_json, air_speed,
+    met_rate, clo_value, write_op_map, comfort_par, folder, log_file
+):
     """Get CSV files with matrices of PMV comfort from matrices of PMV inputs.
 
     \b
@@ -210,8 +212,10 @@ def pmv_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mt
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
-def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_mtx,
-                 air_speed_mtx, air_speed_json, air_speed, comfort_par, folder, log_file):
+def adaptive_mtx(
+    temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_mtx,
+    air_speed_mtx, air_speed_json, air_speed, comfort_par, folder, log_file
+):
     """Get CSV files with matrices of Adaptive comfort from matrices of Adaptive inputs.
 
     \b
@@ -333,8 +337,10 @@ def adaptive_mtx(temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_m
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
-def utci_mtx(temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
-             air_speed_mtx, wind_speed_json, wind_speed, comfort_par, folder, log_file):
+def utci_mtx(
+    temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
+    air_speed_mtx, wind_speed_json, wind_speed, comfort_par, folder, log_file
+):
     """Get CSV files with matrices of UTCI comfort from matrices of UTCI inputs.
 
     \b
