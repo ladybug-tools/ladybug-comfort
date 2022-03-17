@@ -59,21 +59,21 @@ def air_map(enclosure_info, sql, epw, analysis_period=None, humidity=False):
     air_mtx = []
     for sen_enc in enclosure_dict['sensor_indices']:
         air_mtx.append(air_data[sen_enc]._values)
-    
+
     # go over the base values to and interpolate across any air boundaries
     for pt_1, int_facs in enclosure_dict['air_bound_proximity'].items():
         zon_i1, zon_i2 = tuple(int_facs[0].keys())
         z_fac1, z_fac2 = tuple(int_facs[0].values())
         dat_1 = (v * z_fac1 for v in air_data[int(zon_i1)])
         dat_2 = (v * z_fac2 for v in air_data[int(zon_i2)])
-        dat_comb = tuple(v1 + v2 for v1, v2  in zip(dat_1, dat_2))
+        dat_comb = tuple(v1 + v2 for v1, v2 in zip(dat_1, dat_2))
         if len(int_facs) > 1:
             for fac in int_facs[1:]:
                 zon_i1, zon_i2 = tuple(fac.keys())
                 z_fac1, z_fac2 = tuple(fac.values())
                 dat_1 = (v * z_fac1 for v in air_data[int(zon_i1)])
                 dat_2 = (v * z_fac2 for v in air_data[int(zon_i2)])
-                dat_comb_i = (v1 + v2 for v1, v2  in zip(dat_1, dat_2))
+                dat_comb_i = (v1 + v2 for v1, v2 in zip(dat_1, dat_2))
                 dat_comb = tuple(d1 + d2 for d1, d2 in zip(dat_comb, dat_comb_i))
             fac_len = len(int_facs)
             dat_comb = tuple(d1 / fac_len for d1 in dat_comb)

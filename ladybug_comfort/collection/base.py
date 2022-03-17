@@ -82,6 +82,10 @@ class ComfortCollection(object):
                 dat_type = dat_type()  # convert the class to an instance
             coll = self._base_collection.get_aligned_collection(
                 value_list, dat_type, unit, mutable=False)
+            if 'type' in coll.header.metadata:
+                new_meta = coll.header.metadata.copy()
+                new_meta.pop('type')
+                coll.header.metadata = new_meta
             setattr(self, attr_name, coll)
         return getattr(self, attr_name)
 
