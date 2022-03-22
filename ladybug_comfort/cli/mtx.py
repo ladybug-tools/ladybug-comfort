@@ -42,7 +42,7 @@ def mtx():
               '--air-speed-json and the --air-speed inputs.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
-@click.option('--air-speed-json', '-vm', help='Path to a JSON file conaining a '
+@click.option('--air-speed-json', '-vj', help='Path to a JSON file conaining a '
               'simplified set of air speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --air-speed input.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
@@ -192,7 +192,7 @@ def pmv_mtx(
               '--air-speed-json and the --air-speed inputs.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
-@click.option('--air-speed-json', '-vm', help='Path to a JSON file conaining a '
+@click.option('--air-speed-json', '-vj', help='Path to a JSON file conaining a '
               'simplified set of air speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --air-speed input.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
@@ -316,7 +316,7 @@ def adaptive_mtx(
               default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
                               resolve_path=True))
-@click.option('--wind-speed-json', '-vm', help='Path to a JSON file conaining a set of '
+@click.option('--wind-speed-json', '-vj', help='Path to a JSON file conaining a set of '
               'meteorological wind speed values for each row of the matrix in m/s. '
               'If specified, this overrides the the --wind-speed input.', default=None,
               type=click.Path(exists=False, file_okay=True, dir_okay=False,
