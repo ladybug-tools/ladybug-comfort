@@ -205,6 +205,9 @@ class OutdoorSolarCal(_SolarCalBase):
             'horizontal_infrared')
         self._srf_temp = self._check_input(
             surface_temperatures, Temperature, 'C', 'surface_temperatures')
+        assert self._horiz_ir[0] != 9999, 'Missing data for Horizontal ' \
+            'Infrared has been detected. Make sure that this data is not missing ' \
+            'from the EPW.'
 
         # check optional inputs
         self._sky_exp = self._fraction_input_check(sky_exposure, 'sky_exposure', 1)
@@ -704,7 +707,6 @@ class _HorizontalSolarCalMap(HorizontalSolarCal):
 
     def _get_altitudes_and_sharps(self):
         return self._altitudes, self._sharps
-
 
 
 class _HorizontalRefSolarCalMap(HorizontalRefSolarCal):
