@@ -729,6 +729,12 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
                 with open(file_path, 'w') as fp:
                     json.dump(result_info_dict[metric], fp, indent=4)
 
+            # write the VTK config file
+            config_file = os.path.join(folder, 'config.json')
+            cfg = _tcp_config()
+            with open(config_file, 'w') as outf:
+                json.dump(cfg, outf)
+
         log_file.write(json.dumps(result_info_dict))
     except Exception as e:
         _logger.exception('Failed to write thermal map info.\n{}'.format(e))
@@ -809,3 +815,67 @@ def tcp(condition_csv, enclosure_info, schedule, occ_schedule_json, folder, log_
         sys.exit(1)
     else:
         sys.exit(0)
+
+
+def _tcp_config():
+    """Return vtk-config for a thermal comfort map. """
+    cfg = {
+        "data": [
+            {
+                "identifier": "Thermal Comfort Percentage",
+                "object_type": "grid",
+                "unit": "Percentage",
+                "path": 'TCP',
+                "hide": False,
+                "legend_parameters": {
+                    "hide_legend": False,
+                    "color_set": "annual_comfort",
+                    "min": 0,
+                    "max": 100,
+                    "label_parameters": {
+                        "color": [34, 247, 10],
+                        "size": 0,
+                        "bold": True
+                    }
+                }
+            },
+            {
+                "identifier": "Heat Sensation Percentage",
+                "object_type": "grid",
+                "unit": "Percentage",
+                "path": 'HSP',
+                "hide": False,
+                "legend_parameters": {
+                    "hide_legend": False,
+                    "color_set": "heat_sensation",
+                    "min": 0,
+                    "max": 50,
+                    "label_parameters": {
+                        "size": 0,
+                        "color": [34, 247, 10],
+                        "bold": True
+                    }
+                }
+            },
+            {
+                "identifier": "Cold Sensation Percentage",
+                "object_type": "grid",
+                "unit": "Percentage",
+                "path": 'CSP',
+                "hide": False,
+                "legend_parameters": {
+                    "hide_legend": False,
+                    "color_set": "cold_sensation",
+                    "min": 0,
+                    "max": 50,
+                    "label_parameters": {
+                        "color": [34, 247, 10],
+                        "size": 0,
+                        "bold": True
+                    }
+                }
+            }
+        ]
+    }
+
+    return cfg
