@@ -20,7 +20,8 @@ from ..parameter.solarcal import SolarCalParameter
 
 def shortwave_mrt_map(
     location, longwave_data, sun_up_hours, indirect_ill, direct_ill=None, ref_ill=None,
-    contributions=None, solarcal_par=None, indirect_is_total=False
+    contributions=None, transmittance_contribs=None,
+    solarcal_par=None, indirect_is_total=False
 ):
     """Get MRT data collections adjusted for shortwave using Radiance .ill files.
 
@@ -48,6 +49,12 @@ def shortwave_mrt_map(
             files named direct.ill, indirect.ill and reflected.ill. If specified,
             these will be added to the irradiance inputs before computing
             shortwave MRT deltas. (Default: None).
+        transmittance_contribs: An optional folder containing a transmittance
+            schedule JSON and sub-folders of irradiance results that exclude the
+            shade from the calculation. There should be one sub-folder per window
+            groups and each one should contain three .ill files named direct.ill,
+            indirect.ill and reflected.ill. If specified, these will be added to
+            the irradiance inputs before computing shortwave MRT deltas.
         solarcal_par: Optional SolarCalParameter object to account for
             properties of the human geometry. (Default: None).
         indirect_is_total: A boolean to note whether the indirect_ill is actually the
@@ -91,6 +98,40 @@ def shortwave_mrt_map(
         direct = [data.filter_by_analysis_period(a_per) for data in direct]
         if ref is not None:
             ref = [data.filter_by_analysis_period(a_per) for data in ref]
+
+    # if there are any transmittance contributions, then compute and add them
+    if transmittance_contribs is not None and os.path.isdir(transmittance_contribs):
+        # load the JSON file with the transmittance schedules
+        sch_json = os.path.join(transmittance_contribs, 'schedules.json')
+        with open(sch_json) as json_file:
+            sch_dict = json.load(json_file)
+        shd_grps = [grp for grp in os.listdir(transmittance_contribs)
+                    if grp != 'schedules.json']
+        for dyn_group in shd_grps:
+            t_sch_head = Header(Irradiance(), 'W/m2', a_per)
+            t_sch = HourlyContinuousCollection(t_sch_head, sch_dict[dyn_group])
+            # get the file paths to the transmittance_contribs
+            group_path = os.path.join(transmittance_contribs, dyn_group)
+            indirect_con_f = os.path.join(group_path, 'indirect.ill')
+            direct_con_f = os.path.join(group_path, 'direct.ill')
+            ref_con_f = os.path.join(group_path, 'reflected.ill')
+            # add the transmittance_contribs to the irradiance terms
+            indirect_con = _ill_file_to_data(indirect_con_f, sun_indices, t_step, lp_yr)
+            direct_con = _ill_file_to_data(direct_con_f, sun_indices, t_step, lp_yr)
+            if not is_annual:
+                indirect_con = \
+                    [data.filter_by_analysis_period(a_per) for data in indirect_con]
+                direct_con = \
+                    [data.filter_by_analysis_period(a_per) for data in direct_con]
+            indirect = [rad + ((c_rad - rad) * t_sch)
+                        for rad, c_rad in zip(indirect, indirect_con)]
+            direct = [rad + ((c_rad - rad) * t_sch)
+                      for rad, c_rad in zip(direct, direct_con)]
+            if ref is not None and os.path.isfile(ref_con_f):
+                ref_con = _ill_file_to_data(ref_con_f, sun_indices, t_step, lp_yr)
+                if not is_annual:
+                    ref_con = [data.filter_by_analysis_period(a_per) for data in ref_con]
+                ref = [rad + ((c_rad - rad) * t_sch) for rad, c_rad in zip(ref, ref_con)]
 
     # if need be, convert total irradiance into indirect irradiance
     if indirect_is_total:
@@ -160,8 +201,10 @@ def longwave_mrt_map(
     a_per = analysis_period if analysis_period is not None else AnalysisPeriod()
 
     # load the indoor surface temperatures if they are needed
-    sql_obj = SQLiteResult(sql)
+    sql_obj = SQLiteResult(sql) if os.path.isfile(sql) else None
     if enclosure_dict['has_indoor']:
+        assert sql_obj is not None, \
+            'Indoor sensors were found but no SQLite file was present.'
         in_avg_outp = 'Zone Mean Radiant Temperature'
         in_srf_outp = 'Surface Inside Face Temperature'
         in_avg_dict = {d.header.metadata['Zone']: d for d in
@@ -180,12 +223,15 @@ def longwave_mrt_map(
 
     # load the EPW and outdoor surface temperatures if they are needed
     if enclosure_dict['has_outdoor']:
-        out_srf_outp = 'Surface Outside Face Temperature'
-        out_srf_dict = {d.header.metadata['Surface']: d for d in
-                        sql_obj.data_collections_by_output_name(out_srf_outp)}
-        out_srf = [out_srf_dict[s] for s in srf_order[:-3]]
-        if out_srf[0].header.analysis_period != a_per:
-            out_srf = [d.filter_by_analysis_period(a_per) for d in out_srf]
+        if sql_obj is not None:
+            out_srf_outp = 'Surface Outside Face Temperature'
+            out_srf_dict = {d.header.metadata['Surface']: d for d in
+                            sql_obj.data_collections_by_output_name(out_srf_outp)}
+            out_srf = [out_srf_dict[s] for s in srf_order[:-3]]
+            if out_srf[0].header.analysis_period != a_per:
+                out_srf = [d.filter_by_analysis_period(a_per) for d in out_srf]
+        else:
+            out_srf = []
         epw_obj = EPW(epw)
         out_avg = epw_obj.dry_bulb_temperature
         out_sky = epw_obj.sky_temperature

@@ -2,6 +2,7 @@
 """Methods for resolving Air Temperature and Humidity for EnergyPlus output files."""
 from __future__ import division
 
+import os
 import json
 
 from ladybug.epw import EPW
@@ -35,6 +36,8 @@ def air_map(enclosure_info, sql, epw, analysis_period=None, humidity=False):
     # load the indoor values if they are needed
     air_data = []
     if enclosure_dict['has_indoor']:
+        assert os.path.isfile(sql), \
+            'Indoor sensors were found but no EnergyPlus SQLite file was present.'
         sql_obj = SQLiteResult(sql)
         if humidity:
             in_avg_outp, id_key = 'Zone Air Relative Humidity', 'System'

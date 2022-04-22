@@ -4,6 +4,7 @@ import sys
 import logging
 import json
 import os
+import shutil
 
 from ladybug.epw import EPW
 from ladybug.datacollection import HourlyContinuousCollection, \
@@ -486,6 +487,21 @@ def irradiance_contrib(
               'inputs before computing shortwave MRT deltas.',
               default=None, show_default=True,
               type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
+@click.option('--transmittance-contribs', '-tc', help='An optional folder containing '
+              'a transmittance schedule JSON and sub-folders of irradiance results '
+              'that exclude the shade from the calculation. There should be one '
+              'sub-folder per window groups and each one should contain three .ill '
+              'files named direct.ill, indirect.ill and reflected.ill. If specified, '
+              'these will be added to the irradiance inputs before computing shortwave '
+              'MRT deltas.', default=None, show_default=True,
+              type=click.Path(file_okay=False, dir_okay=True, resolve_path=True))
+@click.option('--trans-schedule-json', '-ts', help='An optional path to a transmittance '
+              'schedule JSON output by the honeybee-energy model-transmittance-schedules'
+              ' command, which is coordinated with the --transmittance-contribs. '
+              'If unspecified, it will be assumed that this JSON already exists in '
+              'the root of the --transmittance-contribs with a name schedules.json.',
+              default=None, type=click.Path(exists=False, file_okay=True, dir_okay=False,
+                                            resolve_path=True))
 @click.option('--run-period', '-rp', help='An AnalysisPeriod string to dictate the '
               'start and end of the analysis (eg. "6/21 to 9/21 between 8 and 16 @1"). '
               'If unspecified, results will be annual.', default=None, type=str)
@@ -500,7 +516,8 @@ def irradiance_contrib(
               type=click.File('w'), default='-', show_default=True)
 def shortwave_mrt(
         epw_file, indirect_irradiance, direct_irradiance, ref_irradiance,
-        sun_up_hours, contributions, run_period, solarcal_par, is_indirect, output_file):
+        sun_up_hours, contributions, transmittance_contribs, trans_schedule_json,
+        run_period, solarcal_par, is_indirect, output_file):
     """Get CSV files with maps of shortwave MRT Deltas from Radiance results.
 
     \b
@@ -532,11 +549,19 @@ def shortwave_mrt(
             if run_period.st_hour == 0 and run_period.end_hour == 23 else \
             [HourlyDiscontinuousCollection(header, lt_values, run_period.datetimes)]
 
+        # if the trans_schedule_json is specified, copy it to the contrib folder
+        if trans_schedule_json is not None and os.path.isfile(trans_schedule_json):
+            if transmittance_contribs is not None and \
+                    os.path.isdir(transmittance_contribs):
+                sch_json = os.path.join(transmittance_contribs, 'schedules.json')
+                shutil.copyfile(trans_schedule_json, sch_json)
+
         # adjust the radiant temperature for shortwave solar
         is_total = not is_indirect
         d_mrt_temps = shortwave_mrt_map(
             epw_obj.location, pt_rad_temps, sun_up_hours,
-            indirect_irradiance, direct_irradiance, ref_irradiance, contributions,
+            indirect_irradiance, direct_irradiance, ref_irradiance,
+            contributions, transmittance_contribs,
             solarcal_par=solarcal_par, indirect_is_total=is_total)
 
         # write out the final results to CSV files
@@ -555,7 +580,7 @@ def shortwave_mrt(
 
 @map.command('longwave-mrt')
 @click.argument('result-sql', type=click.Path(
-    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+    file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('view-factors', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('modifiers', type=click.Path(
@@ -608,7 +633,7 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
 
 @map.command('air')
 @click.argument('result-sql', type=click.Path(
-    exists=True, file_okay=True, dir_okay=False, resolve_path=True))
+    file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('enclosure-info', type=click.Path(
     exists=True, file_okay=True, dir_okay=False, resolve_path=True))
 @click.argument('epw-file', type=click.Path(
