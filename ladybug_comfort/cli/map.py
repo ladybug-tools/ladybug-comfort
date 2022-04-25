@@ -855,8 +855,6 @@ def _tcp_config():
                 "legend_parameters": {
                     "hide_legend": False,
                     "color_set": "annual_comfort",
-                    "min": 0,
-                    "max": 100,
                     "label_parameters": {
                         "color": [34, 247, 10],
                         "size": 0,
@@ -873,8 +871,6 @@ def _tcp_config():
                 "legend_parameters": {
                     "hide_legend": False,
                     "color_set": "heat_sensation",
-                    "min": 0,
-                    "max": 50,
                     "label_parameters": {
                         "size": 0,
                         "color": [34, 247, 10],
@@ -891,8 +887,6 @@ def _tcp_config():
                 "legend_parameters": {
                     "hide_legend": False,
                     "color_set": "cold_sensation",
-                    "min": 0,
-                    "max": 50,
                     "label_parameters": {
                         "color": [34, 247, 10],
                         "size": 0,
