@@ -201,7 +201,8 @@ def longwave_mrt_map(
     a_per = analysis_period if analysis_period is not None else AnalysisPeriod()
 
     # load the indoor surface temperatures if they are needed
-    sql_obj = SQLiteResult(sql) if os.path.isfile(sql) else None
+    sql_obj = SQLiteResult(sql) if os.path.isfile(sql) \
+        and os.stat(sql).st_size != 0 else None
     if enclosure_dict['has_indoor']:
         assert sql_obj is not None, \
             'Indoor sensors were found but no SQLite file was present.'

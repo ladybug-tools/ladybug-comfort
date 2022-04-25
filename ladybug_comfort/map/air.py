@@ -36,7 +36,7 @@ def air_map(enclosure_info, sql, epw, analysis_period=None, humidity=False):
     # load the indoor values if they are needed
     air_data = []
     if enclosure_dict['has_indoor']:
-        assert os.path.isfile(sql), \
+        assert os.path.isfile(sql) and os.stat(sql).st_size != 0, \
             'Indoor sensors were found but no EnergyPlus SQLite file was present.'
         sql_obj = SQLiteResult(sql)
         if humidity:
