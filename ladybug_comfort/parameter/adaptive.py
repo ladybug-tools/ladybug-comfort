@@ -318,7 +318,7 @@ class AdaptiveParameter(ComfortParameter):
     def __repr__(self):
         """Adaptive comfort parameters representation."""
         return '--standard {} --neutral-offset {} ' \
-            '--prevail_method {} --air-speed-method {} ' \
+            '--prevail-method {} --air-speed-method {} ' \
             '--cold-limit {} --conditioning {}'.format(
                 self.standard, self.neutral_offset, self.prevailing_temperature_method,
                 self.air_speed_method, self.cold_prevail_temp_limit, self.conditioning)
