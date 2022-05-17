@@ -27,9 +27,8 @@ def irradiance_contrib_map(
         sun_up_hours: Path to a sun-up-hours.txt file output by an annual
             irradiance simulation.
         aperture_id: Text string for the identifier of the aperture associated with
-            the irradiance. If unspecified, it will the first '
-              'aperture found in the result-sql, essentially assuming there is '
-              'only one dynamic group in the file.
+            the irradiance. If unspecified, it will the first aperture found in the
+            result-sql, essentially assuming there is only one dynamic group in the file.
 
     Returns:
         A tuple fo three values.
