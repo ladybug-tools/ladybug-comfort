@@ -56,8 +56,8 @@ def irradiance_contrib_map(
     beam_to_diff = _data_for_surface(beam_to_diff_dat, aperture_id)
     diff_to_diff = _data_for_surface(diff_to_diff_dat, aperture_id)
     ap_dict = sql_obj.tabular_data_by_name('Exterior Fenestration')
-    ap_area = ap_dict[aperture_id.upper()][1] if aperture_id is not None \
-        else ap_dict.values()[0][1]
+    ap_area = ap_dict[aperture_id.upper()][2] if aperture_id is not None \
+        else ap_dict.values()[0][2]
     incident = incident_per_area * ap_area
     dts = incident_per_area.datetimes
     beam_trans_all, diff_trans_all = {}, {}
