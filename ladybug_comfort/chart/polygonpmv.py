@@ -170,11 +170,11 @@ class PolygonPMV(object):
     @property
     def comfort_parameter(self):
         """PMV comfort parameters that are assigned to this object."""
-        return self._comfort_par.duplicate()  # duplicate since ppd_thresh is setable
+        return self._comfort_par.duplicate()  # duplicate since ppd_thresh is set-able
 
     @property
     def polygon_count(self):
-        """Integer for the number of comfort polygons contined on the object."""
+        """Integer for the number of comfort polygons contained on the object."""
         return self._polygon_count
 
     @property
@@ -638,6 +638,33 @@ class PolygonPMV(object):
             else sol_lines[-1][-1]
         sol_lines.append(LineSegment2D.from_end_points(l_pt, right[0]))
         return sol_lines
+
+    def shade_line(self, balance_temperature=None):
+        """Get a Polyline2D or LineSegment2D for the line above which shade is needed.
+
+        The purpose of this line is to show which other polygons may not work as
+        intended if there is no shade available. This will be None if the line
+        does not fit on the chart.
+
+        Args:
+            balance_temperature: An optional balance temperature of the building
+                to which the shade is applied (Celsius). Must be greater or equal to 5 C.
+                In order for this method to not return None, this value must be
+                less than the coldest temperature of the merged comfort
+                polygon. If None, the shade line will be at the lower edge of the
+                comfort polygon, essentially assuming that the shade is applied
+                directly to the occupant, who is not inside of a building.
+        """
+        psy = self._psychrometric_chart
+        # check to be sure the shade line fits on the chart
+        self._balance_check(balance_temperature)
+        
+        comf_poly = self.merged_comfort_polygon
+        bal = balance_temperature if not psy.use_ip else \
+            self.TEMP_TYPE.to_unit([balance_temperature], 'F', 'C')[0]
+        bal_x = psy.t_x_value(bal)
+        if self.is_comfort_too_cold or comf_poly[0][0].x < bal_x:
+            return None
 
     def evaluate_polygon(self, polygon, tolerance=0.01):
         """Evaluate a strategy polygon in relation to the data points of the chart.

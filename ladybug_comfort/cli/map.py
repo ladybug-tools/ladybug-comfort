@@ -7,6 +7,8 @@ import os
 import shutil
 
 from ladybug.epw import EPW
+from ladybug.legend import LegendParameters
+from ladybug.color import Colorset
 from ladybug.datacollection import HourlyContinuousCollection, \
     HourlyDiscontinuousCollection
 from ladybug.header import Header
@@ -18,6 +20,7 @@ from ladybug.datatype.temperature import OperativeTemperature, \
 from ladybug.datatype.thermalcondition import PredictedMeanVote, \
     ThermalCondition, ThermalConditionElevenPoint
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
+from ladybug.datatype.fraction import Fraction
 
 from ladybug_comfort.map.irr import irradiance_contrib_map
 from ladybug_comfort.map.mrt import shortwave_mrt_map, longwave_mrt_map
@@ -745,6 +748,31 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
             'condition_intensity': cond_i_header.to_dict()
         }
 
+        # build up dictionaries of visualization metadata
+        tcp_lpar = LegendParameters(colors=Colorset.annual_comfort())
+        hsp_lpar = LegendParameters(colors=Colorset.heat_sensation())
+        csp_lpar = LegendParameters(colors=Colorset.cold_sensation())
+        metric_info_dict = {
+            'TCP': {
+                'type': 'VisualizationMetaData',
+                'data_type': Fraction('Thermal Comfort Percentage').to_dict(),
+                'unit': '%',
+                'legend_parameters': tcp_lpar.to_dict()
+            },
+            'HSP': {
+                'type': 'VisualizationMetaData',
+                'data_type': Fraction('Heat Sensation Percentage').to_dict(),
+                'unit': '%',
+                'legend_parameters': hsp_lpar.to_dict()
+            },
+            'CSP': {
+                'type': 'VisualizationMetaData',
+                'data_type': Fraction('Cold Sensation Percentage').to_dict(),
+                'unit': '%',
+                'legend_parameters': csp_lpar.to_dict()
+            }
+        }
+
         # write the JSON into result sub-folders
         if folder is not None:
             if not os.path.isdir(folder):
@@ -753,6 +781,10 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
                 file_path = os.path.join(folder, '{}.json'.format(metric))
                 with open(file_path, 'w') as fp:
                     json.dump(result_info_dict[metric], fp, indent=4)
+            for metric in ('TCP', 'HSP', 'CSP'):
+                file_path = os.path.join(folder, '{}.json'.format(metric))
+                with open(file_path, 'w') as fp:
+                    json.dump(metric_info_dict[metric], fp, indent=4)
 
             # write the VTK config file
             config_file = os.path.join(folder, 'config.json')
@@ -797,7 +829,7 @@ def map_result_info(comfort_model, run_period, qualifier, folder, log_file):
               'CSV files. By default, it will be printed to stdout',
               type=click.File('w'), default='-', show_default=True)
 def tcp(condition_csv, enclosure_info, schedule, occ_schedule_json, folder, log_file):
-    """Compute Thermal Comfort Petcent (TCP) from thermal mapping results.
+    """Compute Thermal Comfort Percent (TCP) from thermal mapping results.
 
     \b
     Args:
@@ -843,8 +875,8 @@ def tcp(condition_csv, enclosure_info, schedule, occ_schedule_json, folder, log_
 
 
 def _tcp_config():
-    """Return vtk-config for a thermal comfort map. """
-    cfg = {
+    """Return vtk-config for a thermal comfort map."""
+    return {
         "data": [
             {
                 "identifier": "Thermal Comfort Percentage",
@@ -896,5 +928,3 @@ def _tcp_config():
             }
         ]
     }
-
-    return cfg
