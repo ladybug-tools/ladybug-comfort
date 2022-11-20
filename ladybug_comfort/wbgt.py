@@ -2,14 +2,12 @@
 """Utility functions for calculating the Wet Bulb Globe Temperature (WBGT)."""
 from __future__ import division
 
-import math
-
 from ladybug.psychrometrics import saturated_vapor_pressure
 
 
 def wet_bulb_globe_temperature(ta, mrt, ws, rh):
     """Get wet-bulb globe temperature (WBGT) for outdoor conditions.
-    
+
     WBGT is a type of feels-like temperature that is widely used as a heat stress
     index (ISO 7243). It is incorporates the effect of temperature, humidity, wind
     speed, and mean radiant temperature (optionally including the effect of sun).

@@ -87,7 +87,7 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
             ce = secant(ce_l, ce_r, fn, eps)
         except OverflowError:
             ce = None
-        if ce is None:  # ce can be None because OverflowError or max secant iterations 
+        if ce is None:  # ce can be None because OverflowError or max secant iterations
             ce = bisect(ce_l, ce_r, fn, eps, 0)
 
         pmv, ppd, heat_loss = fanger_pmv(
@@ -105,7 +105,8 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
     return result
 
 
-def predicted_mean_vote_no_set(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
+def predicted_mean_vote_no_set(
+        ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.1):
     """Calculate PMV using Fanger's model and Pierce SET model ONLY WHEN NECESSARY.
 
     This method uses the officially correct way to calculate PMV comfort according to
@@ -124,7 +125,7 @@ def predicted_mean_vote_no_set(ta, tr, vel, rh, met, clo, wme=0, still_air_thres
         rh: Relative humidity [%]
         met: Metabolic rate [met]
         clo: Clothing [clo]
-        wme: External work [met], normally around 0 when seated
+        wme: External work [met], normally around 0 when seated.
         still_air_threshold: The air velocity in m/s at which the Pierce
             Standard Effective Temperature (SET) model will be used
             to correct values in the original Fanger PMV model.
@@ -165,7 +166,7 @@ def predicted_mean_vote_no_set(ta, tr, vel, rh, met, clo, wme=0, still_air_thres
             ce = secant(ce_l, ce_r, fn, eps)
         except OverflowError:
             ce = None
-        if ce is None:  # ce can be None because OverflowError or max secant iterations 
+        if ce is None:  # ce can be None because OverflowError or max secant iterations
             ce = bisect(ce_l, ce_r, fn, eps, 0)
 
         pmv, ppd, heat_loss = fanger_pmv(
@@ -224,8 +225,8 @@ def fanger_pmv(ta, tr, vel, rh, met, clo, wme=0):
     pa = rh * 10. * math.exp(16.6536 - 4030.183 / (ta + 235.))
 
     icl = 0.155 * clo  # thermal insulation of the clothing in M2K/W
-    m = met * 58.15  # metabolic rate in W/M2
-    w = wme * 58.15  # external work in W/M2
+    m = met * 58.15  # metabolic rate in W/m2
+    w = wme * 58.15  # external work in W/m2
     mw = m - w  # internal heat production in the human body
     if icl <= 0.078:
         fcl = 1 + (1.29 * icl)
@@ -414,8 +415,7 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
         coldc = ((-1.0 * crsig) > 0) * (-1.0 * crsig)
         bdsig = TB - temp_body_neutral
         warmb = (bdsig > 0) * bdsig
-        skin_blood_flow = (skin_blood_flow_neutral + cdil *
-                           warmc) / (1 + cstr * colds)
+        skin_blood_flow = (skin_blood_flow_neutral + cdil * warmc) / (1 + cstr * colds)
         if skin_blood_flow > 90.0:
             skin_blood_flow = 90.0
         if skin_blood_flow < 0.5:
@@ -488,10 +488,10 @@ def pierce_set(ta, tr, vel, rh, met, clo, wme=0.):
     dx = 100.0
     x_old = temp_skin - hsk / hd_s  # lower bound for SET
     while abs(dx) > .01:
-        err1 = (hsk - hd_s * (temp_skin - x_old) - W * he_s *
-                (pssk - 0.5 * saturated_vapor_pressure_torr(x_old)))
-        err2 = (hsk - hd_s * (temp_skin - (x_old + delta)) - W * he_s *
-                (pssk - 0.5 * saturated_vapor_pressure_torr((x_old + delta))))
+        be1 = pssk - 0.5 * saturated_vapor_pressure_torr(x_old)
+        err1 = hsk - hd_s * (temp_skin - x_old) - W * he_s * be1
+        be2 = pssk - 0.5 * saturated_vapor_pressure_torr((x_old + delta))
+        err2 = hsk - hd_s * (temp_skin - (x_old + delta)) - W * he_s * be2
         x = x_old - delta * err1 / (err2 - err1)
         dx = x - x_old
         x_old = x
@@ -647,7 +647,7 @@ def calc_missing_pmv_input(target_pmv, pmv_inputs, low_bound=0., up_bound=100.,
         def fn(x):
             return predicted_mean_vote_no_set(
                 pmv_inputs['ta'], x, pmv_inputs['vel'], pmv_inputs['rh'],
-                pmv_inputs['met'], pmv_inputs['clo'],  pmv_inputs['wme'],
+                pmv_inputs['met'], pmv_inputs['clo'], pmv_inputs['wme'],
                 still_air_threshold)['pmv'] - target_pmv
         missing_key = 'tr'
     elif pmv_inputs['vel'] is None:
