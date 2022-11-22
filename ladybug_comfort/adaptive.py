@@ -1,5 +1,12 @@
 # coding=utf-8
-"""Utility functions for calculating Adaptive Thermal Comfort."""
+"""Utility functions for calculating Adaptive Thermal Comfort.
+
+The Adaptive thermal comfort model is for use on the interior of buildings where
+a heating or cooling system is not operational and occupants have the option to
+open windows for natural ventilation.
+
+Note that, for fully conditioned buildings, the PMV thermal comfort model is recommended.
+"""
 from __future__ import division
 
 import math
@@ -12,8 +19,8 @@ def adaptive_comfort_ashrae55(t_prevail, to):
     """Get adaptive comfort criteria according to ASHRAE-55.
 
     Note:
-        [1] ASHRAE Standard 55 (2017). Thermal Environmental Conditions
-        for Human Occupancy. Atlanta Georgoa: American Society of Heating,
+        [1] ASHRAE Standard 55 (2017). "Thermal Environmental Conditions
+        for Human Occupancy." Atlanta Georgia: American Society of Heating,
         Refrigerating and Air Conditioning Engineers.
 
     Args:

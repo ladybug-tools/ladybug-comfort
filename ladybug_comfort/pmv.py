@@ -1,5 +1,12 @@
 # coding=utf-8
-"""Utility functions for calculating PMV."""
+"""Utility functions for calculating Predicted MEan Vote (PMV).
+
+PMV is a thermal comfort model for use on the interior of buildings where a
+heating or cooling system is operational. For naturally ventilated buildings,
+the Adaptive thermal comfort model is recommended and, for outdoor conditions,
+models such as Universal Thermal Climate Index (UTCI) or Physiological
+Equivalent Temperature (PET) are recommended.
+"""
 from __future__ import division
 
 from ladybug.rootfinding import secant
@@ -15,8 +22,8 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
     """Calculate PMV using Fanger's original model and Pierce SET.
 
     This method uses the officially correct way to calculate PMV comfort according to
-    the 2015 ASHRAE-55 Thermal Comfort Standard. This function will return
-    correct values even if the air speed is above the sill air threshold of
+    the 2017 ASHRAE-55 Thermal Comfort Standard. This function will return
+    valid values even if the air speed is above the sill air threshold of
     Fanger's original model (> 0.1 m/s).
 
     However, because this function always returns the Standard Effective Temperature
@@ -26,7 +33,8 @@ def predicted_mean_vote(ta, tr, vel, rh, met, clo, wme=0, still_air_threshold=0.
 
     Note:
         [1] ASHRAE Standard 55 (2017). "Thermal Environmental Conditions
-        for Human Occupancy".
+        for Human Occupancy". Atlanta Georgia: American Society of Heating,
+        Refrigerating and Air Conditioning Engineers.
 
         [2] Hoyt Tyler, Schiavon Stefano, Piccioli Alberto, Cheung Toby, Moon Dustin,
         and Steinfeld Kyle, 2017, CBE Thermal Comfort Tool. Center for the Built
