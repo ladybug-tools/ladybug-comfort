@@ -1,5 +1,22 @@
 # coding=utf-8
-"""Utility functions for calculating UTCI."""
+"""Utility functions for calculating Universal Thermal Climate Index (UTCI).
+
+UTCI is a thermal comfort model strictly for the outdoors. It is an international
+standard for outdoor temperature sensation (aka. "feels-like" temperature) and
+is one of the most common of such "feels-like" temperatures used by
+meteorologists. UTCI that attempts to satisfy the following requirements:
+
+1) Thermo-physiological significance in the whole range of heat
+    exchange conditions of existing thermal environments
+2) Valid in all climates, seasons, and scales
+3) Useful for key applications in human biometeorology.
+
+While UTCI is designed to be valid in all climates and seasons, it assumes
+that human subjects are walking (with a metabolic rate around 2.4 met) and
+that they naturally adapt their clothing with the outdoor temperature.
+For outdoor situations that do not fit these criteria, the Physiological
+Equivalent Temperature (PET) model is recommended.
+"""
 from __future__ import division
 
 from ladybug.rootfinding import secant
@@ -10,15 +27,6 @@ import math
 
 def universal_thermal_climate_index(ta, tr, vel, rh):
     """Calculate Universal Thermal Climate Index (UTCI) using a polynomial approximation.
-
-    UTCI is an international standard for outdoor temperature sensation
-    (aka. "feels-like" temperature) that attempts to fill the
-    following requirements:
-
-    1) Thermo-physiological significance in the whole range of heat
-       exchange conditions of existing thermal environments
-    2) Valid in all climates, seasons, and scales
-    3) Useful for key applications in human biometeorology.
 
     This function here is a Python version of the original UTCI_approx
     application written in Fortran. Version a 0.002, October 2009
@@ -332,12 +340,14 @@ def calc_missing_utci_input(target_utci, utci_inputs, low_bound=0., up_bound=100
     elif utci_inputs['ta'] is None:
         def fn(x):
             return universal_thermal_climate_index(
-                x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']) - target_utci
+                x, utci_inputs['tr'], utci_inputs['vel'], utci_inputs['rh']) \
+                - target_utci
         missing_key = 'ta'
     elif utci_inputs['tr'] is None:
         def fn(x):
             return universal_thermal_climate_index(
-                utci_inputs['ta'], x, utci_inputs['vel'], utci_inputs['rh']) - target_utci
+                utci_inputs['ta'], x, utci_inputs['vel'], utci_inputs['rh']) \
+                - target_utci
         missing_key = 'tr'
     elif utci_inputs['vel'] is None:
         def fn(x):
@@ -347,7 +357,8 @@ def calc_missing_utci_input(target_utci, utci_inputs, low_bound=0., up_bound=100
     else:
         def fn(x):
             return universal_thermal_climate_index(
-                utci_inputs['ta'], utci_inputs['tr'], utci_inputs['vel'], x) - target_utci
+                utci_inputs['ta'], utci_inputs['tr'], utci_inputs['vel'], x) \
+                - target_utci
         missing_key = 'rh'
 
     # Solve for the missing input using the function.

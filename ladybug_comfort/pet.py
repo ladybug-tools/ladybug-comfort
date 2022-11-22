@@ -1,10 +1,24 @@
 # coding=utf-8
-"""Utility functions for calculating Physiologic Equivalent Temperature (PET)."""
-from __future__ import division
+"""Utility functions for calculating Physiologic Equivalent Temperature (PET).
 
+PET uses the Munich Energy Balance Model (MEMI), which is arguably the most
+detailed 3-node human energy balance model in common use today. It can account
+for various physiological features of the human subject, including age, sex,
+height, and body mass, making it one of the only models that is suitable for
+forecasting the thermal experience of a specific individual. This also makes
+it one of the better models for estimating core body temperature and whether
+a given set of conditions is likely to induce hypothermia or hyperthermia in
+a specific individual.
+
+PET is, itself, a "feels like" temperature and is defined as the operative
+temperature of a reference environment that would cause the same physiological
+response in the human subject as the environment under study. That is, the
+same skin temperature and core body temperature.
+"""
+from __future__ import division
 import math
 
-from ladybug.rootfinding import secant_three_var
+from ladybug.rootfinding import secant_three_var, bisect_three_var
 
 # constants for standard conditions
 TC_SET = 36.6  # standard core body temperature
@@ -98,13 +112,44 @@ def physiologic_equivalent_temperature(
         -   t_skin -- Skin temperature [C]
         -   t_clo -- Clothing temperature [C]
     """
-    # find a steady state solution to the MEMI model balance under the input conditions
-    t_min = (35, -10, -40)  # hypothermia conditions
-    t_max = (41, 60, 64)  # hyperthermia conditions
+    # determine a good set of starting guesses for the human temperatures
+    r_body, r_clo = 0.25, clo / 6.45
+    r_tot = r_body + r_clo
+    t_env = (ta + tr) / 2
+    t_core_in = 36.6
+    t_sk_in = t_core_in * (r_clo / r_tot) + t_env * (r_body / r_tot)
+    t_clo_in = (ta + tr + t_sk_in) / 3
+    t_min = (t_core_in - 10, t_sk_in - 20, t_clo_in - 20)  # hypothermia conditions
+    t_max = (t_core_in + 10, t_sk_in + 20, t_clo_in + 20)  # hyperthermia conditions
     epsilon = 0.01  # the acceptable error in the result of the load balance
-    conditions=(ta, tr, vel, rh, met, clo, age, sex, ht, m_body, pos)
-    tn = secant_three_var(
-        t_min, t_max, memi_balance, epsilon, other_args=conditions)
+
+    # find a steady state solution to the MEMI model balance under the input conditions
+    conditions = (ta, tr, vel, rh, met, clo, age, sex, ht, m_body, pos, b_press)
+    try:  # see if we can get the model to converge using a standard search range
+        tn = secant_three_var(
+            t_min, t_max, memi_balance, epsilon, other_args=conditions)
+    except OverflowError:  # about 1% of the time, the solution diverges
+        tn = None  # we will have to get the model to converge some other way
+    if tn is None:  # try progressively larger search ranges until we get convergence
+        factors = (1, 3, 4, 5, 6, 7, 8, 9)
+        for i in factors:
+            t_min = (t_core_in - (5 * i), t_sk_in - (10 * i), t_clo_in - (10* i))
+            t_max = (t_core_in + (5 * i), t_sk_in + (10 * i), t_clo_in + (10 * i))
+            try:
+                tn = secant_three_var(
+                    t_min, t_max, memi_balance, epsilon, other_args=conditions)
+            except OverflowError:
+                tn = None
+            if tn is not None:
+                break
+    if tn is None:  # if we still don't have convergence, try brute force bisect method
+        tn = bisect_three_var(
+            t_min, t_max, memi_balance, epsilon, other_args=conditions)
+
+    # TODO: consider replacing the root finding code above with this scipy method
+    # import scipy.optimize as optimize
+    # tx = (38, 40, 40)
+    # tn = optimize.fsolve(memi_balance, tx, args=conditions)
 
     # compute the PET using the human subject temperatures using a bisect method
     def f(tx):
@@ -322,3 +367,125 @@ def sweat_volume(t_body):
         sig_body = 0
     qm_sw = 304.94 * 10 ** -3 * sig_body
     return qm_sw if qm_sw < 500 else 500  # 500 g/m2-h is the upper limit of sweat rate
+
+
+def pet_category(pet):
+    """Get the category of heat/cold stress associated PET.
+
+    This method uses the original categories developed by Matzarakis and Mayer (1996),
+    which are most suitable in temperature climates.
+
+    Each number (from -4 to +4) represents a certain PET thermal sensation category.
+
+    * -4 = Extreme Cold
+    * -3 = Strong Cold
+    * -2 = Moderate Cold
+    * -1 = Slight Cold
+    * 0 = Comfortable
+    * 1 = Slight Heat
+    * 2 = Moderate Heat
+    * 3 = Strong Heat
+    * 4 = Extreme Heat
+
+    Args:
+        pet: Physiological Equivalent Temperature [C].
+
+    Returns:
+        category -- An integer indicating the level of heat/cold stress
+        associated with the PET.
+    """
+    if pet < 4:
+        return -4
+    elif pet < 8:
+        return -3
+    elif pet < 13:
+        return -2
+    elif pet < 18:
+        return -1
+    elif pet <= 23:
+        return 0
+    elif pet <= 29:
+        return 1
+    elif pet <= 35:
+        return 2
+    elif pet <= 41:
+        return 3
+    else:
+        return 4
+
+
+def pet_category_humid(pet):
+    """Get the category of heat/cold stress associated PET.
+
+    This method uses the categories by Lin and Matzarakis (2008), which are
+    suitable for tropical and subtropical humid climates.
+
+    Each number (from -4 to +4) represents a certain PET thermal sensation category.
+
+    * -4 = Extreme Cold
+    * -3 = Strong Cold
+    * -2 = Moderate Cold
+    * -1 = Slight Cold
+    * 0 = Comfortable
+    * 1 = Slight Heat
+    * 2 = Moderate Heat
+    * 3 = Strong Heat
+    * 4 = Extreme Heat
+
+    Args:
+        pet: Physiological Equivalent Temperature [C].
+
+    Returns:
+        category -- An integer indicating the level of heat/cold stress
+        associated with the PET.
+    """
+    if pet < 14:
+        return -4
+    elif pet < 18:
+        return -3
+    elif pet < 22:
+        return -2
+    elif pet < 26:
+        return -1
+    elif pet <= 30:
+        return 0
+    elif pet <= 34:
+        return 1
+    elif pet <= 38:
+        return 2
+    elif pet <= 42:
+        return 3
+    else:
+        return 4
+
+
+def core_temperature_category(t_core):
+    """Get the classification of core body temperature.
+
+    * -2 = Hypothermia
+    * -1 = Cold
+    * 0 = Normal
+    * 1 = Hot
+    * 2 = Hyperthermia
+
+    Args:
+        t_core: The core body temperature of the human subject [C].
+
+    Returns:
+        category -- An integer indicating the classification of the body temperature.
+
+    Note:
+        [1] Marx J (2006). Rosen's emergency medicine : concepts and clinical
+        practice (6th ed.). Philadelphia: Mosby/Elsevier. p. 2239.
+        ISBN 978-0-323-02845-5. OCLC 58533794.
+    """
+    if t_core < 35:
+        return -2
+    elif t_core < 36.5:
+        return -1
+    elif t_core < 37.5:
+        return 0
+    elif t_core < 38.3:
+        return 1
+    else:
+        return 2

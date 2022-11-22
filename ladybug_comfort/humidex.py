@@ -70,10 +70,10 @@ weather-hazards/warm-season-weather-hazards.html#toc7
 
     if humidex < 20.0:
         return 0
-    elif 20.0 <= humidex < 30.0:
+    elif humidex < 30.0:
         return 1
-    elif 30.0 <= humidex < 40.0:
+    elif humidex < 40.0:
         return 2
-    elif 40.0 <= humidex < 46.0:
+    elif humidex < 46.0:
         return 3
     return 4

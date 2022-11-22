@@ -100,8 +100,9 @@ class _PMVnoSET(ComfortCollection):
                  '_discomfort_reason', '_ta_adj', '_cooling_effect',
                  '_heat_loss_conduction', '_heat_loss_sweating',
                  '_heat_loss_latent_respiration', '_heat_loss_dry_respiration',
-                 '_heat_loss_radiation', '_heat_loss_convection', '_air_temperature_coll',
-                 '_rel_humidity_coll', '_rad_temperature_coll', '_air_speed_coll',
+                 '_heat_loss_radiation', '_heat_loss_convection',
+                 '_air_temperature_coll', '_rel_humidity_coll',
+                 '_rad_temperature_coll', '_air_speed_coll',
                  '_met_rate_coll', '_clo_value_coll', '_external_work_coll',
                  '_humidity_ratio_coll', '_pmv_coll', '_ppd_coll',
                  '_is_comfortable_coll', '_thermal_condition_coll',
@@ -191,16 +192,17 @@ class _PMVnoSET(ComfortCollection):
                 where the human experiences a very low wind speed of 0.1 m/s. If
                 included, the wind speed at ground level will be assumed to be 2/3
                 times the meteorological wind speed in the EPW (usually at 10 meters).
-                This follows the standard assumed for UTCI. Default: True to include wind.
+                This follows the standard assumed for UTCI. (Default: True to
+                include wind).
             include_sun: Set to True to include the mean radiant temperature (MRT) delta
-                from both shortwave solar falling directly on people and long wave radiant
-                exchange with the sky. Setting to False will assume a shaded condition
-                with MRT being equal to the EPW dry bulb temperature. When set to True,
-                this calculation will assume no surrounding shade context, standing human
-                geometry, and a solar horizontal angle relative to front of person (SHARP)
-                of 135 degrees. A SHARP of 135 essentially assumes that a person typically
-                faces their side or back to the sun to avoid glare.
-                Default: True to include sun.
+                from both shortwave solar falling directly on people and long wave
+                radiant exchange with the sky. Setting to False will assume a shaded
+                condition with MRT being equal to the EPW dry bulb temperature. When
+                set to True, this calculation will assume no surrounding shade context,
+                standing human geometry, and a solar horizontal angle relative to
+                front of person (SHARP) of 135 degrees. A SHARP of 135 essentially
+                assumes that a person typically faces their side or back to the
+                sun to avoid glare. (Default: True to include sun).
             met_rate: Data Collection of metabolic rate in met or a single
                 metabolic rate value to be used for the whole analysis. Default: 2.4 met
                 (walking at 1 m/s, which is the same assumption used in UTCI).
@@ -357,7 +359,6 @@ class _PMVnoSET(ComfortCollection):
         * 1 met = Metabolic rate of a resting seated person
         * 1.2 met = Metabolic rate of a standing person
         * 2 met = Metabolic rate of a walking person
-        * If left blank, default is set to 1.1 met (for seated, typing).
         """
         return self._get_coll('_met_rate_coll', self._met_rate,
                               MetabolicRate, 'met')
@@ -369,7 +370,6 @@ class _PMVnoSET(ComfortCollection):
         * 1 clo = Three-piece suit
         * 0.5 clo = Shorts + T-shirt
         * 0 clo = No clothing
-        * If left blank, default is set to 0.85 clo.
         """
         return self._get_coll('_clo_value_coll', self._clo_value,
                               ClothingInsulation, 'clo')
@@ -413,7 +413,6 @@ class _PMVnoSET(ComfortCollection):
         and most standards aim to have a PPD below 10%.
         """
         return self._get_coll('_ppd_coll', self._ppd, PercentagePeopleDissatisfied, '%')
-
 
     @property
     def operative_temperature(self):
@@ -468,7 +467,7 @@ class _PMVnoSET(ComfortCollection):
 
     @property
     def percent_comfortable(self):
-        """The percent of time comfortabe given by the assigned comfort_parameter."""
+        """The percent of time comfortable given by the assigned comfort_parameter."""
         return (sum(self._is_comfortable) / self._calc_length) * 100
 
     @property
@@ -569,7 +568,6 @@ class _PMVnoSET(ComfortCollection):
         """Data Collection of heat loss by convection in [W]."""
         return self._get_coll('_hl_convection_coll', self._heat_loss_convection,
                               Power('Heat Loss From Convection'), 'W')
-
 
 
 class PMV(_PMVnoSET):

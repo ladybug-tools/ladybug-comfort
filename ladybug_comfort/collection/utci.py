@@ -35,7 +35,7 @@ class UTCI(ComfortCollection):
             recommended for the UTCI model.
         comfort_parameter: Optional UTCIParameter object to specify parameters under
             which conditions are considered acceptable. If None, default will
-            assume comfort thresholds consistent with those used by meterologists
+            assume comfort thresholds consistent with those used by meteorologists
             to categorize outdoor conditions.
 
     Properties:

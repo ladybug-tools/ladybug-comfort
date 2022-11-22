@@ -9,7 +9,7 @@ def windchill_index(ta, ws):
     """Calculate the Wind Chill Index (WCI) from air temperature and wind
     speed.
 
-    Wind Chill Index is derived from original work carried out by Gregorczuk[1].
+    Wind Chill Index is derived from original work carried out by Gregorczuk [1].
     It qualifies thermal sensations of a person in wintertime. It is especially
     useful at low and very low air temperature and at high wind speed.
 
@@ -109,13 +109,12 @@ def windchill_temp(ta, ws):
 
 
 def windchill_temp_effect_category(twc):
-    """Get the category of effect associated with a given wind chill
-    temperature (WCT).
+    """Get the category of effect associated with a given wind chill temperature (WCT).
 
     Each number (from -6 to 0) represents a certain WCT thermal sensation
     category. With categories being the following:
 
-    * 0 = No discomfort. No risk of frostbite formost people
+    * 0 = No discomfort. No risk of frostbite for most people.
     * -1 = Slight increase in discomfort. Low risk of frostbite for most people
     * -2 = Risk of hypothermia if outside for long periods without adequate
       protection. Low risk of frostbite for most people
