@@ -18,7 +18,7 @@ same skin temperature and core body temperature.
 from __future__ import division
 import math
 
-from ladybug.rootfinding import secant_three_var, bisect_three_var
+from ladybug.rootfinding import secant_three_var
 
 # constants for standard conditions
 TC_SET = 36.6  # standard core body temperature
@@ -112,59 +112,54 @@ def physiologic_equivalent_temperature(
         -   t_skin -- Skin temperature [C]
         -   t_clo -- Clothing temperature [C]
     """
-    # determine a good set of starting guesses for the human temperatures
-    r_body, r_clo = 0.25, clo / 6.45
-    r_tot = r_body + r_clo
-    t_env = (ta + tr) / 2
-    t_core_in = 36.6
-    t_sk_in = t_core_in * (r_clo / r_tot) + t_env * (r_body / r_tot)
-    t_clo_in = (ta + tr + t_sk_in) / 3
-    t_min = (t_core_in - 10, t_sk_in - 20, t_clo_in - 20)  # hypothermia conditions
-    t_max = (t_core_in + 10, t_sk_in + 20, t_clo_in + 20)  # hyperthermia conditions
-    epsilon = 0.01  # the acceptable error in the result of the load balance
+    epsilon = 0.01  # the acceptable error in the result of the temperatures
+
+    # compute the constant variables of the MEMI model
+    a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa, he, ere = \
+        _memi_constant_vars(ta, vel, rh, b_press, met, clo, age, sex, ht, m_body, pos)
+
+    # determine a starting guess for the human temperatures using constant variables
+    t_core_in = 36.6  # normal human body temperature
+    t_env = (ta + tr) / 2  # the operative temperature of the surrounding environment
+    r_body = (1 / htcl) - rcl
+    r_tot = r_body + rcl
+    t_sk_in = t_core_in * (rcl / r_tot) + t_env * (r_body / r_tot)
+    t_clo_in = (ta + tr + t_sk_in) / 3  # average of air, radiant, and skin temperature
 
     # find a steady state solution to the MEMI model balance under the input conditions
-    conditions = (ta, tr, vel, rh, met, clo, age, sex, ht, m_body, pos, b_press)
-    try:  # see if we can get the model to converge using a standard search range
-        tn = secant_three_var(
-            t_min, t_max, memi_balance, epsilon, other_args=conditions)
-    except OverflowError:  # about 1% of the time, the solution diverges
-        tn = None  # we will have to get the model to converge some other way
-    if tn is None:  # try progressively larger search ranges until we get convergence
-        factors = (1, 3, 4, 5, 6, 7, 8, 9)
-        for i in factors:
-            t_min = (t_core_in - (5 * i), t_sk_in - (10 * i), t_clo_in - (10* i))
-            t_max = (t_core_in + (5 * i), t_sk_in + (10 * i), t_clo_in + (10 * i))
-            try:
-                tn = secant_three_var(
-                    t_min, t_max, memi_balance, epsilon, other_args=conditions)
-            except OverflowError:
-                tn = None
-            if tn is not None:
-                break
-    if tn is None:  # if we still don't have convergence, try brute force bisect method
-        tn = bisect_three_var(
-            t_min, t_max, memi_balance, epsilon, other_args=conditions)
+    d_args = (ta, tr, a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa, he, ere)
+    for i in (1, 2, 3, 4, 5, 6):  # progressively widen search range
+        t_min = (t_core_in - (5 * i), t_sk_in - (10 * i), t_clo_in - (10 * i))
+        t_max = (t_core_in + (5 * i), t_sk_in + (10 * i), t_clo_in + (10 * i))
+        try:
+            tn = secant_three_var(
+                t_min, t_max, _memi_dynamic_balance, epsilon, other_args=d_args)
+        except OverflowError:  # about 1% of the time, the solution diverges
+            tn = None
+        if tn is not None:
+            break  # model converged and root was found
+    if tn is None:  # if we still don't have convergence, try brute force method
+        starting_guess = (t_core_in, t_sk_in, t_clo_in)
+        increments = (0.001, 0.01, 0.01)  # increments with which to adjust body temp
+        err = 0.1  # maximum allowed error in [W]
+        tn = _brute_force_three_var(
+            starting_guess, increments, _memi_dynamic_balance, err, other_args=d_args)
 
-    # TODO: consider replacing the root finding code above with this scipy method
-    # import scipy.optimize as optimize
-    # tx = (38, 40, 40)
-    # tn = optimize.fsolve(memi_balance, tx, args=conditions)
-
-    # compute the PET using the human subject temperatures using a bisect method
+    # compute the PET using the human subject temperatures using a bisection method
     def f(tx):
         """A function with the input variables of the PET reference situation."""
-        return memi_balance(tn, tx, tx, 0.1, 50, met, 0.9,
-                            age, sex, ht, m_body, pos, b_press, False, True)
-    ti = t_min[-1]  # start of the search interval
-    tf = t_max[-1]  # end of the search interval
+        return memi_balance(
+            tn, tx, tx, 0.1, 50, met, 0.9, age, sex, ht, m_body, pos, b_press,
+            False, True)
+    ti = -40  # start of the search interval
+    tf = 60  # end of the search interval
     pet = 0
-    while tf - ti > epsilon:  # Dichotomy loop
+    while tf - ti > epsilon:  # bisection loop
         if f(ti) * f(pet) < 0:
             tf = pet
         else:
             ti = pet
-        pet = (ti + tf) / 2.0
+        pet = (ti + tf) / 2
 
     # put all of the results into a single dictionary
     return {'pet': pet, 't_core': tn[0], 't_skin': tn[1], 't_clo': tn[2]}
@@ -204,18 +199,51 @@ def memi_balance(
         The energy flux across the entire human subject if scalar is True or a
         vector with energy flux across [core, skin, clo] if scalar is False.
     """
-    # unpack the array of temperatures of the human subject
-    t_core, t_sk, t_clo = t_human
+    # compute constant attributes of the model
+    a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa, he, ere = \
+        _memi_constant_vars(
+            ta, vel, rh, b_press, met, clo, age, sex, ht, m_body, pos, actual)
+    # compute the dynamic load balance of the model
+    return _memi_dynamic_balance(
+        t_human, ta, tr, a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa,
+        he, ere, scalar)
 
+
+def _memi_constant_vars(
+        ta, vel, rh, b_press, met, clo, age, sex, ht, m_body, pos, actual=True):
+    """Compute variables of the MEMI model that do not change with body temperature.
+
+    This includes things such as the surface are of the human, basal metabolism,
+    vapor pressure, convection coefficients, radiant efficiency, etc.
+
+    Args:
+        ta: Air temperature [C].
+        vel: Relative air velocity [m/s].
+        rh: Relative humidity [%].
+        b_press: The barometric air pressure [Pa]. (Default: 101325 for sea level).
+        met: Metabolic rate [met].
+        clo: Clothing [clo].
+        age: The age of the human subject [years].
+        sex: A value between 0 and 1 to indicate the sex of the human [0=male, 1=female].
+        ht: The height of the human subject in [m].
+        m_body: The body mass of the human subject in [kg].
+        pos: Text for the posture of the human subject. [standing, seated, crouching].
+        actual: A boolean to indicate whether the calculation should be performed
+            in the actual environment (True) or the reference environment (False).
+
+    Returns:
+        A tuple of variables that are constant throughout the computation of the
+        MEMI model energy balance.
+    """
     # compute tha area parameters of the body
-    adu = 0.203 * m_body ** 0.425 * ht ** 0.725  # Dubois surface area of human subject
+    a_du = 0.203 * m_body ** 0.425 * ht ** 0.725  # Dubois surface area of human subject
     feff = 0.725 if pos in ('standing', 'crouching') else 0.696  # radiant efficiency
 
     # increase the Burton surface to account for clothing, k = 0.31 for Hoeppe
     fcl = 1 + (0.31 * clo)  # increase heat exchange surface depending on clothing level
     facl = (173.51 * clo - 2.36 - 100.76 * clo * clo + 19.28 * clo ** 3.0) / 100
-    a_clo = adu * facl + adu * (fcl - 1.0)
-    a_effr = adu * feff  # effective radiative area derived from posture of the subject
+    a_clo = a_du * facl + a_du * (fcl - 1.0)
+    a_effr = a_du * feff  # effective radiative area derived from posture of the subject
 
     # partial pressure of water depending on relative humidity and air temperature
     if actual:  # the calculation of the actual vapor pressure of inputs
@@ -240,16 +268,16 @@ def memi_balance(
     metab_male = 3.45 * m_body ** 0.75 * (1.0 + 0.004 * (30.0 - age) + 0.01 * r_mal)
     # compute the total metabolism, accounting for the activity level
     if actual:  # actual human subject metabolic rate
-        mec = (metab_male * 1.17 * met) / adu  # [W/m2]
-        fec = (metab_female * 1.22 * met) / adu  # [W/m2]
+        mec = (metab_male * 1.17 * met) / a_du  # [W/m2]
+        fec = (metab_female * 1.22 * met) / a_du  # [W/m2]
     else:  # reference human subject metabolic rate assumes 80 W of activity level
-        mec = (80 + metab_male) / adu  # [W/m2]
-        fec = (80 + metab_female) / adu  # [W/m2]
+        mec = (80 + metab_male) / a_du  # [W/m2]
+        fec = (80 + metab_female) / a_du  # [W/m2]
 
     # attribution of internal energy depending on the sex of the subject
     he = ((1 - sex) * mec) + (sex * fec)  # [W/m2]
 
-    # compute the respiratory energy losses
+    # compute the respiratory energy losses from the metabolic rate
     texp = 0.47 * ta + 21.0  # [degC]
     dventpulm = he * 1.44 * (10.0 ** -6)  # pulmonary flow rate
     eres = C_AIR * (ta - texp) * dventpulm  # sensible heat loss [W/m2]
@@ -273,14 +301,55 @@ def memi_balance(
         y = 0.1
 
     # compute subject radius depending on the clothing level (6.28 = 2 * pi)
-    r2 = adu * (fcl - 1.0 + facl) / (6.28 * ht * y)  # external radius
-    r1 = facl * adu / (6.28 * ht * y)  # internal radius
+    r2 = a_du * (fcl - 1.0 + facl) / (6.28 * ht * y)  # external radius
+    r1 = facl * a_du / (6.28 * ht * y)  # internal radius
     di = r2 - r1
 
     # compute the equivalent thermal resistance of body tissues
+    htcl = (6.28 * ht * y * di) / (rcl * math.log(r2 / r1) * a_clo)  # [W/(m2-K)]
+
+    # return all of the variables used by the rest of the MEMI calculation
+    return a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa, he, ere
+
+
+def _memi_dynamic_balance(
+        t_human, ta, tr, a_du, a_clo, a_effr, feff, hc, fcl, facl, rcl, htcl, vpa,
+        he, ere, scalar=False):
+    """Compute the dynamic load balance of the MEMI model.
+
+    Args:
+        t_human: A list of three values for the temperature of the human subject.
+
+            * core body temperature [C]
+            * skin temperature [C]
+            * clothing temperature [C]
+
+        ta: Air temperature [C].
+        tr: Mean radiant temperature [C].
+        a_du: The Dubois surface area of the human subject [m2].
+        a_clo: The clothing surface area of the human subject [m2].
+        a_effr: The effective radiant surface area of the human subject [m2].
+        feff: The fractional radiant efficiency of the human subject.
+        hc: The coefficient of convective thermal transfer [W/m2-k].
+        fcl: The fractional increase in heat exchange surface depending on clothing.
+        facl: The fraction of the human subject covered in clothing.
+        rcl: The thermal resistance of the clothing layer [m2-K/W].
+        htcl: The thermal transmittance of all body tissues and clothing [W/(m2-K)].
+        vpa: The partial vapour pressure of the environment [hPa].
+        he: The internal heat energy generated by the human subject [W/m2].
+        ere: The total respiratory heat loss [W/m2].
+        scalar: A boolean for whether the result should be returned as a vector of
+            the energy flux across [core, skin, clo] or it should be a single scalar
+            energy flux for the entire human subject.
+
+    Returns:
+        The energy flux across the entire human subject if scalar is True or a
+        vector with energy flux across [core, skin, clo] if scalar is False.
+    """
+    # unpack the array of temperatures of the human subject and get average body temp
+    t_core, t_sk, t_clo = t_human
     alpha = 0.1  # constant in steady state model but updates t_body in transient model
     t_body = alpha * t_sk + (1 - alpha) * t_core
-    htcl = (6.28 * ht * y * di) / (rcl * math.log(r2 / r1) * a_clo)  # [W/(m2-K)]
 
     # compute sweat losses
     qmsw = sweat_volume(t_body)
@@ -308,16 +377,16 @@ def memi_balance(
 
     # compute radiation losses
     tr_k, tsk_k, tclo_k = tr + 273.15, t_sk + 273.15, t_clo + 273.15
-    # for bare skin area:
-    rbare = a_effr * (1.0 - facl) * EM_SK * SIGM * (tr_k ** 4 - tsk_k ** 4) / adu  # W/m2
-    # for dressed area:
-    rclo = feff * a_clo * EM_CL * SIGM * (tr_k ** 4 - tclo_k ** 4) / adu  # W/m2
+    # for bare skin area [W/m2]
+    rbare = a_effr * (1.0 - facl) * EM_SK * SIGM * (tr_k ** 4 - tsk_k ** 4) / a_du
+    # for dressed area [W/m2]
+    rclo = feff * a_clo * EM_CL * SIGM * (tr_k ** 4 - tclo_k ** 4) / a_du
 
     # compute convection losses #
     # for bare skin area:
-    cbare = hc * (ta - t_sk) * adu * (1.0 - facl) / adu  # [W/m2]
+    cbare = hc * (ta - t_sk) * a_du * (1.0 - facl) / a_du  # [W/m2]
     # for dressed area:
-    cclo = hc * (ta - t_clo) * a_clo / adu  # [W/m2]
+    cclo = hc * (ta - t_clo) * a_clo / a_du  # [W/m2]
 
     # return either the calculated [core, skin, clo] energy flux or the scalar sum
     if scalar:  # return the scalar sum of the energy balance
@@ -489,3 +558,45 @@ def core_temperature_category(t_core):
         return 1
     else:
         return 2
+
+
+def _brute_force_three_var(
+        starting_guess, increments, fn, epsilon, other_args, max_iter=100000):
+    """Brute force root-finding algorithm designed specifically for solving MEMI models.
+
+    It is reliable. However, it converges slowly and, for this reason, it is recommended
+    that this only be used after the secant_three_var() method has returned None.
+
+    Args:
+        starting_guess: A tuple with 3 numbers with a starting guess for the roots.
+        increments: A tuple with 3 numbers indicating the increments with which
+            each value should be adjusted to find the root.
+        fn: A function for which roots are to be solved. That is, where the output
+            of the function is a tuple of three zeros.
+        epsilon: The acceptable error in the output of the function (aka. how
+            far from zero it is allowed to be).
+        other_args: Other input arguments for the fn other than the ones being
+            adjusted to solve the root.
+        max_iter: The maximum number of iterations with which a root will be
+            sought. (Default: 100000).
+
+    Returns:
+        root -- a tuple of 3 values that return a vector of zeros from the fn.
+    """
+    curr_i = 0
+    in_args = (starting_guess,) + other_args
+    en_vec = fn(*in_args)
+    while not all(abs(v) < epsilon for v in en_vec):
+        new_guess = list(starting_guess)
+        for i, hf in enumerate(en_vec):
+            if hf > epsilon:
+                new_guess[i] = new_guess[i] + increments[i]
+            elif hf < -epsilon:
+                new_guess[i] = new_guess[i] - increments[i]
+        starting_guess = new_guess
+        in_args = (starting_guess,) + other_args
+        en_vec = fn(*in_args)
+        curr_i += 1
+        if curr_i == max_iter:
+            break
+    return starting_guess
