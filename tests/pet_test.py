@@ -232,10 +232,6 @@ def test_pet_collection_comfort_percent_outputs():
     pet_obj = PET(epw.dry_bulb_temperature, epw.relative_humidity,
                   met_rate=2.4, clo_value=1)
 
-    print(pet_obj.percent_neutral)
-    print(pet_obj.percent_hot)
-    print(pet_obj.percent_cold)
-
     assert 11 < pet_obj.percent_neutral < 13
     assert 26 < pet_obj.percent_hot < 28
     assert 60 < pet_obj.percent_cold < 62
