@@ -1,7 +1,6 @@
 
 ![Ladybug](http://www.ladybug.tools/assets/img/ladybug.png)
 
-
 [![Build Status](https://travis-ci.com/ladybug-tools/ladybug.svg?branch=master)](https://travis-ci.com/ladybug-tools/ladybug-comfort)
 [![Coverage Status](https://coveralls.io/repos/github/ladybug-tools/ladybug-comfort/badge.svg)](https://coveralls.io/github/ladybug-tools/ladybug-comfort)
 
@@ -20,7 +19,7 @@ Ladybug-comfort is a Python library that adds thermal comfort functionalities to
 
 ## Usage
 
-```
+```python
 """Get the percentage of time outdoor conditions are comfortable with/without sun + wind"""
 from ladybug.epw import EPW
 from ladybug_comfort.collection.utci import UTCI
