@@ -6,7 +6,7 @@ import json
 
 def tcp_model_schedules(
         condition_csv, enclosure_info_json, occ_schedule_json, outdoor_occ_csv=None):
-    """Compute Thermal Comfort Petcent (TCP) using model-exported occupancy schedules.
+    """Compute Thermal Comfort Percent (TCP) using model-exported occupancy schedules.
 
     Args:
         condition_csv: Path to a CSV file of thermal conditions output by a
@@ -97,7 +97,7 @@ def tcp_model_schedules(
 
 
 def tcp_total(condition_csv, schedule=None):
-    """Compute Thermal Comfort Petcent (TCP) assuming all times are occupied.
+    """Compute Thermal Comfort Percent (TCP) assuming all times are occupied.
 
     Args:
         condition_csv: Path to a CSV file of thermal conditions output by a
