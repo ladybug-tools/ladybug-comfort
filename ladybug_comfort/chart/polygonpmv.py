@@ -231,7 +231,7 @@ class PolygonPMV(object):
 
     @property
     def comfort_values(self):
-        """A tuple of tuples with each sub-tuple representing one of the comfort polygons.
+        """A tuple of tuples with each sub-tuple representing one of comfort polygons.
 
         Each sub-tuple contains 0/1 values for whether the point is inside the
         comfort polygon or not.
@@ -266,7 +266,7 @@ class PolygonPMV(object):
 
     @property
     def merged_comfort_data(self):
-        """A data collection or 0/1 for whether the data is in the merged comfort polygon.
+        """A data collection or 0/1 for whether the data is in merged comfort polygon.
         """
         if self._merged_comfort_data is None:
             if len(self.merged_comfort_values) == 1:
@@ -291,7 +291,7 @@ class PolygonPMV(object):
         return self.merged_comfort_polygon[0][0].x <= psy.base_point.x
 
     def evaporative_cooling_polygon(self):
-        """Get a tuple of Polyline2D and LineSegment2D for an evaporative cooling polygon.
+        """Get a tuple of Polyline2D and LineSegment2D for evaporative cooling polygon.
 
         This will be None if the polygon does not fit on the chart.
         """
@@ -495,8 +495,8 @@ class PolygonPMV(object):
             hr_e = humid_ratio_from_db_rh(min_tc, 100, psy.average_pressure)
             hr_y = psy.hr_y_value(hr_e)
             hr_y = hr_y if hr_y < comf_poly[0][0].y else comf_poly[0][0].y
-            left1 = Point2D(psy.basepoint.x, hr_y)
-            left2 = Point2D(psy.basepoint.x, comf_poly[0][-1].y)
+            left1 = Point2D(psy.base_point.x, hr_y)
+            left2 = Point2D(psy.base_point.x, comf_poly[0][-1].y)
         left_lin = LineSegment2D.from_end_points(left1, left2)
 
         # get the bottom line and the line bordering the comfort polygon
@@ -658,7 +658,6 @@ class PolygonPMV(object):
         psy = self._psychrometric_chart
         # check to be sure the shade line fits on the chart
         self._balance_check(balance_temperature)
-        
         comf_poly = self.merged_comfort_polygon
         bal = balance_temperature if not psy.use_ip else \
             self.TEMP_TYPE.to_unit([balance_temperature], 'F', 'C')[0]
@@ -795,7 +794,7 @@ class PolygonPMV(object):
         if len(temp_vals) == 1:
             t = temp_vals[0]
             val = 1 if bal_temp - 20 < t < bal_temp and comf_val[0] == 0 else 0
-            return([val]), 20
+            return ([val]), 20
         else:  # make sure the collection is hourly continuous
             time_ind = self._check_hourly(incident_irradiance, 'Passive Solar')
             tcon_i = time_constant * incident_irradiance.header.analysis_period.timestep
