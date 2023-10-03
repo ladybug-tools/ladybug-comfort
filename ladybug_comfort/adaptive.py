@@ -55,7 +55,7 @@ def adaptive_comfort_ashrae55(t_prevail, to):
 
 
 def adaptive_comfort_en15251(t_prevail, to):
-    """Get adaptive comfort criteria according to EN-15251.
+    """Get adaptive comfort criteria according to EN-15251 and EN-16798.
 
     Note:
         [1] CEN (2007) Standard EN15251. Indoor Environmental Input Parameters for
@@ -100,12 +100,12 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
     """Get adaptive comfort using SCATs neutral temp function for heated/cooled operation.
 
     Note that the use of adaptive comfort methods in conditioned buildings is not
-    an official part of either ASHRAE-55 or EN-15251. For more information on how
-    adaptive comfort methods can be applied to conditioned buildings, see the
+    an official part of either ASHRAE-55 or the EN standard. For more information on
+    how adaptive comfort methods can be applied to conditioned buildings, see the
     neutral_temperature_conditioned function.
 
     Args:
-        t_prevail: The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+        t_prevail: The prevailing outdoor temperature [C]. For the EN adaptive
             comfort model, this is typically the exponentially weighted running mean
             of the outdoor temperature over the past week.  Use the weighted_running_mean
             functions to compute this value.
@@ -117,7 +117,7 @@ def adaptive_comfort_conditioned(t_prevail, to, conditioning, model):
             * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
-            function.  Chose from: 'EN-15251', 'ASHRAE-55'.
+            function.  Chose from: 'EN-16798', 'ASHRAE-55'.
 
     Returns:
         A dictionary containing results with the following keys
@@ -156,7 +156,7 @@ def adaptive_comfort_conditioned_function(conditioning, model):
             * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
-            function.  Chose from: 'EN-15251', 'ASHRAE-55'.
+            function.  Chose from: 'EN-16798', 'ASHRAE-55'.
     """
     def comfort_funct(t_prevail, to):
         return adaptive_comfort_conditioned(t_prevail, to, conditioning, model)
@@ -192,13 +192,13 @@ def neutral_temperature_ashrae55(t_prevail):
             comfort model, this is typically the average monthly outdoor temperature.
 
     Return:
-        The desired neutral temperature for the input previaling outdoor temperature.
+        The desired neutral temperature for the input prevailing outdoor temperature.
     """
     return 0.31 * t_prevail + 17.8
 
 
 def neutral_temperature_en15251(t_prevail):
-    """Get the neutral temperature (desired by occupants) according to EN-15251.
+    """Get the neutral temperature (desired by occupants) according to the EN standard.
 
     Note:
         [1] CIBSE (2006) Environmental Criteria for Design, Chapter 1: Environmental
@@ -206,27 +206,27 @@ def neutral_temperature_en15251(t_prevail):
         Services Engineers.
 
         [2] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
-        and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+        and Thermal Comfort (SCATs). Report to the European Commission of the Smart
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
     Args:
-        t_prevail: The prevailing outdoor temperature [C].  For the EN-15251 adaptive
+        t_prevail: The prevailing outdoor temperature [C].  For the EN adaptive
             comfort model, this is typically the exponentially weighted running mean
             of the outdoor temperature over the past week.  Use the weighted_running_mean
             functions to compute this value.
 
     Return:
-        The desired neutral temperature for the input previaling outdoor temperature.
+        The desired neutral temperature for the input prevailing outdoor temperature.
     """
     return 0.33 * t_prevail + 18.8
 
 
-def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
+def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-16798'):
     """Get the neutral temperature for a conditioned or partly conditioned building.
 
     Note that the use of adaptive comfort methods in conditioned buildings is not an
     official part of any standard. Both the American ASHRAE-55 standard and the
-    European EN-15251 standard state that the adaptive model should only be used
+    European EN standard state that the adaptive model should only be used
     when the following criteria are met:
 
     (a) There is no mechanical cooling or heating system in operation
@@ -239,18 +239,18 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
         (in the case of ASHRAE-55, occupants must specifically be allowed
         to adapt clothing within a range at least as wide as 0.5 - 1.0 clo)
 
-    However, the SCATs project[1], from which EN-15251 is derived, involved the survey
-    of conditioned buildings and a neutral temperature function was obtained for
+    However, the SCATs project[1], from which the EN standard is derived, involved the
+    survey of conditioned buildings and a neutral temperature function was obtained for
     heated and cooled modes of operation.  While the coefficient of determination (aka.
     R squared) of this function was not as strong as that for free-running buildings,
     it appears to be stronger than PMV calculated from the observed conditions in the
-    SCATs data set[2].  Accordingly, it has been published in CIBSE guide[3] and has
-    been included here along with methods to calculate netural temperature functions
+    SCATs data set[2]. Accordingly, it has been published in CIBSE guide[3] and has
+    been included here along with methods to calculate neutral temperature functions
     in between free-running and heated/cooled conditions.
 
     Note:
         [1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
-        and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+        and Thermal Comfort (SCATs). Report to the European Commission of the Smart
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
         [2] Humphreys, M., Nicol, F. and Roaf, S. (2016) Adaptive Thermal Comfort:
@@ -270,10 +270,10 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
             * 1 = conditioned (no operable windows and fully air conditioned)
 
         model: The comfort standard, which will be used to represent the "free-running"
-            function.  Chose from: 'EN-15251', 'ASHRAE-55'.
+            function.  Chose from: 'EN-16798', 'ASHRAE-55'.
 
     Return:
-        The desired neutral temperature for the input previaling outdoor temperature.
+        The desired neutral temperature for the input prevailing outdoor temperature.
 
     """
     if conditioning == 1:
@@ -282,14 +282,32 @@ def neutral_temperature_conditioned(t_prevail, conditioning, model='EN-15251'):
         inv_conditioning = 1 - conditioning
         t_comf = ((0.09 * conditioning) + (0.31 * inv_conditioning)) * t_prevail + \
             ((22.6 * conditioning) + (17.8 * inv_conditioning))
-    elif model == 'EN-15251':
+    elif model.startswith('EN'):
         inv_conditioning = 1 - conditioning
         t_comf = ((0.09 * conditioning) + (0.33 * inv_conditioning)) * t_prevail + \
             ((22.6 * conditioning) + (18.8 * inv_conditioning))
     else:
         raise ValueError('Adaptive comfort model type {} not recognized. '
-                         'Choose: EN-15251 or ASHRAE-55'.format(model))
+                         'Choose: EN-16798 or ASHRAE-55'.format(model))
     return t_comf
+
+
+def neutral_temperature_conditioned_function(conditioning, model):
+    """Get a neutral_temperature_conditioned function with pre-set conditioning/model.
+
+    Args:
+        conditioning: A number between 0 and 1 that represents how "conditioned" vs.
+            "free-running" the building is.
+
+            * 0 = free-running (completely passive with no air conditioning)
+            * 1 = conditioned (no operable windows and fully air conditioned)
+
+        model: The comfort standard, which will be used to represent the "free-running"
+            function.  Chose from: 'EN-16798', 'ASHRAE-55'.
+    """
+    def neutral_funct(t_prevail):
+        return neutral_temperature_conditioned(t_prevail, conditioning, model)
+    return neutral_funct
 
 
 def cooling_effect_ashrae55(vel, to):
@@ -344,10 +362,10 @@ def ashrae55_neutral_offset_from_ppd(ppd=90):
 
 
 def en15251_neutral_offset_from_comfort_class(comf_class):
-    """Get acceptable offset from neutral temperature given the EN-15251 comfort class.
+    """Get acceptable offset from neutral temperature given the EN comfort class.
 
     Args:
-        comf_class: An integer representing the EN-15251 comfort class.
+        comf_class: An integer representing the EN comfort class.
             Choose from: 1, 2, 3 (the higher the class, the greater the offset)
 
     Returns:
@@ -370,7 +388,7 @@ def weighted_running_mean_hourly(outdoor_temperatures, alpha=0.8):
 
     Note:
         [1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
-        and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+        and Thermal Comfort (SCATs). Report to the European Commission of the Smart
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
     Args:
@@ -427,7 +445,7 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
 
     Note:
         [1] Nicol, F. and McCartney, K. (2001) Final Report (Public) Smart Controls
-        and Thermal Comfort (SCATs). Report to the European Comission of the Smart
+        and Thermal Comfort (SCATs). Report to the European Commission of the Smart
         Controls and Thermal Comfort project. Oxford: Oxford Brokes University.
 
     Args:
@@ -484,7 +502,7 @@ def check_prevailing_temperatures_ashrae55(t_prevail):
 
 
 def check_prevailing_temperatures_en15251(t_prevail):
-    """Check whether prevailing temperatures are outside permissable ranges for EN-15251.
+    """Check whether prevailing temperatures are outside permissable ranges for EN.
 
     Args:
         t_prevail: A list of prevailing outdoor temperature [C].
@@ -498,7 +516,7 @@ def check_prevailing_temperatures_en15251(t_prevail):
             acceptable ranges.
     """
     all_in_range, message = check_prevailing_temperatures_range(
-        t_prevail, 10., 30., 'EN-15251')
+        t_prevail, 10., 30., 'EN-16798')
     return all_in_range, message
 
 

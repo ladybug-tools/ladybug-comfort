@@ -223,19 +223,19 @@ def test_check_prevailing_temperatures_en15251():
 
 def test_adaptive_parameter_init():
     """Test the initialization of the AdaptiveParameter object."""
-    ashrae55_or_en15251 = False
+    ashrae_or_en = False
     neutral_offset = 2
     avg_month_or_run = True
     discr_or_cont = True
     cold_prevail_temp_limit = 18
     conditioning = 0.5
-    adaptive_par = AdaptiveParameter(ashrae55_or_en15251=ashrae55_or_en15251,
+    adaptive_par = AdaptiveParameter(ashrae_or_en=ashrae_or_en,
                                      neutral_offset=neutral_offset,
                                      avg_month_or_running_mean=avg_month_or_run,
                                      discrete_or_continuous_air_speed=discr_or_cont,
                                      cold_prevail_temp_limit=cold_prevail_temp_limit,
                                      conditioning=conditioning)
-    assert adaptive_par.ashrae55_or_en15251 == ashrae55_or_en15251
+    assert adaptive_par.ashrae_or_en == ashrae_or_en
     assert adaptive_par.neutral_offset == neutral_offset
     assert adaptive_par.avg_month_or_running_mean is avg_month_or_run
     assert adaptive_par.discrete_or_continuous_air_speed == discr_or_cont
@@ -247,7 +247,7 @@ def test_adaptive_parameter_default_ahsrae55():
     """Test the default AdaptiveParameter properties."""
     adaptive_par = AdaptiveParameter()
     str(adaptive_par)  # test casting the parameters to a string
-    assert adaptive_par.ashrae55_or_en15251 is True
+    assert adaptive_par.ashrae_or_en is True
     assert adaptive_par.neutral_offset == 2.5
     assert adaptive_par.avg_month_or_running_mean is True
     assert adaptive_par.discrete_or_continuous_air_speed is True
@@ -262,20 +262,19 @@ def test_adaptive_parameter_default_ahsrae55():
     assert adaptive_par.neutral_offset == 3.5
 
 
-def test_adaptive_parameter_default_en15251():
+def test_adaptive_parameter_default_en():
     """Test the default AdaptiveParameter properties."""
     adaptive_par = AdaptiveParameter(False)
     str(adaptive_par)  # test casting the parameters to a string
-    assert adaptive_par.ashrae55_or_en15251 is False
+    assert adaptive_par.ashrae_or_en is False
     assert adaptive_par.neutral_offset == 3
     assert adaptive_par.avg_month_or_running_mean is False
-    assert adaptive_par.discrete_or_continuous_air_speed is False
-    assert adaptive_par.cold_prevail_temp_limit == 15
+    assert adaptive_par.discrete_or_continuous_air_speed is True
+    assert adaptive_par.cold_prevail_temp_limit == 10
     assert adaptive_par.conditioning == 0
-    assert adaptive_par.standard == 'EN-15251'
+    assert adaptive_par.standard == 'EN-16798'
     assert adaptive_par.prevailing_temperature_method == 'RunningMean'
-    assert adaptive_par.air_speed_method == 'Continuous'
-    assert adaptive_par.minimum_operative == pytest.approx(20.75, rel=1e-2)
+    assert adaptive_par.air_speed_method == 'Discrete'
 
     adaptive_par.set_neutral_offset_from_comfort_class(1)
     assert adaptive_par.neutral_offset == 2
@@ -411,7 +410,7 @@ def test_adaptive_collection_defaults():
 
     assert isinstance(adapt_obj.comfort_parameter, AdaptiveParameter)
     default_par = AdaptiveParameter()
-    assert adapt_obj.comfort_parameter.ashrae55_or_en15251 == default_par.ashrae55_or_en15251
+    assert adapt_obj.comfort_parameter.ashrae_or_en == default_par.ashrae_or_en
     assert adapt_obj.comfort_parameter.neutral_offset == default_par.neutral_offset
     assert adapt_obj.comfort_parameter.avg_month_or_running_mean == default_par.avg_month_or_running_mean
     assert adapt_obj.comfort_parameter.discrete_or_continuous_air_speed == default_par.discrete_or_continuous_air_speed
@@ -499,7 +498,7 @@ def test_init_adaptive_collection_full_input():
 
     assert adapt_obj.operative_temperature[0] == 26
     assert adapt_obj.air_speed[0] == 0.7
-    assert adapt_obj.comfort_parameter.ashrae55_or_en15251 is True
+    assert adapt_obj.comfort_parameter.ashrae_or_en is True
     assert adapt_obj.comfort_parameter.neutral_offset == 2
     assert adapt_obj.comfort_parameter.avg_month_or_running_mean is False
     assert adapt_obj.comfort_parameter.discrete_or_continuous_air_speed is False

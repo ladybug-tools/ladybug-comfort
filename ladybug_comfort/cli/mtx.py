@@ -257,7 +257,7 @@ def adaptive_mtx(
         if comfort_par.conditioning != 0:
             comf_funct = adaptive_comfort_conditioned_function(
                 comfort_par.conditioning, comfort_par.standard)
-        elif comfort_par.ashrae55_or_en15251 is True:
+        elif comfort_par.ashrae_or_en is True:
             comf_funct = adaptive_comfort_ashrae55
         else:
             comf_funct = adaptive_comfort_en15251

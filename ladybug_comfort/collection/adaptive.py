@@ -76,7 +76,7 @@ class Adaptive(ComfortCollection):
                  '_cooling_effect_coll')
 
     def __init__(self, outdoor_temperature, operative_temperature, air_speed=None,
-                 comfort_parameter=None):
+                 comfort_parameter=None): 
         """Initialize an Adaptive comfort object from DataCollections of inputs.
         """
         # set up the object using operative temperature as a base
@@ -133,7 +133,7 @@ class Adaptive(ComfortCollection):
         return cls(outdoor_temperature, to, air_speed, comfort_parameter)
 
     def _calculate_adaptive(self):
-        """Compute Adaptive comfort for each step of the Data Collection."""
+        """Compute Adaptive comfort for each step of the Data Collection.""" 
         # empty properties to be calculated
         self._neutral_temperature = []
         self._degrees_from_neutral = []
@@ -145,7 +145,7 @@ class Adaptive(ComfortCollection):
         if self._comfort_par.conditioning != 0:
             comf_funct = adaptive_comfort_conditioned_function(
                 self._comfort_par.conditioning, self._comfort_par.standard)
-        elif self._comfort_par.ashrae55_or_en15251 is True:
+        elif self._comfort_par.ashrae_or_en:
             comf_funct = adaptive_comfort_ashrae55
         else:
             comf_funct = adaptive_comfort_en15251
@@ -242,7 +242,7 @@ class Adaptive(ComfortCollection):
 
     @property
     def percent_comfortable(self):
-        """The percent of time comfortabe given by the assigned comfort_parameter."""
+        """The percent of time comfortable given by the assigned comfort_parameter."""
         return (sum(self._is_comfortable) / self._calc_length) * 100
 
     @property
