@@ -12,32 +12,34 @@ class AdaptiveParameter(ComfortParameter):
     """Parameters of Adaptive comfort.
 
     Args:
-        ashrae55_or_en15251: A boolean to note whether to use the ASHRAE-55 neutral
-            temperature function (True) or the EN-15251 function (False).
-            Note that this input will also determine default values for many of
-            the other properties of this object.
+        ashrae_or_en: A boolean to note whether to use the ASHRAE-55 neutral
+            temperature function (True) or the european neutral function (False),
+            which is consistent with both EN-15251 and EN-16798. Note that this
+            input will also determine default values for many of the other
+            properties of this object.
         neutral_offset:  The number of degrees Celsius from the neutral temperature
             where the input operative temperature is considered acceptable.
             The default is 2.5C when the neutral temperature function is ASHRAE-55
-            and 3C when the neutral temperature function is EN-15251.
-            You may want to use the set_neutral_offset_from_ppd() or the
-            set_neutral_offset_from_comfort_class() methods on this object to set
-            this value using ppd from the ASHRAE-55 standard or comfort classes
-            from the EN-15251 standard respectively.
+            and 3C when the neutral temperature function is EN, which is consistent
+            with comfort class II. You may want to use the set_neutral_offset_from_ppd()
+            or the set_neutral_offset_from_comfort_class() methods on this object to
+            set this value using ppd from the ASHRAE-55 standard or comfort classes
+            from the EN standard respectively.
         avg_month_or_running_mean: A boolean to note whether the prevailing outdoor
             temperature is computed from the average monthly temperature (True) or
             a weighted running mean of the last week (False).  The default is True
             when the neutral temperature function is ASHRAE-55 and False when the
-            neutral temperature function is EN-15251.
+            neutral temperature function is EN.
         discrete_or_continuous_air_speed: A boolean to note whether discrete
             categories should be used to assess the effect of elevated air speed
             (True) or whether a continuous function should be used (False).
-            The default is True when the neutral temperature function is ASHRAE-55
-            and False when the neutral temperature function is EN-15251.
+            Note that continuous air speeds were only used in the older EN-15251
+            standard and are not a part of the more recent EN-16798 standard.
+            When unassigned, this will be True for discrete air speeds.
         cold_prevail_temp_limit: A number indicating the prevailing outdoor
             temperature below which acceptable indoor operative temperatures
-            flatline. The default is 10C when the neutral temperature function is
-            ASHRAE-55 and 15C when the neutral temperature function is EN-15251.
+            flat line. The default is 10C, which is consistent with both ASHRAE-55 and
+            EN-16798. However, 15C was used for the older EN-15251 standard.
             This number cannot be greater than 22C and cannot be less than 10C.
         conditioning: A number between 0 and 1 that represents how "conditioned" vs.
             "free-running" the building is.
@@ -45,11 +47,11 @@ class AdaptiveParameter(ComfortParameter):
             * 0 = free-running (completely passive with no air conditioning)
             * 1 = conditioned (no operable windows and fully air conditioned)
 
-            The default is 0 since both the ASHRAE-55 and EN-15251 standards prohibit
+            The default is 0 since both the ASHRAE-55 and EN standards prohibit
             the use of adaptive comfort methods when a cooling system is active.
 
     Properties:
-        * ashrae55_or_en15251
+        * ashrae_or_en
         * neutral_offset
         * avg_month_or_running_mean
         * discrete_or_continuous_air_speed
@@ -63,27 +65,25 @@ class AdaptiveParameter(ComfortParameter):
     __slots__ = ('_standard', '_neutral_offset', '_prevail_method', '_air_speed_method',
                  '_cold_prevail_temp_limit', '_conditioning', '_min_operative')
 
-    def __init__(self, ashrae55_or_en15251=None, neutral_offset=None,
+    def __init__(self, ashrae_or_en=None, neutral_offset=None,
                  avg_month_or_running_mean=None, discrete_or_continuous_air_speed=None,
                  cold_prevail_temp_limit=None, conditioning=None):
         """Initialize Adaptive Parameters.
         """
         # get the standard
-        self._standard = ashrae55_or_en15251 if ashrae55_or_en15251 is not None else True
-        assert isinstance(self._standard, bool), 'ashrae55_or_en15251 must be '\
+        self._standard = ashrae_or_en if ashrae_or_en is not None else True
+        assert isinstance(self._standard, bool), 'ashrae_or_en must be '\
             'a boolean. Got {}'.format(type(self._standard))
 
         # set defaults based on the standard
-        if self._standard is True:
+        default_air_speed_method = True
+        default_cold_prevail_temp_limit = 10
+        if self._standard:
             default_neutral_offset = 2.5
             default_prevail_method = True
-            default_air_speed_method = True
-            default_cold_prevail_temp_limit = 10
         else:
             default_neutral_offset = 3
             default_prevail_method = False
-            default_air_speed_method = False
-            default_cold_prevail_temp_limit = 15
 
         # assign properties based on defaults and input
         self._prevail_method = avg_month_or_running_mean if \
@@ -116,7 +116,7 @@ class AdaptiveParameter(ComfortParameter):
 
             {
             'type': 'AdaptiveParameter',
-            'ashrae55_or_en15251': True,
+            'ashrae_or_en': True,
             'neutral_offset': 2.5,
             'avg_month_or_running_mean': False,
             'discrete_or_continuous_air_speed': True,
@@ -126,8 +126,8 @@ class AdaptiveParameter(ComfortParameter):
         """
         assert data['type'] == 'AdaptiveParameter', \
             'Expected AdaptiveParameter dictionary. Got {}.'.format(data['type'])
-        ashrae55_or_en15251 = data['ashrae55_or_en15251'] if \
-            'ashrae55_or_en15251' in data else None
+        ashrae_or_en = data['ashrae_or_en'] if \
+            'ashrae_or_en' in data else None
         neutral_offset = data['neutral_offset'] if \
             'neutral_offset' in data else None
         avg_month_or_running_mean = data['avg_month_or_running_mean'] if \
@@ -138,7 +138,7 @@ class AdaptiveParameter(ComfortParameter):
             'cold_prevail_temp_limit' in data else None
         conditioning = data['conditioning'] if \
             'conditioning' in data else None
-        return cls(ashrae55_or_en15251, neutral_offset, avg_month_or_running_mean,
+        return cls(ashrae_or_en, neutral_offset, avg_month_or_running_mean,
                    discrete_or_continuous_air_speed, cold_prevail_temp_limit,
                    conditioning)
 
@@ -167,9 +167,9 @@ class AdaptiveParameter(ComfortParameter):
         return cls(ashrae55, offset, avg_month, spd_method, cold_limit, conditioning)
 
     @property
-    def ashrae55_or_en15251(self):
+    def ashrae_or_en(self):
         """A boolean to note whether to use the ASHRAE-55 neutral temperature
-        function (True) or the EN-15251 function (False)."""
+        function (True) or the EN function (False)."""
         return self._standard
 
     @property
@@ -200,7 +200,7 @@ class AdaptiveParameter(ComfortParameter):
     @property
     def cold_prevail_temp_limit(self):
         """The prevailing outdoor temperature below which acceptable indoor
-        operative temperatures flatline. [C]"""
+        operative temperatures flat line. [C]"""
         return self._cold_prevail_temp_limit
 
     @property
@@ -212,16 +212,16 @@ class AdaptiveParameter(ComfortParameter):
     def standard(self):
         """Text denoting the standard.
 
-        Either 'ASHRAE-55' or 'EN-15251'
+        Either 'ASHRAE-55' or 'EN-16798'
         """
         if self._standard is True:
             return 'ASHRAE-55'
         else:
-            return 'EN-15251'
+            return 'EN-16798'
 
     @property
     def prevailing_temperature_method(self):
-        """Text denoting previaling temperature method.
+        """Text denoting prevailing temperature method.
 
         Either 'Averaged Monthly' or 'Running Mean'.
         """
@@ -251,7 +251,7 @@ class AdaptiveParameter(ComfortParameter):
         self.neutral_offset = ashrae55_neutral_offset_from_ppd(ppd)
 
     def set_neutral_offset_from_comfort_class(self, comfort_class):
-        """Set the offset from neutral temperature given the EN-15251 comfort class."""
+        """Set the offset from neutral temperature given the EN comfort class."""
         self.neutral_offset = en15251_neutral_offset_from_comfort_class(comfort_class)
 
     def is_comfortable(self, comfort_result, cooling_effect=0):
@@ -278,7 +278,7 @@ class AdaptiveParameter(ComfortParameter):
         Values are one of the following:
 
         * -1 = cold
-        * 0 = netural
+        * 0 = neutral
         * +1 = hot
 
         Args:
@@ -295,7 +295,7 @@ class AdaptiveParameter(ComfortParameter):
         """AdaptiveParameter dictionary representation."""
         return {
             'type': 'AdaptiveParameter',
-            'ashrae55_or_en15251': self.ashrae55_or_en15251,
+            'ashrae_or_en': self.ashrae_or_en,
             'neutral_offset': self.neutral_offset,
             'avg_month_or_running_mean': self.avg_month_or_running_mean,
             'discrete_or_continuous_air_speed': self.discrete_or_continuous_air_speed,
@@ -304,7 +304,7 @@ class AdaptiveParameter(ComfortParameter):
         }
 
     def __copy__(self):
-        return AdaptiveParameter(self.ashrae55_or_en15251, self.neutral_offset,
+        return AdaptiveParameter(self.ashrae_or_en, self.neutral_offset,
                                  self.avg_month_or_running_mean,
                                  self.discrete_or_continuous_air_speed,
                                  self.cold_prevail_temp_limit, self.conditioning)
