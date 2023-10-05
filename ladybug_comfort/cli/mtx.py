@@ -8,7 +8,7 @@ import os
 from ladybug_comfort.pmv import predicted_mean_vote, predicted_mean_vote_no_set
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     adaptive_comfort_en15251, adaptive_comfort_conditioned_function, \
-    cooling_effect_ashrae55, cooling_effect_en15251
+    cooling_effect_ashrae55, cooling_effect_en16798, cooling_effect_en15251
 from ladybug_comfort.utci import universal_thermal_climate_index
 
 from ._helper import load_value_list, thermal_map_csv, csv_to_num_matrix, \
@@ -262,10 +262,12 @@ def adaptive_mtx(
         else:
             comf_funct = adaptive_comfort_en15251
         # determine the cooling effect function to use
-        if comfort_par.discrete_or_continuous_air_speed is True:
+        if not comfort_par.discrete_or_continuous_air_speed:
+            cooling_funct = cooling_effect_en15251
+        elif comfort_par.ashrae_or_en:
             cooling_funct = cooling_effect_ashrae55
         else:
-            cooling_funct = cooling_effect_en15251
+            cooling_funct = cooling_effect_en16798
 
         # run the collections through the PMV model and output results
         temper, cond, cond_intensity = [], [], []
@@ -274,7 +276,7 @@ def adaptive_mtx(
             for tp, ta, tr, vel in zip(prevail_temp, sat, srt, sas):
                 to = (ta + tr) / 2
                 result = comf_funct(tp, to)
-                ce = cooling_funct(vel, to)
+                ce = cooling_funct(vel, to, tp)
                 s_cond_intensity.append(result['deg_comf'])
                 s_cond.append(comfort_par.thermal_condition(result, ce))
                 s_temper.append(to)

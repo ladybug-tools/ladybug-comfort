@@ -310,12 +310,13 @@ def neutral_temperature_conditioned_function(conditioning, model):
     return neutral_funct
 
 
-def cooling_effect_ashrae55(vel, to):
+def cooling_effect_ashrae55(vel, to, tp=None):
     """Get ASHRAE-55 cooling effect as a result of elevated air speed.
 
     Args:
         vel: Relative air velocity [m/s]
         to : Operative Temperature [C]
+        tp: Prevailing Outdoor Temperature [C]. Currently not used in calculations.
 
     Returns:
         ce -- Cooling effect as a result of elevated air speed [C]
@@ -331,12 +332,36 @@ def cooling_effect_ashrae55(vel, to):
     return ce
 
 
-def cooling_effect_en15251(vel, to):
-    """Get EN-15251 cooling effect as a result of elevated air speed.
+def cooling_effect_en16798(vel, to, trm):
+    """Get EN-16798 cooling effect as a result of elevated air speed.
 
     Args:
         vel: Relative air velocity [m/s]
         to : Operative Temperature [C]
+        trm: Running Mean Outdoor Air Temperature [C]
+
+    Returns:
+        ce -- Cooling effect as a result of elevated air speed [C]
+    """
+    ce = 0
+    if vel >= 0.6 and to >= 25 and trm > 12.73:
+        if vel < 0.9:
+            ce = 1.2
+        elif vel < 1.2:
+            ce = 1.8
+        elif vel >= 1.2:
+            ce = 2.2
+    return ce
+
+
+def cooling_effect_en15251(vel, to, trm=None):
+    """Get EN-15251 cooling effect as a result of elevated air speed.
+
+    Args:
+        vel: Relative air velocity [m/s].
+        to : Operative Temperature [C].
+        trm: Running Mean Outdoor Air Temperature [C]. Currently not
+            used in calculations.
 
     Returns:
         ce -- Cooling effect as a result of elevated air speed [C]
