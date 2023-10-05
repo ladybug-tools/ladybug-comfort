@@ -4,7 +4,7 @@ from __future__ import division
 
 from ..adaptive import adaptive_comfort_ashrae55, adaptive_comfort_en15251, \
     adaptive_comfort_conditioned_function, cooling_effect_ashrae55, \
-    cooling_effect_en15251, t_operative, \
+    cooling_effect_en16798, cooling_effect_en15251, t_operative, \
     weighted_running_mean_hourly, weighted_running_mean_daily
 from ..parameter.adaptive import AdaptiveParameter
 from .base import ComfortCollection
@@ -151,15 +151,17 @@ class Adaptive(ComfortCollection):
             comf_funct = adaptive_comfort_en15251
 
         # determine the cooling effect function to use
-        if self._comfort_par.discrete_or_continuous_air_speed is True:
+        if not self._comfort_par.discrete_or_continuous_air_speed:
+            cooling_funct = cooling_effect_en15251
+        elif self._comfort_par.ashrae_or_en:
             cooling_funct = cooling_effect_ashrae55
         else:
-            cooling_funct = cooling_effect_en15251
+            cooling_funct = cooling_effect_en16798
 
         # perform the Adaptive calculation
         for tp, to, vel in zip(self._prevail_temp, self._op_temp, self._air_speed):
             result = comf_funct(tp, to)
-            ce = cooling_funct(vel, to)
+            ce = cooling_funct(vel, to, tp)
             comf = self._comfort_par.is_comfortable(result, ce)
             if comf == 0:
                 condit = 1 if result['deg_comf'] > 0 else -1

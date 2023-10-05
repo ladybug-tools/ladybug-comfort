@@ -476,6 +476,30 @@ class AdaptiveChart(object):
         lower_line = neutral_line.move(Vector2D(0, -offset_dist))
         upper_line = neutral_line.move(Vector2D(0, offset_dist))
 
+        # trim the bottom of the polygon if there is a cold_prevail_temp_limit
+        if self.comfort_parameter.cold_prevail_temp_limit > 10:
+            limit_tc = self.comfort_parameter.cold_prevail_temp_limit
+            limit_t = limit_tc if not self.use_ip else \
+                self.TEMP_TYPE.to_unit([limit_tc], 'F', 'C')[0]
+            limit_x = self.tp_x_value(limit_t)
+            int_lin = LineSegment2D.from_end_points(Point2D(limit_x, self._y_range[0]),
+                                                    Point2D(limit_x, self._y_range[-1]))
+            i_pts = lower_line.intersect_line_ray(int_lin)
+            if i_pts is not None and (len(i_pts) == 1 or isinstance(i_pts, Point2D)):
+                int_pt = i_pts if isinstance(i_pts, Point2D) else i_pts[0]
+                new_low_pts, int_passed = [], False
+                for pt in lower_line.vertices:
+                    if pt.x < int_pt.x:
+                        new_low_pts.append(Point2D(pt.x, int_pt.y))
+                    elif not int_passed:
+                        new_low_pts.append(int_pt)
+                        new_low_pts.append(pt)
+                        int_passed = True
+                    else:
+                        new_low_pts.append(pt)
+                lower_line = Polyline2D(new_low_pts) if len(new_low_pts) > 2 else \
+                    LineSegment2D.from_end_points(new_low_pts[0], new_low_pts[1])
+
         # determine if there is a cooling effect
         if self.comfort_parameter.discrete_or_continuous_air_speed is True:
             cooling_func = cooling_effect_ashrae55
@@ -489,7 +513,7 @@ class AdaptiveChart(object):
         ce_t = ce if not self.use_ip else self.DT_TYPE.to_unit([ce], 'dF', 'dC')[0]
         ce_dist = self.y_dim * ce_t
         ce_vec = Vector2D(0, ce_dist)
-        switch_tc = 12 if self.comfort_parameter.ashrae_or_en else 12.72
+        switch_tc = 12 if self.comfort_parameter.ashrae_or_en else 12.73
         switch_t = switch_tc if not self.use_ip else \
             self.TEMP_TYPE.to_unit([switch_tc], 'F', 'C')[0]
         switch_x = self.tp_x_value(switch_t)
