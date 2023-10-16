@@ -317,11 +317,11 @@ def calc_missing_utci_input(target_utci, utci_inputs, low_bound=0., up_bound=100
 
         low_bound: The lowest possible value of the missing input you are tying to
             find. Putting in a good value here will help the model converge to a
-            solution faster.
+            solution faster. (Default: 0).
         up_bound: The highest possible value of the missing input you are tying to
             find. Putting in a good value here will help the model converge to a
-            solution faster.
-        tolerance: The acceptable error in the target_utci. The default is set to 0.001
+            solution faster. (Default: 100).
+        tolerance: The acceptable error in the target_utci. (Default: 0.001).
 
     Returns:
         complete_utci_inputs -- A copy of the utci_inputs dictionary but with values for
