@@ -6,7 +6,7 @@ import re
 from ._base import ComfortParameter
 
 
-class UTCIParameter(ComfortParameter):
+class UTCIParameter(ComfortParameter): 
     """Parameters of UTCI comfort.
 
     Args:
@@ -23,7 +23,7 @@ class UTCIParameter(ComfortParameter):
         moderate_cold_thresh:  UTCI temperature below which conditions
             represent moderate cold stress [C]. Default: 0C.
         moderate_heat_thresh:  UTCI temperature above which conditions
-            represent moderateheat stress [C]. Default: 28C.
+            represent moderate heat stress [C]. Default: 28C.
         strong_heat_thresh:  UTCI temperature above which conditions
             represent strong heat stress [C]. Default: 32C.
         very_strong_heat_thresh:  UTCI temperature above which conditions
