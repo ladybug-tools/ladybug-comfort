@@ -59,3 +59,41 @@ def radiant_asymmetry_ppd(radiant_temperature_difference, asymmetry_type):
         raise ValueError(
             'Radiant asymmetry_type "{}" was not recognized.'.format(asymmetry_type))
     return ppd
+
+
+def ankle_draft_ppd(predicted_mean_vote, air_speed_at_ankle):
+    """Calculate the percentage of people dissatisfied from cold drafts at ankle-level.
+
+    The original tests used to create the model involved blowing cold air on
+    subject's ankles at a height of 10 cm off of the ground.
+    The formula was officially incorporated in the ASHRAE 55 standard in 2020
+    with a recommendation that PPD from ankle draft not exceed 20%.
+
+    Note:
+        [1] ASHRAE Standard 55 (2020). "Thermal Environmental Conditions
+        for Human Occupancy." American Society of Heating,
+        Refrigerating and Air Conditioning Engineers.
+
+        [2] Schiavon, S., D. Rim, W. Pasut, W. Nazaroff. 2016. "Sensation of
+        draft at uncovered ankles for women exposed to displacement ventilation
+        and underfloor air distribution systems." Building and Environment, 96, 228-236.
+
+        [3] Liu, S., S. Schiavon, A. Kabanshi, W. Nazaroff. 2016. "Predicted
+        percentage of dissatisfied with ankle draft." Accepted Author Manuscript.
+        Indoor Environmental Quality. http://escholarship.org/uc/item/9076254n
+
+    Args:
+        predicted_mean_vote: The full-body predicted mean vote (PMV) of the subject.
+            Ankle draft depends on full-body PMV because subjects are more likely
+            to feel uncomfortably cold at their extremities when their whole body
+            is already feeling colder than neutral.
+            The functions in the pmv module can be used to calculate this input.
+        air_speed_at_ankle: The velocity of the draft in m/s at ankle level
+            (10cm above the floor).
+
+    Returns:
+        ppd -- The percentage of people dissatisfied (PPD) from cold downdraft
+        at ankle-level.
+    """
+    c_term = math.exp(-2.58 + (3.05 * air_speed_at_ankle) - (1.06 * predicted_mean_vote))
+    return 100 * (c_term / (1 + c_term))
