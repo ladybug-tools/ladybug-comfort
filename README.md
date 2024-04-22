@@ -17,6 +17,9 @@ Ladybug-comfort is a Python library that adds thermal comfort functionalities to
 
 `pip install ladybug-comfort`
 
+To check if the Ladybug-comfort command line interface is installed correctly,
+use `ladybug-comfort --help`.
+
 ## Usage
 
 ```python
