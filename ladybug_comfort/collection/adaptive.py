@@ -15,7 +15,7 @@ from ladybug.datacollection import HourlyContinuousCollection, DailyCollection, 
 from ladybug.analysisperiod import AnalysisPeriod
 
 from ladybug.datatype.temperature import Temperature, OperativeTemperature, \
-    PrevailingOutdoorTemperature
+    PrevailingOutdoorTemperature, NeutralTemperature
 from ladybug.datatype.speed import Speed, AirSpeed
 from ladybug.datatype.thermalcondition import ThermalComfort, ThermalCondition
 from ladybug.datatype.temperaturedelta import OperativeTemperatureDelta
@@ -199,7 +199,7 @@ class Adaptive(ComfortCollection):
     def neutral_temperature(self):
         """Data Collection of the desired neutral temperature in degrees C."""
         return self._get_coll('_neutral_temperature_coll', self._neutral_temperature,
-                              OperativeTemperature, 'C')
+                              NeutralTemperature, 'C')
 
     @property
     def degrees_from_neutral(self):
