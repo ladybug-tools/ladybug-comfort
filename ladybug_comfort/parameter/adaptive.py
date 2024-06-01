@@ -267,10 +267,16 @@ class AdaptiveParameter(ComfortParameter):
                 adaptive_comfort_ashrae55 or adaptive_comfort_en15251 functions.
             cooling_effect: Cooling effect from elevated air speed.
         """
-        return 1 if (comfort_result['to'] >= self._min_operative and
-                    comfort_result['deg_comf'] >= -self.neutral_offset and
-                    comfort_result['deg_comf'] <= self.neutral_offset +
-                    cooling_effect) else 0
+        if self._standard:
+            return 1 if (comfort_result['to'] >= self._min_operative and
+                        comfort_result['deg_comf'] >= -self.neutral_offset and
+                        comfort_result['deg_comf'] <= self.neutral_offset +
+                        cooling_effect) else 0
+        else:  # lower threshold of EN-16798 is 1 degree cooler than upper threshold
+            return 1 if (comfort_result['to'] >= self._min_operative and
+                        comfort_result['deg_comf'] >= -self.neutral_offset - 1 and
+                        comfort_result['deg_comf'] <= self.neutral_offset +
+                        cooling_effect) else 0
 
     def thermal_condition(self, comfort_result, cooling_effect=0):
         """Determine whether conditions are cold, neutral or hot.

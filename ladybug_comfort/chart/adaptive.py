@@ -470,11 +470,20 @@ class AdaptiveChart(object):
         """Get a Polygon2D for the comfort range on the chart."""
         # start off with the neutral polyline and move it based on the offset
         neutral_line = self.neutral_polyline
-        offset_t = self.comfort_parameter.neutral_offset if not self.use_ip else \
-            self.DT_TYPE.to_unit([self.comfort_parameter.neutral_offset], 'dF', 'dC')[0]
-        offset_dist = self.y_dim * offset_t
-        lower_line = neutral_line.move(Vector2D(0, -offset_dist))
-        upper_line = neutral_line.move(Vector2D(0, offset_dist))
+        offset_t_up = self.comfort_parameter.neutral_offset
+        # lower threshold of EN-16798 is 1 degree cooler than upper threshold
+        offset_t_low = -self.comfort_parameter.neutral_offset \
+            if self.comfort_parameter.standard == 'ASHRAE-55' else \
+            -self.comfort_parameter.neutral_offset - 1
+        offset_t_up = offset_t_up if not self.use_ip else \
+            self.DT_TYPE.to_unit([offset_t_up], 'dF', 'dC')[0]
+        offset_t_low = offset_t_low if not self.use_ip else \
+            self.DT_TYPE.to_unit([offset_t_low], 'dF', 'dC')[0]
+
+        offset_dist_up = self.y_dim * offset_t_up
+        offset_dist_low = self.y_dim * offset_t_low
+        upper_line = neutral_line.move(Vector2D(0, offset_dist_up))
+        lower_line = neutral_line.move(Vector2D(0, offset_dist_low))
 
         # trim the bottom of the polygon if there is a cold_prevail_temp_limit
         if self.comfort_parameter.cold_prevail_temp_limit > 10:
