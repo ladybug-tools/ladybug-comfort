@@ -4,6 +4,7 @@ import sys
 import logging
 import json
 import os
+import numpy as np
 
 from ladybug_comfort.pmv import predicted_mean_vote, predicted_mean_vote_no_set
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
@@ -354,12 +355,12 @@ def utci_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = csv_to_num_matrix(temperature_mtx)
-        rel_h = csv_to_num_matrix(rel_humidity_mtx)
-        rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
+        air_temp = np.genfromtxt(temperature_mtx, delimiter=',').tolist()
+        rel_h = np.genfromtxt(rel_humidity_mtx, delimiter=',').tolist()
+        rad_temp = np.load(rad_temperature_mtx).tolist() \
             if rad_temperature_mtx is not None else air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
+            d_rad_temp = np.load(rad_delta_mtx).tolist()
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
         mtx_len = len(air_temp[0])
