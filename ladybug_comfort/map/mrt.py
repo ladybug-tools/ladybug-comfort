@@ -246,14 +246,40 @@ def longwave_mrt_map(
 
     # load the view factors and perform the matrix multiplication with temperature
     vf_data = np.load(view_factors)
-    mrt_data = []
-    for sen_enc, view_facs in zip(enclosure_dict['sensor_indices'], vf_data):
-        if sen_enc == -1:  # outdoor sensor
-            temp_data = out_data
-        else:  # indoor sensor
-            temp_data = in_data[sen_enc]
-        sensor_vals = np.dot(temp_data, view_facs)
-        mrt_data.append(sensor_vals)
+    sensor_indices = np.array(enclosure_dict['sensor_indices'])
+
+    # create masks for outdoor and indoor sensors
+    outdoor_mask = sensor_indices == -1
+    indoor_mask = ~outdoor_mask
+
+    # process outdoor sensors if any
+    if np.any(outdoor_mask):
+        out_temp_data = np.array(out_data)
+        out_view_facs = vf_data[outdoor_mask]
+        outdoor_results = np.dot(out_temp_data, out_view_facs.T).T
+        num_time_steps = outdoor_results.shape[1]
+
+    # process indoor sensors if any
+    if np.any(indoor_mask):
+        indoor_indices = sensor_indices[indoor_mask]
+        in_temp_data = np.array([in_data[i] for i in indoor_indices])
+        in_view_facs = vf_data[indoor_mask]
+        indoor_results = np.einsum('ijk,ik->ij', in_temp_data, in_view_facs)
+        num_time_steps = indoor_results.shape[1]
+
+    # initialize mrt_data with the correct shape
+    mrt_data = np.empty((len(sensor_indices), num_time_steps))
+
+    # place results in the correct order
+    if np.any(outdoor_mask):
+        mrt_data[outdoor_mask, :] = outdoor_results
+
+    if np.any(indoor_mask):
+        mrt_data[indoor_mask, :] = indoor_results
+
+    # convert to list format
+    mrt_data = mrt_data.tolist()
+
     return mrt_data
 
 
