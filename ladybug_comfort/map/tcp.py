@@ -2,6 +2,7 @@
 """Process comfort map results into thermal comfort percent."""
 from __future__ import division
 import json
+import numpy as np
 
 
 def tcp_model_schedules(
@@ -32,10 +33,7 @@ def tcp_model_schedules(
     # parse all of the input files
     with open(enclosure_info_json) as json_file:
         enclosure_dict = json.load(json_file)
-    cond_mtx = []
-    with open(condition_csv) as csv_data_file:
-        for row in csv_data_file:
-            cond_mtx.append([int(val) for val in row.split(',')])
+    cond_mtx = np.load(condition_csv)
     with open(occ_schedule_json) as json_file:
         occ_dict = json.load(json_file)
 
@@ -116,10 +114,7 @@ def tcp_total(condition_csv, schedule=None):
         * csp_list - List of Cold Sensation Percent (CSP) values for each sensor.
     """
     # parse the csv of results
-    cond_mtx = []
-    with open(condition_csv) as csv_data_file:
-        for row in csv_data_file:
-            cond_mtx.append([int(val) for val in row.split(',')])
+    cond_mtx = np.load(condition_csv)
 
     # create the occupancy schedule
     time_count = len(cond_mtx[0])
