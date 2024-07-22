@@ -13,6 +13,7 @@ from ladybug.datatype.energyflux import Irradiance
 from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.header import Header
 from ladybug.datacollection import HourlyContinuousCollection
+from honeybee_radiance_postprocess.reader import binary_to_array
 
 from ..solarcal import sharp_from_solar_and_body_azimuth
 from ..collection.solarcal import _HorizontalSolarCalMap, _HorizontalRefSolarCalMap
@@ -271,12 +272,11 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     a_period = AnalysisPeriod(timestep=timestep, is_leap_year=leap_yr)
     header = Header(Irradiance(), 'W/m2', a_period)
     irr_data = []
-    with open(ill_file) as results:
-        for pt_res in results:
-            ill_values = [float(v) for v in pt_res.split()]
-            pt_irr_data = _ill_values_to_data(
-                ill_values, sun_indices, header, timestep, leap_yr)
-            irr_data.append(pt_irr_data)
+    results = binary_to_array(ill_file)
+    for ill_values in results:
+        pt_irr_data = _ill_values_to_data(
+            ill_values, sun_indices, header, timestep, leap_yr)
+        irr_data.append(pt_irr_data)
     return irr_data
 
 
