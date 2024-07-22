@@ -4,6 +4,7 @@ from __future__ import division
 
 import os
 import json
+import numpy as np
 
 from ladybug.epw import EPW
 from ladybug.sql import SQLiteResult
@@ -243,18 +244,14 @@ def longwave_mrt_map(
         out_data = tuple(zip(*out_data))
 
     # load the view factors and perform the matrix multiplication with temperature
-    with open(view_factors) as csv_data_file:
-        vf_data = tuple(
-            tuple(float(val) for val in row.split(',')) for row in csv_data_file)
+    vf_data = np.load(view_factors)
     mrt_data = []
     for sen_enc, view_facs in zip(enclosure_dict['sensor_indices'], vf_data):
         if sen_enc == -1:  # outdoor sensor
             temp_data = out_data
         else:  # indoor sensor
             temp_data = in_data[sen_enc]
-        sensor_vals = []
-        for t_step in temp_data:
-            sensor_vals.append(sum(vf * t for vf, t in zip(view_facs, t_step)))
+        sensor_vals = np.dot(temp_data, view_facs)
         mrt_data.append(sensor_vals)
     return mrt_data
 
