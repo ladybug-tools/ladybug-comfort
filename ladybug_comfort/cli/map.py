@@ -5,6 +5,7 @@ import logging
 import json
 import os
 import shutil
+import numpy as np
 
 from ladybug.epw import EPW
 from ladybug.legend import LegendParameters
@@ -516,7 +517,7 @@ def irradiance_contrib(
               'from it to get indirect irradiance.', default=True, show_default=True)
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of MRT deltas. By default this will be printed out to stdout',
-              type=click.File('w'), default='-', show_default=True)
+              type=click.File('wb'), default='-', show_default=True)
 def shortwave_mrt(
         epw_file, indirect_irradiance, direct_irradiance, ref_irradiance,
         sun_up_hours, contributions, transmittance_contribs, trans_schedule_json,
@@ -569,11 +570,9 @@ def shortwave_mrt(
 
         # write out the final results to CSV files
         if len(d_mrt_temps) == 0:  # no sun-up hours; just create a blank file
-            output_file.write('')
+            output_file.write(b'')
         else:
-            for mrt_d in d_mrt_temps:
-                output_file.write(','.join(str(v) for v in mrt_d))
-                output_file.write('\n')
+            np.save(output_file, d_mrt_temps)
     except Exception as e:
         _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))
         sys.exit(1)
@@ -597,7 +596,7 @@ def shortwave_mrt(
               'If unspecified, results will be annual.', default=None, type=str)
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of longwave MRT. By default this will be printed out to stdout',
-              type=click.File('w'), default='-', show_default=True)
+              type=click.File('wb'), default='-', show_default=True)
 def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
                  run_period, output_file):
     """Get CSV files with maps of longwave MRT from Radiance and EnergyPlus results.
@@ -624,9 +623,7 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
             enclosure_info, modifiers, result_sql, view_factors, epw_file, run_period)
 
         # write out the final results to CSV files
-        for mrt_d in mrt_temps:
-            output_file.write(','.join(str(v) for v in mrt_d))
-            output_file.write('\n')
+        np.save(output_file, mrt_temps)
     except Exception as e:
         _logger.exception('Failed to run Longwave MRT map.\n{}'.format(e))
         sys.exit(1)
