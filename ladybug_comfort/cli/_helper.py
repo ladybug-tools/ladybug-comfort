@@ -4,6 +4,7 @@ Most functions assist with the serialization of objects to/from JSON or CSV.
 """
 import os
 import json
+import numpy as np
 
 from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.header import Header
@@ -170,7 +171,10 @@ def thermal_map_csv(folder, temperature, condition, condition_intensity):
         'condition': os.path.join(folder, 'condition.csv'),
         'condition_intensity': os.path.join(folder, 'condition_intensity.csv')
     }
-    _data_to_csv(temperature, result_file_dict['temperature'])
-    _data_to_csv(condition, result_file_dict['condition'])
-    _data_to_csv(condition_intensity, result_file_dict['condition_intensity'])
+    with open(result_file_dict['temperature'], 'wb') as fp:
+        np.save(fp, temperature)
+    with open(result_file_dict['condition'], 'wb') as fp:
+        np.save(fp, np.array(condition, dtype=np.int8))
+    with open(result_file_dict['condition_intensity'], 'wb') as fp:
+        np.save(fp, np.array(condition_intensity, dtype=np.int8))
     return result_file_dict
