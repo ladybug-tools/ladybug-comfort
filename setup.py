@@ -6,6 +6,9 @@ with open("README.md", "r") as fh:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+with open('mapping-requirements.txt') as f:
+    mapping_requirements = f.read().splitlines()
+
 setuptools.setup(
     name="ladybug-comfort",
     use_scm_version=True,
@@ -20,6 +23,9 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests']),
     include_package_data=True,
     install_requires=requirements,
+    extras_require={
+        'mapping': mapping_requirements
+    },
     entry_points={
         "console_scripts": ["ladybug-comfort = ladybug_comfort.cli:comfort"]
     },

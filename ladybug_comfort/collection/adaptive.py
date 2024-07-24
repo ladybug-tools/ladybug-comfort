@@ -76,7 +76,7 @@ class Adaptive(ComfortCollection):
                  '_cooling_effect_coll')
 
     def __init__(self, outdoor_temperature, operative_temperature, air_speed=None,
-                 comfort_parameter=None): 
+                 comfort_parameter=None):
         """Initialize an Adaptive comfort object from DataCollections of inputs.
         """
         # set up the object using operative temperature as a base
@@ -133,7 +133,7 @@ class Adaptive(ComfortCollection):
         return cls(outdoor_temperature, to, air_speed, comfort_parameter)
 
     def _calculate_adaptive(self):
-        """Compute Adaptive comfort for each step of the Data Collection.""" 
+        """Compute Adaptive comfort for each step of the Data Collection."""
         # empty properties to be calculated
         self._neutral_temperature = []
         self._degrees_from_neutral = []
@@ -307,9 +307,9 @@ class PrevailingTemperature(object):
         self._head = self._t_out.header
         self._avg_month = avg_month
 
-        assert isinstance(self._head.data_type, Temperature) and self._head.unit == 'C',\
-            'outdoor_temperature must be Temperature in C. Got {} in {}'.format(
-                self._head.data_type, self._head.unit)
+        assert isinstance(self._head.data_type, Temperature) and \
+            self._head.unit == 'C', 'outdoor_temperature must be Temperature in C. ' \
+            'Got {} in {}'.format(self._head.data_type, self._head.unit)
         assert self._t_out.is_continuous, 'outdoor_temperature must be continuous.'
         assert self._head.analysis_period.is_annual, 'outdoor_temperature must be annual'
         assert isinstance(self._avg_month, bool), 'avg_month' \
