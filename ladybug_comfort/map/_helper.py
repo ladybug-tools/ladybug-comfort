@@ -1,9 +1,8 @@
 """A collection of helper functions for the map sub-package."""
 import numpy as np
-from typing import Tuple
 
 
-def binary_mtx_dimension(filepath: str) -> Tuple[int, int, int, int]:
+def binary_mtx_dimension(filepath):
     """Return binary Radiance matrix dimensions if exist.
 
     This function returns NROWS, NCOLS, NCOMP and number of header lines including the
@@ -54,9 +53,7 @@ def binary_mtx_dimension(filepath: str) -> Tuple[int, int, int, int]:
         inf.close()
 
 
-def binary_to_array(
-        binary_file: str, nrows: int = None, ncols: int = None,
-        ncomp: int = None, line_count: int = 0) -> np.ndarray:
+def binary_to_array(binary_file, nrows=None, ncols=None, ncomp=None, line_count=0):
     """Read a Radiance binary file as a NumPy array.
 
     Args:
@@ -87,7 +84,7 @@ def binary_to_array(
     return array
 
 
-def load_matrix(matrix_file, delimiter = ','):
+def load_matrix(matrix_file, delimiter=','):
     with open(matrix_file, 'rb') as inf:
         first_char = inf.read(1)
         second_char = inf.read(1)

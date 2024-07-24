@@ -310,7 +310,7 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
                 pt_irr_data = _ill_values_to_data(
                     ill_values, sun_indices, header, timestep, leap_yr)
                 irr_data.append(pt_irr_data)
-    else: 
+    else:
         results = binary_to_array(ill_file)
         for ill_values in results:
             pt_irr_data = _ill_values_to_data(

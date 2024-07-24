@@ -2,7 +2,6 @@
 """Process comfort map results into thermal comfort percent."""
 from __future__ import division
 import json
-import numpy as np
 
 from ._helper import load_matrix
 

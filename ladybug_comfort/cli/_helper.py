@@ -164,7 +164,7 @@ def _data_to_ill(data, ill_path):
 
 
 def thermal_map_csv(folder, temperature, condition, condition_intensity,
-                    plain_text = True):
+                    plain_text=True):
     """Write out the thermal mapping CSV files associated with every comfort map."""
     preparedir(folder, remove_content=False)
     result_file_dict = {

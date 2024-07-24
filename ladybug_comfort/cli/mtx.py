@@ -368,7 +368,8 @@ def utci_mtx(
                 second_char = inf.read(1)
             is_text = True if first_char.isdigit() or second_char.isdigit() else False
             if is_text:
-                rad_temp = np.genfromtxt(rad_temperature_mtx, delimiter=',', encoding='utf-8').tolist()
+                rad_temp = np.genfromtxt(
+                    rad_temperature_mtx, delimiter=',', encoding='utf-8').tolist()
             else:
                 rad_temp = np.load(rad_temperature_mtx).tolist()
         else:
