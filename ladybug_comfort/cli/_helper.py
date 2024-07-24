@@ -163,7 +163,8 @@ def _data_to_ill(data, ill_path):
             ill_file.write(' '.join(str_data) + '\n')
 
 
-def thermal_map_csv(folder, temperature, condition, condition_intensity):
+def thermal_map_csv(folder, temperature, condition, condition_intensity,
+                    plain_text = True):
     """Write out the thermal mapping CSV files associated with every comfort map."""
     preparedir(folder, remove_content=False)
     result_file_dict = {
@@ -171,10 +172,15 @@ def thermal_map_csv(folder, temperature, condition, condition_intensity):
         'condition': os.path.join(folder, 'condition.csv'),
         'condition_intensity': os.path.join(folder, 'condition_intensity.csv')
     }
-    with open(result_file_dict['temperature'], 'wb') as fp:
-        np.save(fp, temperature)
-    with open(result_file_dict['condition'], 'wb') as fp:
-        np.save(fp, np.array(condition, dtype=np.int8))
-    with open(result_file_dict['condition_intensity'], 'wb') as fp:
-        np.save(fp, np.array(condition_intensity, dtype=np.int8))
+    if plain_text:
+        _data_to_csv(temperature, result_file_dict['temperature'])
+        _data_to_csv(condition, result_file_dict['condition'])
+        _data_to_csv(condition_intensity, result_file_dict['condition_intensity'])
+    else:
+        with open(result_file_dict['temperature'], 'wb') as fp:
+            np.save(fp, temperature)
+        with open(result_file_dict['condition'], 'wb') as fp:
+            np.save(fp, np.array(condition))
+        with open(result_file_dict['condition_intensity'], 'wb') as fp:
+            np.save(fp, np.array(condition_intensity))
     return result_file_dict
