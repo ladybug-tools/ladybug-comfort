@@ -4,6 +4,8 @@ from __future__ import division
 import json
 import numpy as np
 
+from ._helper import load_matrix
+
 
 def tcp_model_schedules(
         condition_csv, enclosure_info_json, occ_schedule_json, outdoor_occ_csv=None):
@@ -31,9 +33,10 @@ def tcp_model_schedules(
         * csp_list - List of Cold Sensation Percent (CSP) values for each sensor.
     """
     # parse all of the input files
+    cond_mtx = load_matrix(condition_csv)
+
     with open(enclosure_info_json) as json_file:
         enclosure_dict = json.load(json_file)
-    cond_mtx = np.load(condition_csv)
     with open(occ_schedule_json) as json_file:
         occ_dict = json.load(json_file)
 
@@ -114,7 +117,7 @@ def tcp_total(condition_csv, schedule=None):
         * csp_list - List of Cold Sensation Percent (CSP) values for each sensor.
     """
     # parse the csv of results
-    cond_mtx = np.load(condition_csv)
+    cond_mtx = load_matrix(condition_csv)
 
     # create the occupancy schedule
     time_count = len(cond_mtx[0])

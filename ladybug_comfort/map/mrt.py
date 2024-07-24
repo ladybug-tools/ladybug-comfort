@@ -13,11 +13,11 @@ from ladybug.datatype.energyflux import Irradiance
 from ladybug.analysisperiod import AnalysisPeriod
 from ladybug.header import Header
 from ladybug.datacollection import HourlyContinuousCollection
-from honeybee_radiance_postprocess.reader import binary_to_array
 
 from ..solarcal import sharp_from_solar_and_body_azimuth
 from ..collection.solarcal import _HorizontalSolarCalMap, _HorizontalRefSolarCalMap
 from ..parameter.solarcal import SolarCalParameter
+from ._helper import binary_to_array, load_matrix
 
 
 def shortwave_mrt_map(
@@ -245,7 +245,8 @@ def longwave_mrt_map(
         out_data = tuple(zip(*out_data))
 
     # load the view factors and perform the matrix multiplication with temperature
-    vf_data = np.load(view_factors)
+    vf_data = load_matrix(view_factors)
+
     sensor_indices = np.array(enclosure_dict['sensor_indices'])
 
     # create masks for outdoor and indoor sensors
@@ -298,11 +299,23 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     a_period = AnalysisPeriod(timestep=timestep, is_leap_year=leap_yr)
     header = Header(Irradiance(), 'W/m2', a_period)
     irr_data = []
-    results = binary_to_array(ill_file)
-    for ill_values in results:
-        pt_irr_data = _ill_values_to_data(
-            ill_values, sun_indices, header, timestep, leap_yr)
-        irr_data.append(pt_irr_data)
+    with open(ill_file, 'rb') as inf:
+        first_char = inf.read(1)
+        second_char = inf.read(1)
+    is_text = True if first_char.isdigit() or second_char.isdigit() else False
+    if is_text:
+        with open(ill_file) as results:
+            for pt_res in results:
+                ill_values = [float(v) for v in pt_res.split()]
+                pt_irr_data = _ill_values_to_data(
+                    ill_values, sun_indices, header, timestep, leap_yr)
+                irr_data.append(pt_irr_data)
+    else: 
+        results = binary_to_array(ill_file)
+        for ill_values in results:
+            pt_irr_data = _ill_values_to_data(
+                ill_values, sun_indices, header, timestep, leap_yr)
+            irr_data.append(pt_irr_data)
     return irr_data
 
 
