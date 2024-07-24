@@ -17,6 +17,10 @@ Ladybug-comfort is a Python library that adds thermal comfort functionalities to
 
 `pip install ladybug-comfort`
 
+If you want to also include the dependencies needed for thermal mapping use:
+
+`pip install -U honeybee-energy[mapping]`
+
 To check if the Ladybug-comfort command line interface is installed correctly,
 use `ladybug-comfort --help`.
 

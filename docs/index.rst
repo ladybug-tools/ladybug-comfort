@@ -11,6 +11,12 @@ Installation
 
 ``pip install -U ladybug-comfort``
 
+If you want to also include the dependencies needed for thermal mapping use.
+
+``pip install -U honeybee-energy[mapping]``
+
+To check if the command line interface is installed correctly use ``ladybug-comfort --help``
+
 
 CLI Docs
 =============
