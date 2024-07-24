@@ -341,7 +341,7 @@ def adaptive(result_sql, enclosure_info, epw_file,
 @click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
               'output should be formatted as a plain text CSV or whether it '
               'should be formatted as a binary numpy array.',
-              default=False, show_default=True)
+              default=True, show_default=True)
 def utci(result_sql, enclosure_info, epw_file,
          total_irradiance, direct_irradiance, ref_irradiance, sun_up_hours,
          wind_speed, run_period, comfort_par, solarcal_par, folder, log_file,
@@ -526,7 +526,7 @@ def irradiance_contrib(
 @click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
               'output should be formatted as a plain text CSV or whether it '
               'should be formatted as a binary numpy array.',
-              default=False, show_default=True)
+              default=True, show_default=True)
 def shortwave_mrt(
         epw_file, indirect_irradiance, direct_irradiance, ref_irradiance,
         sun_up_hours, contributions, transmittance_contribs, trans_schedule_json,
@@ -618,7 +618,7 @@ def shortwave_mrt(
 @click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
               'output should be formatted as a plain text CSV or whether it '
               'should be formatted as a binary numpy array.',
-              default=False, show_default=True)
+              default=True, show_default=True)
 def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
                  run_period, output_file, plain_text):
     """Get CSV files with maps of longwave MRT from Radiance and EnergyPlus results.

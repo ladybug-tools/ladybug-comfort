@@ -343,7 +343,7 @@ def adaptive_mtx(
 @click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
               'output should be formatted as a plain text CSV or whether it '
               'should be formatted as a binary numpy array.',
-              default=False, show_default=True)
+              default=True, show_default=True)
 def utci_mtx(
     temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
     air_speed_mtx, wind_speed_json, wind_speed, comfort_par, folder, log_file,
