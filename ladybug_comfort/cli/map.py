@@ -5,6 +5,7 @@ import logging
 import json
 import os
 import shutil
+import numpy as np
 
 from ladybug.epw import EPW
 from ladybug.legend import LegendParameters
@@ -337,9 +338,14 @@ def adaptive(result_sql, enclosure_info, epw_file,
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def utci(result_sql, enclosure_info, epw_file,
          total_irradiance, direct_irradiance, ref_irradiance, sun_up_hours,
-         wind_speed, run_period, comfort_par, solarcal_par, folder, log_file):
+         wind_speed, run_period, comfort_par, solarcal_par, folder, log_file,
+         plain_text):
     """Get CSV files with maps of UTCI comfort from EnergyPlus and Radiance results.
 
     \b
@@ -386,7 +392,7 @@ def utci(result_sql, enclosure_info, epw_file,
         if folder is None:
             folder = os.path.join(os.path.dirname(result_sql), 'thermal_map')
         result_file_dict = thermal_map_csv(
-            folder, temperature, condition, condition_intensity)
+            folder, temperature, condition, condition_intensity, plain_text)
         log_file.write(json.dumps(result_file_dict))
     except Exception as e:
         _logger.exception('Failed to run UTCI model comfort map.\n{}'.format(e))
@@ -517,10 +523,14 @@ def irradiance_contrib(
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of MRT deltas. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def shortwave_mrt(
         epw_file, indirect_irradiance, direct_irradiance, ref_irradiance,
         sun_up_hours, contributions, transmittance_contribs, trans_schedule_json,
-        run_period, solarcal_par, is_indirect, output_file):
+        run_period, solarcal_par, is_indirect, output_file, plain_text):
     """Get CSV files with maps of shortwave MRT Deltas from Radiance results.
 
     \b
@@ -568,12 +578,19 @@ def shortwave_mrt(
             solarcal_par=solarcal_par, indirect_is_total=is_total)
 
         # write out the final results to CSV files
-        if len(d_mrt_temps) == 0:  # no sun-up hours; just create a blank file
-            output_file.write('')
+        if plain_text:
+            if len(d_mrt_temps) == 0:
+                output_file.write('')
+            else:
+                for mrt_d in d_mrt_temps:
+                    output_file.write(','.join(str(v) for v in mrt_d))
+                    output_file.write('\n')
         else:
-            for mrt_d in d_mrt_temps:
-                output_file.write(','.join(str(v) for v in mrt_d))
-                output_file.write('\n')
+            if len(d_mrt_temps) == 0:  # no sun-up hours; just create a blank file
+                output_file.write('')
+            else:
+                with open(output_file.name, 'wb') as fp:
+                    np.save(fp, d_mrt_temps)
     except Exception as e:
         _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))
         sys.exit(1)
@@ -598,8 +615,12 @@ def shortwave_mrt(
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of longwave MRT. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
-                 run_period, output_file):
+                 run_period, output_file, plain_text):
     """Get CSV files with maps of longwave MRT from Radiance and EnergyPlus results.
 
     \b
@@ -624,9 +645,13 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
             enclosure_info, modifiers, result_sql, view_factors, epw_file, run_period)
 
         # write out the final results to CSV files
-        for mrt_d in mrt_temps:
-            output_file.write(','.join(str(v) for v in mrt_d))
-            output_file.write('\n')
+        if plain_text:
+            for mrt_d in mrt_temps:
+                output_file.write(','.join(str(v) for v in mrt_d))
+                output_file.write('\n')
+        else:
+            with open(output_file.name, 'wb') as fp:
+                np.save(fp, mrt_temps)
     except Exception as e:
         _logger.exception('Failed to run Longwave MRT map.\n{}'.format(e))
         sys.exit(1)

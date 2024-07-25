@@ -4,6 +4,7 @@ from __future__ import division
 
 import os
 import json
+import numpy as np
 
 from ladybug.epw import EPW
 from ladybug.sql import SQLiteResult
@@ -16,6 +17,7 @@ from ladybug.datacollection import HourlyContinuousCollection
 from ..solarcal import sharp_from_solar_and_body_azimuth
 from ..collection.solarcal import _HorizontalSolarCalMap, _HorizontalRefSolarCalMap
 from ..parameter.solarcal import SolarCalParameter
+from ._helper import binary_to_array, load_matrix
 
 
 def shortwave_mrt_map(
@@ -243,19 +245,42 @@ def longwave_mrt_map(
         out_data = tuple(zip(*out_data))
 
     # load the view factors and perform the matrix multiplication with temperature
-    with open(view_factors) as csv_data_file:
-        vf_data = tuple(
-            tuple(float(val) for val in row.split(',')) for row in csv_data_file)
-    mrt_data = []
-    for sen_enc, view_facs in zip(enclosure_dict['sensor_indices'], vf_data):
-        if sen_enc == -1:  # outdoor sensor
-            temp_data = out_data
-        else:  # indoor sensor
-            temp_data = in_data[sen_enc]
-        sensor_vals = []
-        for t_step in temp_data:
-            sensor_vals.append(sum(vf * t for vf, t in zip(view_facs, t_step)))
-        mrt_data.append(sensor_vals)
+    vf_data = load_matrix(view_factors)
+
+    sensor_indices = np.array(enclosure_dict['sensor_indices'])
+
+    # create masks for outdoor and indoor sensors
+    outdoor_mask = sensor_indices == -1
+    indoor_mask = ~outdoor_mask
+
+    # process outdoor sensors if any
+    if np.any(outdoor_mask):
+        out_temp_data = np.array(out_data)
+        out_view_facs = vf_data[outdoor_mask]
+        outdoor_results = np.dot(out_temp_data, out_view_facs.T).T
+        num_time_steps = outdoor_results.shape[1]
+
+    # process indoor sensors if any
+    if np.any(indoor_mask):
+        indoor_indices = sensor_indices[indoor_mask]
+        in_temp_data = np.array([in_data[i] for i in indoor_indices])
+        in_view_facs = vf_data[indoor_mask]
+        indoor_results = np.einsum('ijk,ik->ij', in_temp_data, in_view_facs)
+        num_time_steps = indoor_results.shape[1]
+
+    # initialize mrt_data with the correct shape
+    mrt_data = np.empty((len(sensor_indices), num_time_steps))
+
+    # place results in the correct order
+    if np.any(outdoor_mask):
+        mrt_data[outdoor_mask, :] = outdoor_results
+
+    if np.any(indoor_mask):
+        mrt_data[indoor_mask, :] = indoor_results
+
+    # convert to list format
+    mrt_data = mrt_data.tolist()
+
     return mrt_data
 
 
@@ -274,9 +299,20 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     a_period = AnalysisPeriod(timestep=timestep, is_leap_year=leap_yr)
     header = Header(Irradiance(), 'W/m2', a_period)
     irr_data = []
-    with open(ill_file) as results:
-        for pt_res in results:
-            ill_values = [float(v) for v in pt_res.split()]
+    with open(ill_file, 'rb') as inf:
+        first_char = inf.read(1)
+        second_char = inf.read(1)
+    is_text = True if first_char.isdigit() or second_char.isdigit() else False
+    if is_text:
+        with open(ill_file) as results:
+            for pt_res in results:
+                ill_values = [float(v) for v in pt_res.split()]
+                pt_irr_data = _ill_values_to_data(
+                    ill_values, sun_indices, header, timestep, leap_yr)
+                irr_data.append(pt_irr_data)
+    else:
+        results = binary_to_array(ill_file)
+        for ill_values in results:
             pt_irr_data = _ill_values_to_data(
                 ill_values, sun_indices, header, timestep, leap_yr)
             irr_data.append(pt_irr_data)

@@ -4,6 +4,7 @@ import sys
 import logging
 import json
 import os
+import numpy as np
 
 from ladybug_comfort.pmv import predicted_mean_vote, predicted_mean_vote_no_set
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
@@ -339,9 +340,14 @@ def adaptive_mtx(
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def utci_mtx(
     temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
-    air_speed_mtx, wind_speed_json, wind_speed, comfort_par, folder, log_file
+    air_speed_mtx, wind_speed_json, wind_speed, comfort_par, folder, log_file,
+    plain_text
 ):
     """Get CSV files with matrices of UTCI comfort from matrices of UTCI inputs.
 
@@ -354,12 +360,29 @@ def utci_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = csv_to_num_matrix(temperature_mtx)
-        rel_h = csv_to_num_matrix(rel_humidity_mtx)
-        rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
-            if rad_temperature_mtx is not None else air_temp
+        air_temp = np.genfromtxt(temperature_mtx, delimiter=',').tolist()
+        rel_h = np.genfromtxt(rel_humidity_mtx, delimiter=',').tolist()
+        if rad_temperature_mtx is not None:
+            with open(rad_temperature_mtx, 'rb') as inf:
+                first_char = inf.read(1)
+                second_char = inf.read(1)
+            is_text = True if first_char.isdigit() or second_char.isdigit() else False
+            if is_text:
+                rad_temp = np.genfromtxt(
+                    rad_temperature_mtx, delimiter=',', encoding='utf-8').tolist()
+            else:
+                rad_temp = np.load(rad_temperature_mtx).tolist()
+        else:
+            rad_temp = air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
+            with open(rad_delta_mtx, 'rb') as inf:
+                first_char = inf.read(1)
+                second_char = inf.read(1)
+            is_text = True if first_char.isdigit() or second_char.isdigit() else False
+            if is_text:
+                d_rad_temp = np.genfromtxt(rad_delta_mtx, delimiter=',', encoding='utf-8')
+            else:
+                d_rad_temp = np.load(rad_delta_mtx).tolist()
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
         mtx_len = len(air_temp[0])
@@ -399,7 +422,8 @@ def utci_mtx(
         # write out the final results to CSV files
         if folder is None:
             folder = os.path.join(os.path.dirname(temperature_mtx), 'thermal_mtx')
-        result_file_dict = thermal_map_csv(folder, temper, cond, cond_intensity)
+        result_file_dict = thermal_map_csv(folder, temper, cond, cond_intensity,
+                                           plain_text=plain_text)
         log_file.write(json.dumps(result_file_dict))
     except Exception as e:
         _logger.exception('Failed to run UTCI matrix.\n{}'.format(e))
