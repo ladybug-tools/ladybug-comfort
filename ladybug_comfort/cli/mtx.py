@@ -4,7 +4,6 @@ import sys
 import logging
 import json
 import os
-import numpy as np
 
 from ladybug_comfort.pmv import predicted_mean_vote, predicted_mean_vote_no_set
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
@@ -12,6 +11,7 @@ from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     cooling_effect_ashrae55, cooling_effect_en16798, cooling_effect_en15251
 from ladybug_comfort.utci import universal_thermal_climate_index
 
+from ..map._helper import load_matrix
 from ._helper import load_value_list, thermal_map_csv, csv_to_num_matrix, \
     load_pmv_par_str, load_adaptive_par_str, load_utci_par_str
 
@@ -360,29 +360,15 @@ def utci_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = np.genfromtxt(temperature_mtx, delimiter=',').tolist()
-        rel_h = np.genfromtxt(rel_humidity_mtx, delimiter=',').tolist()
+        air_temp = load_matrix(temperature_mtx).tolist()
+        rel_h = load_matrix(rel_humidity_mtx).tolist()
+
         if rad_temperature_mtx is not None:
-            with open(rad_temperature_mtx, 'rb') as inf:
-                first_char = inf.read(1)
-                second_char = inf.read(1)
-            is_text = True if first_char.isdigit() or second_char.isdigit() else False
-            if is_text:
-                rad_temp = np.genfromtxt(
-                    rad_temperature_mtx, delimiter=',', encoding='utf-8').tolist()
-            else:
-                rad_temp = np.load(rad_temperature_mtx).tolist()
+            rad_temp = load_matrix(rad_temperature_mtx).tolist()
         else:
             rad_temp = air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            with open(rad_delta_mtx, 'rb') as inf:
-                first_char = inf.read(1)
-                second_char = inf.read(1)
-            is_text = True if first_char.isdigit() or second_char.isdigit() else False
-            if is_text:
-                d_rad_temp = np.genfromtxt(rad_delta_mtx, delimiter=',', encoding='utf-8')
-            else:
-                d_rad_temp = np.load(rad_delta_mtx).tolist()
+            d_rad_temp = load_matrix(rad_delta_mtx).tolist()
             rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
                              for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
         mtx_len = len(air_temp[0])
