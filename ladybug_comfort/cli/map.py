@@ -34,7 +34,7 @@ from ladybug_comfort.collection.utci import UTCI
 
 from ._helper import load_values, load_analysis_period_str, \
     load_pmv_par_str, load_adaptive_par_str, load_utci_par_str, \
-    load_solarcal_par_str, thermal_map_csv, _data_to_ill
+    load_solarcal_par_str, thermal_map_csv, _data_to_ill, set_smallest_dtype
 
 _logger = logging.getLogger(__name__)
 
@@ -590,7 +590,7 @@ def shortwave_mrt(
                 output_file.write('')
             else:
                 with open(output_file.name, 'wb') as fp:
-                    np.save(fp, d_mrt_temps)
+                    np.save(fp, set_smallest_dtype(np.array(d_mrt_temps)))
     except Exception as e:
         _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))
         sys.exit(1)
@@ -651,7 +651,7 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
                 output_file.write('\n')
         else:
             with open(output_file.name, 'wb') as fp:
-                np.save(fp, mrt_temps)
+                np.save(fp, set_smallest_dtype(np.array(mrt_temps)))
     except Exception as e:
         _logger.exception('Failed to run Longwave MRT map.\n{}'.format(e))
         sys.exit(1)
@@ -677,8 +677,12 @@ def longwave_mrt(result_sql, view_factors, modifiers, enclosure_info, epw_file,
 @click.option('--output-file', '-f', help='Optional file to output the CSV matrix '
               'of values. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
-def air_temperature(result_sql, enclosure_info, epw_file,
-                    run_period, air_temperature, output_file):
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
+def air_temperature(result_sql, enclosure_info, epw_file, run_period,
+                    air_temperature, output_file, plain_text):
     """Get CSV files with maps of air temperatures or humidity from EnergyPlus results.
 
     \b
@@ -701,9 +705,13 @@ def air_temperature(result_sql, enclosure_info, epw_file,
         air_data = air_map(enclosure_info, result_sql, epw_file, run_period, humidity)
 
         # write out the final results to CSV files
-        for air_d in air_data:
-            output_file.write(','.join(str(v) for v in air_d))
-            output_file.write('\n')
+        if plain_text:
+            for air_d in air_data:
+                output_file.write(','.join(str(v) for v in air_d))
+                output_file.write('\n')
+        else:
+            with open(output_file.name, 'wb') as fp:
+                np.save(fp, set_smallest_dtype(np.array(air_data)))
     except Exception as e:
         _logger.exception('Failed to run Air Temperature map.\n{}'.format(e))
         sys.exit(1)
