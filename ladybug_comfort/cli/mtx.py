@@ -4,14 +4,16 @@ import sys
 import logging
 import json
 import os
+import numpy as np
 
 from ladybug_comfort.pmv import predicted_mean_vote, predicted_mean_vote_no_set
 from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     adaptive_comfort_en15251, adaptive_comfort_conditioned_function, \
     cooling_effect_ashrae55, cooling_effect_en16798, cooling_effect_en15251
-from ladybug_comfort.utci import universal_thermal_climate_index
 
 from ..map._helper import load_matrix
+from .utci import universal_thermal_climate_index, thermal_condition, \
+    thermal_condition_eleven_point
 from ._helper import load_value_list, thermal_map_csv, csv_to_num_matrix, \
     load_pmv_par_str, load_adaptive_par_str, load_utci_par_str
 
@@ -360,50 +362,40 @@ def utci_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = load_matrix(temperature_mtx).tolist()
-        rel_h = load_matrix(rel_humidity_mtx).tolist()
+        air_temp = load_matrix(temperature_mtx)
+        rel_h = load_matrix(rel_humidity_mtx)
 
         if rad_temperature_mtx is not None:
-            rad_temp = load_matrix(rad_temperature_mtx).tolist()
+            rad_temp = load_matrix(rad_temperature_mtx)
         else:
             rad_temp = air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            d_rad_temp = load_matrix(rad_delta_mtx).tolist()
-            rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
-                             for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
+            d_rad_temp = load_matrix(rad_delta_mtx)
+            rad_temp = rad_temp + d_rad_temp
         mtx_len = len(air_temp[0])
 
         # process any of the other inputs for air speed
         w_speed = None
         if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
-            a_speed = csv_to_num_matrix(air_speed_mtx)
-            w_speed = tuple(tuple(v * 2 for v in row) for row in a_speed)
+            a_speed = load_matrix(air_speed_mtx)
+            w_speed = a_speed * 2
         if w_speed is None and wind_speed_json is not None \
                 and os.path.isfile(wind_speed_json):
             with open(wind_speed_json) as json_file:
                 w_speed_dict = json.load(json_file)
             speeds = w_speed_dict['air_speeds']
-            w_speed = tuple(speeds[i] for i in w_speed_dict['speed_indices'])
+            w_speed = np.array([speeds[i] for i in w_speed_dict['speed_indices']], dtype=np.float32)
         if w_speed is None:
             wind_speed = load_value_list(wind_speed, mtx_len, 0.5)
-            w_speed = [wind_speed] * len(air_temp)
+            w_speed = np.array([[wind_speed] * len(air_temp)], dtype=np.float32)
 
         # load the comfort parameters
         comfort_par = load_utci_par_str(comfort_par)
 
         # run the collections through the UTCI model and output results
-        temper, cond, cond_intensity = [], [], []
-        for sat, srt, sws, srh in zip(air_temp, rad_temp, w_speed, rel_h):
-            s_temper, s_cond, s_cond_intensity = [], [], []
-            for ta, tr, vel, rh in zip(sat, srt, sws, srh):
-                result = universal_thermal_climate_index(ta, tr, vel, rh)
-                s_temper.append(result)
-                s_cond.append(comfort_par.thermal_condition(result))
-                s_cond_intensity.append(
-                    comfort_par.thermal_condition_eleven_point(result))
-            temper.append(s_temper)
-            cond.append(s_cond)
-            cond_intensity.append(s_cond_intensity)
+        temper = universal_thermal_climate_index(air_temp, rad_temp, w_speed, rel_h)
+        cond = thermal_condition(temper, comfort_par)
+        cond_intensity = thermal_condition_eleven_point(temper, comfort_par)
 
         # write out the final results to CSV files
         if folder is None:
