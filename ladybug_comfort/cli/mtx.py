@@ -12,7 +12,7 @@ from ladybug_comfort.adaptive import adaptive_comfort_ashrae55, \
     cooling_effect_ashrae55, cooling_effect_en16798, cooling_effect_en15251
 
 from ..map._helper import load_matrix
-from .utci import universal_thermal_climate_index, thermal_condition, \
+from ..map.utci import universal_thermal_climate_index_np, thermal_condition, \
     thermal_condition_eleven_point
 from ._helper import load_value_list, thermal_map_csv, csv_to_num_matrix, \
     load_pmv_par_str, load_adaptive_par_str, load_utci_par_str
@@ -393,7 +393,7 @@ def utci_mtx(
         comfort_par = load_utci_par_str(comfort_par)
 
         # run the collections through the UTCI model and output results
-        temper = universal_thermal_climate_index(air_temp, rad_temp, w_speed, rel_h)
+        temper = universal_thermal_climate_index_np(air_temp, rad_temp, w_speed, rel_h)
         cond = thermal_condition(temper, comfort_par)
         cond_intensity = thermal_condition_eleven_point(temper, comfort_par)
 
