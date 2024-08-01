@@ -4,23 +4,14 @@
 This module is devoted to calculating UTCI with NumPy.
 """
 import numpy as np
-from ..utci import _utci_polynomial_function
+from ..utci import _utci_polynomial
 
 
 def universal_thermal_climate_index_np(ta, tr, vel, rh):
     """Calculate Universal Thermal Climate Index (UTCI) using a polynomial approximation.
 
-    This function here is a Python version of the original UTCI_approx
-    application written in Fortran. Version a 0.002, October 2009
-    The original Fortran code can be found at www.utci.org.
-
-    Note:
-        [1] Peter Bröde, Dusan Fiala, Krzysztof Blazejczyk, Yoram Epstein,
-        Ingvar Holmér, Gerd Jendritzky, Bernhard Kampmann, Mark Richards,
-        Hannu Rintamäki, Avraham Shitzer, George Havenith. 2009.
-        Calculating UTCI Equivalent Temperature. In: JW Castellani & TL
-        Endrusick, eds. Proceedings of the 13th International Conference
-        on Environmental Ergonomics, USARIEM, Natick, MA.
+    This function is the same as the base universal_thermal_climate_index function
+    but it uses NumPy arrays for calculating UTCI.
 
     Args:
         ta: Air temperature [C] as a NumPy array.
@@ -38,17 +29,17 @@ def universal_thermal_climate_index_np(ta, tr, vel, rh):
     vel = np.where(vel < 0.5, 0.5, np.where(vel > 17, 17, vel))
 
     # metrics derived from the inputs used in the polynomial equation
-    eh_pa = saturated_vapor_pressure_hpa(ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
+    eh_pa = saturated_vapor_pressure_hpa_np(ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
     pa_pr = eh_pa / 10.0  # convert vapour pressure to kPa
     d_tr = tr - ta  # difference between radiant and air temperature
 
     # pre-calculate powers so we can re-use them
-    utci_approx = _utci_polynomial_function(ta, d_tr, vel, pa_pr)
+    utci_approx = _utci_polynomial(ta, d_tr, vel, pa_pr)
 
     return utci_approx
 
 
-def saturated_vapor_pressure_hpa(db_temp):
+def saturated_vapor_pressure_hpa_np(db_temp):
     """Calculate saturated vapor pressure (hPa) at temperature (C).
 
     This equation of saturation vapor pressure is specific to the UTCI model.
@@ -64,7 +55,7 @@ def saturated_vapor_pressure_hpa(db_temp):
     return es
 
 
-def thermal_condition(utci, comfort_par):
+def thermal_condition_np(utci, comfort_par):
     """Determine whether conditions are cold, neutral or hot.
 
     Values are one of the following:
@@ -82,7 +73,7 @@ def thermal_condition(utci, comfort_par):
     
     return result
 
-def thermal_condition_eleven_point(utci, comfort_par):
+def thermal_condition_eleven_point_np(utci, comfort_par):
     """Determine the thermal condition on an eleven-point scale.
 
     Values are one of the following:

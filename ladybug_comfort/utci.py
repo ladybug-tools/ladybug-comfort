@@ -62,7 +62,7 @@ def universal_thermal_climate_index(ta, tr, vel, rh):
     d_tr = tr - ta  # difference between radiant and air temperature
 
     # pre-calculate powers so we can re-use them
-    utci_approx = _utci_polynomial_function(ta, d_tr, vel, pa_pr)
+    utci_approx = _utci_polynomial(ta, d_tr, vel, pa_pr)
 
     return utci_approx
 
@@ -167,7 +167,7 @@ def calc_missing_utci_input(target_utci, utci_inputs, low_bound=0., up_bound=100
     return utci_inputs
 
 
-def _utci_polynomial_function(ta, d_tr, vel, pa_pr):
+def _utci_polynomial(ta, d_tr, vel, pa_pr):
     """Polynomial approximation for UTCI.
     
     Args:
