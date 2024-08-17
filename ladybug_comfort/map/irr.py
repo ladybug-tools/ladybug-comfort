@@ -2,7 +2,11 @@
 """Methods for resolving MRT from Radiance and EnergyPlus output files."""
 from __future__ import division
 
+import numpy as np
+
 from ladybug.sql import SQLiteResult
+
+from ._helper import binary_to_array
 
 
 def irradiance_contrib_map(
@@ -85,25 +89,15 @@ def irradiance_contrib_map(
         diff_trans.append(d_trans)
 
     # compute the direct irradiance contribution
-    direct_mtx = []
-    for pt_irr in _ill_vals(direct_specular):
-        direct_mtx.append([irr * bt for irr, bt in zip(pt_irr, beam_trans)])
+    direct_mtx = binary_to_array(direct_specular) * np.array(beam_trans)
 
     # compute the indirect irradiance contribution
-    indirect_mtx = []
-    for s_irr, d_irr in zip(_ill_vals(indirect_specular), _ill_vals(indirect_diffuse)):
-        sen_mtx = []
-        for si, di, bt, dt in zip(s_irr, d_irr, beam_trans, diff_trans):
-            sen_mtx.append((si * bt) + (di * dt))
-        indirect_mtx.append(sen_mtx)
+    indirect_mtx = binary_to_array(indirect_specular) * np.array(
+        beam_trans) + binary_to_array(indirect_diffuse) * np.array(diff_trans)
 
     # compute the ground-reflected irradiance contribution
-    ref_mtx = []
-    for s_irr, d_irr in zip(_ill_vals(ref_specular), _ill_vals(ref_diffuse)):
-        sen_mtx = []
-        for si, di, bt, dt in zip(s_irr, d_irr, beam_trans, diff_trans):
-            sen_mtx.append((si * bt) + (di * dt))
-        ref_mtx.append(sen_mtx)
+    ref_mtx = binary_to_array(ref_specular) * np.array(
+        beam_trans) + binary_to_array(ref_diffuse) * np.array(diff_trans)
 
     return direct_mtx, indirect_mtx, ref_mtx
 
