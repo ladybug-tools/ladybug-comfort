@@ -12,7 +12,7 @@ def binary_mtx_dimension(filepath):
         filepath: Full path to Radiance file.
 
     Returns:
-        nrows, ncols, ncomp, line_count
+        nrows, ncols, ncomp, line_count, fmt
     """
     try:
         inf = open(filepath, 'rb', encoding='utf-8')
@@ -39,6 +39,7 @@ def binary_mtx_dimension(filepath):
             if line[:6] == 'NCOMP=':
                 ncomp = int(line.split('=')[-1])
             if line[:7] == 'FORMAT=':
+                fmt = line.split('=')[-1]
                 break
 
         if not nrows or not ncols:
@@ -48,12 +49,14 @@ def binary_mtx_dimension(filepath):
                 f'elements.'
             )
             raise ValueError(error_message)
-        return nrows, ncols, ncomp, len(header_lines) + 1
+        return nrows, ncols, ncomp, len(header_lines) + 1, fmt
     finally:
         inf.close()
 
 
-def binary_to_array(binary_file, nrows=None, ncols=None, ncomp=None, line_count=0):
+def binary_to_array(
+        binary_file, nrows=None, ncols=None, ncomp=None, fmt=None,
+        line_count=0):
     """Read a Radiance binary file as a NumPy array.
 
     Args:
@@ -61,21 +64,43 @@ def binary_to_array(binary_file, nrows=None, ncols=None, ncomp=None, line_count=
         nrows: Number of rows in the Radiance file.
         ncols: Number of columns in the Radiance file.
         ncomp: Number of components of each element in the Radiance file.
+        fmt: Format of the Radiance file. Can be either "ascii", "float", or "double.
         line_count: Number of lines to skip in the input file. Usually used to
             skip the header.
 
     Returns:
         A NumPy array.
     """
+    with open(binary_file, 'rb') as file:
+        # check if file is NumPy file
+        numpy_header = file.read(6)
+        if numpy_header.startswith(b'\x93NUMPY'):
+            file.seek(0)
+            array = np.load(file)
+            return array
+        file.seek(0)
+        # check if file has Radiance header, if not it is a text file
+        radiance_header = file.read(10).decode('utf-8')
+        if radiance_header != '#?RADIANCE':
+            file.seek(0)
+            array = np.genfromtxt(file, dtype=np.float32)
+            return array
+
+    if (nrows or ncols or ncomp or fmt) is None:
+        # get nrows, ncols and header line count
+        nrows, ncols, ncomp, line_count, fmt = binary_mtx_dimension(binary_file)
     with open(binary_file, 'rb') as reader:
-        if (nrows or ncols or ncomp) is None:
-            # get nrows, ncols and header line count
-            nrows, ncols, ncomp, line_count = binary_mtx_dimension(binary_file)
         # skip first n lines from reader
         for i in range(line_count):
             reader.readline()
 
-        array = np.fromfile(reader, dtype=np.float32)
+        if fmt == 'ascii':
+            array = np.loadtxt(reader, dtype=np.float32)
+        elif fmt == 'float':
+            array = np.fromfile(reader, dtype=np.float32)
+        elif fmt == 'double':
+            array = np.fromfile(reader, dtype=np.float64)
+
         if ncomp != 1:
             array = array.reshape(nrows, ncols, ncomp)
         else:
