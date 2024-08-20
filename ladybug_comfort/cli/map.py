@@ -427,9 +427,14 @@ def utci(result_sql, enclosure_info, epw_file,
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def irradiance_contrib(
     result_sql, direct_specular, indirect_specular, ref_specular,
-    indirect_diffuse, ref_diffuse, sun_up_hours, aperture_id, folder, log_file
+    indirect_diffuse, ref_diffuse, sun_up_hours, aperture_id, folder, log_file,
+    plain_text
 ):
     """Get CSV files with irradiance contributions from dynamic windows.
 
@@ -466,9 +471,17 @@ def irradiance_contrib(
         ref_file = os.path.join(out_folder, 'reflected.ill')
 
         # write the irradiance matrices into CSV files
-        _data_to_ill(direct_mtx, direct_file)
-        _data_to_ill(indirect_mtx, indirect_file)
-        _data_to_ill(ref_mtx, ref_file)
+        if plain_text:
+            _data_to_ill(direct_mtx, direct_file)
+            _data_to_ill(indirect_mtx, indirect_file)
+            _data_to_ill(ref_mtx, ref_file)
+        else:
+            with open(direct_file, 'wb') as fp:
+                np.save(fp, set_smallest_dtype(np.array(direct_mtx)))
+            with open(indirect_file, 'wb') as fp:
+                np.save(fp, set_smallest_dtype(np.array(indirect_mtx)))
+            with open(ref_file, 'wb') as fp:
+                np.save(fp, set_smallest_dtype(np.array(ref_mtx)))
         log_file.write(json.dumps([direct_file, indirect_file, ref_file]))
     except Exception as e:
         _logger.exception('Failed to run Shortwave MRT Delta map.\n{}'.format(e))

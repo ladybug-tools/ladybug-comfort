@@ -29,7 +29,8 @@ def universal_thermal_climate_index_np(ta, tr, vel, rh):
     vel = np.where(vel < 0.5, 0.5, np.where(vel > 17, 17, vel))
 
     # metrics derived from the inputs used in the polynomial equation
-    eh_pa = saturated_vapor_pressure_hpa_np(ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
+    eh_pa = saturated_vapor_pressure_hpa_np(
+        ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
     pa_pr = eh_pa / 10.0  # convert vapour pressure to kPa
     d_tr = tr - ta  # difference between radiant and air temperature
 
@@ -70,7 +71,7 @@ def thermal_condition_np(utci, comfort_par):
     ]
     choices = [-1, 1]
     result = np.select(conditions, choices, default=0)
-    
+
     return result
 
 def thermal_condition_eleven_point_np(utci, comfort_par):

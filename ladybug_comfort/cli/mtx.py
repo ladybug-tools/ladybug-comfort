@@ -86,10 +86,14 @@ def mtx():
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def pmv_mtx(
     temperature_mtx, rel_humidity_mtx, rad_temperature_mtx, rad_delta_mtx,
     air_speed_mtx, air_speed_json, air_speed,
-    met_rate, clo_value, write_op_map, comfort_par, folder, log_file
+    met_rate, clo_value, write_op_map, comfort_par, folder, log_file, plain_text
 ):
     """Get CSV files with matrices of PMV comfort from matrices of PMV inputs.
 
@@ -102,20 +106,19 @@ def pmv_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = csv_to_num_matrix(temperature_mtx)
-        rel_h = csv_to_num_matrix(rel_humidity_mtx)
-        rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
+        air_temp = load_matrix(temperature_mtx)
+        rel_h = load_matrix(rel_humidity_mtx)
+        rad_temp = load_matrix(rad_temperature_mtx) \
             if rad_temperature_mtx is not None else air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
-            rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
-                             for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
+            d_rad_temp = load_matrix(rad_delta_mtx)
+            rad_temp = rad_temp + d_rad_temp
         mtx_len = len(air_temp[0])
 
         # process any of the other inputs for air speed
         a_speed = None
         if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
-            a_speed = csv_to_num_matrix(air_speed_mtx)
+            a_speed = load_matrix(air_speed_mtx).tolist()
         if a_speed is None and air_speed_json is not None \
                 and os.path.isfile(air_speed_json):
             with open(air_speed_json) as json_file:
@@ -166,7 +169,8 @@ def pmv_mtx(
         # write out the final results to CSV files
         if folder is None:
             folder = os.path.join(os.path.dirname(temperature_mtx), 'thermal_mtx')
-        result_file_dict = thermal_map_csv(folder, temper, cond, cond_intensity)
+        result_file_dict = thermal_map_csv(
+            folder, temper, cond, cond_intensity, plain_text=plain_text)
         log_file.write(json.dumps(result_file_dict))
     except Exception as e:
         _logger.exception('Failed to run PMV matrix.\n{}'.format(e))
@@ -215,9 +219,14 @@ def pmv_mtx(
 @click.option('--log-file', '-log', help='Optional log file to output the paths to the '
               'generated CSV files. By default this will be printed out to stdout',
               type=click.File('w'), default='-', show_default=True)
+@click.option('--plain-text/--binary', ' /-b', help='Flag to note whether the '
+              'output should be formatted as a plain text CSV or whether it '
+              'should be formatted as a binary numpy array.',
+              default=True, show_default=True)
 def adaptive_mtx(
     temperature_mtx, prevail_temp, rad_temperature_mtx, rad_delta_mtx,
-    air_speed_mtx, air_speed_json, air_speed, comfort_par, folder, log_file
+    air_speed_mtx, air_speed_json, air_speed, comfort_par, folder, log_file,
+    plain_text
 ):
     """Get CSV files with matrices of Adaptive comfort from matrices of Adaptive inputs.
 
@@ -230,20 +239,19 @@ def adaptive_mtx(
     """
     try:
         # load up the matrices of values
-        air_temp = csv_to_num_matrix(temperature_mtx)
+        air_temp = load_matrix(temperature_mtx)
         prevail_temp = csv_to_num_matrix(prevail_temp)[0]
-        rad_temp = csv_to_num_matrix(rad_temperature_mtx) \
+        rad_temp = load_matrix(rad_temperature_mtx) \
             if rad_temperature_mtx is not None else air_temp
         if rad_delta_mtx is not None and not os.path.getsize(rad_delta_mtx) == 0:
-            d_rad_temp = csv_to_num_matrix(rad_delta_mtx)
-            rad_temp = tuple(tuple(t + dt for t, dt in zip(t_pt, dt_pt))
-                             for t_pt, dt_pt in zip(rad_temp, d_rad_temp))
+            d_rad_temp = load_matrix(rad_delta_mtx)
+            rad_temp = rad_temp + d_rad_temp
         mtx_len = len(air_temp[0])
 
         # process any of the other inputs for air speed
         a_speed = None
         if air_speed_mtx is not None and os.path.isfile(air_speed_mtx):
-            a_speed = csv_to_num_matrix(air_speed_mtx)
+            a_speed = load_matrix(air_speed_mtx).tolist()
         if a_speed is None and air_speed_json is not None \
                 and os.path.isfile(air_speed_json):
             with open(air_speed_json) as json_file:
@@ -290,7 +298,8 @@ def adaptive_mtx(
         # write out the final results to CSV files
         if folder is None:
             folder = os.path.join(os.path.dirname(temperature_mtx), 'thermal_mtx')
-        result_file_dict = thermal_map_csv(folder, temper, cond, cond_intensity)
+        result_file_dict = thermal_map_csv(
+            folder, temper, cond, cond_intensity, plain_text=plain_text)
         log_file.write(json.dumps(result_file_dict))
     except Exception as e:
         _logger.exception('Failed to run PMV matrix.\n{}'.format(e))
