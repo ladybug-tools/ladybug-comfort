@@ -1,4 +1,6 @@
 """A collection of helper functions for the map sub-package."""
+import json
+from pathlib import Path
 import numpy as np
 
 
@@ -71,21 +73,6 @@ def binary_to_array(
     Returns:
         A NumPy array.
     """
-    with open(binary_file, 'rb') as file:
-        # check if file is NumPy file
-        numpy_header = file.read(6)
-        if numpy_header.startswith(b'\x93NUMPY'):
-            file.seek(0)
-            array = np.load(file)
-            return array
-        file.seek(0)
-        # check if file has Radiance header, if not it is a text file
-        radiance_header = file.read(10).decode('utf-8')
-        if radiance_header != '#?RADIANCE':
-            file.seek(0)
-            array = np.genfromtxt(file, dtype=np.float32)
-            return array
-
     if (nrows or ncols or ncomp or fmt) is None:
         # get nrows, ncols and header line count
         nrows, ncols, ncomp, line_count, fmt = binary_mtx_dimension(binary_file)
@@ -120,3 +107,93 @@ def load_matrix(matrix_file, delimiter=','):
         array = np.load(matrix_file)
 
     return array
+
+
+def restore_original_distribution(
+        input_folder, output_folder, extension='npy', dist_info=None,
+        output_extension='ill', as_text=False, fmt='%.2f', input_delimiter=',',
+        delimiter='tab'):
+    """Restructure files to the original distribution based on the distribution info.
+    
+    It will assume that the files in the input folder are NumPy files. However,
+    if it fails to load the files as arrays it will try to load from binary
+    Radiance files to array.
+
+    Args:
+        input_folder: Path to input folder.
+        output_folder: Path to the new restructured folder
+        extension: Extension of the files to collect data from. Default is ``npy`` for
+            NumPy files. Another common extension is ``ill`` for the results of daylight
+            studies.
+        dist_info: Path to dist_info.json file. If None, the function will try to load
+            ``_redist_info.json`` file from inside the input_folder. (Default: None).
+        output_extension: Output file extension. This is only used if as_text
+            is set to True. Otherwise the output extension will be ```npy``.
+        as_text: Set to True if the output files should be saved as text instead
+            of NumPy files.
+        fmt: Format for the output files when saved as text.
+        input_delimiter: Delimiter for the input files. This is used only if the
+            input files are text files.
+        delimiter: Delimiter for the output files when saved as text.
+    """
+    if not dist_info:
+        _redist_info_file = Path(input_folder, '_redist_info.json')
+    else:
+        _redist_info_file = Path(dist_info)
+
+    assert _redist_info_file.is_file(), 'Failed to find %s' % _redist_info_file
+
+    with open(_redist_info_file) as inf:
+        data = json.load(inf)
+
+    # create output folder
+    output_folder = Path(output_folder)
+    if not output_folder.is_dir():
+        output_folder.mkdir(parents=True, exist_ok=True)
+
+    src_file = Path()
+    for f in data:
+        output_file = Path(output_folder, f['identifier'])
+        # ensure the new folder is created. in case the identifier has a subfolder
+        parent_folder = output_file.parent
+        if not parent_folder.is_dir():
+            parent_folder.mkdir()
+
+        out_arrays = []
+        for src_info in f['dist_info']:
+            st = src_info['st_ln']
+            end = src_info['end_ln']
+            new_file = Path(input_folder, '%s.%s' % (src_info['identifier'], extension))
+            if not new_file.samefile(src_file):
+                src_file = new_file
+                try:
+                    array = np.load(src_file)
+                except:
+                    try:
+                        array = binary_to_array(src_file)
+                    except:
+                        try:
+                            array = np.loadtxt(
+                                src_file, delimiter=input_delimiter)
+                        except Exception:
+                            raise RuntimeError(
+                                f'Failed to load input file "{src_file}"')
+            slice_array = array[st:end+1,:]
+
+            out_arrays.append(slice_array)
+
+        out_array = np.concatenate(out_arrays)
+        # save numpy array, .npy extension is added automatically
+        if not as_text:
+            np.save(output_file, out_array)
+        else:
+            if output_extension.startswith('.'):
+                output_extension = output_extension[1:]
+            if delimiter == 'tab':
+                delimiter = '\t'
+            elif delimiter == 'space':
+                delimiter = ' '
+            elif delimiter == 'comma':
+                delimiter = ','
+            np.savetxt(output_file.with_suffix(f'.{output_extension}'),
+                       out_array, fmt=fmt, delimiter=delimiter)
