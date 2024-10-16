@@ -15,6 +15,8 @@ Ladybug-comfort is a Python library that adds thermal comfort functionalities to
 
 ## Installation
 
+To install the library use:
+
 `pip install ladybug-comfort`
 
 If you want to also include the dependencies needed for thermal mapping use:
@@ -40,7 +42,34 @@ print(utci_obj_exposed.percent_neutral)  # comfortable percent of time with sun 
 print(utci_obj_protected.percent_neutral)  # comfortable percent of time without sun + wind
 ```
 
-### derivative work
+## Local Development
+1. Clone this repo locally
+```console
+git clone git@github.com:ladybug-tools/ladybug-comfort.git
+
+# or
+
+git clone https://github.com/ladybug-tools/ladybug-comfort.git
+```
+2. Install dependencies:
+```console
+cd ladybug-comfort
+pip install -r dev-requirements.txt
+pip install -r requirements.txt
+```
+
+3. Run Tests:
+```console
+python -m pytest ./tests
+```
+
+4. Generate Documentation:
+```console
+sphinx-apidoc -f -e -d 4 -o ./docs ./ladybug_comfort
+sphinx-build -b html ./docs ./docs/_build/docs
+```
+
+### Derivative Work
 
 Ladybug-comfort is a derivative work of the following software projects:
 
