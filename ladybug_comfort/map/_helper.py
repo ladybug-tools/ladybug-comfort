@@ -102,7 +102,13 @@ def load_matrix(matrix_file, delimiter=','):
         second_char = inf.read(1)
     is_text = True if first_char.isdigit() or second_char.isdigit() else False
     if is_text:
-        array = np.genfromtxt(matrix_file, delimiter=delimiter,  encoding='utf-8')
+        array = np.genfromtxt(
+            matrix_file, delimiter=delimiter, encoding='utf-8',
+            filling_values=np.nan)
+        if np.isnan(array[:, -1]).all():
+            # remove last column if all in column is NaN
+            # this may happen if the CSV has trailing commas
+            array = array[:, :-1]
     else:
         array = np.load(matrix_file)
 
