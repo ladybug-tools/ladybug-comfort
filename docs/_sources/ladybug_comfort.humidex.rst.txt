@@ -1,0 +1,7 @@
+ladybug\_comfort.humidex module
+===============================
+
+.. automodule:: ladybug_comfort.humidex
+   :members:
+   :undoc-members:
+   :show-inheritance:
