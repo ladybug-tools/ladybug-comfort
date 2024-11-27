@@ -1,5 +1,0 @@
-{
-    "__comment__": "Add full paths to folders (eg. C:/epw_data, /usr/local/epw_data).",
-    "ladybug_tools_folder": "",
-    "default_epw_folder": ""
-}
