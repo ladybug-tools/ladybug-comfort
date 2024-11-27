@@ -1,1 +1,2 @@
 ladybug-core==0.43.18
+numpy
