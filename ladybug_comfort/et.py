@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Effective temperature transitioned from legacy code of @stgeorges"""
 
 def effective_temperature(Ta, ws, rh, SR, ac):
