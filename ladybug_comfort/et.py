@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Effective temperature transitioned from legacy code of @stgeorges"""
+"""Utility functions to calculate Effective Temperature"""
+
 
 def effective_temperature_conditions(tre, te):
+    """ Inputs:
+        * tre: Radiant effective temperature
+        * te: Thermal emission 
+    """
     if tre < 1:
         effectTE = -4
     elif tre >= 1 and te < 9:
