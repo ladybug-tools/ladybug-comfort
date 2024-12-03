@@ -18,8 +18,6 @@ def effective_temperature_conditions(tre, te):
         effectTE = 2
 
     return tre, effectTE, []
-    
-
 
 def effective_temperature(ta, ws, rh, sr, ac):
     """ Inputs: 
@@ -45,4 +43,4 @@ def effective_temperature(ta, ws, rh, sr, ac):
     tre = te + ((1 - 0.01 * ac) * sr) * ((0.0155 - 0.00025 * te) - (0.0043 - 0.00011 * te))
 
     return effective_temperature_conditions(tre, te)
-    
+
