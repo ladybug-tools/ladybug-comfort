@@ -5,7 +5,10 @@
 def effective_temperature_conditions(tre, te):
     """ Inputs:
         * tre: Radiant effective temperature
-        * te: Thermal emission 
+        * te: Thermal emission
+        Outputs:
+        * tre: Radiant effective temperature
+        * te: Effective temperature
     """
     if tre < 1:
         effectTE = -4
@@ -22,7 +25,8 @@ def effective_temperature_conditions(tre, te):
     elif tre >= 27:
         effectTE = 2
 
-    return tre, effectTE, []
+    return tre, effectTE
+
 
 def effective_temperature(ta, ws, rh, sr, ac):
     """ Inputs: 
@@ -48,4 +52,3 @@ def effective_temperature(ta, ws, rh, sr, ac):
     tre = te + ((1 - 0.01 * ac) * sr) * ((0.0155 - 0.00025 * te) - (0.0043 - 0.00011 * te))
 
     return effective_temperature_conditions(tre, te)
-
