@@ -1,0 +1,7 @@
+ladybug\_comfort.wc module
+==========================
+
+.. automodule:: ladybug_comfort.wc
+   :members:
+   :undoc-members:
+   :show-inheritance:
