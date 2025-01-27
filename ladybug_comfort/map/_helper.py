@@ -105,6 +105,8 @@ def load_matrix(matrix_file, delimiter=','):
         array = np.genfromtxt(
             matrix_file, delimiter=delimiter, encoding='utf-8',
             filling_values=np.nan)
+        if array.ndim == 1:
+            array = array.reshape(-1, 1)
         if np.isnan(array[:, -1]).all():
             # remove last column if all in column is NaN
             # this may happen if the CSV has trailing commas
