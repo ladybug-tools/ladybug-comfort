@@ -275,9 +275,9 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
     header = Header(Irradiance(), 'W/m2', a_period)
     irr_data = []
     with open(ill_file, 'rb') as inf:
-        first_char = inf.read(1)
-        second_char = inf.read(1)
-    is_text = True if first_char.isdigit() or second_char.isdigit() else False
+        first_bytes = inf.read(6)
+    is_text = first_bytes[:1].isdigit() or first_bytes[1:2].isdigit()
+    is_numpy = first_bytes.startswith(b'\x93NUMPY')
     if is_text:
         with open(ill_file) as results:
             for pt_res in results:
@@ -285,6 +285,12 @@ def _ill_file_to_data(ill_file, sun_indices, timestep=1, leap_yr=False):
                 pt_irr_data = _ill_values_to_data(
                     ill_values, sun_indices, header, timestep, leap_yr)
                 irr_data.append(pt_irr_data)
+    elif is_numpy:
+        results = np.load(ill_file)
+        for ill_values in results:
+            pt_irr_data = _ill_values_to_data(
+                ill_values, sun_indices, header, timestep, leap_yr)
+            irr_data.append(pt_irr_data)
     else:
         results = binary_to_array(ill_file)
         for ill_values in results:
