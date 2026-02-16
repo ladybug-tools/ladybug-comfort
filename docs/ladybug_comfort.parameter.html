@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ladybug_comfort.parameter package &#8212; ladybug comfort  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css?v=0bf093e7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=45cd8fae" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ladybug_comfort.parameter.adaptive module" href="ladybug_comfort.parameter.adaptive.html" />
+    <link rel="prev" title="ladybug_comfort.map.utci module" href="ladybug_comfort.map.utci.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ladybug comfort</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="cli/index.html">CLI Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli/index.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli/index.html#commands">Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli/mtx.html">mtx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli/sql.html">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli/map.html">map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli/datacollection.html">datacollection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli/epw.html">epw</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ladybug_comfort</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.html#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html">ladybug_comfort.chart.adaptive module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart"><code class="docutils literal notranslate"><span class="pre">AdaptiveChart</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.data_mesh"><code class="docutils literal notranslate"><span class="pre">data_mesh()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.from_air_and_rad_temp"><code class="docutils literal notranslate"><span class="pre">from_air_and_rad_temp()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.plot_point"><code class="docutils literal notranslate"><span class="pre">plot_point()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.to_y_value"><code class="docutils literal notranslate"><span class="pre">to_y_value()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.tp_x_value"><code class="docutils literal notranslate"><span class="pre">tp_x_value()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.DT_TYPE"><code class="docutils literal notranslate"><span class="pre">DT_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.TEMP_TYPE"><code class="docutils literal notranslate"><span class="pre">TEMP_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.air_speed"><code class="docutils literal notranslate"><span class="pre">air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.base_point"><code class="docutils literal notranslate"><span class="pre">base_point</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.chart_border"><code class="docutils literal notranslate"><span class="pre">chart_border</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.colored_mesh"><code class="docutils literal notranslate"><span class="pre">colored_mesh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.comfort_polygon"><code class="docutils literal notranslate"><span class="pre">comfort_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.container"><code class="docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.data_points"><code class="docutils literal notranslate"><span class="pre">data_points</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.degrees_from_neutral"><code class="docutils literal notranslate"><span class="pre">degrees_from_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.hour_values"><code class="docutils literal notranslate"><span class="pre">hour_values</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.legend"><code class="docutils literal notranslate"><span class="pre">legend</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.legend_parameters"><code class="docutils literal notranslate"><span class="pre">legend_parameters</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.max_operative"><code class="docutils literal notranslate"><span class="pre">max_operative</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.max_prevailing"><code class="docutils literal notranslate"><span class="pre">max_prevailing</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.min_operative"><code class="docutils literal notranslate"><span class="pre">min_operative</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.min_prevailing"><code class="docutils literal notranslate"><span class="pre">min_prevailing</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.neutral_polyline"><code class="docutils literal notranslate"><span class="pre">neutral_polyline</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.neutral_temperature"><code class="docutils literal notranslate"><span class="pre">neutral_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.operative_label_points"><code class="docutils literal notranslate"><span class="pre">operative_label_points</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.operative_labels"><code class="docutils literal notranslate"><span class="pre">operative_labels</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.operative_lines"><code class="docutils literal notranslate"><span class="pre">operative_lines</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.operative_temperature"><code class="docutils literal notranslate"><span class="pre">operative_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.percent_comfortable"><code class="docutils literal notranslate"><span class="pre">percent_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.percent_uncomfortable"><code class="docutils literal notranslate"><span class="pre">percent_uncomfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.prevailing_label_points"><code class="docutils literal notranslate"><span class="pre">prevailing_label_points</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.prevailing_labels"><code class="docutils literal notranslate"><span class="pre">prevailing_labels</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.prevailing_lines"><code class="docutils literal notranslate"><span class="pre">prevailing_lines</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.prevailing_outdoor_temperature"><code class="docutils literal notranslate"><span class="pre">prevailing_outdoor_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.time_matrix"><code class="docutils literal notranslate"><span class="pre">time_matrix</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.title_location"><code class="docutils literal notranslate"><span class="pre">title_location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.title_text"><code class="docutils literal notranslate"><span class="pre">title_text</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.use_ip"><code class="docutils literal notranslate"><span class="pre">use_ip</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.x_axis_location"><code class="docutils literal notranslate"><span class="pre">x_axis_location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.x_axis_text"><code class="docutils literal notranslate"><span class="pre">x_axis_text</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.x_dim"><code class="docutils literal notranslate"><span class="pre">x_dim</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.y_axis_location"><code class="docutils literal notranslate"><span class="pre">y_axis_location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.y_axis_text"><code class="docutils literal notranslate"><span class="pre">y_axis_text</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.adaptive.html#ladybug_comfort.chart.adaptive.AdaptiveChart.y_dim"><code class="docutils literal notranslate"><span class="pre">y_dim</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html">ladybug_comfort.chart.polygonpmv module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV"><code class="docutils literal notranslate"><span class="pre">PolygonPMV</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.comfort_polylines"><code class="docutils literal notranslate"><span class="pre">comfort_polylines()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.create_collection"><code class="docutils literal notranslate"><span class="pre">create_collection()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.evaluate_night_flush_polygon"><code class="docutils literal notranslate"><span class="pre">evaluate_night_flush_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.evaluate_passive_solar"><code class="docutils literal notranslate"><span class="pre">evaluate_passive_solar()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.evaluate_polygon"><code class="docutils literal notranslate"><span class="pre">evaluate_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.evaporative_cooling_polygon"><code class="docutils literal notranslate"><span class="pre">evaporative_cooling_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.fan_use_polygon"><code class="docutils literal notranslate"><span class="pre">fan_use_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.internal_heat_polygon"><code class="docutils literal notranslate"><span class="pre">internal_heat_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.max_min_air_temperatures"><code class="docutils literal notranslate"><span class="pre">max_min_air_temperatures()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.night_flush_polygon"><code class="docutils literal notranslate"><span class="pre">night_flush_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.passive_solar_polygon"><code class="docutils literal notranslate"><span class="pre">passive_solar_polygon()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.shade_line"><code class="docutils literal notranslate"><span class="pre">shade_line()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.DELTA_TEMP_TYPE"><code class="docutils literal notranslate"><span class="pre">DELTA_TEMP_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.TEMP_TYPE"><code class="docutils literal notranslate"><span class="pre">TEMP_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.air_speed"><code class="docutils literal notranslate"><span class="pre">air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.clo_value"><code class="docutils literal notranslate"><span class="pre">clo_value</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.comfort_data"><code class="docutils literal notranslate"><span class="pre">comfort_data</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.comfort_polygons"><code class="docutils literal notranslate"><span class="pre">comfort_polygons</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.comfort_values"><code class="docutils literal notranslate"><span class="pre">comfort_values</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.external_work"><code class="docutils literal notranslate"><span class="pre">external_work</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.is_comfort_too_cold"><code class="docutils literal notranslate"><span class="pre">is_comfort_too_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.is_comfort_too_hot"><code class="docutils literal notranslate"><span class="pre">is_comfort_too_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.left_comfort_line"><code class="docutils literal notranslate"><span class="pre">left_comfort_line</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.left_comfort_lines"><code class="docutils literal notranslate"><span class="pre">left_comfort_lines</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.merged_comfort_data"><code class="docutils literal notranslate"><span class="pre">merged_comfort_data</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.merged_comfort_polygon"><code class="docutils literal notranslate"><span class="pre">merged_comfort_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.merged_comfort_values"><code class="docutils literal notranslate"><span class="pre">merged_comfort_values</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.met_rate"><code class="docutils literal notranslate"><span class="pre">met_rate</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.polygon_count"><code class="docutils literal notranslate"><span class="pre">polygon_count</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.psychrometric_chart"><code class="docutils literal notranslate"><span class="pre">psychrometric_chart</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.rad_temperature"><code class="docutils literal notranslate"><span class="pre">rad_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.right_comfort_line"><code class="docutils literal notranslate"><span class="pre">right_comfort_line</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonpmv.html#ladybug_comfort.chart.polygonpmv.PolygonPMV.right_comfort_lines"><code class="docutils literal notranslate"><span class="pre">right_comfort_lines</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html">ladybug_comfort.chart.polygonutci module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI"><code class="docutils literal notranslate"><span class="pre">PolygonUTCI</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.comfort_polylines"><code class="docutils literal notranslate"><span class="pre">comfort_polylines()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.create_collection"><code class="docutils literal notranslate"><span class="pre">create_collection()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.evaluate_inside"><code class="docutils literal notranslate"><span class="pre">evaluate_inside()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.max_min_air_temperatures"><code class="docutils literal notranslate"><span class="pre">max_min_air_temperatures()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.stress_polyline"><code class="docutils literal notranslate"><span class="pre">stress_polyline()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.DELTA_TEMP_TYPE"><code class="docutils literal notranslate"><span class="pre">DELTA_TEMP_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.POLYGON_INCLUSION_TYPE"><code class="docutils literal notranslate"><span class="pre">POLYGON_INCLUSION_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.TEMP_TYPE"><code class="docutils literal notranslate"><span class="pre">TEMP_TYPE</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.comfort_data"><code class="docutils literal notranslate"><span class="pre">comfort_data</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.comfort_polygons"><code class="docutils literal notranslate"><span class="pre">comfort_polygons</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.comfort_values"><code class="docutils literal notranslate"><span class="pre">comfort_values</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.is_comfort_too_cold"><code class="docutils literal notranslate"><span class="pre">is_comfort_too_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.is_comfort_too_hot"><code class="docutils literal notranslate"><span class="pre">is_comfort_too_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.left_comfort_line"><code class="docutils literal notranslate"><span class="pre">left_comfort_line</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.left_comfort_lines"><code class="docutils literal notranslate"><span class="pre">left_comfort_lines</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.merged_comfort_data"><code class="docutils literal notranslate"><span class="pre">merged_comfort_data</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.merged_comfort_polygon"><code class="docutils literal notranslate"><span class="pre">merged_comfort_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.merged_comfort_values"><code class="docutils literal notranslate"><span class="pre">merged_comfort_values</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.moderate_cold_polygon"><code class="docutils literal notranslate"><span class="pre">moderate_cold_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.moderate_heat_polygon"><code class="docutils literal notranslate"><span class="pre">moderate_heat_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.polygon_count"><code class="docutils literal notranslate"><span class="pre">polygon_count</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.psychrometric_chart"><code class="docutils literal notranslate"><span class="pre">psychrometric_chart</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.rad_temperature"><code class="docutils literal notranslate"><span class="pre">rad_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.right_comfort_line"><code class="docutils literal notranslate"><span class="pre">right_comfort_line</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.right_comfort_lines"><code class="docutils literal notranslate"><span class="pre">right_comfort_lines</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.strong_cold_polygon"><code class="docutils literal notranslate"><span class="pre">strong_cold_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.strong_heat_polygon"><code class="docutils literal notranslate"><span class="pre">strong_heat_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.very_strong_cold_polygon"><code class="docutils literal notranslate"><span class="pre">very_strong_cold_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.very_strong_heat_polygon"><code class="docutils literal notranslate"><span class="pre">very_strong_heat_polygon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.chart.polygonutci.html#ladybug_comfort.chart.polygonutci.PolygonUTCI.wind_speed"><code class="docutils literal notranslate"><span class="pre">wind_speed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.chart.html#module-ladybug_comfort.chart">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.cli.html">ladybug_comfort.cli package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.cli.html#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.cli.datacollection.html">ladybug_comfort.cli.datacollection module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.cli.epw.html">ladybug_comfort.cli.epw module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.cli.map.html">ladybug_comfort.cli.map module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.cli.mtx.html">ladybug_comfort.cli.mtx module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.cli.sql.html">ladybug_comfort.cli.sql module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.cli.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.html#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html">ladybug_comfort.collection.adaptive module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive"><code class="docutils literal notranslate"><span class="pre">Adaptive</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.from_air_and_rad_temp"><code class="docutils literal notranslate"><span class="pre">from_air_and_rad_temp()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.air_speed"><code class="docutils literal notranslate"><span class="pre">air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.cooling_effect"><code class="docutils literal notranslate"><span class="pre">cooling_effect</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.degrees_from_neutral"><code class="docutils literal notranslate"><span class="pre">degrees_from_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.neutral_temperature"><code class="docutils literal notranslate"><span class="pre">neutral_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.operative_temperature"><code class="docutils literal notranslate"><span class="pre">operative_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.percent_comfortable"><code class="docutils literal notranslate"><span class="pre">percent_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.percent_uncomfortable"><code class="docutils literal notranslate"><span class="pre">percent_uncomfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.prevailing_outdoor_temperature"><code class="docutils literal notranslate"><span class="pre">prevailing_outdoor_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.Adaptive.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature"><code class="docutils literal notranslate"><span class="pre">PrevailingTemperature</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.get_aligned_prevailing"><code class="docutils literal notranslate"><span class="pre">get_aligned_prevailing()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature_timestep"><code class="docutils literal notranslate"><span class="pre">hourly_prevailing_temperature_timestep()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.avg_month"><code class="docutils literal notranslate"><span class="pre">avg_month</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.daily_prevailing_temperature"><code class="docutils literal notranslate"><span class="pre">daily_prevailing_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.hourly_prevailing_temperature"><code class="docutils literal notranslate"><span class="pre">hourly_prevailing_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_per_hour_prevailing_temperature"><code class="docutils literal notranslate"><span class="pre">monthly_per_hour_prevailing_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.adaptive.html#ladybug_comfort.collection.adaptive.PrevailingTemperature.monthly_prevailing_temperature"><code class="docutils literal notranslate"><span class="pre">monthly_prevailing_temperature</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.base.html">ladybug_comfort.collection.base module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection"><code class="docutils literal notranslate"><span class="pre">ComfortCollection</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.base.html#ladybug_comfort.collection.base.ComfortCollection.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.pet.html">ladybug_comfort.collection.pet module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET"><code class="docutils literal notranslate"><span class="pre">PET</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.from_epw"><code class="docutils literal notranslate"><span class="pre">from_epw()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.air_speed"><code class="docutils literal notranslate"><span class="pre">air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.air_temperature"><code class="docutils literal notranslate"><span class="pre">air_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.barometric_pressure"><code class="docutils literal notranslate"><span class="pre">barometric_pressure</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.body_parameter"><code class="docutils literal notranslate"><span class="pre">body_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.clo_value"><code class="docutils literal notranslate"><span class="pre">clo_value</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.clothing_temperature"><code class="docutils literal notranslate"><span class="pre">clothing_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.core_body_temperature"><code class="docutils literal notranslate"><span class="pre">core_body_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.core_temperature_category"><code class="docutils literal notranslate"><span class="pre">core_temperature_category</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.met_rate"><code class="docutils literal notranslate"><span class="pre">met_rate</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.operative_temperature"><code class="docutils literal notranslate"><span class="pre">operative_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.percent_comfortable"><code class="docutils literal notranslate"><span class="pre">percent_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.percent_uncomfortable"><code class="docutils literal notranslate"><span class="pre">percent_uncomfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.pet_category"><code class="docutils literal notranslate"><span class="pre">pet_category</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.physiologic_equivalent_temperature"><code class="docutils literal notranslate"><span class="pre">physiologic_equivalent_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.rad_temperature"><code class="docutils literal notranslate"><span class="pre">rad_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.rel_humidity"><code class="docutils literal notranslate"><span class="pre">rel_humidity</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.skin_temperature"><code class="docutils literal notranslate"><span class="pre">skin_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pet.html#ladybug_comfort.collection.pet.PET.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.pmv.html">ladybug_comfort.collection.pmv module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV"><code class="docutils literal notranslate"><span class="pre">PMV</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.from_epw"><code class="docutils literal notranslate"><span class="pre">from_epw()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.adjusted_air_temperature"><code class="docutils literal notranslate"><span class="pre">adjusted_air_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.air_speed"><code class="docutils literal notranslate"><span class="pre">air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.air_temperature"><code class="docutils literal notranslate"><span class="pre">air_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.clo_value"><code class="docutils literal notranslate"><span class="pre">clo_value</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.cooling_effect"><code class="docutils literal notranslate"><span class="pre">cooling_effect</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.discomfort_reason"><code class="docutils literal notranslate"><span class="pre">discomfort_reason</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.external_work"><code class="docutils literal notranslate"><span class="pre">external_work</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_conduction"><code class="docutils literal notranslate"><span class="pre">heat_loss_conduction</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_convection"><code class="docutils literal notranslate"><span class="pre">heat_loss_convection</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_dry_respiration"><code class="docutils literal notranslate"><span class="pre">heat_loss_dry_respiration</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_latent_respiration"><code class="docutils literal notranslate"><span class="pre">heat_loss_latent_respiration</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_radiation"><code class="docutils literal notranslate"><span class="pre">heat_loss_radiation</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.heat_loss_sweating"><code class="docutils literal notranslate"><span class="pre">heat_loss_sweating</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.humidity_ratio"><code class="docutils literal notranslate"><span class="pre">humidity_ratio</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.met_rate"><code class="docutils literal notranslate"><span class="pre">met_rate</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.operative_temperature"><code class="docutils literal notranslate"><span class="pre">operative_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_comfortable"><code class="docutils literal notranslate"><span class="pre">percent_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_dry"><code class="docutils literal notranslate"><span class="pre">percent_dry</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_humid"><code class="docutils literal notranslate"><span class="pre">percent_humid</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percent_uncomfortable"><code class="docutils literal notranslate"><span class="pre">percent_uncomfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.percentage_people_dissatisfied"><code class="docutils literal notranslate"><span class="pre">percentage_people_dissatisfied</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.predicted_mean_vote"><code class="docutils literal notranslate"><span class="pre">predicted_mean_vote</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.rad_temperature"><code class="docutils literal notranslate"><span class="pre">rad_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.rel_humidity"><code class="docutils literal notranslate"><span class="pre">rel_humidity</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.standard_effective_temperature"><code class="docutils literal notranslate"><span class="pre">standard_effective_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.pmv.html#ladybug_comfort.collection.pmv.PMV.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html">ladybug_comfort.collection.solarcal module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal"><code class="docutils literal notranslate"><span class="pre">HorizontalRefSolarCal</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.diffuse_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">diffuse_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.direct_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">direct_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.effective_radiant_field"><code class="docutils literal notranslate"><span class="pre">effective_radiant_field</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.floor_reflectance"><code class="docutils literal notranslate"><span class="pre">floor_reflectance</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.fraction_body_exposed"><code class="docutils literal notranslate"><span class="pre">fraction_body_exposed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.location"><code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.longwave_mrt"><code class="docutils literal notranslate"><span class="pre">longwave_mrt</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.mean_radiant_temperature"><code class="docutils literal notranslate"><span class="pre">mean_radiant_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.mrt_delta"><code class="docutils literal notranslate"><span class="pre">mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.reflected_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">reflected_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalRefSolarCal.solarcal_body_parameter"><code class="docutils literal notranslate"><span class="pre">solarcal_body_parameter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal"><code class="docutils literal notranslate"><span class="pre">HorizontalSolarCal</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.diffuse_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">diffuse_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.direct_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">direct_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.effective_radiant_field"><code class="docutils literal notranslate"><span class="pre">effective_radiant_field</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.floor_reflectance"><code class="docutils literal notranslate"><span class="pre">floor_reflectance</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.fraction_body_exposed"><code class="docutils literal notranslate"><span class="pre">fraction_body_exposed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.location"><code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.longwave_mrt"><code class="docutils literal notranslate"><span class="pre">longwave_mrt</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.mean_radiant_temperature"><code class="docutils literal notranslate"><span class="pre">mean_radiant_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.mrt_delta"><code class="docutils literal notranslate"><span class="pre">mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.HorizontalSolarCal.solarcal_body_parameter"><code class="docutils literal notranslate"><span class="pre">solarcal_body_parameter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal"><code class="docutils literal notranslate"><span class="pre">IndoorSolarCal</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.diffuse_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">diffuse_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.direct_normal_solar"><code class="docutils literal notranslate"><span class="pre">direct_normal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.effective_radiant_field"><code class="docutils literal notranslate"><span class="pre">effective_radiant_field</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.floor_reflectance"><code class="docutils literal notranslate"><span class="pre">floor_reflectance</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.fraction_body_exposed"><code class="docutils literal notranslate"><span class="pre">fraction_body_exposed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.location"><code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.longwave_mrt"><code class="docutils literal notranslate"><span class="pre">longwave_mrt</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.mean_radiant_temperature"><code class="docutils literal notranslate"><span class="pre">mean_radiant_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.mrt_delta"><code class="docutils literal notranslate"><span class="pre">mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.sky_exposure"><code class="docutils literal notranslate"><span class="pre">sky_exposure</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.solarcal_body_parameter"><code class="docutils literal notranslate"><span class="pre">solarcal_body_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.IndoorSolarCal.window_transmittance"><code class="docutils literal notranslate"><span class="pre">window_transmittance</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal"><code class="docutils literal notranslate"><span class="pre">OutdoorSolarCal</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.diffuse_horizontal_solar"><code class="docutils literal notranslate"><span class="pre">diffuse_horizontal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.direct_normal_solar"><code class="docutils literal notranslate"><span class="pre">direct_normal_solar</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.floor_reflectance"><code class="docutils literal notranslate"><span class="pre">floor_reflectance</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.fraction_body_exposed"><code class="docutils literal notranslate"><span class="pre">fraction_body_exposed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.horizontal_infrared"><code class="docutils literal notranslate"><span class="pre">horizontal_infrared</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.location"><code class="docutils literal notranslate"><span class="pre">location</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_effective_radiant_field"><code class="docutils literal notranslate"><span class="pre">longwave_effective_radiant_field</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.longwave_mrt_delta"><code class="docutils literal notranslate"><span class="pre">longwave_mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.mean_radiant_temperature"><code class="docutils literal notranslate"><span class="pre">mean_radiant_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.mrt_delta"><code class="docutils literal notranslate"><span class="pre">mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_effective_radiant_field"><code class="docutils literal notranslate"><span class="pre">shortwave_effective_radiant_field</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.shortwave_mrt_delta"><code class="docutils literal notranslate"><span class="pre">shortwave_mrt_delta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.sky_exposure"><code class="docutils literal notranslate"><span class="pre">sky_exposure</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.solarcal_body_parameter"><code class="docutils literal notranslate"><span class="pre">solarcal_body_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.solarcal.html#ladybug_comfort.collection.solarcal.OutdoorSolarCal.surface_temperatures"><code class="docutils literal notranslate"><span class="pre">surface_temperatures</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.collection.utci.html">ladybug_comfort.collection.utci module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI"><code class="docutils literal notranslate"><span class="pre">UTCI</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.from_epw"><code class="docutils literal notranslate"><span class="pre">from_epw()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.air_temperature"><code class="docutils literal notranslate"><span class="pre">air_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.calc_length"><code class="docutils literal notranslate"><span class="pre">calc_length</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.comfort_parameter"><code class="docutils literal notranslate"><span class="pre">comfort_parameter</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.original_utci_category"><code class="docutils literal notranslate"><span class="pre">original_utci_category</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_cold"><code class="docutils literal notranslate"><span class="pre">percent_cold</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_comfortable"><code class="docutils literal notranslate"><span class="pre">percent_comfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_extreme_cold_stress"><code class="docutils literal notranslate"><span class="pre">percent_extreme_cold_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_extreme_heat_stress"><code class="docutils literal notranslate"><span class="pre">percent_extreme_heat_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_hot"><code class="docutils literal notranslate"><span class="pre">percent_hot</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_moderate_cold_stress"><code class="docutils literal notranslate"><span class="pre">percent_moderate_cold_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_moderate_heat_stress"><code class="docutils literal notranslate"><span class="pre">percent_moderate_heat_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_neutral"><code class="docutils literal notranslate"><span class="pre">percent_neutral</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_slight_cold_stress"><code class="docutils literal notranslate"><span class="pre">percent_slight_cold_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_slight_heat_stress"><code class="docutils literal notranslate"><span class="pre">percent_slight_heat_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_strong_cold_stress"><code class="docutils literal notranslate"><span class="pre">percent_strong_cold_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_strong_heat_stress"><code class="docutils literal notranslate"><span class="pre">percent_strong_heat_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_uncomfortable"><code class="docutils literal notranslate"><span class="pre">percent_uncomfortable</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_very_strong_cold_stress"><code class="docutils literal notranslate"><span class="pre">percent_very_strong_cold_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.percent_very_strong_heat_stress"><code class="docutils literal notranslate"><span class="pre">percent_very_strong_heat_stress</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.rad_temperature"><code class="docutils literal notranslate"><span class="pre">rad_temperature</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.rel_humidity"><code class="docutils literal notranslate"><span class="pre">rel_humidity</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.thermal_condition_eleven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_eleven_point</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.thermal_condition_five_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_five_point</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.thermal_condition_nine_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_nine_point</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.thermal_condition_seven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_seven_point</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.universal_thermal_climate_index"><code class="docutils literal notranslate"><span class="pre">universal_thermal_climate_index</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.collection.utci.html#ladybug_comfort.collection.utci.UTCI.wind_speed"><code class="docutils literal notranslate"><span class="pre">wind_speed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.collection.html#module-ladybug_comfort.collection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.map.html">ladybug_comfort.map package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.map.html#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.map.air.html">ladybug_comfort.map.air module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.map.air.html#ladybug_comfort.map.air.air_map"><code class="docutils literal notranslate"><span class="pre">air_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.map.irr.html">ladybug_comfort.map.irr module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.map.mrt.html">ladybug_comfort.map.mrt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.map.tcp.html">ladybug_comfort.map.tcp module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.map.utci.html">ladybug_comfort.map.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.map.html#module-ladybug_comfort.map">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter"><code class="docutils literal notranslate"><span class="pre">AdaptiveParameter</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">set_neutral_offset_from_comfort_class()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_ppd"><code class="docutils literal notranslate"><span class="pre">set_neutral_offset_from_ppd()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.air_speed_method"><code class="docutils literal notranslate"><span class="pre">air_speed_method</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.ashrae_or_en"><code class="docutils literal notranslate"><span class="pre">ashrae_or_en</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.avg_month_or_running_mean"><code class="docutils literal notranslate"><span class="pre">avg_month_or_running_mean</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.cold_prevail_temp_limit"><code class="docutils literal notranslate"><span class="pre">cold_prevail_temp_limit</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.conditioning"><code class="docutils literal notranslate"><span class="pre">conditioning</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.discrete_or_continuous_air_speed"><code class="docutils literal notranslate"><span class="pre">discrete_or_continuous_air_speed</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.minimum_operative"><code class="docutils literal notranslate"><span class="pre">minimum_operative</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.neutral_offset"><code class="docutils literal notranslate"><span class="pre">neutral_offset</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.prevailing_temperature_method"><code class="docutils literal notranslate"><span class="pre">prevailing_temperature_method</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.standard"><code class="docutils literal notranslate"><span class="pre">standard</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pet.html">ladybug_comfort.parameter.pet module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter"><code class="docutils literal notranslate"><span class="pre">PETParameter</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.POSTURES"><code class="docutils literal notranslate"><span class="pre">POSTURES</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.age"><code class="docutils literal notranslate"><span class="pre">age</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.body_mass"><code class="docutils literal notranslate"><span class="pre">body_mass</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.height"><code class="docutils literal notranslate"><span class="pre">height</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.humid_acclimated"><code class="docutils literal notranslate"><span class="pre">humid_acclimated</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.posture"><code class="docutils literal notranslate"><span class="pre">posture</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.sex"><code class="docutils literal notranslate"><span class="pre">sex</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter"><code class="docutils literal notranslate"><span class="pre">PMVParameter</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.discomfort_reason"><code class="docutils literal notranslate"><span class="pre">discomfort_reason()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.set_ppd_comfort_thresh_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">set_ppd_comfort_thresh_from_comfort_class()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.humid_ratio_lower"><code class="docutils literal notranslate"><span class="pre">humid_ratio_lower</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.humid_ratio_upper"><code class="docutils literal notranslate"><span class="pre">humid_ratio_upper</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.ppd_comfort_thresh"><code class="docutils literal notranslate"><span class="pre">ppd_comfort_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.still_air_threshold"><code class="docutils literal notranslate"><span class="pre">still_air_threshold</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter"><code class="docutils literal notranslate"><span class="pre">SolarCalParameter</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.get_sharp"><code class="docutils literal notranslate"><span class="pre">get_sharp()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.POSTURES"><code class="docutils literal notranslate"><span class="pre">POSTURES</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_absorptivity"><code class="docutils literal notranslate"><span class="pre">body_absorptivity</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_azimuth"><code class="docutils literal notranslate"><span class="pre">body_azimuth</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_emissivity"><code class="docutils literal notranslate"><span class="pre">body_emissivity</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.posture"><code class="docutils literal notranslate"><span class="pre">posture</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.sharp"><code class="docutils literal notranslate"><span class="pre">sharp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter"><code class="docutils literal notranslate"><span class="pre">UTCIParameter</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.original_utci_category"><code class="docutils literal notranslate"><span class="pre">original_utci_category()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_eleven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_eleven_point()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_five_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_five_point()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_nine_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_nine_point()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_seven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_seven_point()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.cold_thresh"><code class="docutils literal notranslate"><span class="pre">cold_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.extreme_cold_thresh"><code class="docutils literal notranslate"><span class="pre">extreme_cold_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.extreme_heat_thresh"><code class="docutils literal notranslate"><span class="pre">extreme_heat_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.heat_thresh"><code class="docutils literal notranslate"><span class="pre">heat_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.moderate_cold_thresh"><code class="docutils literal notranslate"><span class="pre">moderate_cold_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.moderate_heat_thresh"><code class="docutils literal notranslate"><span class="pre">moderate_heat_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.strong_cold_thresh"><code class="docutils literal notranslate"><span class="pre">strong_cold_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.strong_heat_thresh"><code class="docutils literal notranslate"><span class="pre">strong_heat_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.very_strong_cold_thresh"><code class="docutils literal notranslate"><span class="pre">very_strong_cold_thresh</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.very_strong_heat_thresh"><code class="docutils literal notranslate"><span class="pre">very_strong_heat_thresh</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.adaptive.html">ladybug_comfort.adaptive module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.adaptive_comfort_ashrae55"><code class="docutils literal notranslate"><span class="pre">adaptive_comfort_ashrae55()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.adaptive_comfort_conditioned"><code class="docutils literal notranslate"><span class="pre">adaptive_comfort_conditioned()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.adaptive_comfort_conditioned_function"><code class="docutils literal notranslate"><span class="pre">adaptive_comfort_conditioned_function()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.adaptive_comfort_en15251"><code class="docutils literal notranslate"><span class="pre">adaptive_comfort_en15251()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.ashrae55_neutral_offset_from_ppd"><code class="docutils literal notranslate"><span class="pre">ashrae55_neutral_offset_from_ppd()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.check_prevailing_temperatures_ashrae55"><code class="docutils literal notranslate"><span class="pre">check_prevailing_temperatures_ashrae55()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.check_prevailing_temperatures_en15251"><code class="docutils literal notranslate"><span class="pre">check_prevailing_temperatures_en15251()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.check_prevailing_temperatures_range"><code class="docutils literal notranslate"><span class="pre">check_prevailing_temperatures_range()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.cooling_effect_ashrae55"><code class="docutils literal notranslate"><span class="pre">cooling_effect_ashrae55()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.cooling_effect_en15251"><code class="docutils literal notranslate"><span class="pre">cooling_effect_en15251()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.cooling_effect_en16798"><code class="docutils literal notranslate"><span class="pre">cooling_effect_en16798()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.en15251_neutral_offset_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">en15251_neutral_offset_from_comfort_class()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.neutral_temperature_ashrae55"><code class="docutils literal notranslate"><span class="pre">neutral_temperature_ashrae55()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.neutral_temperature_conditioned"><code class="docutils literal notranslate"><span class="pre">neutral_temperature_conditioned()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.neutral_temperature_conditioned_function"><code class="docutils literal notranslate"><span class="pre">neutral_temperature_conditioned_function()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.neutral_temperature_en15251"><code class="docutils literal notranslate"><span class="pre">neutral_temperature_en15251()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.t_operative"><code class="docutils literal notranslate"><span class="pre">t_operative()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.weighted_running_mean_daily"><code class="docutils literal notranslate"><span class="pre">weighted_running_mean_daily()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.adaptive.html#ladybug_comfort.adaptive.weighted_running_mean_hourly"><code class="docutils literal notranslate"><span class="pre">weighted_running_mean_hourly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.asv.html">ladybug_comfort.asv module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.asv.html#ladybug_comfort.asv.actual_sensation_vote"><code class="docutils literal notranslate"><span class="pre">actual_sensation_vote()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.asv.html#ladybug_comfort.asv.actual_sensation_vote_effect_category"><code class="docutils literal notranslate"><span class="pre">actual_sensation_vote_effect_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.at.html">ladybug_comfort.at module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.at.html#ladybug_comfort.at.apparent_temperature"><code class="docutils literal notranslate"><span class="pre">apparent_temperature()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.at.html#ladybug_comfort.at.apparent_temperature_warning_category"><code class="docutils literal notranslate"><span class="pre">apparent_temperature_warning_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.clo.html">ladybug_comfort.clo module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.clo.html#ladybug_comfort.clo.schiavon_clo"><code class="docutils literal notranslate"><span class="pre">schiavon_clo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.degreetime.html">ladybug_comfort.degreetime module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.degreetime.html#ladybug_comfort.degreetime.cooling_degree_time"><code class="docutils literal notranslate"><span class="pre">cooling_degree_time()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.degreetime.html#ladybug_comfort.degreetime.heating_degree_time"><code class="docutils literal notranslate"><span class="pre">heating_degree_time()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.di.html">ladybug_comfort.di module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.di.html#ladybug_comfort.di.discomfort_index"><code class="docutils literal notranslate"><span class="pre">discomfort_index()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.di.html#ladybug_comfort.di.discomfort_index_effect_category"><code class="docutils literal notranslate"><span class="pre">discomfort_index_effect_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.hi.html">ladybug_comfort.hi module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.hi.html#ladybug_comfort.hi.heat_index"><code class="docutils literal notranslate"><span class="pre">heat_index()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.hi.html#ladybug_comfort.hi.heat_index_warning_category"><code class="docutils literal notranslate"><span class="pre">heat_index_warning_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.humidex.html">ladybug_comfort.humidex module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.humidex.html#ladybug_comfort.humidex.humidex"><code class="docutils literal notranslate"><span class="pre">humidex()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.humidex.html#ladybug_comfort.humidex.humidex_degree_of_comfort"><code class="docutils literal notranslate"><span class="pre">humidex_degree_of_comfort()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.local.html">ladybug_comfort.local module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.local.html#ladybug_comfort.local.ankle_draft_ppd"><code class="docutils literal notranslate"><span class="pre">ankle_draft_ppd()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.local.html#ladybug_comfort.local.radiant_asymmetry_ppd"><code class="docutils literal notranslate"><span class="pre">radiant_asymmetry_ppd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.pet.html">ladybug_comfort.pet module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.core_temperature_category"><code class="docutils literal notranslate"><span class="pre">core_temperature_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.memi_balance"><code class="docutils literal notranslate"><span class="pre">memi_balance()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.pet_category"><code class="docutils literal notranslate"><span class="pre">pet_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.pet_category_humid"><code class="docutils literal notranslate"><span class="pre">pet_category_humid()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.physiologic_equivalent_temperature"><code class="docutils literal notranslate"><span class="pre">physiologic_equivalent_temperature()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.sweat_volume"><code class="docutils literal notranslate"><span class="pre">sweat_volume()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pet.html#ladybug_comfort.pet.vaso_circulation"><code class="docutils literal notranslate"><span class="pre">vaso_circulation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.pmv.html">ladybug_comfort.pmv module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.calc_missing_pmv_input"><code class="docutils literal notranslate"><span class="pre">calc_missing_pmv_input()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.fanger_pmv"><code class="docutils literal notranslate"><span class="pre">fanger_pmv()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.pierce_set"><code class="docutils literal notranslate"><span class="pre">pierce_set()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.pmv_from_ppd"><code class="docutils literal notranslate"><span class="pre">pmv_from_ppd()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.ppd_from_pmv"><code class="docutils literal notranslate"><span class="pre">ppd_from_pmv()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.ppd_threshold_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">ppd_threshold_from_comfort_class()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.predicted_mean_vote"><code class="docutils literal notranslate"><span class="pre">predicted_mean_vote()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.predicted_mean_vote_no_set"><code class="docutils literal notranslate"><span class="pre">predicted_mean_vote_no_set()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.pmv.html#ladybug_comfort.pmv.saturated_vapor_pressure_torr"><code class="docutils literal notranslate"><span class="pre">saturated_vapor_pressure_torr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.solarcal.html">ladybug_comfort.solarcal module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_diff_from_diff_horiz"><code class="docutils literal notranslate"><span class="pre">body_diff_from_diff_horiz()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_dir_from_dir_horiz"><code class="docutils literal notranslate"><span class="pre">body_dir_from_dir_horiz()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_dir_from_dir_normal"><code class="docutils literal notranslate"><span class="pre">body_dir_from_dir_normal()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_ref_from_glob_horiz"><code class="docutils literal notranslate"><span class="pre">body_ref_from_glob_horiz()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_ref_from_ref_horiz"><code class="docutils literal notranslate"><span class="pre">body_ref_from_ref_horiz()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_solar_flux_from_horiz_components"><code class="docutils literal notranslate"><span class="pre">body_solar_flux_from_horiz_components()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_solar_flux_from_horiz_solar"><code class="docutils literal notranslate"><span class="pre">body_solar_flux_from_horiz_solar()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.body_solar_flux_from_parts"><code class="docutils literal notranslate"><span class="pre">body_solar_flux_from_parts()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.erf_from_body_solar_flux"><code class="docutils literal notranslate"><span class="pre">erf_from_body_solar_flux()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.erf_from_mrt_delta"><code class="docutils literal notranslate"><span class="pre">erf_from_mrt_delta()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.get_projection_factor"><code class="docutils literal notranslate"><span class="pre">get_projection_factor()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.get_projection_factor_simple"><code class="docutils literal notranslate"><span class="pre">get_projection_factor_simple()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.indoor_sky_heat_exch"><code class="docutils literal notranslate"><span class="pre">indoor_sky_heat_exch()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.longwave_mrt_delta_from_horiz_ir"><code class="docutils literal notranslate"><span class="pre">longwave_mrt_delta_from_horiz_ir()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.longwave_mrt_delta_from_sky_temp"><code class="docutils literal notranslate"><span class="pre">longwave_mrt_delta_from_sky_temp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.mrt_delta_from_erf"><code class="docutils literal notranslate"><span class="pre">mrt_delta_from_erf()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.outdoor_sky_heat_exch"><code class="docutils literal notranslate"><span class="pre">outdoor_sky_heat_exch()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.sharp_from_solar_and_body_azimuth"><code class="docutils literal notranslate"><span class="pre">sharp_from_solar_and_body_azimuth()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.shortwave_from_horiz_components"><code class="docutils literal notranslate"><span class="pre">shortwave_from_horiz_components()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.shortwave_from_horiz_solar"><code class="docutils literal notranslate"><span class="pre">shortwave_from_horiz_solar()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.solarcal.html#ladybug_comfort.solarcal.transpose_altitude_azimuth"><code class="docutils literal notranslate"><span class="pre">transpose_altitude_azimuth()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.ts.html">ladybug_comfort.ts module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.ts.html#ladybug_comfort.ts.thermal_sensation"><code class="docutils literal notranslate"><span class="pre">thermal_sensation()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.ts.html#ladybug_comfort.ts.thermal_sensation_effect_category"><code class="docutils literal notranslate"><span class="pre">thermal_sensation_effect_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.utci.html">ladybug_comfort.utci module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.utci.html#ladybug_comfort.utci.calc_missing_utci_input"><code class="docutils literal notranslate"><span class="pre">calc_missing_utci_input()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.utci.html#ladybug_comfort.utci.saturated_vapor_pressure_hpa"><code class="docutils literal notranslate"><span class="pre">saturated_vapor_pressure_hpa()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.utci.html#ladybug_comfort.utci.universal_thermal_climate_index"><code class="docutils literal notranslate"><span class="pre">universal_thermal_climate_index()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.wbgt.html">ladybug_comfort.wbgt module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wbgt.html#ladybug_comfort.wbgt.wbgt_warning_category"><code class="docutils literal notranslate"><span class="pre">wbgt_warning_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wbgt.html#ladybug_comfort.wbgt.wet_bulb_globe_temperature"><code class="docutils literal notranslate"><span class="pre">wet_bulb_globe_temperature()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.wc.html">ladybug_comfort.wc module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wc.html#ladybug_comfort.wc.windchill_index"><code class="docutils literal notranslate"><span class="pre">windchill_index()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wc.html#ladybug_comfort.wc.windchill_index_effect_category"><code class="docutils literal notranslate"><span class="pre">windchill_index_effect_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wc.html#ladybug_comfort.wc.windchill_temp"><code class="docutils literal notranslate"><span class="pre">windchill_temp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ladybug_comfort.wc.html#ladybug_comfort.wc.windchill_temp_effect_category"><code class="docutils literal notranslate"><span class="pre">windchill_temp_effect_category()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="cli/index.html">CLI Docs</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ladybug_comfort</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.cli.html">ladybug_comfort.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.map.html">ladybug_comfort.map package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pet.html">ladybug_comfort.parameter.pet module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ladybug_comfort.map.utci.html" title="Previous Chapter: ladybug_comfort.map.utci module"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; ladybug_comfo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="ladybug_comfort.parameter.adaptive.html" title="Next Chapter: ladybug_comfort.parameter.adaptive module"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">ladybug_comfo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/ladybug_comfort.parameter.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="cli/index.html">CLI Docs</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ladybug_comfort</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ladybug_comfort.html">ladybug_comfort package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="ladybug_comfort.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.chart.html">ladybug_comfort.chart package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.cli.html">ladybug_comfort.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.collection.html">ladybug_comfort.collection package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ladybug_comfort.map.html">ladybug_comfort.map package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ladybug_comfort.parameter package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pet.html">ladybug_comfort.parameter.pet module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-ladybug_comfort.parameter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.html#module-ladybug_comfort">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="body col-md-8 content" role="main">
+      
+  <section id="ladybug-comfort-parameter-package">
+<h1>ladybug_comfort.parameter package<a class="headerlink" href="#ladybug-comfort-parameter-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html">ladybug_comfort.parameter.adaptive module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter"><code class="docutils literal notranslate"><span class="pre">AdaptiveParameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">set_neutral_offset_from_comfort_class()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.set_neutral_offset_from_ppd"><code class="docutils literal notranslate"><span class="pre">set_neutral_offset_from_ppd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.air_speed_method"><code class="docutils literal notranslate"><span class="pre">air_speed_method</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.ashrae_or_en"><code class="docutils literal notranslate"><span class="pre">ashrae_or_en</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.avg_month_or_running_mean"><code class="docutils literal notranslate"><span class="pre">avg_month_or_running_mean</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.cold_prevail_temp_limit"><code class="docutils literal notranslate"><span class="pre">cold_prevail_temp_limit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.conditioning"><code class="docutils literal notranslate"><span class="pre">conditioning</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.discrete_or_continuous_air_speed"><code class="docutils literal notranslate"><span class="pre">discrete_or_continuous_air_speed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.minimum_operative"><code class="docutils literal notranslate"><span class="pre">minimum_operative</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.neutral_offset"><code class="docutils literal notranslate"><span class="pre">neutral_offset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.prevailing_temperature_method"><code class="docutils literal notranslate"><span class="pre">prevailing_temperature_method</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.adaptive.html#ladybug_comfort.parameter.adaptive.AdaptiveParameter.standard"><code class="docutils literal notranslate"><span class="pre">standard</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ladybug_comfort.parameter.pet.html">ladybug_comfort.parameter.pet module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter"><code class="docutils literal notranslate"><span class="pre">PETParameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.POSTURES"><code class="docutils literal notranslate"><span class="pre">POSTURES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.age"><code class="docutils literal notranslate"><span class="pre">age</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.body_mass"><code class="docutils literal notranslate"><span class="pre">body_mass</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.height"><code class="docutils literal notranslate"><span class="pre">height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.humid_acclimated"><code class="docutils literal notranslate"><span class="pre">humid_acclimated</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.posture"><code class="docutils literal notranslate"><span class="pre">posture</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pet.html#ladybug_comfort.parameter.pet.PETParameter.sex"><code class="docutils literal notranslate"><span class="pre">sex</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html">ladybug_comfort.parameter.pmv module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter"><code class="docutils literal notranslate"><span class="pre">PMVParameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.discomfort_reason"><code class="docutils literal notranslate"><span class="pre">discomfort_reason()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.set_ppd_comfort_thresh_from_comfort_class"><code class="docutils literal notranslate"><span class="pre">set_ppd_comfort_thresh_from_comfort_class()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.humid_ratio_lower"><code class="docutils literal notranslate"><span class="pre">humid_ratio_lower</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.humid_ratio_upper"><code class="docutils literal notranslate"><span class="pre">humid_ratio_upper</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.ppd_comfort_thresh"><code class="docutils literal notranslate"><span class="pre">ppd_comfort_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.pmv.html#ladybug_comfort.parameter.pmv.PMVParameter.still_air_threshold"><code class="docutils literal notranslate"><span class="pre">still_air_threshold</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html">ladybug_comfort.parameter.solarcal module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter"><code class="docutils literal notranslate"><span class="pre">SolarCalParameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.get_sharp"><code class="docutils literal notranslate"><span class="pre">get_sharp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.POSTURES"><code class="docutils literal notranslate"><span class="pre">POSTURES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_absorptivity"><code class="docutils literal notranslate"><span class="pre">body_absorptivity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_azimuth"><code class="docutils literal notranslate"><span class="pre">body_azimuth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.body_emissivity"><code class="docutils literal notranslate"><span class="pre">body_emissivity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.posture"><code class="docutils literal notranslate"><span class="pre">posture</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.solarcal.html#ladybug_comfort.parameter.solarcal.SolarCalParameter.sharp"><code class="docutils literal notranslate"><span class="pre">sharp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ladybug_comfort.parameter.utci.html">ladybug_comfort.parameter.utci module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter"><code class="docutils literal notranslate"><span class="pre">UTCIParameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.ToString"><code class="docutils literal notranslate"><span class="pre">ToString()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.duplicate"><code class="docutils literal notranslate"><span class="pre">duplicate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.from_dict"><code class="docutils literal notranslate"><span class="pre">from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.from_string"><code class="docutils literal notranslate"><span class="pre">from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.is_comfortable"><code class="docutils literal notranslate"><span class="pre">is_comfortable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.original_utci_category"><code class="docutils literal notranslate"><span class="pre">original_utci_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition"><code class="docutils literal notranslate"><span class="pre">thermal_condition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_eleven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_eleven_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_five_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_five_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_nine_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_nine_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.thermal_condition_seven_point"><code class="docutils literal notranslate"><span class="pre">thermal_condition_seven_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.to_dict"><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.cold_thresh"><code class="docutils literal notranslate"><span class="pre">cold_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.comfort_model"><code class="docutils literal notranslate"><span class="pre">comfort_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.extreme_cold_thresh"><code class="docutils literal notranslate"><span class="pre">extreme_cold_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.extreme_heat_thresh"><code class="docutils literal notranslate"><span class="pre">extreme_heat_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.heat_thresh"><code class="docutils literal notranslate"><span class="pre">heat_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.moderate_cold_thresh"><code class="docutils literal notranslate"><span class="pre">moderate_cold_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.moderate_heat_thresh"><code class="docutils literal notranslate"><span class="pre">moderate_heat_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.strong_cold_thresh"><code class="docutils literal notranslate"><span class="pre">strong_cold_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.strong_heat_thresh"><code class="docutils literal notranslate"><span class="pre">strong_heat_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.very_strong_cold_thresh"><code class="docutils literal notranslate"><span class="pre">very_strong_cold_thresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ladybug_comfort.parameter.utci.html#ladybug_comfort.parameter.utci.UTCIParameter.very_strong_heat_thresh"><code class="docutils literal notranslate"><span class="pre">very_strong_heat_thresh</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-ladybug_comfort.parameter">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ladybug_comfort.parameter" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2026, Ladybug Tools.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.0.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

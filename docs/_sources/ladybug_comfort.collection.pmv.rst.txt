@@ -1,0 +1,7 @@
+ladybug\_comfort.collection.pmv module
+======================================
+
+.. automodule:: ladybug_comfort.collection.pmv
+   :members:
+   :undoc-members:
+   :show-inheritance:
