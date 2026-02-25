@@ -25,12 +25,16 @@ def universal_thermal_climate_index_np(ta, tr, vel, rh):
         UTCI_approx -- The Universal Thermal Climate Index (UTCI) for the input
         conditions as approximated by a 4-D polynomial.
     """
+    # convert inputs to float32 (except for relative humidity)
+    ta = ta.astype(np.float32)
+    tr = tr.astype(np.float32)
+    vel = vel.astype(np.float32)
+
     # set upper and lower limits of air velocity according to Fiala model scenarios
     vel = np.where(vel < 0.5, 0.5, np.where(vel > 17, 17, vel))
 
     # metrics derived from the inputs used in the polynomial equation
-    eh_pa = saturated_vapor_pressure_hpa_np(
-        ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
+    eh_pa = saturated_vapor_pressure_hpa_np(ta) * (rh / 100.0).astype(np.float32)  # partial vapor pressure
     pa_pr = eh_pa / 10.0  # convert vapour pressure to kPa
     d_tr = tr - ta  # difference between radiant and air temperature
 
