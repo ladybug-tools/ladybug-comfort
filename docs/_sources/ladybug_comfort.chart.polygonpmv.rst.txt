@@ -1,0 +1,7 @@
+ladybug\_comfort.chart.polygonpmv module
+========================================
+
+.. automodule:: ladybug_comfort.chart.polygonpmv
+   :members:
+   :undoc-members:
+   :show-inheritance:
