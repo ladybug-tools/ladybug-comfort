@@ -98,12 +98,13 @@ def binary_to_array(
 
 def load_matrix(matrix_file, delimiter=','):
     with open(matrix_file, 'rb') as inf:
-        first_char = inf.read(1)
-        second_char = inf.read(1)
-    is_text = True if first_char.isdigit() or second_char.isdigit() else False
-    if is_text:
+        start = inf.read(6)
+
+    if start.startswith(b'\x93NUMPY'):
+        array = np.load(matrix_file)
+    else:
         array = np.genfromtxt(
-            matrix_file, delimiter=delimiter, encoding='utf-8',
+            matrix_file, delimiter=delimiter, encoding='utf-8-sig',
             filling_values=np.nan)
         if array.ndim == 1:
             array = array.reshape(-1, 1)
@@ -111,8 +112,6 @@ def load_matrix(matrix_file, delimiter=','):
             # remove last column if all in column is NaN
             # this may happen if the CSV has trailing commas
             array = array[:, :-1]
-    else:
-        array = np.load(matrix_file)
 
     return array
 
