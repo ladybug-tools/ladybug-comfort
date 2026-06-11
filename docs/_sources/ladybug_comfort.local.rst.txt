@@ -1,0 +1,7 @@
+ladybug\_comfort.local module
+=============================
+
+.. automodule:: ladybug_comfort.local
+   :members:
+   :undoc-members:
+   :show-inheritance:
