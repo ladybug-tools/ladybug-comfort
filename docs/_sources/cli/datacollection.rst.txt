@@ -1,0 +1,6 @@
+datacollection
+==============
+
+.. click:: ladybug_comfort.cli.datacollection:datacollection
+   :prog: ladybug-comfort data-collection
+   :show-nested:
