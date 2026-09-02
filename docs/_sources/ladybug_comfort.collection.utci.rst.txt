@@ -1,0 +1,7 @@
+ladybug\_comfort.collection.utci module
+=======================================
+
+.. automodule:: ladybug_comfort.collection.utci
+   :members:
+   :undoc-members:
+   :show-inheritance:
