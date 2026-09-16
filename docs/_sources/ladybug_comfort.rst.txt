@@ -1,0 +1,45 @@
+ladybug\_comfort package
+========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ladybug_comfort.chart
+   ladybug_comfort.cli
+   ladybug_comfort.collection
+   ladybug_comfort.map
+   ladybug_comfort.parameter
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ladybug_comfort.adaptive
+   ladybug_comfort.asv
+   ladybug_comfort.at
+   ladybug_comfort.clo
+   ladybug_comfort.degreetime
+   ladybug_comfort.di
+   ladybug_comfort.hi
+   ladybug_comfort.humidex
+   ladybug_comfort.local
+   ladybug_comfort.pet
+   ladybug_comfort.pmv
+   ladybug_comfort.solarcal
+   ladybug_comfort.ts
+   ladybug_comfort.utci
+   ladybug_comfort.wbgt
+   ladybug_comfort.wc
+
+Module contents
+---------------
+
+.. automodule:: ladybug_comfort
+   :members:
+   :undoc-members:
+   :show-inheritance:
