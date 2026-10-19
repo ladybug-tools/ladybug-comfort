@@ -121,7 +121,7 @@ def restore_original_distribution(
         output_extension='ill', as_text=False, fmt='%.2f', input_delimiter=',',
         delimiter='tab'):
     """Restructure files to the original distribution based on the distribution info.
-    
+
     It will assume that the files in the input folder are NumPy files. However,
     if it fails to load the files as arrays it will try to load from binary
     Radiance files to array.
@@ -175,17 +175,17 @@ def restore_original_distribution(
                 src_file = new_file
                 try:
                     array = np.load(src_file)
-                except:
+                except Exception:
                     try:
                         array = binary_to_array(src_file)
-                    except:
+                    except Exception:
                         try:
                             array = np.loadtxt(
                                 src_file, delimiter=input_delimiter)
                         except Exception:
                             raise RuntimeError(
                                 f'Failed to load input file "{src_file}"')
-            slice_array = array[st:end+1,:]
+            slice_array = array[st:end + 1, :]
 
             out_arrays.append(slice_array)
 
