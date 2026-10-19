@@ -1,0 +1,7 @@
+ladybug\_comfort.map.utci module
+================================
+
+.. automodule:: ladybug_comfort.map.utci
+   :members:
+   :undoc-members:
+   :show-inheritance:
