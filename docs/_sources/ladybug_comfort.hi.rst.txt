@@ -1,0 +1,7 @@
+ladybug\_comfort.hi module
+==========================
+
+.. automodule:: ladybug_comfort.hi
+   :members:
+   :undoc-members:
+   :show-inheritance:

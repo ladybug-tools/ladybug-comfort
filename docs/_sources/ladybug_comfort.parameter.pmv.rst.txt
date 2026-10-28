@@ -1,0 +1,7 @@
+ladybug\_comfort.parameter.pmv module
+=====================================
+
+.. automodule:: ladybug_comfort.parameter.pmv
+   :members:
+   :undoc-members:
+   :show-inheritance:

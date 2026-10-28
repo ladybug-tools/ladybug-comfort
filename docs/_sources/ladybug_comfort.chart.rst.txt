@@ -1,0 +1,20 @@
+ladybug\_comfort.chart package
+==============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ladybug_comfort.chart.adaptive
+   ladybug_comfort.chart.polygonpmv
+   ladybug_comfort.chart.polygonutci
+
+Module contents
+---------------
+
+.. automodule:: ladybug_comfort.chart
+   :members:
+   :undoc-members:
+   :show-inheritance:
