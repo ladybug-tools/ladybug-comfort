@@ -169,6 +169,15 @@ def test_weighted_running_mean_daily():
     prevailing = weighted_running_mean_daily(outdoor)
     assert prevailing[0] == pytest.approx(362.1316, rel=1e-2)
 
+    # test that the running mean responds on the day after a change, like the hourly one
+    outdoor = [0] * 10 + [10] + [0] * 20
+    prevailing = weighted_running_mean_daily(outdoor)
+    assert prevailing[10] == pytest.approx(0)
+    assert prevailing[11] == pytest.approx(2)
+    assert prevailing[12] == pytest.approx(1.6)
+    hourly = weighted_running_mean_hourly([temp for temp in outdoor for _ in range(24)])
+    assert prevailing == pytest.approx(hourly[::24])
+
     # test that an exception is thrown when values are less than a week.
     outdoor = list(range(5))
     with pytest.raises(Exception):
