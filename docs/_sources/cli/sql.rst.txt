@@ -1,0 +1,6 @@
+sql
+===
+
+.. click:: ladybug_comfort.cli.sql:sql
+   :prog: ladybug-comfort sql
+   :show-nested:
