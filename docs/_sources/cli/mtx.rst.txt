@@ -1,0 +1,6 @@
+mtx
+===
+
+.. click:: ladybug_comfort.cli.mtx:mtx
+   :prog: ladybug-comfort mtx
+   :show-nested:

@@ -1,0 +1,7 @@
+ladybug\_comfort.collection.base module
+=======================================
+
+.. automodule:: ladybug_comfort.collection.base
+   :members:
+   :undoc-members:
+   :show-inheritance:

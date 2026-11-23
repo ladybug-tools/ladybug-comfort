@@ -1,0 +1,7 @@
+ladybug\_comfort.ts module
+==========================
+
+.. automodule:: ladybug_comfort.ts
+   :members:
+   :undoc-members:
+   :show-inheritance:
