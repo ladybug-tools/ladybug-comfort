@@ -502,7 +502,7 @@ def weighted_running_mean_daily(outdoor_temperatures, alpha=0.8):
     for i in xrange(len(outdoor_temperatures) - 1):
         daily_run_mean = ((1 - alpha) * daily_means[-1]) + alpha * daily_run_means[-1]
         daily_run_means.append(daily_run_mean)
-        daily_means.append(outdoor_temperatures[i])
+        daily_means.append(outdoor_temperatures[i + 1])
 
     return daily_run_means
 
